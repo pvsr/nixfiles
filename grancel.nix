@@ -1,11 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
   home.packages = with pkgs; [
   ];
+
+  programs.fish.shellAliases = {
+    mpv = "/usr/bin/mpv";
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
