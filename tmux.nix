@@ -19,6 +19,7 @@
       tmuxPlugins.sensible
     ];
     extraConfig = ''
+      set -g mouse on
       set -ga terminal-overrides \",xterm-termite:Tc\"
       run -b ~/.local/share/tmux/themes/srcery-tmux/srcery.tmux
     '';
