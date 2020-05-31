@@ -4,6 +4,7 @@
   imports = [
     ./fish.nix
     ./tmux.nix
+    ./sway.nix
   ];
 
   home.packages = with pkgs; [

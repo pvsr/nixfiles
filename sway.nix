@@ -1,0 +1,190 @@
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.wayland.windowManager.sway;
+  modifier = cfg.config.modifier;
+
+  font = "Sarasa Term J";
+  fonts = [ "${font} 13" ];
+  exitMode = "Exit (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown";
+
+
+  #black        = "#282828";
+  black        = "#32302f";
+  dark1        = "#3c3836";
+  dark2        = "#504945";
+  dark3        = "#665c54";
+  dark4        = "#7c6f64";
+
+  darkred      = "#cc241d";
+  darkgreen    = "#98971a";
+  darkyellow   = "#d79921";
+  darkblue     = "#458588";
+  darkmagenta  = "#b16286";
+  darkcyan     = "#689d6a";
+
+  lightgray    = "#a89984";
+  darkgray     = "#928374";
+
+  red          = "#fb4934";
+  green        = "#b8bb26";
+  yellow       = "#fabd2f";
+  blue         = "#83a598";
+  magenta      = "#d3869b";
+  cyan         = "#8ec07c";
+  white        = "#ebdbb2";
+in
+{
+  home.packages = with pkgs; [];
+
+  programs.git = {
+    enable = true;
+    ignores = [ "Session.vim" "healthcheck.out" ];
+    userName = "Peter Rice";
+    userEmail = "peter@peterrice.xyz";
+  };
+  wayland.windowManager.sway.enable = true;
+  wayland.windowManager.sway.systemdIntegration = true;
+  wayland.windowManager.sway.config = {
+    modifier = "Mod4";
+    terminal = "${pkgs.alacritty}/bin/alacritty";
+    fonts = fonts;
+
+
+    menu = ''
+      ${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop \
+        --dmenu='${pkgs.dmenu}/bin/dmenu -i -fn "${font}-12"' \
+        | ${pkgs.findutils}/bin/xargs swaymsg exec --
+    '';
+
+    workspaceAutoBackAndForth = true;
+
+    input."*" = { xkb_variant = "altgr-intl"; xkb_options = "ctrl:nocaps"; };
+    # output."*" = { bg = "~/background.png"; };
+
+    keybindings = lib.mkOptionDefault {
+      "${modifier}+z" = "workspace back_and_forth";
+      "${modifier}+Shift+z" = "move container to workspace back_and_forth";
+      "${modifier}+q" = "mode '${exitMode}'";
+      "${modifier}+p" = "exec ${pkgs.pass}/bin/passmenu -i -fn '${font}-12'";
+
+      Print = "exec ${pkgs.grim}/bin/grim $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H:%M:%S.png')";
+      "Shift+Print" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H:%M:%S.png')";
+    };
+
+    startup = [
+      { command = "${pkgs.mako}/bin/mako"; }
+      { command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | ${pkgs.wob}/bin/wob"; }
+    ];
+
+    modes."${exitMode}" = {
+      l = "exec swaylock -c '${black}', mode 'default'";
+      e = "exit";
+      s = "exec swaylock -c '${black}' -f && systemctl suspend, mode 'default'";
+      r = "exec systemctl reboot -i, mode 'default'";
+      "Shift+s" = "exec systemctl poweroff -i, mode 'default'";
+
+      Return = "mode 'default'";
+      Escape = "mode 'default'";
+      "Control+bracketleft" = "mode 'default'";
+    };
+
+    floating.criteria = [
+      { title = "Steam - Update News"; }
+      { class = "(?i)feh"; }
+      { instance = "qb-nvim"; }
+    ];
+    window.hideEdgeBorders = "smart";
+    window.commands = [
+      { command = "border pixel 0"; criteria = { class = "Steam"; }; }
+      { command = "border pixel 0"; criteria = { instance = "steam.exe"; }; }
+    ];
+
+    # wrapperFeatures.gtk = true;
+
+    colors = {
+      focused = {
+        border = "${dark2}";
+        background = "${dark2}";
+        text = "${white}";
+        indicator = "${black}";
+        childBorder = "${dark2}";
+      };
+      focusedInactive = {
+        border = "${dark1}";
+        background = "${dark1}";
+        text = "${white}";
+        indicator = "${black}";
+        childBorder = "${dark1}";
+      };
+      unfocused = {
+        border = "${black}";
+        background = "${black}";
+        text = "${white}";
+        indicator = "${black}";
+        childBorder = "${black}";
+      };
+      urgent = {
+        border = "${black}";
+        background = "${black}";
+        text = "${white}";
+        indicator = "${black}";
+        childBorder = "${black}";
+      };
+    };
+    bars = [
+      {
+        position = "top";
+        # TODO add contrib to store
+        statusCommand = "SCRIPT_DIR=~/.config/i3blocks/i3blocks-contrib ${pkgs.i3blocks}/bin/i3blocks";
+        fonts = fonts;
+        colors = {
+          background = "${black}";
+          statusline = "${white}";
+          separator = "${red}";
+          focusedWorkspace = {
+            border = "${dark2}";
+            background = "${dark2}";
+            text = "${white}";
+          };
+          activeWorkspace = {
+            border = "${dark1}";
+            background = "${dark1}";
+            text = "${white}";
+          };
+          inactiveWorkspace = {
+            border = "${black}";
+            background = "${black}";
+            text = "${lightgray}";
+          };
+          urgentWorkspace = {
+            border = "${black}";
+            background = "${black}";
+            text = "${darkyellow}";
+          };
+          bindingMode = {
+            border = "${dark2}";
+            background = "${dark2}";
+            text = "${white}";
+          };
+        };
+      }
+    ];
+  };
+
+  # TODO
+  wayland.windowManager.sway.extraConfig = ''
+      bindsym --locked XF86AudioPlay exec ~/bin/toggle
+      bindsym --locked XF86AudioPrev exec mpc prev
+      bindsym --locked XF86AudioNext exec mpc next
+      bindsym --locked XF86AudioStop exec mpc stop
+      bindsym --locked XF86AudioMute exec pamixer --toggle-mute && pkill -RTMIN+10 i3blocks && (pamixer --get-mute && echo 0 > $SWAYSOCK.wob) || pamixer --get-volume > $SWAYSOCK.wob
+      bindsym --locked XF86AudioRaiseVolume exec pamixer -ui 5 && pkill -RTMIN+10 i3blocks && pamixer --get-volume > $SWAYSOCK.wob
+      bindsym --locked XF86AudioLowerVolume exec pamixer -ud 5 && pkill -RTMIN+10 i3blocks && pamixer --get-volume > $SWAYSOCK.wob
+  '';
+  wayland.windowManager.sway.extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+      export _JAVA_AWT_WM_NONREPARENTING=1
+  '';
+}
