@@ -20,7 +20,6 @@
     moreutils
     atool
     pass
-    exa
     pastel
     #tmux
   ];

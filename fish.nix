@@ -79,10 +79,10 @@
     shellAliases = {
       nvim_nowrite = "nvim '+set noundofile' '+set noswapfile'";
       pass = "EDITOR=nvim_nowrite command pass";
-      ls = "exa";
-      ll = "exa -l";
-      la = "exa -la";
-      tree = "exa -T";
+      ls = "${pkgs.exa}/bin/exa";
+      ll = "${pkgs.exa}/bin/exa -l";
+      la = "${pkgs.exa}/bin/exa -la";
+      tree = "${pkgs.exa}/bin/exa -T";
       bell = "echo \a";
       mp = "mpc toggle";
       rmi = "hub --git-dir=(realpath ~/dev/report-management-issues/.git) issue";
