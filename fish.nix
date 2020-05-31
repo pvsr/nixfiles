@@ -18,7 +18,7 @@
         set batch $argv[1]
         set season (basename $batch)
         set show_dir (dirname $batch)
-        set show_name (basename $show_dir)
+        set show_name (basename (realpath $show_dir))
         youtube-dl --cookies ~/downloads/cookies.txt \
           -o "$show_dir/S%(season_number)02d/$show_name.S%(season_number)02d.E%(episode_number)02d.%(title)s.%(ext)s" \
           --download-archive "~/.local/share/youtube-dl/archives/$suffix.$season.archive" \
