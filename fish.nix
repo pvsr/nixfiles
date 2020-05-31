@@ -77,6 +77,7 @@
       suod = "sudo";
     };
     shellAliases = {
+      nvim_nowrite = "nvim '+set noundofile' '+set noswapfile'";
       pass = "EDITOR=nvim_nowrite command pass";
       ls = "exa";
       ll = "exa -l";
