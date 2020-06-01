@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  programs.home-manager.enable = true;
+
+  imports = [
+    ./common.nix
+  ];
+
   home.packages = with pkgs; [
     ranger
     diceware
