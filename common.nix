@@ -106,7 +106,7 @@
     };
   };
 
-  programs.alacritty = {
+  programs.alacritty = with import ./colors.nix; {
     enable = true;
     settings = {
 
@@ -114,29 +114,29 @@
       font.normal.family = "Sarasa Term J";
       font.size = 12.0;
       colors = {
-        primary.background = "0x1c1b19";
-        primary.foreground = "0xfce8c3";
+        primary.background = "${black}";
+        primary.foreground = "${white}";
 
         normal = {
-          black = "0x1c1b19";
-          red = "0xef2f27";
-          green = "0x519f50";
-          yellow = "0xfbb829";
-          blue = "0x2c78bf";
-          magenta = "0xe02c6d";
-          cyan = "0x0aaeb3";
-          white = "0x918175";
+          black = "${black}";
+          red = "${darkred}";
+          green = "${darkgreen}";
+          yellow = "${darkyellow}";
+          blue = "${darkblue}";
+          magenta = "${darkmagenta}";
+          cyan = "${darkcyan}";
+          white = "${white}";
         };
 
         bright = {
-          black = "0x2d2c29";
-          red = "0xf75341";
-          green = "0x98bc37";
-          yellow = "0xfed06e";
-          blue = "0x68a8e4";
-          magenta = "0xff5c8f";
-          cyan = "0x53fde9";
-          white = "0xfce8c3";
+          black = "${darkgray}";
+          red = "${red}";
+          green = "${green}";
+          yellow = "${yellow}";
+          blue = "${blue}";
+          magenta = "${magenta}";
+          cyan = "${cyan}";
+          white = "${lightgray}";
         };
       };
     };
