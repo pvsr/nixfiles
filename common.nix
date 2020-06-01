@@ -109,7 +109,7 @@
   programs.alacritty = with import ./colors.nix; {
     enable = true;
     settings = {
-
+      dynamic_title = true;
       draw_bold_text_with_bright_colors = true;
       font.normal.family = "Sarasa Term J";
       font.size = 12.0;
