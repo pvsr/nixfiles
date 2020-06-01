@@ -115,28 +115,28 @@
       font.size = 12.0;
       colors = {
         primary.background = "${black}";
-        primary.foreground = "${white}";
+        primary.foreground = "${brightWhite}";
 
         normal = {
           black = "${black}";
-          red = "${darkred}";
-          green = "${darkgreen}";
-          yellow = "${darkyellow}";
-          blue = "${darkblue}";
-          magenta = "${darkmagenta}";
-          cyan = "${darkcyan}";
-          white = "${white}";
-        };
-
-        bright = {
-          black = "${darkgray}";
           red = "${red}";
           green = "${green}";
           yellow = "${yellow}";
           blue = "${blue}";
           magenta = "${magenta}";
           cyan = "${cyan}";
-          white = "${lightgray}";
+          white = "${white}";
+        };
+
+        bright = {
+          black = "${brightBlack}";
+          red = "${brightRed}";
+          green = "${brightGreen}";
+          yellow = "${brightYellow}";
+          blue = "${brightBlue}";
+          magenta = "${brightMagenta}";
+          cyan = "${brightCyan}";
+          white = "${brightWhite}";
         };
       };
     };

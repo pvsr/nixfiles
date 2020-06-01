@@ -1,26 +1,36 @@
 {
-  black        = "#282828";
-  #black        = "#32302f";
-  dark1        = "#3c3836";
-  dark2        = "#504945";
-  dark3        = "#665c54";
-  dark4        = "#7c6f64";
+  black = "#1C1B19";
+  brightBlack = "#918175";
 
-  darkred      = "#cc241d";
-  darkgreen    = "#98971a";
-  darkyellow   = "#d79921";
-  darkblue     = "#458588";
-  darkmagenta  = "#b16286";
-  darkcyan     = "#689d6a";
+  red = "#EF2F27";
+  brightRed = "#F75341";
 
-  lightgray    = "#a89984";
-  darkgray     = "#928374";
+  green = "#519F50";
+  brightGreen = "#98BC37";
 
-  red          = "#fb4934";
-  green        = "#b8bb26";
-  yellow       = "#fabd2f";
-  blue         = "#83a598";
-  magenta      = "#d3869b";
-  cyan         = "#8ec07c";
-  white        = "#ebdbb2";
+  yellow = "#FBB829";
+  brightYellow = "#FED06E";
+
+  blue = "#2C78BF";
+  brightBlue = "#68A8E4";
+
+  magenta = "#E02C6D";
+  brightMagenta = "#FF5C8F";
+
+  cyan = "#0AAEB3";
+  brightCyan = "#53FDE9";
+
+  white = "#D0BFA1";
+  brightWhite = "#FCE8C3";
+
+  orange = "#D75F00";
+  brightOrange = "#FF8700";
+
+  xgray1 = "#262626";
+  xgray2 = "#303030";
+  xgray3 = "#3A3A3A";
+  xgray4 = "#444444";
+  xgray5 = "#4E4E4E";
+
+  hardBlack = "#121212";
 }

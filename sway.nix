@@ -72,18 +72,18 @@ in
 
     colors = {
       focused = {
-        border = "${dark2}";
-        background = "${dark2}";
+        border = "${xgray3}";
+        background = "${xgray3}";
         text = "${white}";
         indicator = "${black}";
-        childBorder = "${dark2}";
+        childBorder = "${xgray3}";
       };
       focusedInactive = {
-        border = "${dark1}";
-        background = "${dark1}";
+        border = "${xgray2}";
+        background = "${xgray2}";
         text = "${white}";
         indicator = "${black}";
-        childBorder = "${dark1}";
+        childBorder = "${xgray2}";
       };
       unfocused = {
         border = "${black}";
@@ -111,28 +111,28 @@ in
           statusline = "${white}";
           separator = "${red}";
           focusedWorkspace = {
-            border = "${dark2}";
-            background = "${dark2}";
+            border = "${xgray3}";
+            background = "${xgray3}";
             text = "${white}";
           };
           activeWorkspace = {
-            border = "${dark1}";
-            background = "${dark1}";
+            border = "${xgray2}";
+            background = "${xgray2}";
             text = "${white}";
           };
           inactiveWorkspace = {
             border = "${black}";
             background = "${black}";
-            text = "${lightgray}";
+            text = "${xgray5}";
           };
           urgentWorkspace = {
             border = "${black}";
             background = "${black}";
-            text = "${darkyellow}";
+            text = "${yellow}";
           };
           bindingMode = {
-            border = "${dark2}";
-            background = "${dark2}";
+            border = "${xgray3}";
+            background = "${xgray3}";
             text = "${white}";
           };
         };
