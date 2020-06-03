@@ -10,7 +10,7 @@
     shortcut = "a";
     keyMode = "vi";
     terminal = "screen-256color";
-    newSession = true;
+    newSession = false;
     clock24 = true;
     plugins = with pkgs; [
       tmuxPlugins.resurrect
