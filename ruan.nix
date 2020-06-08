@@ -19,6 +19,8 @@
     tmux
   ];
 
+  wayland.windowManager.sway.config.output."*".scale = "2";
+
   #services.fontconfig.enable = true;
 
   # This value determines the Home Manager release that your
