@@ -101,7 +101,7 @@
         # TODO
         slang = "eng,en,enUS,en-US";
         ytdl-raw-options =
-          "sub-lang=\"eng,en,enUS,en-US\",write-sub=,write-auto-sub=";
+          "sub-lang=\"eng,en,enUS,en-US\",write-sub=,write-auto-sub=,cookies=~/.cache/cookies.txt";
       };
     };
   };
