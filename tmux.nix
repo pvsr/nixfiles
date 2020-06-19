@@ -17,11 +17,14 @@
       tmuxPlugins.pain-control
       tmuxPlugins.prefix-highlight
       tmuxPlugins.sensible
+      tmuxPlugins.yank
     ];
     extraConfig = ''
       set -g mouse on
       set -ga terminal-overrides \",xterm-termite:Tc\"
       run -b ~/.local/share/tmux/themes/srcery-tmux/srcery.tmux
+      bind C-a send-prefix
+      bind a last-window
     '';
   };
 
