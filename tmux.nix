@@ -21,7 +21,7 @@
     ];
     extraConfig = ''
       set -g mouse on
-      set -ga terminal-overrides \",xterm-termite:Tc\"
+      set -ga terminal-overrides ",xterm-256color:Tc"
       run -b ~/.local/share/tmux/themes/srcery-tmux/srcery.tmux
       bind C-a send-prefix
       bind a last-window
