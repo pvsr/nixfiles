@@ -60,7 +60,6 @@
   };
 
   programs.mpv = {
-    enable = true;
     bindings = { };
     config = {
       profile = "standard";
@@ -103,7 +102,6 @@
   };
 
   programs.alacritty = with import ./colors.nix; {
-    enable = true;
     settings = {
       dynamic_title = true;
       draw_bold_text_with_bright_colors = true;

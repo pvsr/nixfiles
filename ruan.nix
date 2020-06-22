@@ -20,6 +20,9 @@
     tmux
   ];
 
+  programs.mpv.enable = true;
+  programs.alacritty.enable = true;
+
   wayland.windowManager.sway.config.output."*".scale = "2";
 
   #services.fontconfig.enable = true;

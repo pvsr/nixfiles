@@ -11,11 +11,6 @@
   home.packages = with pkgs; [
   ];
 
-  home.file."bin/alacritty".text = "#!/bin/sh\n/usr/bin/alacritty \"$@\"";
-  programs.fish.shellAliases = {
-    mpv = "/usr/bin/mpv";
-  };
-
   programs.beets.enable = false;
   programs.beets.settings = {
     directory = "~/music";
