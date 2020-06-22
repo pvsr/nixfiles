@@ -73,32 +73,32 @@ in
 
     colors = {
       focused = {
-        border = "${xgray2}";
-        background = "${xgray2}";
-        text = "${white}";
-        indicator = "${black}";
-        childBorder = "${xgray2}";
+        border = xgray2;
+        background = xgray2;
+        text = white;
+        indicator = black;
+        childBorder = xgray2;
       };
       focusedInactive = {
-        border = "${xgray1}";
-        background = "${xgray1}";
-        text = "${white}";
-        indicator = "${black}";
-        childBorder = "${xgray1}";
+        border = xgray1;
+        background = xgray1;
+        text = white;
+        indicator = black;
+        childBorder = xgray1;
       };
       unfocused = {
-        border = "${black}";
-        background = "${black}";
-        text = "${white}";
-        indicator = "${black}";
-        childBorder = "${black}";
+        border = black;
+        background = black;
+        text = white;
+        indicator = black;
+        childBorder = black;
       };
       urgent = {
-        border = "${black}";
-        background = "${black}";
-        text = "${white}";
-        indicator = "${black}";
-        childBorder = "${black}";
+        border = black;
+        background = black;
+        text = white;
+        indicator = black;
+        childBorder = black;
       };
     };
     bars = [
@@ -108,33 +108,33 @@ in
         statusCommand = "SCRIPT_DIR=~/.config/i3blocks/i3blocks-contrib ${pkgs.i3blocks}/bin/i3blocks";
         fonts = fonts;
         colors = {
-          background = "${black}";
-          statusline = "${white}";
-          separator = "${red}";
+          background = black;
+          statusline = white;
+          separator = red;
           focusedWorkspace = {
-            border = "${xgray2}";
-            background = "${xgray2}";
-            text = "${white}";
+            border = xgray2;
+            background = xgray2;
+            text = white;
           };
           activeWorkspace = {
-            border = "${xgray1}";
-            background = "${xgray1}";
-            text = "${white}";
+            border = xgray1;
+            background = xgray1;
+            text = white;
           };
           inactiveWorkspace = {
-            border = "${black}";
-            background = "${black}";
-            text = "${xgray5}";
+            border = black;
+            background = black;
+            text = xgray5;
           };
           urgentWorkspace = {
-            border = "${black}";
-            background = "${black}";
-            text = "${yellow}";
+            border = black;
+            background = black;
+            text = yellow;
           };
           bindingMode = {
-            border = "${xgray2}";
-            background = "${xgray2}";
-            text = "${white}";
+            border = xgray2;
+            background = xgray2;
+            text = white;
           };
         };
       }
