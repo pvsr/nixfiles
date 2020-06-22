@@ -108,29 +108,29 @@
       font.normal.family = "Sarasa Term J";
       font.size = lib.mkDefault 12.0;
       colors = {
-        primary.background = "${black}";
-        primary.foreground = "${brightWhite}";
+        primary.background = black;
+        primary.foreground = brightWhite;
 
         normal = {
-          black = "${black}";
-          red = "${red}";
-          green = "${green}";
-          yellow = "${yellow}";
-          blue = "${blue}";
-          magenta = "${magenta}";
-          cyan = "${cyan}";
-          white = "${white}";
+          black = black;
+          red = red;
+          green = green;
+          yellow = yellow;
+          blue = blue;
+          magenta = magenta;
+          cyan = cyan;
+          white = white;
         };
 
         bright = {
-          black = "${brightBlack}";
-          red = "${brightRed}";
-          green = "${brightGreen}";
-          yellow = "${brightYellow}";
-          blue = "${brightBlue}";
-          magenta = "${brightMagenta}";
-          cyan = "${brightCyan}";
-          white = "${brightWhite}";
+          black = brightBlack;
+          red = brightRed;
+          green = brightGreen;
+          yellow = brightYellow;
+          blue = brightBlue;
+          magenta = brightMagenta;
+          cyan = brightCyan;
+          white = brightWhite;
         };
       };
     };
