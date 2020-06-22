@@ -157,4 +157,12 @@ in
       export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
       export _JAVA_AWT_WM_NONREPARENTING=1
   '';
+
+  programs.mako = with import ./colors.nix; {
+    enable = true;
+    font = "${font} 13";
+    backgroundColor = brightBlue;
+    borderColor = blue;
+    textColor = xgray1;
+  };
 }
