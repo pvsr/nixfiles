@@ -5,6 +5,7 @@ let
 
   font = "Sarasa Term J";
   fonts = [ "${font} 13" ];
+  colors = import ./colors.nix;
   exitMode = "(l)ock, (e)xit, (s)uspend, (r)eboot, (S)hutdown";
 in
 {
@@ -13,7 +14,7 @@ in
   wayland.windowManager.sway.enable = true;
   wayland.windowManager.sway.systemdIntegration = true;
 
-  wayland.windowManager.sway.config = with import ./colors.nix; {
+  wayland.windowManager.sway.config = with colors; {
     modifier = "Mod4";
     # HACK
     terminal = "${pkgs.fish}/bin/fish -c alacritty";
@@ -158,7 +159,7 @@ in
       export _JAVA_AWT_WM_NONREPARENTING=1
   '';
 
-  programs.mako = with import ./colors.nix; {
+  programs.mako = with colors; {
     enable = true;
     font = "${font} 13";
     backgroundColor = brightBlue;

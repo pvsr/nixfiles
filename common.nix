@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }:
 
+let colors = import ./colors.nix; in
 {
   imports = [
     ./fish.nix
@@ -101,25 +102,18 @@
     };
   };
 
-  programs.alacritty = with import ./colors.nix; {
+  programs.alacritty = {
     settings = {
       dynamic_title = true;
       draw_bold_text_with_bright_colors = true;
       font.normal.family = "Sarasa Term J";
       font.size = lib.mkDefault 12.0;
-      colors = {
+      colors = with colors; {
         primary.background = black;
         primary.foreground = brightWhite;
 
         normal = {
-          black = black;
-          red = red;
-          green = green;
-          yellow = yellow;
-          blue = blue;
-          magenta = magenta;
-          cyan = cyan;
-          white = white;
+          inherit black red green yellow blue magenta cyan white;
         };
 
         bright = {
