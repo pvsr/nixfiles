@@ -18,7 +18,6 @@
     atool
     pass
     pastel
-    #tmux
   ];
 
   programs.direnv = {
