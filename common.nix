@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -15,7 +15,6 @@
     fd
     ripgrep
     htop
-    transmission
     moreutils
     atool
     pass
@@ -32,7 +31,7 @@
     enable = true;
     ignores = [ "Session.vim" "healthcheck.out" ];
     userName = "Peter Rice";
-    userEmail = "peter@peterrice.xyz";
+    userEmail = lib.mkDefault "peter@peterrice.xyz";
   };
 
   programs.fzf = {
@@ -55,7 +54,6 @@
   };
 
   services.mpd = {
-    enable = true;
     musicDirectory = ~/annex/music;
   };
 
@@ -90,7 +88,6 @@
         # TODO
         ytdl-format = "bestvideo[height<=?2160]+bestaudio/best";
         profile = "gpu-hq";
-        gpu-context = "wayland";
         video-sync = "display-resample";
         interpolation = true;
         tscale = "oversample";
