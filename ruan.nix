@@ -5,6 +5,7 @@
 
   imports = [
     ./common.nix
+    ./sway.nix
   ];
 
   home.packages = with pkgs; [
