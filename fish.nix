@@ -83,9 +83,8 @@
       ll = "${pkgs.exa}/bin/exa -l";
       la = "${pkgs.exa}/bin/exa -la";
       tree = "${pkgs.exa}/bin/exa -T";
-      bell = "echo \a";
+      bell = "echo \\a";
       mp = "mpc toggle";
-      rmi = "hub --git-dir=(realpath ~/dev/report-management-issues/.git) issue";
       "hoi4" = "steam steam://rungameid/394360";
     };
   };

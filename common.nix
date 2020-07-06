@@ -53,7 +53,7 @@
     enable = true;
     enableFishIntegration = false;
     agents = [ "gpg" "ssh" ];
-    keys = [ "id_ed25519" ];
+    keys = [ "id_rsa" "id_ed25519" ];
     extraFlags = [ "--quiet" ];
   };
 
