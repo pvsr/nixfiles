@@ -32,6 +32,7 @@
   };
 
   programs.git.userEmail = "price@hubspot.com";
+  programs.alacritty.settings.font.size = 13.0;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

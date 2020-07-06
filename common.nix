@@ -106,7 +106,7 @@
       dynamic_title = true;
       draw_bold_text_with_bright_colors = true;
       font.normal.family = "Sarasa Term J";
-      font.size = 12.0;
+      font.size = lib.mkDefault 12.0;
       colors = {
         primary.background = "${black}";
         primary.foreground = "${brightWhite}";
