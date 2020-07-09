@@ -32,6 +32,9 @@
     ignores = [ "Session.vim" "healthcheck.out" ];
     userName = "Peter Rice";
     userEmail = lib.mkDefault "peter@peterrice.xyz";
+    extraConfig = {
+      commit.verbose = true;
+    };
   };
 
   programs.fzf = {
