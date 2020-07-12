@@ -10,7 +10,6 @@
     neovim
     stow
     youtube-dl
-    git
     gitAndTools.git-annex
     fd
     ripgrep
@@ -29,6 +28,7 @@
 
   programs.git = {
     enable = true;
+    package = pkgs.gitAndTools.gitFull;
     ignores = [ "Session.vim" "healthcheck.out" ];
     userName = "Peter Rice";
     userEmail = lib.mkDefault "peter@peterrice.xyz";
