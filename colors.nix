@@ -31,6 +31,7 @@
   xgray3 = "#3A3A3A";
   xgray4 = "#444444";
   xgray5 = "#4E4E4E";
+  xgray6 = "#585858";
 
   hardBlack = "#121212";
 }
