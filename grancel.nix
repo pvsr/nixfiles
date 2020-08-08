@@ -6,6 +6,7 @@
   imports = [
     ./common.nix
     ./linux.nix
+    ./kakoune.nix
   ];
 
   targets.genericLinux.enable = true;
