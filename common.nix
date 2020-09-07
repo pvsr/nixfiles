@@ -5,10 +5,10 @@ let colors = import ./colors.nix; in
   imports = [
     ./fish.nix
     ./tmux.nix
+    ./neovim/neovim.nix
   ];
 
   home.packages = with pkgs; [
-    neovim
     stow
     youtube-dl
     gitAndTools.git-annex

@@ -1,0 +1,102 @@
+{ config, pkgs, lib, ... }:
+
+{
+  imports = [
+  ];
+
+  home.packages = with pkgs; [
+  ];
+
+  programs.neovim = {
+    enable = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+
+    withPython3 = true;
+
+    extraConfig = lib.concatStringsSep "\n" [
+      "set shell=${pkgs.fish}/bin/fish"
+      (builtins.readFile ./init.vim)
+    ];
+    plugins = with pkgs.vimPlugins; [
+      { plugin = neomake;
+        config = ''
+          let g:neomake_python_enabled_makers = ['python', 'pylint', 'mypy']
+
+          let g:neomake_cabal_args = ['new-build']
+          autocmd SourcePost neomake.vim call neomake#configure#automake('rw', 400)
+        '';
+      }
+      { plugin = denite;
+        config = ''
+          autocmd FileType denite call s:denite_my_settings()
+          function! s:denite_my_settings() abort
+            nnoremap <silent><buffer><expr> <CR>
+            \ denite#do_map('do_action')
+            nnoremap <silent><buffer><expr> d
+            \ denite#do_map('do_action', 'delete')
+            nnoremap <silent><buffer><expr> p
+            \ denite#do_map('do_action', 'preview')
+            nnoremap <silent><buffer><expr> q
+            \ denite#do_map('quit')
+            nnoremap <silent><buffer><expr> i
+            \ denite#do_map('open_filter_buffer')
+            nnoremap <silent><buffer><expr> J
+            \ denite#do_map('toggle_select').'j'
+            nnoremap <silent><buffer><expr> K
+            \ denite#do_map('toggle_select').'k'
+          endfunction
+
+          nnoremap <leader>* :Denite grep:::\\b<c-r><c-w>\\b<cr>
+          nnoremap <leader>fr :Denite file/rec<cr>
+          nnoremap <leader>b :Denite buffer<cr>
+        '';
+      }
+      { plugin = deoplete-nvim;
+        config = ''
+          "call deoplete#custom#option('auto_complete_delay', 300)
+          "let g:deoplete#enable_at_startup = 1
+          "let g:deoplete#max_menu_width = 60
+          "inoremap <expr><C-h>
+          "\ deoplete#smart_close_popup()."\<C-h>"
+          "inoremap <expr><BS>
+          "\ deoplete#smart_close_popup()."\<C-h>"
+        '';
+      }
+      deoplete-fish
+      deoplete-jedi
+      { plugin = echodoc;
+        config = ''
+          let g:echodoc#enable_at_startup = 1
+          set completeopt-=preview
+        '';
+      }
+      argtextobj-vim
+      vim-sleuth
+      vim-abolish
+      vim-exchange
+      vim-commentary
+      vim-surround
+      vim-unimpaired
+      vim-fugitive
+      { plugin = airline;
+        config = "set noshowmode";
+      }
+      vim-toml
+      haskell-vim
+      vim-fish
+      vim-nix
+      gitgutter
+      # pkgs.vimUtils.buildVimPluginFrom2Nix {
+      #   pname = "srcery-vim";
+      #   version = "2020-07-03";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "srcery-colors";
+      #     repo = "srcery-vim";
+      #     rev = "a6ee51328ca26b792d974bcfab07812cce04b9f8";
+      #     sha256 = "0q4x656djd4qj34jrl3df3r10g3gdkrf5pyg0v8ma9knx2j3nxk6";
+      #   };
+      # }
+    ];
+  };
+}
