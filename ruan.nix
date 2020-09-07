@@ -21,7 +21,6 @@
   ];
 
   programs.mpv.enable = true;
-  programs.alacritty.enable = true;
 
   wayland.windowManager.sway.config.output."*".scale = "2";
 

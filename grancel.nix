@@ -14,6 +14,8 @@
   home.packages = with pkgs; [
   ];
 
+  wayland.windowManager.sway.config.terminal = "SHELL=${pkgs.fish}/bin/fish /usr/bin/alacritty";
+
   programs.beets.enable = false;
   programs.beets.settings = {
     directory = "~/music";

@@ -103,11 +103,12 @@ let colors = import ./colors.nix; in
   };
 
   programs.alacritty = {
+    enable = true;
     settings = {
-      dynamic_title = true;
+      window.dynamic_title = true;
       draw_bold_text_with_bright_colors = true;
       font.normal.family = "Sarasa Term J";
-      font.size = lib.mkDefault 12.0;
+      font.size = 12.0;
       colors = with colors; {
         primary.background = black;
         primary.foreground = brightWhite;

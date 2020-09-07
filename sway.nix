@@ -16,8 +16,7 @@ in
 
   wayland.windowManager.sway.config = with colors; {
     modifier = "Mod4";
-    # HACK
-    terminal = "${pkgs.fish}/bin/fish -c alacritty";
+    terminal = lib.mkDefault "SHELL=${pkgs.fish}/bin/fish ${pkgs.alacritty}/bin/alacritty";
     fonts = fonts;
 
 
