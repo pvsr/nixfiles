@@ -15,7 +15,7 @@
         relative = true;
         highlightCursor = true;
       };
-      showWhitespace.enable = true;
+      # showWhitespace.enable = true;
       wrapLines.enable = true;
       ui = {
         enableMouse = true;
@@ -30,5 +30,5 @@
     };
   };
 
-  programs.fish.shellAliases.nvim = "kak";
+  #programs.fish.shellAliases.nvim = "kak";
 }
