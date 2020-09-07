@@ -14,6 +14,8 @@
   home.packages = with pkgs; [
   ];
 
+  home.language.base = "en-US.UTF-8";
+
   wayland.windowManager.sway.config.terminal = "SHELL=${pkgs.fish}/bin/fish /usr/bin/alacritty";
 
   programs.beets.enable = false;
