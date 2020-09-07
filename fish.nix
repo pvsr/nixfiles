@@ -86,6 +86,8 @@
       bell = "echo \\a";
       mp = "mpc toggle";
       "hoi4" = "steam steam://rungameid/394360";
+      "eu4" = "steam steam://rungameid/236850";
+      "ck3" = "steam steam://rungameid/1158310";
     };
   };
 }
