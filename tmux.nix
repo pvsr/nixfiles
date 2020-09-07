@@ -22,6 +22,7 @@
     extraConfig = ''
       set -g mouse on
       set -ga terminal-overrides ",xterm-256color:Tc"
+      set-option -g default-shell "${pkgs.fish}/bin/fish"
       run -b ~/.local/share/tmux/themes/srcery-tmux/srcery.tmux
       bind C-a send-prefix
       bind a last-window
