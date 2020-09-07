@@ -34,6 +34,7 @@ let colors = import ./colors.nix; in
     userEmail = lib.mkDefault "peter@peterrice.xyz";
     extraConfig = {
       commit.verbose = true;
+      pull.rebase = true;
     };
   };
 
