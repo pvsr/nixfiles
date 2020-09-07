@@ -16,7 +16,8 @@
     mrsh
     termite
     psmisc
-    jetbrains.idea-community
+    #jetbrains.idea-community
+    lsof
     tmux
   ];
 
