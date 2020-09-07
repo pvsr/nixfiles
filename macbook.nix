@@ -32,8 +32,7 @@
   };
 
   programs.git.userEmail = "price@hubspot.com";
-  # TODO I don't think this will work
-  programs.alacritty.settings.font.size = mkForce 13.0;
+  programs.alacritty.settings.font.size = 13.0;
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
