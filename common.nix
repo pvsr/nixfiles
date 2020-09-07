@@ -50,10 +50,9 @@ let colors = import ./colors.nix; in
 
   programs.keychain = {
     enable = true;
-    enableFishIntegration = false;
     agents = [ "gpg" "ssh" ];
     keys = [ "id_rsa" "id_ed25519" ];
-    extraFlags = [ "--quiet" ];
+    extraFlags = [ "--noask" "--quiet" ];
   };
 
   services.mpd = {

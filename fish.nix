@@ -35,14 +35,6 @@
       set -gx BROWSER org.qutebrowser.qutebrowser.desktop
       set -gx EDITOR nvim
       set -gx VISUAL nvim
-
-      test -z "$hostname"; and set hostname (uname -n)
-      if test -f "$HOME/.keychain/$hostname-fish"
-        source $HOME/.keychain/$hostname-fish
-      end
-      if test -f "$HOME/.keychain/$hostname-fish-gpg"
-        source $HOME/.keychain/$hostname-fish-gpg
-      end
     '';
     plugins = [
       {
