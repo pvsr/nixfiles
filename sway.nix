@@ -30,7 +30,7 @@ in
     workspaceAutoBackAndForth = true;
 
     input."*" = { xkb_variant = "altgr-intl"; xkb_options = "ctrl:nocaps"; };
-    # output."*" = { bg = "~/background.png"; };
+    output."*" = { bg = "~/background fit"; };
 
     keybindings = lib.mkOptionDefault {
       "${modifier}+z" = "workspace back_and_forth";
