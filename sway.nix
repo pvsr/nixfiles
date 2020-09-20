@@ -58,6 +58,22 @@ in
       "Control+bracketleft" = "mode 'default'";
     };
 
+    modes.resize = {
+      h = "resize shrink width 5 px or 5 ppt";
+      j = "resize grow height 5 px or 5 ppt";
+      k = "resize shrink height 5 px or 5 ppt";
+      l = "resize grow width 5 px or 5 ppt";
+
+      left = "resize shrink width 5 px or 5 ppt";
+      down = "resize grow height 5 px or 5 ppt";
+      up = "resize shrink height 5 px or 5 ppt";
+      right = "resize grow width 5 px or 5 ppt";
+
+      Return = "mode 'default'";
+      Escape = "mode 'default'";
+      "Control+bracketleft" = "mode 'default'";
+    };
+
     floating.criteria = [
       { title = "Steam - Update News"; }
       { class = "(?i)feh"; }
