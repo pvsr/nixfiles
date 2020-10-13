@@ -64,6 +64,15 @@
           sha256 = "0ypbdfjyv8kgmjvczwb9bx10sp7jd593sd0xadpq1hc8cxm5vsih";
         };
       }
+      {
+        name = "plugin-git";
+        src = pkgs.fetchFromGitHub {
+          owner = "jhillyerd";
+          repo = "plugin-git";
+          rev = "18d8369132bdc349afc9ffc6702098dc8deaaa96";
+          sha256 = "10pscjyv7ypbbfa9j2n3r1p8fm5vg86lpdvs4ndj0dh23pazsfhz";
+        };
+      }
     ];
     shellAbbrs = {
       suod = "sudo";
