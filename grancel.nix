@@ -10,6 +10,7 @@
   ];
 
   targets.genericLinux.enable = true;
+  targets.genericLinux.extraXdgDataDirs = [ "/usr/share" ];
 
   home.packages = with pkgs; [
   ];
