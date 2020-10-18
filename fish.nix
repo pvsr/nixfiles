@@ -26,6 +26,9 @@
       '';
       yts = "mpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
     };
+    promptInit = ''
+      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+    '';
     interactiveShellInit = ''
       set -g fish_key_bindings fish_hybrid_key_bindings
       set -g fish_cursor_default block
