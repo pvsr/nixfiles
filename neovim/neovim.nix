@@ -19,7 +19,8 @@
       (builtins.readFile ./init.vim)
     ];
     plugins = with pkgs.vimPlugins; [
-      { plugin = neomake;
+      {
+        plugin = neomake;
         config = ''
           let g:neomake_python_enabled_makers = ['python', 'pylint', 'mypy']
 
@@ -27,7 +28,8 @@
           autocmd SourcePost neomake.vim call neomake#configure#automake('rw', 400)
         '';
       }
-      { plugin = denite;
+      {
+        plugin = denite;
         config = ''
           autocmd FileType denite call s:denite_my_settings()
           function! s:denite_my_settings() abort
@@ -52,7 +54,8 @@
           nnoremap <leader>b :Denite buffer<cr>
         '';
       }
-      { plugin = deoplete-nvim;
+      {
+        plugin = deoplete-nvim;
         config = ''
           "call deoplete#custom#option('auto_complete_delay', 300)
           "let g:deoplete#enable_at_startup = 1
@@ -65,7 +68,8 @@
       }
       deoplete-fish
       deoplete-jedi
-      { plugin = echodoc;
+      {
+        plugin = echodoc;
         config = ''
           let g:echodoc#enable_at_startup = 1
           set completeopt-=preview
@@ -81,7 +85,8 @@
       vim-fugitive
       vim-eunuch
       vim-dirvish
-      { plugin = airline;
+      {
+        plugin = airline;
         config = "set noshowmode";
       }
       vim-toml
