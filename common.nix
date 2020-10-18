@@ -20,6 +20,13 @@ let colors = import ./colors.nix; in
     pastel
   ];
 
+  home.sessionVariables = {
+    RIPGREP_CONFIG_PATH = "~/.config/rg/rc";
+    BROWSER = "org.qutebrowser.qutebrowser.desktop";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
+
   xdg.configFile."rg/rc".text = "--smart-case";
 
   programs.direnv = {

@@ -34,10 +34,6 @@
       set -g fish_cursor_default block
       set -g fish_cursor_insert line
       set -g fish_cursor_replace_one underscore
-      set -gx RIPGREP_CONFIG_PATH ~/.config/rg/rc
-      set -gx BROWSER org.qutebrowser.qutebrowser.desktop
-      set -gx EDITOR nvim
-      set -gx VISUAL nvim
     '';
     plugins = [
       {
