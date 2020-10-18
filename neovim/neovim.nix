@@ -79,6 +79,8 @@
       vim-surround
       vim-unimpaired
       vim-fugitive
+      vim-eunuch
+      vim-dirvish
       { plugin = airline;
         config = "set noshowmode";
       }
