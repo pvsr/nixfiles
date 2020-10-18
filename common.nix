@@ -20,6 +20,8 @@ let colors = import ./colors.nix; in
     pastel
   ];
 
+  xdg.configFile."rg/rc".text = "--smart-case";
+
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;
