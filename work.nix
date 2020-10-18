@@ -32,10 +32,10 @@
     newSession = true;
     clock24 = true;
     extraConfig = ''
-    set -ga terminal-overrides ",xterm-termite:Tc"
+      set -ga terminal-overrides ",xterm-termite:Tc"
 
-    set-option -g default-command "reattach-to-user-namespace -l ${pkgs.fish}/bin/fish"
-    set-option -g default-shell "${pkgs.fish}/bin/fish"
+      set-option -g default-command "reattach-to-user-namespace -l ${pkgs.fish}/bin/fish"
+      set-option -g default-shell "${pkgs.fish}/bin/fish"
     '';
     plugins = with pkgs; [
       tmuxPlugins.resurrect

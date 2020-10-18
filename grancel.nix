@@ -29,8 +29,8 @@
     mpd.host = "localhost";
     mpd.port = 6600;
     match.preferred = {
-      countries = ["XW" "US" "JP"];
-      media = ["CD" "Digital Media|File"];
+      countries = [ "XW" "US" "JP" ];
+      media = [ "CD" "Digital Media|File" ];
       original_year = true;
     };
     ftintitle.drop = true;

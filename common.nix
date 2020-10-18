@@ -1,5 +1,4 @@
 { config, pkgs, lib, ... }:
-
 let colors = import ./colors.nix; in
 {
   imports = [
@@ -43,9 +42,9 @@ let colors = import ./colors.nix; in
     enableFishIntegration = false;
     defaultCommand = "fd --type f";
     defaultOptions = [
-    "--bind=ctrl-j:accept,ctrl-k:kill-line"
-    "--cycle"
-    "--layout=reverse"
+      "--bind=ctrl-j:accept,ctrl-k:kill-line"
+      "--cycle"
+      "--layout=reverse"
     ];
   };
 

@@ -9,7 +9,7 @@ let
   exitMode = "(l)ock, (e)xit, (s)uspend, (r)eboot, (S)hutdown";
 in
 {
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [ ];
 
   wayland.windowManager.sway.enable = true;
   wayland.windowManager.sway.systemdIntegration = true;
@@ -159,19 +159,19 @@ in
 
   # TODO
   wayland.windowManager.sway.extraConfig = ''
-      bindsym --locked XF86AudioPlay exec ~/bin/toggle
-      bindsym --locked XF86AudioPrev exec mpc prev
-      bindsym --locked XF86AudioNext exec mpc next
-      bindsym --locked XF86AudioStop exec mpc stop
-      bindsym --locked XF86AudioMute exec pamixer --toggle-mute && pkill -RTMIN+10 i3blocks && (pamixer --get-mute && echo 0 > $SWAYSOCK.wob) || pamixer --get-volume > $SWAYSOCK.wob
-      bindsym --locked XF86AudioRaiseVolume exec pamixer -ui 5 && pkill -RTMIN+10 i3blocks && pamixer --get-volume > $SWAYSOCK.wob
-      bindsym --locked XF86AudioLowerVolume exec pamixer -ud 5 && pkill -RTMIN+10 i3blocks && pamixer --get-volume > $SWAYSOCK.wob
+    bindsym --locked XF86AudioPlay exec ~/bin/toggle
+    bindsym --locked XF86AudioPrev exec mpc prev
+    bindsym --locked XF86AudioNext exec mpc next
+    bindsym --locked XF86AudioStop exec mpc stop
+    bindsym --locked XF86AudioMute exec pamixer --toggle-mute && pkill -RTMIN+10 i3blocks && (pamixer --get-mute && echo 0 > $SWAYSOCK.wob) || pamixer --get-volume > $SWAYSOCK.wob
+    bindsym --locked XF86AudioRaiseVolume exec pamixer -ui 5 && pkill -RTMIN+10 i3blocks && pamixer --get-volume > $SWAYSOCK.wob
+    bindsym --locked XF86AudioLowerVolume exec pamixer -ud 5 && pkill -RTMIN+10 i3blocks && pamixer --get-volume > $SWAYSOCK.wob
   '';
   wayland.windowManager.sway.extraSessionCommands = ''
-      export SDL_VIDEODRIVER=wayland
-      export QT_QPA_PLATFORM=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-      export _JAVA_AWT_WM_NONREPARENTING=1
+    export SDL_VIDEODRIVER=wayland
+    export QT_QPA_PLATFORM=wayland
+    export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+    export _JAVA_AWT_WM_NONREPARENTING=1
   '';
 
   programs.mako = with colors; {
