@@ -40,6 +40,7 @@ let colors = import ./colors.nix; in
     ignores = [ "Session.vim" "healthcheck.out" ".envrc" ];
     userName = "Peter Rice";
     userEmail = lib.mkDefault "peter@peterrice.xyz";
+    delta.enable = true;
     extraConfig = {
       commit.verbose = true;
       pull.rebase = true;
