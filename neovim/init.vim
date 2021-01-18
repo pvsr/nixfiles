@@ -99,6 +99,7 @@ augroup LastPosition
                 \ if line("'\"") > 0 && line("'\"") <= line("$") |
                 \   exe "normal! g`\"" |
                 \ endif
+    autocmd! BufReadPost COMMIT_EDITMSG normal! gg
 augroup END
 
 autocmd FileType mail setl tw=72
