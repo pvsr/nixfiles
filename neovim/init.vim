@@ -92,6 +92,7 @@ nnoremap <A-h> <C-W>h
 nnoremap <A-j> <C-W>j
 nnoremap <A-k> <C-W>k
 nnoremap <A-l> <C-W>l
+nnoremap <A-c> <C-W>c
 
 " resume position
 augroup LastPosition

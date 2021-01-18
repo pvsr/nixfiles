@@ -93,6 +93,7 @@
       haskell-vim
       vim-fish
       vim-nix
+      semshi
       gitgutter
       {
         plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
