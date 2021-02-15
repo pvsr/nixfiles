@@ -28,6 +28,14 @@ let colors = import ./colors.nix; in
   };
 
   xdg.configFile."rg/rc".text = "--smart-case";
+  # TODO customize height per host
+  xdg.configFile."youtube-dl/config".text = ''
+    -f "bestvideo[height<=?2160]+bestaudio/best"
+    --sub-lang="en,eng,enUS,en-US,ja,jaJP,ja-JP"
+    --write-sub
+    --write-auto-sub
+    --netrc
+  '';
 
   programs.direnv = {
     enable = true;
@@ -96,8 +104,6 @@ let colors = import ./colors.nix; in
         cache = true;
         audio-display = false;
         write-filename-in-watch-later-config = true;
-        # TODO
-        ytdl-format = "bestvideo[height<=?2160]+bestaudio/best";
         profile = "gpu-hq";
         video-sync = "display-resample";
         interpolation = true;
@@ -105,8 +111,6 @@ let colors = import ./colors.nix; in
         demuxer-mkv-subtitle-preroll = true;
         # TODO
         slang = "eng,en,enUS,en-US";
-        ytdl-raw-options =
-          "sub-lang=\"eng,en,enUS,en-US\",write-sub=,write-auto-sub=,cookies=~/.cache/cookies.txt";
       };
     };
   };
