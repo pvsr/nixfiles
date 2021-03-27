@@ -9,7 +9,8 @@
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
     home-manager = {
-      url = github:nix-community/home-manager/master;
+      url = "/home/peter/dev/home-manager";
+      #url = github:nix-community/home-manager/master;
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -29,8 +30,12 @@
 
       nixosProfiles = {
         ruan = {
-          channelName = "unstable";
+          #channelName = "unstable";
           modules = [
+            {
+              boot.isContainer = true;
+              networking.useDHCP = false;
+            }
             #(import ./configurations/Morty.host.nix)
           ];
         };
