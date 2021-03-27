@@ -49,9 +49,27 @@
             \ denite#do_map('toggle_select').'k'
           endfunction
 
+
+          autocmd FileType denite-filter call s:denite_filter_my_settings()
+          function! s:denite_filter_my_settings() abort
+            imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+          endfunction
+
           nnoremap <leader>* :Denite grep:::\\b<c-r><c-w>\\b<cr>
           nnoremap <leader>fr :Denite file/rec<cr>
-          nnoremap <leader>b :Denite buffer<cr>
+          nnoremap <leader>bb :Denite buffer<cr>
+          nnoremap <leader>gg :Denite grep<cr>
+
+          call denite#custom#var('file/rec', 'command',
+            \ ['rg', '--files', '--glob', '!.git', '--color', 'never'])
+          call denite#custom#var('grep', {
+            \ 'command': ['rg'],
+            \ 'default_opts': ['-i', '--vimgrep', '--no-heading'],
+            \ 'recursive_opts': [],
+            \ 'pattern_opt': ['--regexp'],
+            \ 'separator': ['--'],
+            \ 'final_opts': [],
+            \ })
         '';
       }
       {
@@ -76,6 +94,7 @@
         '';
       }
       argtextobj-vim
+      vim-sneak
       vim-sleuth
       vim-abolish
       vim-exchange
