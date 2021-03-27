@@ -3,7 +3,8 @@
   description = "A system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/release-20.09;
+    #nixpkgs.url = github:nixos/nixpkgs/release-20.09;
+    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
     unstable.url = github:nixos/nixpkgs/nixos-unstable;
     nur.url = github:nix-community/NUR;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
@@ -11,11 +12,10 @@
     home-manager = {
       url = "/home/peter/dev/home-manager";
       #url = github:nix-community/home-manager/master;
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "unstable";
     };
 
     neovim-nightly-overlay.url = github:nix-community/neovim-nightly-overlay;
-
   };
 
 
@@ -24,7 +24,7 @@
       inherit self inputs;
 
       channels.nixpkgs.input = nixpkgs;
-      channels.unstable.input = unstable;
+      #channels.unstable.input = unstable;
 
       channelsConfig.allowUnfree = true;
 
@@ -33,10 +33,9 @@
           #channelName = "unstable";
           modules = [
             {
-              boot.isContainer = true;
-              networking.useDHCP = false;
+              home-manager.users.peter = import ./home-manager/ruan.nix;
             }
-            #(import ./configurations/Morty.host.nix)
+            (import ./configurations/ruan.nix)
           ];
         };
       };
@@ -50,16 +49,30 @@
         neovim-nightly-overlay.overlay
       ];
 
-      # Shared modules/configurations between `nixosProfiles`
-      sharedModules = [
+      sharedModules = with self.nixosModules; [
         home-manager.nixosModules.home-manager
-        # Sets sane `nix.*` defaults. Please refer to implementation/readme for more details.
         utils.nixosModules.saneFlakeDefaults
-        #(import ./modules)
+        core
+        cachix
+        dev
+        graphical
+        transmission
+        peter
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
         }
+      ];
+
+      nixosModules = utils.lib.modulesFromList [
+        ./modules/core.nix
+
+        ./modules/cachix.nix
+        ./modules/dev.nix
+        ./modules/graphical.nix
+        ./modules/transmission.nix
+
+        ./users/peter.nix
       ];
     };
 }
