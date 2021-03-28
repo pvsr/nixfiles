@@ -35,7 +35,7 @@
             {
               home-manager.users.peter = import ./home-manager/ruan.nix;
             }
-            (import ./configurations/ruan.nix)
+            (import ./hosts/ruan.nix)
           ];
         };
       };
