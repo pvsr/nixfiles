@@ -10,9 +10,8 @@
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
     home-manager = {
-      url = "/home/peter/dev/home-manager";
-      #url = github:nix-community/home-manager/master;
-      inputs.nixpkgs.follows = "unstable";
+      url = github:nix-community/home-manager/master;
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     neovim-nightly-overlay.url = github:nix-community/neovim-nightly-overlay;
@@ -30,7 +29,7 @@
 
       nixosProfiles = {
         ruan = {
-          #channelName = "unstable";
+          channelName = "unstable";
           modules = [
             {
               home-manager.users.peter = import ./home-manager/ruan.nix;
