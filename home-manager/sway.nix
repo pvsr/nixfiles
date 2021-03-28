@@ -9,6 +9,10 @@ let
   exitMode = "(l)ock, (e)xit, (s)uspend, (r)eboot, (S)hutdown";
 in
 {
+  imports = [
+    ./alacritty.nix
+  ];
+
   home.packages = with pkgs; [ ];
 
   wayland.windowManager.sway.enable = true;
