@@ -1,19 +1,11 @@
 { pkgs, ... }:
-let inherit (builtins) readFile;
-in
 {
-  #imports = [ ../users/sway ];
-
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
+  hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.enable = true;
 
-  boot = {
-    tmpOnTmpfs = true;
-
-    kernel.sysctl."kernel.sysrq" = 1;
-
-  };
+  boot.tmpOnTmpfs = true;
 
   environment = {
     sessionVariables = {

@@ -82,9 +82,16 @@
   system.stateVersion = "20.09"; # Did you read the comment?
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "uas" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  hardware.opengl.extraPackages = with pkgs; [
+    amdvlk
+  ];
+  hardware.video.hidpi.enable = true;
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
@@ -119,6 +126,4 @@
     { device = "/dev/disk/by-uuid/367ffdb7-bfaf-4409-9115-5ecbe4261bae";
       fsType = "btrfs";
     };
-
-  hardware.video.hidpi.enable = true;
 }
