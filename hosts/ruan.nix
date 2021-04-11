@@ -12,7 +12,8 @@
 
   networking.hosts = { "192.168.0.104" = [ "grancel" ]; };
 
-  console.font = "Lat2-Terminus16";
+  #console.font = "Lat2-Terminus16";
+  console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
   console.keyMap = "us";
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -21,6 +22,8 @@
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
   hardware.pulseaudio.support32Bit = true;
+  #nixpkgs.config.allowUnfree = true;
+  hardware.enableRedistributableFirmware = true;
 
   services = {
     openssh.enable = true;
@@ -92,6 +95,8 @@
     amdvlk
   ];
   hardware.video.hidpi.enable = true;
+
+  hardware.cpu.amd.updateMicrocode = true;
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
