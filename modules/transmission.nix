@@ -1,7 +1,7 @@
 { config, lib, ... }:
 let
-  inherit (config.services.qbittorrent) port;
-  inherit (lib) mkAfter;
+  cfg = config.services.transmission;
+  # host = config.networking.hostName;
 in
 {
   services.transmission = {
@@ -9,11 +9,13 @@ in
     # TODO
     # credentialsFile = ;
     settings = {
+      download-dir = "${cfg.home}/downloads";
+      #rpc-host-whitelist = host;
       rpc-host-whitelist = "ruan";
+      rpc-bind-address = "0.0.0.0";
       rpc-whitelist = "127.0.0.1,192.168.*.*";
-      #script-torrent-done-enabled = false;
     };
   };
 
-  #networking.firewall.allowedTCPPorts = [ 9091 ];
+  networking.firewall.allowedTCPPorts = [ 9091 ];
 }
