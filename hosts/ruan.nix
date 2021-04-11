@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
@@ -25,6 +25,16 @@
   #nixpkgs.config.allowUnfree = true;
   hardware.enableRedistributableFirmware = true;
 
+  age.secrets."radicale-users" = {
+    file = ../secrets/radicale-users.age;
+    owner = "radicale";
+    group = "radicale";
+  };
+  age.secrets."miniflux-credentials" = {
+    file = ../secrets/miniflux-credentials.age;
+    owner = "miniflux";
+    group = "miniflux";
+  };
   services = {
     openssh.enable = true;
     openssh.ports = [ 24424 ];
@@ -32,8 +42,7 @@
 
     miniflux.enable = true;
     miniflux.config.LISTEN_ADDR = "0.0.0.0:8080";
-    # TODO
-    miniflux.adminCredentialsFile = /etc/nixos/miniflux-admin-credentials;
+    miniflux.adminCredentialsFile = config.age.secrets."miniflux-credentials".path;
 
     radicale.enable = true;
     radicale.config = ''
@@ -42,7 +51,7 @@
 
       [auth]
       type = htpasswd
-      htpasswd_filename = /etc/radicale/users
+      htpasswd_filename = /run/secrets/radicale-users
       htpasswd_encryption = bcrypt
     '';
 

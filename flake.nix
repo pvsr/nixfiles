@@ -15,10 +15,12 @@
     };
 
     neovim-nightly-overlay.url = github:nix-community/neovim-nightly-overlay;
+    agenix.url = github:ryantm/agenix;
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
 
-  outputs = inputs@{ self, nixpkgs, unstable, nur, utils, home-manager, neovim-nightly-overlay }:
+  outputs = inputs@{ self, nixpkgs, unstable, nur, utils, home-manager, neovim-nightly-overlay, agenix }:
     utils.lib.systemFlake {
       inherit self inputs;
 
@@ -51,6 +53,7 @@
       sharedModules = with self.nixosModules; [
         home-manager.nixosModules.home-manager
         utils.nixosModules.saneFlakeDefaults
+        agenix.nixosModules.age
         core
         cachix
         dev

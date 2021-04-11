@@ -4,10 +4,15 @@ let
   # host = config.networking.hostName;
 in
 {
+  age.secrets."transmission-credentials.json" = {
+    file = ../secrets/transmission-credentials.json.age;
+    owner = "transmission";
+    group = "transmission";
+  };
+
   services.transmission = {
     enable = true;
-    # TODO
-    # credentialsFile = ;
+    credentialsFile = config.age.secrets."transmission-credentials.json".path;
     settings = {
       download-dir = "${cfg.home}/downloads";
       #rpc-host-whitelist = host;
