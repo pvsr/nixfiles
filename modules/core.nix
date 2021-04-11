@@ -54,5 +54,5 @@
 
   services.earlyoom.enable = true;
 
-  users.mutableUsers = false;
+  #users.mutableUsers = false;
 }

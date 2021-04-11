@@ -1,7 +1,6 @@
 {
   users.users.peter = {
     uid = 1000;
-    #password = "peter";
     isNormalUser = true;
     extraGroups = [ "wheel" "transmission" ];
     openssh.authorizedKeys.keys = [
