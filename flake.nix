@@ -56,6 +56,7 @@
         dev
         graphical
         transmission
+        wireguard
         peter
         {
           home-manager.useGlobalPkgs = true;
@@ -70,6 +71,7 @@
         ./modules/dev.nix
         ./modules/graphical.nix
         ./modules/transmission.nix
+        ./modules/wireguard.nix
 
         ./users/peter.nix
       ];
