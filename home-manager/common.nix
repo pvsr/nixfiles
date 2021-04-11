@@ -21,13 +21,11 @@ let colors = import ./colors.nix; in
   ];
 
   home.sessionVariables = {
-    RIPGREP_CONFIG_PATH = "~/.config/rg/rc";
     BROWSER = "org.qutebrowser.qutebrowser.desktop";
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
 
-  xdg.configFile."rg/rc".text = "--smart-case";
   # TODO customize height per host
   xdg.configFile."youtube-dl/config".text = ''
     -f "bestvideo[height<=?2160]+bestaudio/best"
