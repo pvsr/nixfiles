@@ -31,14 +31,20 @@
     openssh.passwordAuthentication = false;
 
     miniflux.enable = true;
-    miniflux.config.LISTEN_ADDR = "192.168.0.110:8080";
+    miniflux.config.LISTEN_ADDR = "0.0.0.0:8080";
     # TODO
     miniflux.adminCredentialsFile = /etc/nixos/miniflux-admin-credentials;
 
-    radicale.enable = false;
-    #radicale.config = ''
-    #'';
-    #radicale.extraArgs = [];
+    radicale.enable = true;
+    radicale.config = ''
+      [server]
+      hosts = 0.0.0.0:52032, [::]:52032
+
+      [auth]
+      type = htpasswd
+      htpasswd_filename = /etc/radicale/users
+      htpasswd_encryption = bcrypt
+    '';
 
     # mpd.enable = true;
     # mpd.startWhenNeeded = true;
@@ -72,6 +78,7 @@
     51413
     8080
     8096
+    52032
   ];
   networking.firewall.allowedUDPPorts = [
   ];
