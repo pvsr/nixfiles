@@ -17,10 +17,24 @@
     neovim-nightly-overlay.url = github:nix-community/neovim-nightly-overlay;
     agenix.url = github:ryantm/agenix;
     agenix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # sources
+    srcery-tmux.url = github:srcery-colors/srcery-tmux;
+    srcery-tmux.flake = false;
+    nvim-colorizer.url = github:norcalli/nvim-colorizer.lua;
+    nvim-colorizer.flake = false;
+    fish-prompt-pvsr.url = github:pvsr/fish-prompt-pvsr;
+    fish-prompt-pvsr.flake = false;
+    z.url = github:jethrokuan/z;
+    z.flake = false;
+    fzf.url = github:jethrokuan/fzf;
+    fzf.flake = false;
+    plugin-git.url = github:jhillyerd/plugin-git;
+    plugin-git.flake = false;
   };
 
 
-  outputs = inputs@{ self, nixpkgs, unstable, nur, utils, home-manager, neovim-nightly-overlay, agenix }:
+  outputs = inputs@{ self, nixpkgs, unstable, nur, utils, home-manager, neovim-nightly-overlay, agenix, ... }:
     utils.lib.systemFlake {
       inherit self inputs;
 
@@ -47,9 +61,29 @@
         username = "peter";
         configuration = { config, pkgs, ... }: {
           imports = [ ./home-manager/grancel.nix ];
+
           nixpkgs.overlays = [
             neovim-nightly-overlay.overlay
+            (final: prev: {
+              tmuxPlugins = prev.tmuxPlugins // {
+                srcery = prev.tmuxPlugins.mkTmuxPlugin {
+                  pluginName = "srcery";
+                  version = "git";
+                  src = inputs.srcery-tmux;
+                };
+              };
+              vimPlugins = prev.vimPlugins // {
+                nvim-colorizer = prev.vimUtils.buildVimPluginFrom2Nix {
+                  pname = "nvim-colorizer";
+                  version = "git";
+                  src = inputs.nvim-colorizer;
+                };
+              };
+            })
           ];
+        };
+        extraSpecialArgs.fishPlugins = {
+          inherit (inputs) fish-prompt-pvsr z fzf plugin-git;
         };
       };
 

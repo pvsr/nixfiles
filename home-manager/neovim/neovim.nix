@@ -116,29 +116,11 @@
       semshi
       gitgutter
       {
-        plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
-          pname = "srcery-vim";
-          version = "2020-07-03";
-          src = pkgs.fetchFromGitHub {
-            owner = "srcery-colors";
-            repo = "srcery-vim";
-            rev = "a6ee51328ca26b792d974bcfab07812cce04b9f8";
-            sha256 = "0q4x656djd4qj34jrl3df3r10g3gdkrf5pyg0v8ma9knx2j3nxk6";
-          };
-        };
+        plugin = srcery-vim;
         config = "colorscheme srcery";
       }
       {
-        plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
-          pname = "nvim-colorizer";
-          version = "2020-09-07";
-          src = pkgs.fetchFromGitHub {
-            owner = "norcalli";
-            repo = "nvim-colorizer.lua";
-            rev = "36c610a9717cc9ec426a07c8e6bf3b3abcb139d6";
-            sha256 = "0gvqdfkqf6k9q46r0vcc3nqa6w45gsvp8j4kya1bvi24vhifg2p9";
-          };
-        };
+        plugin = nvim-colorizer;
         config = "autocmd SourcePost colorizer.vim lua require'colorizer'.setup()";
       }
     ];

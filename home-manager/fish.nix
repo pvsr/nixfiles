@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, fishPlugins, ... }:
 
 {
   home.packages = with pkgs; [
@@ -38,39 +38,19 @@
     plugins = [
       {
         name = "fish-prompt-pvsr";
-        src = pkgs.fetchFromGitHub {
-          owner = "pvsr";
-          repo = "fish-prompt-pvsr";
-          rev = "0f46ccaba0d7ebe54471218d6ee1de5124ca5d6d";
-          sha256 = "0pvw2yzdn83hll1vb2yvhnzhwwq5972nvv007s9n2vn2x2icm814";
-        };
+        src = fishPlugins.fish-prompt-pvsr;
       }
       {
         name = "z";
-        src = pkgs.fetchFromGitHub {
-          owner = "jethrokuan";
-          repo = "z";
-          rev = "ddeb28a7b6a1f0ec6dae40c636e5ca4908ad160a";
-          sha256 = "0c5i7sdrsp0q3vbziqzdyqn4fmp235ax4mn4zslrswvn8g3fvdyh";
-        };
+        src = fishPlugins.z;
       }
       {
         name = "fzf";
-        src = pkgs.fetchFromGitHub {
-          owner = "jethrokuan";
-          repo = "fzf";
-          rev = "6e74bbf18a39b8597799041fbc0aab7ae55f2f80";
-          sha256 = "0ypbdfjyv8kgmjvczwb9bx10sp7jd593sd0xadpq1hc8cxm5vsih";
-        };
+        src = fishPlugins.fzf;
       }
       {
         name = "plugin-git";
-        src = pkgs.fetchFromGitHub {
-          owner = "jhillyerd";
-          repo = "plugin-git";
-          rev = "18d8369132bdc349afc9ffc6702098dc8deaaa96";
-          sha256 = "10pscjyv7ypbbfa9j2n3r1p8fm5vg86lpdvs4ndj0dh23pazsfhz";
-        };
+        src = fishPlugins.plugin-git;
       }
     ];
     shellAbbrs = {
