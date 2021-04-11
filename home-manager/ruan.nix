@@ -22,7 +22,6 @@
   ];
 
   programs.mpv.enable = true;
-  programs.neovim.package = pkgs.neovim-nightly;
 
   wayland.windowManager.sway.config.output."*".scale = "2";
 

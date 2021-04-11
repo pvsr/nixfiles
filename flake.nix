@@ -41,6 +41,18 @@
         };
       };
 
+      homeConfigurations."peter@grancel" = home-manager.lib.homeManagerConfiguration {
+        system = "x86_64-linux";
+        homeDirectory = "/home/peter";
+        username = "peter";
+        configuration = { config, pkgs, ... }: {
+          imports = [ ./home-manager/grancel.nix ];
+          nixpkgs.overlays = [
+            neovim-nightly-overlay.overlay
+          ];
+        };
+      };
+
       sharedExtraArgs = { inherit utils inputs; };
 
       # Shared overlays between channels, gets applied to all `channels.<name>.input`
