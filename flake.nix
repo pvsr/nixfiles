@@ -1,4 +1,3 @@
-
 {
   description = "A system configuration.";
 

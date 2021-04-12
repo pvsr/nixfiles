@@ -4,7 +4,7 @@
     environment.systemPackages = with pkgs; [ cachix ];
 
     nix = {
-       extraOptions = "gc-keep-outputs = true";
+      extraOptions = "gc-keep-outputs = true";
 
       binaryCaches = [
         "https://cachix.cachix.org"

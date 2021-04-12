@@ -115,36 +115,42 @@
   hardware.cpu.amd.updateMicrocode = true;
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
+    {
+      device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
+    {
+      device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
       fsType = "btrfs";
       options = [ "subvol=home" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/AB78-74B8";
+    {
+      device = "/dev/disk/by-uuid/AB78-74B8";
       fsType = "vfat";
     };
 
   fileSystems."/var/lib/transmission" =
-    { device = "/dev/disk/by-uuid/367ffdb7-bfaf-4409-9115-5ecbe4261bae";
+    {
+      device = "/dev/disk/by-uuid/367ffdb7-bfaf-4409-9115-5ecbe4261bae";
       fsType = "btrfs";
       options = [ "subvol=transmission" ];
     };
 
   fileSystems."/media/steam" =
-    { device = "/dev/disk/by-uuid/367ffdb7-bfaf-4409-9115-5ecbe4261bae";
+    {
+      device = "/dev/disk/by-uuid/367ffdb7-bfaf-4409-9115-5ecbe4261bae";
       fsType = "btrfs";
       options = [ "subvol=steam" ];
     };
 
   fileSystems."/media/data" =
-    { device = "/dev/disk/by-uuid/367ffdb7-bfaf-4409-9115-5ecbe4261bae";
+    {
+      device = "/dev/disk/by-uuid/367ffdb7-bfaf-4409-9115-5ecbe4261bae";
       fsType = "btrfs";
     };
 }
