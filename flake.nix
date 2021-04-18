@@ -84,6 +84,7 @@
         neovim-nightly-overlay.overlay
         (final: prev: {
           deploy-rs = deploy-rs.packages.${prev.system}.deploy-rs;
+          agenix = agenix.packages.${prev.system}.agenix;
         })
       ];
     in

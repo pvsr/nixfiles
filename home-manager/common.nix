@@ -18,6 +18,7 @@ let colors = import ./colors.nix; in
     atool
     pass
     pastel
+    agenix
   ];
 
   home.sessionVariables = {
