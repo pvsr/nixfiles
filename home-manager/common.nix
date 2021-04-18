@@ -11,6 +11,7 @@ let colors = import ./colors.nix; in
     stow
     youtube-dl
     gitAndTools.git-annex
+    git-absorb
     fd
     ripgrep
     htop
