@@ -34,6 +34,30 @@
 
 
   outputs = inputs@{ self, nixpkgs, unstable, nur, utils, home-manager, neovim-nightly-overlay, agenix, ... }:
+    let
+      pluginOverlay =
+        (final: prev: {
+          tmuxPlugins = prev.tmuxPlugins // {
+            srcery = prev.tmuxPlugins.mkTmuxPlugin {
+              pluginName = "srcery";
+              version = "git";
+              src = inputs.srcery-tmux;
+            };
+          };
+          vimPlugins = prev.vimPlugins // {
+            nvim-colorizer = prev.vimUtils.buildVimPluginFrom2Nix {
+              pname = "nvim-colorizer";
+              version = "git";
+              src = inputs.nvim-colorizer;
+            };
+          };
+        });
+      sharedOverlays = [
+        pluginOverlay
+        nur.overlay
+        neovim-nightly-overlay.overlay
+      ];
+    in
     utils.lib.systemFlake {
       inherit self inputs;
 
@@ -44,7 +68,7 @@
 
       nixosProfiles = {
         ruan = {
-          channelName = "unstable";
+          #channelName = "unstable";
           modules = [
             {
               home-manager.users.peter = import ./home-manager/ruan.nix;
@@ -61,25 +85,7 @@
         configuration = { config, pkgs, ... }: {
           imports = [ ./home-manager/grancel.nix ];
 
-          nixpkgs.overlays = [
-            neovim-nightly-overlay.overlay
-            (final: prev: {
-              tmuxPlugins = prev.tmuxPlugins // {
-                srcery = prev.tmuxPlugins.mkTmuxPlugin {
-                  pluginName = "srcery";
-                  version = "git";
-                  src = inputs.srcery-tmux;
-                };
-              };
-              vimPlugins = prev.vimPlugins // {
-                nvim-colorizer = prev.vimUtils.buildVimPluginFrom2Nix {
-                  pname = "nvim-colorizer";
-                  version = "git";
-                  src = inputs.nvim-colorizer;
-                };
-              };
-            })
-          ];
+          nixpkgs.overlays = sharedOverlays;
         };
         extraSpecialArgs.fishPlugins = {
           inherit (inputs) fish-prompt-pvsr z fzf plugin-git;
@@ -88,12 +94,7 @@
 
       sharedExtraArgs = { inherit utils inputs; };
 
-      # Shared overlays between channels, gets applied to all `channels.<name>.input`
-      sharedOverlays = [
-        #self.overlays
-        nur.overlay
-        neovim-nightly-overlay.overlay
-      ];
+      inherit sharedOverlays;
 
       sharedModules = with self.nixosModules; [
         home-manager.nixosModules.home-manager
