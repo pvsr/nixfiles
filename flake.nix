@@ -16,6 +16,7 @@
     neovim-nightly-overlay.url = github:nix-community/neovim-nightly-overlay;
     agenix.url = github:ryantm/agenix;
     agenix.inputs.nixpkgs.follows = "nixpkgs";
+    deploy-rs.url = github:serokell/deploy-rs;
 
     # sources
     srcery-tmux.url = github:srcery-colors/srcery-tmux;
@@ -33,7 +34,7 @@
   };
 
 
-  outputs = inputs@{ self, nixpkgs, unstable, nur, utils, home-manager, neovim-nightly-overlay, agenix, ... }:
+  outputs = inputs@{ self, nixpkgs, unstable, nur, utils, home-manager, neovim-nightly-overlay, agenix, deploy-rs, ... }:
     let
       pluginOverlay =
         (final: prev: {
@@ -51,11 +52,39 @@
               src = inputs.nvim-colorizer;
             };
           };
+          fishPlugins = prev.fishPlugins // {
+            fish-prompt-pvsr = prev.fishPlugins.buildFishPlugin {
+              pname = "fish-prompt-pvsr";
+              version = "git";
+              src = inputs.fish-prompt-pvsr;
+              preInstall = ''
+                mv -f *.fish functions/
+              '';
+            };
+            z = prev.fishPlugins.buildFishPlugin {
+              pname = "z";
+              version = "git";
+              src = inputs.z;
+            };
+            fzf = prev.fishPlugins.buildFishPlugin {
+              pname = "fzf";
+              version = "git";
+              src = inputs.fzf;
+            };
+            plugin-git = prev.fishPlugins.buildFishPlugin {
+              pname = "plugin-git";
+              version = "git";
+              src = inputs.plugin-git;
+            };
+          };
         });
       sharedOverlays = [
         pluginOverlay
         nur.overlay
         neovim-nightly-overlay.overlay
+        (final: prev: {
+          deploy-rs = deploy-rs.packages.${prev.system}.deploy-rs;
+        })
       ];
     in
     utils.lib.systemFlake {
@@ -78,6 +107,15 @@
         };
       };
 
+      deploy.nodes.ruan = {
+        hostname = "ruan";
+        profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ruan;
+        };
+      };
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+
       homeConfigurations."peter@grancel" = home-manager.lib.homeManagerConfiguration {
         system = "x86_64-linux";
         homeDirectory = "/home/peter";
@@ -87,9 +125,9 @@
 
           nixpkgs.overlays = sharedOverlays;
         };
-        extraSpecialArgs.fishPlugins = {
-          inherit (inputs) fish-prompt-pvsr z fzf plugin-git;
-        };
+        # extraSpecialArgs.fishPlugins = {
+        #   inherit (inputs) fish-prompt-pvsr z fzf plugin-git;
+        # };
       };
 
       sharedExtraArgs = { inherit utils inputs; };

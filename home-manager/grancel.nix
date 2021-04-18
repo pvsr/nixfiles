@@ -16,6 +16,7 @@
   home.homeDirectory = "/home/peter";
 
   home.packages = with pkgs; [
+    deploy-rs
   ];
 
   home.language.base = "en-US.UTF-8";

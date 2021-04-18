@@ -1,8 +1,12 @@
-{ config, pkgs, fishPlugins, ... }:
+{ config, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
     fish
+    fishPlugins.fish-prompt-pvsr
+    fishPlugins.z
+    fishPlugins.fzf
+    fishPlugins.plugin-git
   ];
 
   programs.fish = {
@@ -35,24 +39,6 @@
       set -g fish_cursor_insert line
       set -g fish_cursor_replace_one underscore
     '';
-    plugins = [
-      {
-        name = "fish-prompt-pvsr";
-        src = fishPlugins.fish-prompt-pvsr;
-      }
-      {
-        name = "z";
-        src = fishPlugins.z;
-      }
-      {
-        name = "fzf";
-        src = fishPlugins.fzf;
-      }
-      {
-        name = "plugin-git";
-        src = fishPlugins.plugin-git;
-      }
-    ];
     shellAbbrs = {
       suod = "sudo";
     };
