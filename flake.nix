@@ -126,9 +126,6 @@
 
           nixpkgs.overlays = sharedOverlays;
         };
-        # extraSpecialArgs.fishPlugins = {
-        #   inherit (inputs) fish-prompt-pvsr z fzf plugin-git;
-        # };
       };
 
       sharedExtraArgs = { inherit utils inputs; };
