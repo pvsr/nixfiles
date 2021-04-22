@@ -1,10 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, appFont, ... }:
 let
   cfg = config.wayland.windowManager.sway;
   modifier = cfg.config.modifier;
 
-  font = "Sarasa Term J";
-  fonts = [ "${font} 13" ];
+  font = appFont;
+  fonts = [ "${font} 14" ];
   colors = import ./colors.nix;
   exitMode = "(l)ock, (e)xit, (s)uspend, (r)eboot, (S)hutdown";
 in
@@ -26,7 +26,7 @@ in
 
     menu = ''
       ${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop \
-        --dmenu='${pkgs.dmenu}/bin/dmenu -i -fn "${font}-12"' \
+        --dmenu='${pkgs.dmenu}/bin/dmenu -i -fn "${font}-13"' \
         | ${pkgs.findutils}/bin/xargs swaymsg exec --
     '';
 
@@ -39,7 +39,7 @@ in
       "${modifier}+z" = "workspace back_and_forth";
       "${modifier}+Shift+z" = "move container to workspace back_and_forth";
       "${modifier}+q" = "mode '${exitMode}'";
-      "${modifier}+p" = "exec ${pkgs.pass}/bin/passmenu -i -fn '${font}-12'";
+      "${modifier}+p" = "exec ${pkgs.pass}/bin/passmenu -i -fn '${font}-13'";
 
       Print = "exec ${pkgs.grim}/bin/grim $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H:%M:%S.png')";
       "Shift+Print" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H:%M:%S.png')";
@@ -180,7 +180,7 @@ in
 
   programs.mako = with colors; {
     enable = true;
-    font = "${font} 13";
+    font = "${font} 14";
     backgroundColor = brightBlue;
     borderColor = blue;
     textColor = xgray1;

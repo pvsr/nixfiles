@@ -20,6 +20,8 @@ let colors = import ./colors.nix; in
     pass
     pastel
     agenix
+    sarasa-gothic
+    fantasque-sans-mono
   ];
 
   home.sessionVariables = {

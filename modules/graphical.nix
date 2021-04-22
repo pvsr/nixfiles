@@ -16,7 +16,6 @@
       #cursor
       feh
       pulsemixer
-      sarasa-gothic
     ];
   };
 }

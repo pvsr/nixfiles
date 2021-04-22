@@ -87,6 +87,7 @@
           agenix = agenix.packages.${prev.system}.agenix;
         })
       ];
+      appFont = "Fantasque Sans Mono";
     in
     utils.lib.systemFlake {
       inherit self inputs;
@@ -101,7 +102,11 @@
           #channelName = "unstable";
           modules = [
             {
-              home-manager.users.peter = import ./home-manager/ruan.nix;
+              home-manager = {
+                users.peter = import ./home-manager/ruan.nix;
+                # kinda hacky
+                extraSpecialArgs.appFont = appFont;
+              };
             }
             (import ./hosts/ruan.nix)
           ];
@@ -126,6 +131,7 @@
 
           nixpkgs.overlays = sharedOverlays;
         };
+        extraSpecialArgs.appFont = appFont;
       };
 
       sharedExtraArgs = { inherit utils inputs; };
