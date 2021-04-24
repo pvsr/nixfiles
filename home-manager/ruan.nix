@@ -25,5 +25,5 @@
 
   wayland.windowManager.sway.config.output."*".scale = "2";
 
-  home.stateVersion = "21.05";
+  #home.stateVersion = "21.05";
 }

@@ -41,5 +41,5 @@
     scrub.auto = true;
   };
 
-  home.stateVersion = "21.05";
+  #home.stateVersion = "21.05";
 }
