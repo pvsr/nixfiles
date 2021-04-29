@@ -13,6 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    home-manager-unstable = {
+      url = github:nix-community/home-manager/master;
+      inputs.nixpkgs.follows = "unstable";
+    };
+
     neovim-nightly-overlay.url = github:nix-community/neovim-nightly-overlay;
     agenix.url = github:ryantm/agenix;
     agenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +41,19 @@
   };
 
 
-  outputs = inputs@{ self, nixpkgs, unstable, nur, utils, home-manager, neovim-nightly-overlay, agenix, deploy-rs, ... }:
+  outputs =
+    inputs@{ self
+    , nixpkgs
+    , unstable
+    , nur
+    , utils
+    , home-manager
+    , home-manager-unstable
+    , neovim-nightly-overlay
+    , agenix
+    , deploy-rs
+    , ...
+    }:
     let
       pluginOverlay =
         (final: prev: {
@@ -125,7 +142,7 @@
       };
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
-      homeConfigurations."peter@grancel" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."peter@grancel" = home-manager-unstable.lib.homeManagerConfiguration {
         system = "x86_64-linux";
         homeDirectory = "/home/peter";
         username = "peter";
