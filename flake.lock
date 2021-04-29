@@ -331,6 +331,26 @@
         "type": "github"
       }
     },
+    "qbpm": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1619732563,
+        "narHash": "sha256-Qaaehl14wgaa4UBxtnpmgL3iXXXlNsbewY8BjhrfMbo=",
+        "owner": "pvsr",
+        "repo": "qbpm",
+        "rev": "0453cc1ccfc349e8e9042d6019f30d0561dd21cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pvsr",
+        "repo": "qbpm",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -343,6 +363,7 @@
         "nur": "nur",
         "nvim-colorizer": "nvim-colorizer",
         "plugin-git": "plugin-git",
+        "qbpm": "qbpm",
         "srcery-tmux": "srcery-tmux",
         "unstable": "unstable",
         "utils": "utils_2",

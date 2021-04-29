@@ -20,6 +20,7 @@ let colors = import ./colors.nix; in
     pass
     pastel
     agenix
+    qbpm
     sarasa-gothic
     fantasque-sans-mono
   ];

@@ -17,6 +17,8 @@
     agenix.url = github:ryantm/agenix;
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     deploy-rs.url = github:serokell/deploy-rs;
+    qbpm.url = github:pvsr/qbpm;
+    qbpm.inputs.nixpkgs.follows = "nixpkgs";
 
     # sources
     srcery-tmux.url = github:srcery-colors/srcery-tmux;
@@ -85,6 +87,7 @@
         (final: prev: {
           deploy-rs = deploy-rs.packages.${prev.system}.deploy-rs;
           agenix = agenix.packages.${prev.system}.agenix;
+          qbpm = inputs.qbpm.packages.${prev.system}.qbpm;
         })
       ];
       appFont = "Fantasque Sans Mono";
