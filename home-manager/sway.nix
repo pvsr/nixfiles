@@ -4,7 +4,10 @@ let
   modifier = cfg.config.modifier;
 
   font = appFont;
-  fonts = [ "${font} 14" ];
+  fonts = {
+    names = [ font ];
+    size = 14.0;
+  };
   colors = import ./colors.nix;
   exitMode = "(l)ock, (e)xit, (s)uspend, (r)eboot, (S)hutdown";
   pamixer = "${pkgs.pamixer}/bin/pamixer";
@@ -22,7 +25,7 @@ in
   wayland.windowManager.sway.config = with colors; {
     modifier = "Mod4";
     terminal = lib.mkDefault "SHELL=${pkgs.fish}/bin/fish ${pkgs.alacritty}/bin/alacritty";
-    fonts = fonts;
+    inherit fonts;
 
 
     menu = ''
@@ -127,7 +130,7 @@ in
         position = "top";
         # TODO add contrib to store
         statusCommand = "SCRIPT_DIR=~/.config/i3blocks/i3blocks-contrib ${pkgs.i3blocks}/bin/i3blocks";
-        fonts = fonts;
+        inherit fonts;
         colors = {
           background = black;
           statusline = white;
