@@ -77,6 +77,8 @@ let colors = import ./colors.nix; in
     extraFlags = [ "--noask" "--quiet" ];
   };
 
+  programs.nix-index.enable = true;
+
   services.mpd = {
     musicDirectory = ~/annex/music;
   };
