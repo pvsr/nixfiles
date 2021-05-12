@@ -10,7 +10,7 @@
   ];
 
   targets.genericLinux.enable = true;
-  targets.genericLinux.extraXdgDataDirs = [ "/usr/share" ];
+  xdg.systemDirs.data = [ "/usr/share" ];
 
   home.username = "peter";
   home.homeDirectory = "/home/peter";
