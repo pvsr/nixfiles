@@ -117,7 +117,7 @@
 
       channelsConfig.allowUnfree = true;
 
-      nixosProfiles = {
+      hosts = {
         ruan = {
           #channelName = "unstable";
           modules = [
@@ -154,11 +154,11 @@
         extraSpecialArgs.appFont = appFont;
       };
 
-      sharedExtraArgs = { inherit utils inputs; };
+      hostDefaults.extraArgs = { inherit utils inputs; };
 
       inherit sharedOverlays;
 
-      sharedModules = with self.nixosModules; [
+      hostDefaults.modules = with self.nixosModules; [
         home-manager.nixosModules.home-manager
         utils.nixosModules.saneFlakeDefaults
         agenix.nixosModules.age
