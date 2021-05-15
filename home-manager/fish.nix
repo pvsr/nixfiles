@@ -34,6 +34,7 @@
       set -g fish_cursor_default block
       set -g fish_cursor_insert line
       set -g fish_cursor_replace_one underscore
+      set -g FZF_LEGACY_KEYBINDINGS 0
     '';
     shellAbbrs = {
       suod = "sudo";
