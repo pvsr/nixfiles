@@ -1,5 +1,19 @@
 { config, pkgs, lib, fishPlugins, ... }:
-
+let fzfKeyBindings = ''
+  if type __fzf_search_current_dir &> /dev/null
+    bind \co __fzf_search_current_dir
+    bind \cr __fzf_search_history
+    bind \cv $fzf_search_vars_cmd
+    bind \e\cl __fzf_search_git_log
+    bind \e\cs __fzf_search_git_status
+    bind --mode insert \co __fzf_search_current_dir
+    bind --mode insert \cr __fzf_search_history
+    bind --mode insert \cv $fzf_search_vars_cmd
+    bind --mode insert \e\cl __fzf_search_git_log
+    bind --mode insert \e\cs __fzf_search_git_status
+  end
+'';
+in
 {
   home.packages = with pkgs; [
     fish
@@ -30,12 +44,12 @@
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
     '';
     interactiveShellInit = ''
-      set -g fish_key_bindings fish_hybrid_key_bindings
+      set -U fish_key_bindings fish_hybrid_key_bindings
+      set -U fzf_fish_custom_keybindings
       set -g fish_cursor_default block
       set -g fish_cursor_insert line
       set -g fish_cursor_replace_one underscore
-      set -g FZF_LEGACY_KEYBINDINGS 0
-    '';
+    '' + fzfKeyBindings;
     shellAbbrs = {
       suod = "sudo";
     };
@@ -66,4 +80,6 @@
         "plugin-git"
       ];
   };
+
+  programs.fzf.enableFishIntegration = false;
 }

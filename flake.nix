@@ -34,8 +34,8 @@
     fish-prompt-pvsr.flake = false;
     fish-z.url = github:jethrokuan/z;
     fish-z.flake = false;
-    fish-fzf.url = github:jethrokuan/fzf;
-    fish-fzf.flake = false;
+    fzf-fish.url = github:PatrickF1/fzf.fish;
+    fzf-fish.flake = false;
     fish-plugin-git.url = github:jhillyerd/plugin-git;
     fish-plugin-git.flake = false;
   };
@@ -75,7 +75,7 @@
       fishPlugins = with inputs; {
         inherit fish-prompt-pvsr;
         z = fish-z;
-        fzf = fish-fzf;
+        fzf = fzf-fish;
         plugin-git = fish-plugin-git;
       };
       sharedOverlays = [

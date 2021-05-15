@@ -42,22 +42,6 @@
         "type": "github"
       }
     },
-    "fish-fzf": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1620776412,
-        "narHash": "sha256-28QW/WTLckR4lEfHv6dSotwkAKpNJFCShxmKFGQQ1Ew=",
-        "owner": "jethrokuan",
-        "repo": "fzf",
-        "rev": "479fa67d7439b23095e01b64987ae79a91a4e283",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jethrokuan",
-        "repo": "fzf",
-        "type": "github"
-      }
-    },
     "fish-plugin-git": {
       "flake": false,
       "locked": {
@@ -180,6 +164,22 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "fzf-fish": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1621046042,
+        "narHash": "sha256-XIdGUDzoeCyUfMy2ucpCUSK6V+dfkych5rUEDrlUzu4=",
+        "owner": "PatrickF1",
+        "repo": "fzf.fish",
+        "rev": "b59f1cf754bddab5e30bf789ae3b7744d16906f6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "PatrickF1",
+        "repo": "fzf.fish",
         "type": "github"
       }
     },
@@ -392,10 +392,10 @@
       "inputs": {
         "agenix": "agenix",
         "deploy-rs": "deploy-rs",
-        "fish-fzf": "fish-fzf",
         "fish-plugin-git": "fish-plugin-git",
         "fish-prompt-pvsr": "fish-prompt-pvsr",
         "fish-z": "fish-z",
+        "fzf-fish": "fzf-fish",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
         "neovim-nightly-overlay": "neovim-nightly-overlay",

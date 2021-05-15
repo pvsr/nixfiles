@@ -14,11 +14,13 @@ let colors = import ./colors.nix; in
     git-absorb
     fd
     ripgrep
+    bat
     htop
     moreutils
     atool
     pass
     pastel
+    nixpkgs-fmt
     agenix
     qbpm
     sarasa-gothic
