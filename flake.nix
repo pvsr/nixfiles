@@ -32,12 +32,12 @@
     nvim-colorizer.flake = false;
     fish-prompt-pvsr.url = github:pvsr/fish-prompt-pvsr;
     fish-prompt-pvsr.flake = false;
-    z.url = github:jethrokuan/z;
-    z.flake = false;
-    fzf.url = github:jethrokuan/fzf;
-    fzf.flake = false;
-    plugin-git.url = github:jhillyerd/plugin-git;
-    plugin-git.flake = false;
+    fish-z.url = github:jethrokuan/z;
+    fish-z.flake = false;
+    fish-fzf.url = github:jethrokuan/fzf;
+    fish-fzf.flake = false;
+    fish-plugin-git.url = github:jhillyerd/plugin-git;
+    fish-plugin-git.flake = false;
   };
 
 
@@ -71,32 +71,13 @@
               src = inputs.nvim-colorizer;
             };
           };
-          fishPlugins = prev.fishPlugins // {
-            fish-prompt-pvsr = prev.fishPlugins.buildFishPlugin {
-              pname = "fish-prompt-pvsr";
-              version = "git";
-              src = inputs.fish-prompt-pvsr;
-              preInstall = ''
-                mv -f *.fish functions/
-              '';
-            };
-            z = prev.fishPlugins.buildFishPlugin {
-              pname = "z";
-              version = "git";
-              src = inputs.z;
-            };
-            fzf = prev.fishPlugins.buildFishPlugin {
-              pname = "fzf";
-              version = "git";
-              src = inputs.fzf;
-            };
-            plugin-git = prev.fishPlugins.buildFishPlugin {
-              pname = "plugin-git";
-              version = "git";
-              src = inputs.plugin-git;
-            };
-          };
         });
+      fishPlugins = with inputs; {
+        inherit fish-prompt-pvsr;
+        z = fish-z;
+        fzf = fish-fzf;
+        plugin-git = fish-plugin-git;
+      };
       sharedOverlays = [
         pluginOverlay
         nur.overlay
@@ -125,7 +106,7 @@
               home-manager = {
                 users.peter = import ./home-manager/ruan.nix;
                 # kinda hacky
-                extraSpecialArgs.appFont = appFont;
+                extraSpecialArgs = { inherit appFont fishPlugins; };
               };
             }
             (import ./hosts/ruan.nix)
@@ -151,7 +132,7 @@
 
           nixpkgs.overlays = sharedOverlays;
         };
-        extraSpecialArgs.appFont = appFont;
+        extraSpecialArgs = { inherit appFont fishPlugins; };
       };
 
       hostDefaults.extraArgs = { inherit utils inputs; };

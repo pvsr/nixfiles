@@ -42,6 +42,38 @@
         "type": "github"
       }
     },
+    "fish-fzf": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1620776412,
+        "narHash": "sha256-28QW/WTLckR4lEfHv6dSotwkAKpNJFCShxmKFGQQ1Ew=",
+        "owner": "jethrokuan",
+        "repo": "fzf",
+        "rev": "479fa67d7439b23095e01b64987ae79a91a4e283",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jethrokuan",
+        "repo": "fzf",
+        "type": "github"
+      }
+    },
+    "fish-plugin-git": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1619977741,
+        "narHash": "sha256-MluAIH5o4ahro8MHvKLelB+3zM8LJMUjqGL7CFn4Znw=",
+        "owner": "jhillyerd",
+        "repo": "plugin-git",
+        "rev": "e8da507732c8e2aa0bd6487cea800f7e3ab4bb3b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jhillyerd",
+        "repo": "plugin-git",
+        "type": "github"
+      }
+    },
     "fish-prompt-pvsr": {
       "flake": false,
       "locked": {
@@ -55,6 +87,22 @@
       "original": {
         "owner": "pvsr",
         "repo": "fish-prompt-pvsr",
+        "type": "github"
+      }
+    },
+    "fish-z": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1621068907,
+        "narHash": "sha256-l5y4cFwO1Lqe/tFNO87F/zs8zA1JXLeYCIKuX6el5hc=",
+        "owner": "jethrokuan",
+        "repo": "z",
+        "rev": "ccb0ac58bc09841eaa2a54bf2aa7e9fb871d0e3f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jethrokuan",
+        "repo": "z",
         "type": "github"
       }
     },
@@ -132,22 +180,6 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "fzf": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1617960845,
-        "narHash": "sha256-l+qDptQLfKt++OjHkL1l1LsesaNYqDfHr4eeU97NlQk=",
-        "owner": "jethrokuan",
-        "repo": "fzf",
-        "rev": "9405fd2fc449fc28196a216bdb873e4c9aab9913",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jethrokuan",
-        "repo": "fzf",
         "type": "github"
       }
     },
@@ -336,22 +368,6 @@
         "type": "github"
       }
     },
-    "plugin-git": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1619104198,
-        "narHash": "sha256-iMN9TlmlXV5UpdRkKItozjROdZgIMx+UdJ2BPoQshgg=",
-        "owner": "jhillyerd",
-        "repo": "plugin-git",
-        "rev": "eb02787e19f24e926789ac497493b87e6e50b0a2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jhillyerd",
-        "repo": "plugin-git",
-        "type": "github"
-      }
-    },
     "qbpm": {
       "inputs": {
         "nixpkgs": [
@@ -376,20 +392,20 @@
       "inputs": {
         "agenix": "agenix",
         "deploy-rs": "deploy-rs",
+        "fish-fzf": "fish-fzf",
+        "fish-plugin-git": "fish-plugin-git",
         "fish-prompt-pvsr": "fish-prompt-pvsr",
-        "fzf": "fzf",
+        "fish-z": "fish-z",
         "home-manager": "home-manager",
         "home-manager-unstable": "home-manager-unstable",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs_3",
         "nur": "nur",
         "nvim-colorizer": "nvim-colorizer",
-        "plugin-git": "plugin-git",
         "qbpm": "qbpm",
         "srcery-tmux": "srcery-tmux",
         "unstable": "unstable",
-        "utils": "utils_2",
-        "z": "z"
+        "utils": "utils_2"
       }
     },
     "srcery-tmux": {
@@ -454,22 +470,6 @@
       "original": {
         "owner": "gytis-ivaskevicius",
         "repo": "flake-utils-plus",
-        "type": "github"
-      }
-    },
-    "z": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1616619907,
-        "narHash": "sha256-I2feYLp+oqVGjtaG5uftG0Lok5ye7G8oefZAMdzAeoo=",
-        "owner": "jethrokuan",
-        "repo": "z",
-        "rev": "d5500284077ebb12c306ea429e74c8d046aef5a0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jethrokuan",
-        "repo": "z",
         "type": "github"
       }
     }

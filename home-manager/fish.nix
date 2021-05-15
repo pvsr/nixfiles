@@ -1,12 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, fishPlugins, ... }:
 
 {
   home.packages = with pkgs; [
     fish
-    fishPlugins.fish-prompt-pvsr
-    fishPlugins.z
-    fishPlugins.fzf
-    fishPlugins.plugin-git
   ];
 
   programs.fish = {
@@ -56,5 +52,17 @@
       "eu4" = "steam steam://rungameid/236850";
       "ck3" = "steam steam://rungameid/1158310";
     };
+    plugins =
+      let genPlugin = name: {
+        inherit name;
+        src = lib.getAttr name fishPlugins;
+      };
+      in
+      map genPlugin [
+        "fish-prompt-pvsr"
+        "z"
+        "fzf"
+        "plugin-git"
+      ];
   };
 }
