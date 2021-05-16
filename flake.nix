@@ -112,6 +112,20 @@
             (import ./hosts/ruan.nix)
           ];
         };
+        "price@work" = {
+          output = "homeConfigurations";
+
+          builder = args: home-manager-unstable.lib.homeManagerConfiguration {
+            inherit (args) system;
+            homeDirectory = "/Users/price";
+            username = "price";
+            configuration = { config, pkgs, ... }: {
+              imports = [ ./home-manager/macbook.nix ];
+              nixpkgs.overlays = sharedOverlays;
+            };
+            extraSpecialArgs = { inherit appFont fishPlugins; };
+          };
+        };
       };
 
       deploy.nodes.ruan = {
