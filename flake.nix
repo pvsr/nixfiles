@@ -116,7 +116,7 @@
           output = "homeConfigurations";
 
           builder = args: home-manager-unstable.lib.homeManagerConfiguration {
-            inherit (args) system;
+            system = "x86_64-darwin";
             homeDirectory = "/Users/price";
             username = "price";
             configuration = { config, pkgs, ... }: {
