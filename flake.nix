@@ -112,6 +112,21 @@
             (import ./hosts/ruan.nix)
           ];
         };
+        "peter@grancel" = {
+          output = "homeConfigurations";
+
+          channelName = "unstable";
+          builder = args: home-manager-unstable.lib.homeManagerConfiguration {
+            system = "x86_64-linux";
+            homeDirectory = "/home/peter";
+            username = "peter";
+            configuration = { config, pkgs, ... }: {
+              imports = [ ./home-manager/grancel.nix ];
+              nixpkgs.overlays = sharedOverlays;
+            };
+            extraSpecialArgs = { inherit appFont fishPlugins; };
+          };
+        };
         "price@work" = {
           output = "homeConfigurations";
 
@@ -136,18 +151,6 @@
         };
       };
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-
-      homeConfigurations."peter@grancel" = home-manager-unstable.lib.homeManagerConfiguration {
-        system = "x86_64-linux";
-        homeDirectory = "/home/peter";
-        username = "peter";
-        configuration = { config, pkgs, ... }: {
-          imports = [ ./home-manager/grancel.nix ];
-
-          nixpkgs.overlays = sharedOverlays;
-        };
-        extraSpecialArgs = { inherit appFont fishPlugins; };
-      };
 
       hostDefaults.extraArgs = { inherit utils inputs; };
 
