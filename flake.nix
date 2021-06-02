@@ -2,9 +2,8 @@
   description = "A system configuration.";
 
   inputs = {
-    #nixpkgs.url = github:nixos/nixpkgs/release-20.09;
-    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
-    unstable.url = github:nixos/nixpkgs/nixos-unstable;
+    nixpkgs.url = github:nixos/nixpkgs/release-21.05;
+    #unstable.url = github:nixos/nixpkgs/nixos-unstable;
     nur.url = github:nix-community/NUR;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
@@ -13,10 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    home-manager-unstable = {
-      url = github:nix-community/home-manager/master;
-      inputs.nixpkgs.follows = "unstable";
-    };
+    #home-manager-unstable = {
+    #  url = github:nix-community/home-manager/master;
+    #  inputs.nixpkgs.follows = "unstable";
+    #};
 
     neovim-nightly-overlay.url = github:nix-community/neovim-nightly-overlay;
     agenix.url = github:ryantm/agenix;
@@ -44,11 +43,11 @@
   outputs =
     inputs@{ self
     , nixpkgs
-    , unstable
+    #, unstable
     , nur
     , utils
     , home-manager
-    , home-manager-unstable
+    #, home-manager-unstable
     , neovim-nightly-overlay
     , agenix
     , deploy-rs
@@ -100,7 +99,6 @@
 
       hosts = {
         ruan = {
-          #channelName = "unstable";
           modules = [
             {
               home-manager = {
@@ -115,8 +113,8 @@
         "peter@grancel" = {
           output = "homeConfigurations";
 
-          channelName = "unstable";
-          builder = args: home-manager-unstable.lib.homeManagerConfiguration {
+          #channelName = "unstable";
+          builder = args: home-manager.lib.homeManagerConfiguration {
             system = "x86_64-linux";
             homeDirectory = "/home/peter";
             username = "peter";
@@ -130,7 +128,8 @@
         "price@work" = {
           output = "homeConfigurations";
 
-          builder = args: home-manager-unstable.lib.homeManagerConfiguration {
+          #channelName = "unstable";
+          builder = args: home-manager.lib.homeManagerConfiguration {
             system = "x86_64-darwin";
             homeDirectory = "/Users/price";
             username = "price";
