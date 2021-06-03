@@ -45,15 +45,14 @@
     miniflux.adminCredentialsFile = config.age.secrets."miniflux-credentials".path;
 
     radicale.enable = true;
-    radicale.config = ''
-      [server]
-      hosts = 0.0.0.0:52032, [::]:52032
-
-      [auth]
-      type = htpasswd
-      htpasswd_filename = /run/secrets/radicale-users
-      htpasswd_encryption = bcrypt
-    '';
+    radicale.settings = {
+      server.hosts = [ "0.0.0.0:52032" "[::]:52032" ];
+      auth = {
+        type = "htpasswd";
+        htpasswd_filename = "/run/secrets/radicale-users";
+        htpasswd_encryption = "bcrypt";
+      };
+    };
 
     # mpd.enable = true;
     # mpd.startWhenNeeded = true;
