@@ -163,6 +163,7 @@
         cachix
         dev
         graphical
+        steam
         transmission
         wireguard
         peter
@@ -178,6 +179,7 @@
         ./modules/cachix.nix
         ./modules/dev.nix
         ./modules/graphical.nix
+        ./modules/steam.nix
         ./modules/transmission.nix
         ./modules/wireguard.nix
 
