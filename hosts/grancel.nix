@@ -61,4 +61,17 @@
       device = "/dev/disk/by-uuid/A253-A1F7";
       fsType = "vfat";
     };
+
+  fileSystems."/media/data" =
+    {
+      device = "/dev/disk/by-uuid/aec1cba5-6ddb-4156-ad7e-a5a5ed6a00f7";
+      fsType = "ext4";
+    };
+
+  fileSystems."/media/arch" =
+    {
+      device = "/dev/disk/by-uuid/0b865d88-2a0e-438a-96e8-bb3035d0b488";
+      fsType = "ext4";
+    };
+
 }
