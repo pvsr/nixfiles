@@ -19,8 +19,11 @@ in
 
   home.packages = with pkgs; [ ];
 
+  programs.mpv.profiles.standard.gpu-context = "wayland";
+
   wayland.windowManager.sway.enable = true;
   wayland.windowManager.sway.systemdIntegration = true;
+  wayland.windowManager.sway.wrapperFeatures.gtk = true;
 
   wayland.windowManager.sway.config = with colors; {
     modifier = "Mod4";

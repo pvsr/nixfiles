@@ -26,15 +26,9 @@
       ripgrep
       utillinux
       whois
+      psmisc
+      lsof
     ];
-  };
-
-  fonts = {
-    fonts = with pkgs; [ dejavu_fonts ];
-    fontconfig.defaultFonts = {
-      monospace = [ "DejaVu Sans Mono" ];
-      sansSerif = [ "DejaVu Sans" ];
-    };
   };
 
   nix = {

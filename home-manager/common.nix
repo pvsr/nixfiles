@@ -7,6 +7,8 @@ let colors = import ./colors.nix; in
     ./neovim/neovim.nix
   ];
 
+  programs.home-manager.enable = true;
+
   home.packages = with pkgs; [
     stow
     youtube-dl
@@ -22,10 +24,13 @@ let colors = import ./colors.nix; in
     pastel
     nixpkgs-fmt
     agenix
+    deploy-rs
     qbpm
     sarasa-gothic
     fantasque-sans-mono
   ];
+
+  home.language.base = "en-US.UTF-8";
 
   home.sessionVariables = {
     BROWSER = "org.qutebrowser.qutebrowser.desktop";

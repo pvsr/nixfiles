@@ -19,11 +19,9 @@
 
   time.timeZone = "America/New_York";
 
-  hardware.opengl.driSupport32Bit = true;
-  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
-  hardware.pulseaudio.support32Bit = true;
-  #nixpkgs.config.allowUnfree = true;
+  hardware.video.hidpi.enable = true;
   hardware.enableRedistributableFirmware = true;
+  nixpkgs.config.allowUnfree = true;
 
   age.secrets."radicale-users" = {
     file = ../secrets/radicale-users.age;
@@ -91,8 +89,6 @@
   networking.firewall.allowedUDPPorts = [
   ];
 
-  security.sudo.wheelNeedsPassword = false;
-
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
@@ -100,18 +96,6 @@
   system.stateVersion = "20.09"; # Did you read the comment?
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "uas" "sd_mod" ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  #boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
-
-  services.xserver.videoDrivers = [ "amdgpu" ];
-
-  hardware.opengl.extraPackages = with pkgs; [
-    amdvlk
-  ];
-  hardware.video.hidpi.enable = true;
-
-  hardware.cpu.amd.updateMicrocode = true;
 
   fileSystems."/" =
     {

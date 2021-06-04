@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/release-21.05;
     #unstable.url = github:nixos/nixpkgs/nixos-unstable;
+    nixos-hardware.url = github:nixos/nixos-hardware;
     nur.url = github:nix-community/NUR;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
@@ -44,6 +45,7 @@
     inputs@{ self
     , nixpkgs
     #, unstable
+    , nixos-hardware
     , nur
     , utils
     , home-manager
@@ -98,6 +100,20 @@
       channelsConfig.allowUnfree = true;
 
       hosts = {
+        grancel = {
+          modules = [
+            {
+              home-manager = {
+                users.peter = import ./home-manager/grancel.nix;
+                extraSpecialArgs = { inherit appFont fishPlugins; };
+              };
+            }
+            (import ./hosts/grancel.nix)
+            nixos-hardware.nixosModules.common-pc-ssd
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-gpu-amd
+          ];
+        };
         ruan = {
           modules = [
             {
@@ -108,9 +124,16 @@
               };
             }
             (import ./hosts/ruan.nix)
-          ];
+            nixos-hardware.nixosModules.common-pc-ssd
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-gpu-amd
+          ] ++
+          (with self.nixosModules; [
+            wireguard
+            transmission
+          ]);
         };
-        "peter@grancel" = {
+        "peter" = {
           output = "homeConfigurations";
 
           #channelName = "unstable";
@@ -119,13 +142,13 @@
             homeDirectory = "/home/peter";
             username = "peter";
             configuration = { config, pkgs, ... }: {
-              imports = [ ./home-manager/grancel.nix ];
+              imports = [ ./home-manager/arch.nix ];
               nixpkgs.overlays = sharedOverlays;
             };
             extraSpecialArgs = { inherit appFont fishPlugins; };
           };
         };
-        "price@work" = {
+        "price" = {
           output = "homeConfigurations";
 
           #channelName = "unstable";
@@ -164,8 +187,6 @@
         dev
         graphical
         steam
-        transmission
-        wireguard
         peter
         {
           home-manager.useGlobalPkgs = true;
