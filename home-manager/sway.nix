@@ -17,7 +17,10 @@ in
     ./alacritty.nix
   ];
 
-  home.packages = with pkgs; [ ];
+  home.packages = with pkgs; [
+    wl-clipboard
+    pamixer
+  ];
 
   programs.mpv.profiles.standard.gpu-context = "wayland";
 
