@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/release-21.05;
-    #unstable.url = github:nixos/nixpkgs/nixos-unstable;
     nixos-hardware.url = github:nixos/nixos-hardware;
     nur.url = github:nix-community/NUR;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
@@ -12,11 +11,6 @@
       url = github:nix-community/home-manager/master;
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    #home-manager-unstable = {
-    #  url = github:nix-community/home-manager/master;
-    #  inputs.nixpkgs.follows = "unstable";
-    #};
 
     neovim-nightly-overlay.url = github:nix-community/neovim-nightly-overlay;
     agenix.url = github:ryantm/agenix;
@@ -44,12 +38,10 @@
   outputs =
     inputs@{ self
     , nixpkgs
-    #, unstable
     , nixos-hardware
     , nur
     , utils
     , home-manager
-    #, home-manager-unstable
     , neovim-nightly-overlay
     , agenix
     , deploy-rs
@@ -95,7 +87,6 @@
       inherit self inputs;
 
       channels.nixpkgs.input = nixpkgs;
-      #channels.unstable.input = unstable;
 
       channelsConfig.allowUnfree = true;
 
@@ -119,7 +110,6 @@
             {
               home-manager = {
                 users.peter = import ./home-manager/ruan.nix;
-                # kinda hacky
                 extraSpecialArgs = { inherit appFont fishPlugins; };
               };
             }
@@ -136,7 +126,6 @@
         "peter" = {
           output = "homeConfigurations";
 
-          #channelName = "unstable";
           builder = args: home-manager.lib.homeManagerConfiguration {
             system = "x86_64-linux";
             homeDirectory = "/home/peter";
@@ -151,7 +140,6 @@
         "price" = {
           output = "homeConfigurations";
 
-          #channelName = "unstable";
           builder = args: home-manager.lib.homeManagerConfiguration {
             system = "x86_64-darwin";
             homeDirectory = "/Users/price";
