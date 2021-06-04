@@ -10,12 +10,12 @@
   security.sudo.wheelNeedsPassword = false;
 
   fonts = {
+    enableDefaultFonts = true;
     fonts = with pkgs; [
       dejavu_fonts
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
-      liberation_ttf
       libertinus
       iosevka
       sarasa-gothic
