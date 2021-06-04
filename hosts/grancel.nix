@@ -41,19 +41,22 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/e1e91f6c-0c5a-407e-b784-f28431839036";
+    {
+      device = "/dev/disk/by-uuid/e1e91f6c-0c5a-407e-b784-f28431839036";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/e1e91f6c-0c5a-407e-b784-f28431839036";
+    {
+      device = "/dev/disk/by-uuid/e1e91f6c-0c5a-407e-b784-f28431839036";
       fsType = "btrfs";
       options = [ "subvol=home" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/A253-A1F7";
+    {
+      device = "/dev/disk/by-uuid/A253-A1F7";
       fsType = "vfat";
     };
 }
