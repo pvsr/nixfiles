@@ -20,6 +20,8 @@
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.allowUnfree = true;
 
+  programs.gnupg.agent.enable = true;
+
   services = {
     openssh.enable = true;
     openssh.ports = [ 23232 ];
