@@ -17,6 +17,7 @@ in
 {
   home.packages = with pkgs; [
     fish
+    exa
   ];
 
   programs.fish = {
@@ -56,10 +57,10 @@ in
     shellAliases = {
       nvim_nowrite = "nvim '+set noundofile' '+set noswapfile'";
       pass = "EDITOR=nvim_nowrite command pass";
-      ls = "${pkgs.exa}/bin/exa";
-      ll = "${pkgs.exa}/bin/exa -l";
-      la = "${pkgs.exa}/bin/exa -la";
-      tree = "${pkgs.exa}/bin/exa -T";
+      ls = "exa";
+      ll = "exa -lb";
+      la = "exa -lba";
+      tree = "exa -T";
       bell = "echo \\a";
       mp = "mpc toggle";
       qpm = "qbpm";
