@@ -19,6 +19,7 @@ in
   home.packages = with pkgs; [
     wl-clipboard
     pamixer
+    playerctl
   ];
 
   programs.mpv.profiles.standard.gpu-context = "wayland";
@@ -172,10 +173,10 @@ in
 
   # TODO
   wayland.windowManager.sway.extraConfig = ''
-    bindsym --locked XF86AudioPlay exec ~/bin/toggle
-    bindsym --locked XF86AudioPrev exec mpc prev
-    bindsym --locked XF86AudioNext exec mpc next
-    bindsym --locked XF86AudioStop exec mpc stop
+    bindsym --locked XF86AudioPlay exec playerctl play-pause
+    bindsym --locked XF86AudioPrev exec playerctl previous
+    bindsym --locked XF86AudioNext exec playerctl next
+    bindsym --locked XF86AudioStop exec playerctl stop
     bindsym --locked XF86AudioMute exec pamixer --toggle-mute && pkill -RTMIN+10 i3blocks && (pamixer --get-mute && echo 0 > $SWAYSOCK.wob) || pamixer --get-volume > $SWAYSOCK.wob
     bindsym --locked XF86AudioRaiseVolume exec pamixer -ui 5 && pkill -RTMIN+10 i3blocks && pamixer --get-volume > $SWAYSOCK.wob
     bindsym --locked XF86AudioLowerVolume exec pamixer -ud 5 && pkill -RTMIN+10 i3blocks && pamixer --get-volume > $SWAYSOCK.wob
