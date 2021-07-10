@@ -75,13 +75,6 @@ let colors = import ./colors.nix; in
     ];
   };
 
-  programs.keychain = {
-    enable = true;
-    agents = [ "gpg" "ssh" ];
-    keys = [ "id_rsa" "id_ed25519" ];
-    extraFlags = [ "--noask" "--quiet" ];
-  };
-
   programs.nix-index.enable = true;
 
   services.mpd = {
