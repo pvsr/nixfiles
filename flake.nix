@@ -6,7 +6,7 @@
     nixos-hardware.url = github:nixos/nixos-hardware;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
-    home-manager.url = github:nix-community/home-manager/master;
+    home-manager.url = github:nix-community/home-manager/release-21.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     neovim-nightly-overlay.url = github:nix-community/neovim-nightly-overlay;
