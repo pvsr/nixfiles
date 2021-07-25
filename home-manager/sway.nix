@@ -20,6 +20,7 @@ in
     wl-clipboard
     pamixer
     playerctl
+    dmenu
   ];
 
   programs.mpv.profiles.standard.gpu-context = "wayland";
@@ -36,7 +37,7 @@ in
 
     menu = ''
       ${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop \
-        --dmenu='${pkgs.dmenu}/bin/dmenu -i -fn "${font}-13"' \
+        --dmenu='dmenu -i -fn "${font}-13"' \
         | ${pkgs.findutils}/bin/xargs swaymsg exec --
     '';
 
