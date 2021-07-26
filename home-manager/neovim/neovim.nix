@@ -30,50 +30,6 @@
         '';
       }
       {
-        plugin = denite;
-        config = ''
-          autocmd FileType denite call s:denite_my_settings()
-          function! s:denite_my_settings() abort
-            nnoremap <silent><buffer><expr> <CR>
-            \ denite#do_map('do_action')
-            nnoremap <silent><buffer><expr> d
-            \ denite#do_map('do_action', 'delete')
-            nnoremap <silent><buffer><expr> p
-            \ denite#do_map('do_action', 'preview')
-            nnoremap <silent><buffer><expr> q
-            \ denite#do_map('quit')
-            nnoremap <silent><buffer><expr> i
-            \ denite#do_map('open_filter_buffer')
-            nnoremap <silent><buffer><expr> J
-            \ denite#do_map('toggle_select').'j'
-            nnoremap <silent><buffer><expr> K
-            \ denite#do_map('toggle_select').'k'
-          endfunction
-
-
-          autocmd FileType denite-filter call s:denite_filter_my_settings()
-          function! s:denite_filter_my_settings() abort
-            imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
-          endfunction
-
-          nnoremap <leader>* :Denite grep:::\\b<c-r><c-w>\\b<cr>
-          nnoremap <leader>fr :Denite file/rec<cr>
-          nnoremap <leader>bb :Denite buffer<cr>
-          nnoremap <leader>gg :Denite grep<cr>
-
-          call denite#custom#var('file/rec', 'command',
-            \ ['rg', '--files', '--glob', '!.git', '--color', 'never'])
-          call denite#custom#var('grep', {
-            \ 'command': ['rg'],
-            \ 'default_opts': ['-i', '--vimgrep', '--no-heading'],
-            \ 'recursive_opts': [],
-            \ 'pattern_opt': ['--regexp'],
-            \ 'separator': ['--'],
-            \ 'final_opts': [],
-            \ })
-        '';
-      }
-      {
         plugin = deoplete-nvim;
         config = ''
           "call deoplete#custom#option('auto_complete_delay', 300)
@@ -122,6 +78,50 @@
       {
         plugin = nvim-colorizer;
         config = "autocmd SourcePost colorizer.vim lua require'colorizer'.setup()";
+      }
+      popup-nvim
+      plenary-nvim
+      {
+        plugin = telescope-nvim;
+        config = ''
+          lua << EOF
+            require("telescope").setup {
+              defaults = {
+                layout_strategy = "vertical",
+                layout_config = {
+                  vertical = {
+                    mirror = true,
+                  },
+                },
+              },
+            }
+          EOF
+        '';
+      }
+      {
+        plugin = which-key-nvim;
+        config = ''
+          lua << EOF
+            local wk = require("which-key")
+            wk.setup {}
+            wk.register({
+              f = {
+                name = "file",
+                f = { "<cmd>Telescope find_files<cr>", "All files" },
+                r = { "<cmd>Telescope oldfiles<cr>", "Recent files" },
+              },
+              b = {
+                b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+              },
+              g = {
+                name = "grep",
+                g = { "<cmd>Telescope live_grep<cr>", "Search" },
+                o = { "<cmd>Telescope live_grep grep_open_files=true<cr>", "Search open files" },
+                i = { "<cmd>Telescope grep_string<cr>", "Search under cursor" },
+              },
+            }, { prefix = "<leader>" })
+          EOF
+        '';
       }
     ];
   };
