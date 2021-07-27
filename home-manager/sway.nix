@@ -20,7 +20,7 @@ in
     wl-clipboard
     pamixer
     playerctl
-    dmenu
+    dmenu-wayland
   ];
 
   programs.mpv.profiles.standard.gpu-context = "wayland";
@@ -37,7 +37,7 @@ in
 
     menu = ''
       ${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop \
-        --dmenu='dmenu -i -fn "${font}-13"' \
+        --dmenu='dmenu-wl -i -fn "${font} 13"' \
         | ${pkgs.findutils}/bin/xargs swaymsg exec --
     '';
 
@@ -50,7 +50,7 @@ in
       "${modifier}+z" = "workspace back_and_forth";
       "${modifier}+Shift+z" = "move container to workspace back_and_forth";
       "${modifier}+q" = "mode '${exitMode}'";
-      "${modifier}+p" = "exec ${pkgs.pass}/bin/passmenu -i -fn '${font}-13'";
+      "${modifier}+p" = "exec ${pkgs.pass}/bin/passmenu -i -fn '${font} 13'";
 
       Print = "exec ${pkgs.grim}/bin/grim $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H:%M:%S.png')";
       "Shift+Print" = "exec ${pkgs.slurp}/bin/slurp | ${pkgs.grim}/bin/grim -g - $(xdg-user-dir PICTURES)/screenshots/$(date +'%Y-%m-%d-%H:%M:%S.png')";
