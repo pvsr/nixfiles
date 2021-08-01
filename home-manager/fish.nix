@@ -53,6 +53,9 @@ in
     '' + fzfKeyBindings;
     shellAbbrs = {
       suod = "sudo";
+      sc = "systemctl";
+      ssc = "sudo systemctl";
+      scu = "systemctl --user";
     };
     shellAliases = {
       nvim_nowrite = "nvim '+set noundofile' '+set noswapfile'";
