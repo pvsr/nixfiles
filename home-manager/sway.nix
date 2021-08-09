@@ -183,7 +183,6 @@ in
     bindsym --locked XF86AudioLowerVolume exec pamixer -ud 5 && pkill -RTMIN+10 i3blocks && pamixer --get-volume > $SWAYSOCK.wob
   '';
   wayland.windowManager.sway.extraSessionCommands = ''
-    export SDL_VIDEODRIVER=wayland
     export QT_QPA_PLATFORM=wayland
     export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
     export _JAVA_AWT_WM_NONREPARENTING=1
