@@ -71,6 +71,7 @@
       vim-nix
       semshi
       gitgutter
+      vim-rooter
       {
         plugin = srcery-vim;
         config = "colorscheme srcery";
