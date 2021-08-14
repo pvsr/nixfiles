@@ -50,7 +50,7 @@
           set completeopt-=preview
         '';
       }
-      argtextobj-vim
+      targets-vim
       vim-sneak
       vim-sleuth
       vim-abolish
