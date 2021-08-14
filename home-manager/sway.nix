@@ -61,6 +61,13 @@ in
       { command = "${pkgs.mako}/bin/mako"; }
       { command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | ${pkgs.wob}/bin/wob"; }
       { command = "wl-paste -t text --watch clipman store"; }
+      {
+        command = lib.concatStringsSep " " [
+          "${pkgs.swayidle}/bin/swayidle"
+          "timeout 600 'swaymsg \"output * dpms off\"'"
+          "resume 'swaymsg \"output * dpms on\"'"
+        ];
+      }
     ];
 
     modes."${exitMode}" = {
