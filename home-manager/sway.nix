@@ -21,6 +21,7 @@ in
     pamixer
     playerctl
     dmenu-wayland
+    clipman
   ];
 
   programs.mpv.profiles.standard.gpu-context = "wayland";
@@ -59,6 +60,7 @@ in
     startup = [
       { command = "${pkgs.mako}/bin/mako"; }
       { command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | ${pkgs.wob}/bin/wob"; }
+      { command = "wl-paste -t text --watch clipman store"; }
     ];
 
     modes."${exitMode}" = {
