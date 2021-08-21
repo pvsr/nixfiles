@@ -3,6 +3,7 @@
 {
   imports = [
     ./common.nix
+    ./alacritty.nix
   ];
 
   home.packages = with pkgs; [
@@ -28,5 +29,5 @@
   };
 
   programs.git.userEmail = "price@hubspot.com";
-  programs.alacritty.settings.font.size = 13.0;
+  programs.alacritty.settings.font.size = 16.0;
 }

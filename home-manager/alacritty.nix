@@ -1,4 +1,4 @@
-{ appFont, ... }:
+{ lib, appFont, ... }:
 let colors = import ./colors.nix; in
 {
   programs.alacritty = {
@@ -6,8 +6,8 @@ let colors = import ./colors.nix; in
     settings = {
       window.dynamic_title = true;
       draw_bold_text_with_bright_colors = true;
-      font.normal.family = appFont;
-      font.size = 14.0;
+      font.normal.family = lib.mkDefault appFont;
+      font.size = lib.mkDefault 14.0;
       colors = with colors; {
         primary.background = black;
         primary.foreground = brightWhite;
