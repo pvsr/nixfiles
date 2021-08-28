@@ -3,13 +3,13 @@
 
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/release-21.05;
+    unstable.url = github:nixos/nixpkgs/nixos-unstable;
     nixos-hardware.url = github:nixos/nixos-hardware;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
     home-manager.url = github:nix-community/home-manager/release-21.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    neovim-nightly-overlay.url = github:nix-community/neovim-nightly-overlay;
     agenix.url = github:ryantm/agenix;
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     deploy-rs.url = github:serokell/deploy-rs;
@@ -35,10 +35,10 @@
   outputs =
     inputs@{ self
     , nixpkgs
+    , unstable
     , nixos-hardware
     , utils
     , home-manager
-    , neovim-nightly-overlay
     , agenix
     , deploy-rs
     , ...
@@ -63,7 +63,6 @@
         });
       sharedOverlays = [
         pluginOverlay
-        neovim-nightly-overlay.overlay
         (final: prev: {
           deploy-rs = deploy-rs.packages.${prev.system}.deploy-rs;
           agenix = agenix.packages.${prev.system}.agenix;
@@ -85,11 +84,18 @@
       inherit self inputs;
 
       channels.nixpkgs.input = nixpkgs;
+      channels.nixpkgs.overlaysBuilder = channels: [
+        (final: prev: {
+          inherit (channels.unstable) neovim neovim-unwrapped;
+        })
+      ];
+      channels.unstable.input = unstable;
 
       channelsConfig.allowUnfree = true;
 
       hosts = {
         grancel = {
+          channelName = "nixpkgs";
           modules = [
             {
               home-manager = {
