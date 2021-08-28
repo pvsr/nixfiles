@@ -183,7 +183,7 @@ in
 
   # TODO
   wayland.windowManager.sway.extraConfig = ''
-    bindsym --locked XF86AudioPlay exec playerctl play-pause
+    bindsym --locked XF86AudioPlay exec playerctl -a status | grep Playing > /dev/null && playerctl -a pause || playerctl play
     bindsym --locked XF86AudioPrev exec playerctl previous
     bindsym --locked XF86AudioNext exec playerctl next
     bindsym --locked XF86AudioStop exec playerctl stop
