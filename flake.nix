@@ -61,12 +61,6 @@
             };
           };
         });
-      fishPlugins = with inputs; {
-        inherit fish-prompt-pvsr;
-        z = fish-z;
-        fzf = fzf-fish;
-        plugin-git = fish-plugin-git;
-      };
       sharedOverlays = [
         pluginOverlay
         neovim-nightly-overlay.overlay
@@ -76,7 +70,16 @@
           qbpm = inputs.qbpm.packages.${prev.system}.qbpm;
         })
       ];
-      appFont = "Fantasque Sans Mono";
+      fishPlugins = with inputs; {
+        inherit fish-prompt-pvsr;
+        z = fish-z;
+        fzf = fzf-fish;
+        plugin-git = fish-plugin-git;
+      };
+      extraSpecialArgs = {
+        inherit fishPlugins;
+        appFont = "Fantasque Sans Mono";
+      };
     in
     utils.lib.systemFlake {
       inherit self inputs;
@@ -91,7 +94,7 @@
             {
               home-manager = {
                 users.peter = import ./home-manager/grancel.nix;
-                extraSpecialArgs = { inherit appFont fishPlugins; };
+                inherit extraSpecialArgs;
               };
             }
             (import ./hosts/grancel.nix)
@@ -105,7 +108,7 @@
             {
               home-manager = {
                 users.peter = import ./home-manager/ruan.nix;
-                extraSpecialArgs = { inherit appFont fishPlugins; };
+                inherit extraSpecialArgs;
               };
             }
             (import ./hosts/ruan.nix)
@@ -129,7 +132,7 @@
               imports = [ ./home-manager/arch.nix ];
               nixpkgs.overlays = sharedOverlays;
             };
-            extraSpecialArgs = { inherit appFont fishPlugins; };
+            inherit extraSpecialArgs;
           };
         };
         "price" = {
@@ -143,7 +146,7 @@
               imports = [ ./home-manager/macbook.nix ];
               nixpkgs.overlays = sharedOverlays;
             };
-            extraSpecialArgs = { inherit appFont fishPlugins; };
+            inherit extraSpecialArgs;
           };
         };
       };
