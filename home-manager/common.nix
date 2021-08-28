@@ -75,7 +75,7 @@ let colors = import ./colors.nix; in
 
   programs.keychain = {
     enable = true;
-    agents = [ "gpg" "ssh" ];
+    agents = [ "ssh" ];
     keys = [ "id_rsa" "id_ed25519" ];
     extraFlags = [ "--noask" "--quiet" ];
   };
@@ -84,6 +84,13 @@ let colors = import ./colors.nix; in
 
   services.mpd = {
     musicDirectory = ~/annex/music;
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 3 * 60 * 60;
+    maxCacheTtl = 8 * 60 * 60;
+    pinentryFlavor = "qt";
   };
 
   programs.mpv = {

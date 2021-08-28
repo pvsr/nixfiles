@@ -20,9 +20,6 @@
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.allowUnfree = true;
 
-  programs.gnupg.agent.enable = true;
-  programs.gnupg.agent.pinentryFlavor = "gnome3";
-
   services = {
     openssh.enable = true;
     openssh.ports = [ 23232 ];
