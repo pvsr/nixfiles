@@ -32,7 +32,6 @@ let colors = import ./colors.nix; in
   home.language.base = "en-US.UTF-8";
 
   home.sessionVariables = {
-    BROWSER = "org.qutebrowser.qutebrowser.desktop";
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
