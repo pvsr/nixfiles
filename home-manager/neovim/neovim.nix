@@ -79,6 +79,15 @@
         plugin = nvim-colorizer;
         config = "autocmd SourcePost colorizer.vim lua require'colorizer'.setup()";
       }
+      {
+        plugin = neoformat;
+        config = ''
+          augroup fmt
+            autocmd!
+            autocmd BufWritePre *.py,*.nix undojoin | Neoformat
+          augroup END
+        '';
+      }
       popup-nvim
       plenary-nvim
       {
