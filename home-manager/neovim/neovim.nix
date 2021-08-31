@@ -95,14 +95,6 @@
         config = ''
           lua << EOF
             require("telescope").setup {
-              defaults = {
-                layout_strategy = "vertical",
-                layout_config = {
-                  vertical = {
-                    mirror = true,
-                  },
-                },
-              },
             }
           EOF
         '';
