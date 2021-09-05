@@ -79,18 +79,39 @@
         appFont = "Fantasque Sans Mono";
       };
     in
-    utils.lib.systemFlake {
+    utils.lib.mkFlake {
       inherit self inputs;
+      inherit sharedOverlays;
 
-      channels.nixpkgs.input = nixpkgs;
       channels.nixpkgs.overlaysBuilder = channels: [
         (final: prev: {
           inherit (channels.unstable) neovim neovim-unwrapped;
         })
       ];
-      channels.unstable.input = unstable;
 
       channelsConfig.allowUnfree = true;
+
+      hostDefaults.modules = [
+        home-manager.nixosModules.home-manager
+        agenix.nixosModules.age
+        {
+          nix.generateNixPathFromInputs = true;
+          nix.generateRegistryFromInputs = true;
+          nix.linkInputs = true;
+        }
+
+        ./modules/core.nix
+        ./modules/cachix.nix
+        ./modules/dev.nix
+        ./modules/graphical.nix
+        ./modules/steam.nix
+
+        ./users/peter.nix
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
+      ];
 
       hosts = {
         grancel = {
@@ -120,13 +141,11 @@
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
-          ] ++
-          (with self.nixosModules; [
-            wireguard
-            transmission
-          ]);
+            ./modules/wireguard.nix
+            ./modules/transmission.nix
+          ];
         };
-        "peter" = {
+        peter = {
           output = "homeConfigurations";
 
           builder = args: home-manager.lib.homeManagerConfiguration {
@@ -140,7 +159,7 @@
             inherit extraSpecialArgs;
           };
         };
-        "price" = {
+        price = {
           output = "homeConfigurations";
 
           builder = args: home-manager.lib.homeManagerConfiguration {
@@ -164,38 +183,5 @@
         };
       };
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-
-      hostDefaults.extraArgs = { inherit utils inputs; };
-
-      inherit sharedOverlays;
-
-      hostDefaults.modules = with self.nixosModules; [
-        home-manager.nixosModules.home-manager
-        utils.nixosModules.saneFlakeDefaults
-        agenix.nixosModules.age
-        core
-        cachix
-        dev
-        graphical
-        steam
-        peter
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        }
-      ];
-
-      nixosModules = utils.lib.modulesFromList [
-        ./modules/core.nix
-
-        ./modules/cachix.nix
-        ./modules/dev.nix
-        ./modules/graphical.nix
-        ./modules/steam.nix
-        ./modules/transmission.nix
-        ./modules/wireguard.nix
-
-        ./users/peter.nix
-      ];
     };
 }
