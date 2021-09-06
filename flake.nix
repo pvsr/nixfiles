@@ -181,13 +181,17 @@
         };
       };
 
-      deploy.nodes.ruan = {
-        hostname = "ruan";
-        profiles.system = {
-          user = "root";
-          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ruan;
-        };
-      };
+      deploy.nodes = nixpkgs.lib.genAttrs [ "grancel" "ruan" ]
+        (hostname:
+          {
+            inherit hostname;
+            profiles.system = {
+              user = "root";
+              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.${hostname};
+            };
+          }
+        );
+
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
       outputsBuilder = channels: {
