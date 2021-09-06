@@ -64,7 +64,7 @@
         pluginOverlay
         (final: prev: {
           qbpm = inputs.qbpm.packages.${prev.system}.qbpm;
-          agenix = agenix.packages.${channels.nixpkgs.system}.agenix;
+          agenix = agenix.packages.${prev.system}.agenix;
         })
       ];
       fishPlugins = with inputs; {
