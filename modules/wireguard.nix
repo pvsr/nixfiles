@@ -13,8 +13,7 @@ in
   networking.wireguard.interfaces.wg0 = {
     inherit (host) listenPort;
     inherit peers;
-    ips = host.allowedIPs;
-    # ips = map (builtins.replaceStrings [ "/32" "/128" ] [ "/24" "/64" ]) host.allowedIPs;
+    ips = map (builtins.replaceStrings [ "/32" "/128" ] [ "/24" "/64" ]) host.allowedIPs;
     privateKeyFile = "/etc/ssh/wireguard.key";
   };
 }
