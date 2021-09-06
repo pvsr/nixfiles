@@ -23,7 +23,6 @@ let colors = import ./colors.nix; in
     pass
     pastel
     nixpkgs-fmt
-    agenix
     qbpm
     sarasa-gothic
     fantasque-sans-mono
