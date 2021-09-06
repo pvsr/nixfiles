@@ -82,6 +82,8 @@
       inherit self inputs;
       inherit sharedOverlays;
 
+      supportedSystems = [ "x86_64-linux" "x86_64-darwin" ];
+
       channels.nixpkgs.overlaysBuilder = channels: [
         (final: prev: {
           inherit (channels.unstable) neovim neovim-unwrapped;
