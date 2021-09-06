@@ -17,7 +17,7 @@
   ruan = {
     allowedIPs = [ "10.0.0.3/32" "fdc9:281f:4d7:9ee9::3/128" ];
     listenPort = 53114;
-    publicKey = "mvYR1JDbe2JhSO/mZ0bV/AxTYZXqsG9GhhkOU8R1/SU=";
+    publicKey = "s796jSbUDMSD9T7ARvXXoVKoBuh3/5qw2p7AXvdSjxw=";
     endpointFrom = {
       grancel = "ruan:53114";
     };
