@@ -1,27 +1,20 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, wg-conf, hostname, ... }:
+let
+  host = wg-conf.${hostname};
+  selectEndpoint = host: (builtins.removeAttrs host [ "endpointFrom" "listenPort" ]) //
+    lib.optionalAttrs (lib.hasAttrByPath [ "endpointFrom" hostname ] host) { endpoint = host.endpointFrom.${hostname}; };
+  peers = map selectEndpoint (lib.attrValues (lib.filterAttrs (n: v: n != hostname) wg-conf));
+in
 {
-  environment.systemPackages = with pkgs; [ wireguard ];
+  environment.systemPackages = with pkgs; [ wireguard wireguard-tools ];
 
-  networking.firewall.allowedUDPPorts = [ 53114 ];
+  networking.firewall.allowedUDPPorts = [ host.listenPort ];
 
   networking.wireguard.interfaces.wg0 = {
-    ips = [ "10.0.0.3/24" ];
-    listenPort = 53114;
-
-    privateKeyFile = "/home/peter/.ssh/wireguard/ruan.key";
-
-    peers = [
-      {
-        publicKey = "fiVDal4zgxwXG7fuiZGOHhhGZkh0nYub9JkR+wqzQSk=";
-        allowedIPs = [ "10.0.0.1/32" "fdc9:281f:4d7:9ee9::1/128" ];
-        endpoint = "54.39.20.214:53113";
-        persistentKeepalive = 25;
-      }
-      {
-        publicKey = "mvYR1JDbe2JhSO/mZ0bV/AxTYZXqsG9GhhkOU8R1/SU=";
-        allowedIPs = [ "10.0.0.2/32" "fdc9:281f:4d7:9ee9::2/128" ];
-        endpoint = "grancel:53331";
-      }
-    ];
+    inherit (host) listenPort;
+    inherit peers;
+    ips = host.allowedIPs;
+    # ips = map (builtins.replaceStrings [ "/32" "/128" ] [ "/24" "/64" ]) host.allowedIPs;
+    privateKeyFile = "/etc/ssh/wireguard.key";
   };
 }

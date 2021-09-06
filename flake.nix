@@ -89,6 +89,9 @@
 
       channelsConfig.allowUnfree = true;
 
+      hostDefaults.specialArgs = {
+        wg-conf = import ./lib/wireguard.nix;
+      };
       hostDefaults.modules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.age
@@ -103,6 +106,7 @@
         ./modules/dev.nix
         ./modules/graphical.nix
         ./modules/steam.nix
+        ./modules/wireguard.nix
 
         ./users/peter.nix
         {
@@ -126,6 +130,7 @@
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
           ];
+          extraArgs.hostname = "grancel";
         };
         ruan = {
           modules = [
@@ -139,9 +144,9 @@
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
-            ./modules/wireguard.nix
             ./modules/transmission.nix
           ];
+          extraArgs.hostname = "ruan";
         };
         peter = {
           output = "homeConfigurations";
