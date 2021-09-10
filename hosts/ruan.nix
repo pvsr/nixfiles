@@ -23,6 +23,14 @@
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.allowUnfree = true;
 
+  nix.distributedBuilds = true;
+  nix.buildMachines = [{
+    hostName = "grancel";
+    sshUser = "peter";
+    systems = [ "x86_64-linux" ];
+    # supportedFeatures = [ ];
+  }];
+
   environment.systemPackages = with pkgs; [ agenix ];
 
   age.secrets."radicale-users" = {
