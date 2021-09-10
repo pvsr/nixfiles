@@ -8,6 +8,8 @@
 
   home.packages = with pkgs; [
     firefox
+    river
+    foot
   ];
 
   services.spotifyd = {
