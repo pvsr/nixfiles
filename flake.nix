@@ -88,7 +88,7 @@
 
       channels.nixpkgs.overlaysBuilder = channels: [
         (final: prev: {
-          inherit (channels.unstable) neovim neovim-unwrapped river foot;
+          inherit (channels.unstable) neovim neovim-unwrapped river foot seatd;
         })
       ];
 
