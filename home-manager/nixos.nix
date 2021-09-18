@@ -8,6 +8,7 @@
   home.packages = with pkgs; [
     diceware
     qutebrowser
+    transmission
   ];
 
   programs.mpv.enable = true;

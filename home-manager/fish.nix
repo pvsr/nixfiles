@@ -56,6 +56,7 @@ in
       sc = "systemctl";
       ssc = "sudo systemctl";
       scu = "systemctl --user";
+      trr = "transmission-remote ruan:9919";
     };
     shellAliases = {
       nvim_nowrite = "nvim '+set noundofile' '+set noswapfile'";
