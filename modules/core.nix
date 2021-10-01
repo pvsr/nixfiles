@@ -48,5 +48,6 @@
 
   services.earlyoom.enable = true;
 
+  users.defaultUserShell = pkgs.fish;
   #users.mutableUsers = false;
 }
