@@ -1,19 +1,4 @@
 { config, pkgs, lib, fishPlugins, ... }:
-let fzfKeyBindings = ''
-  if type __fzf_search_current_dir &> /dev/null
-    bind \co __fzf_search_current_dir
-    bind \cr __fzf_search_history
-    bind \cv $fzf_search_vars_cmd
-    bind \e\cl __fzf_search_git_log
-    bind \e\cs __fzf_search_git_status
-    bind --mode insert \co __fzf_search_current_dir
-    bind --mode insert \cr __fzf_search_history
-    bind --mode insert \cv $fzf_search_vars_cmd
-    bind --mode insert \e\cl __fzf_search_git_log
-    bind --mode insert \e\cs __fzf_search_git_status
-  end
-'';
-in
 {
   home.packages = with pkgs; [
     fish
