@@ -57,18 +57,7 @@
       "eu4" = "steam steam://rungameid/236850";
       "ck3" = "steam steam://rungameid/1158310";
     };
-    plugins =
-      let genPlugin = name: {
-        inherit name;
-        src = lib.getAttr name fishPlugins;
-      };
-      in
-      map genPlugin [
-        "fish-prompt-pvsr"
-        "z"
-        "fzf"
-        "plugin-git"
-      ];
+    plugins = lib.mapAttrsToList (name: src: { inherit name src; }) fishPlugins;
   };
 
   programs.fzf.enableFishIntegration = false;
