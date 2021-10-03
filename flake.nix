@@ -150,6 +150,7 @@
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
             ./modules/transmission.nix
+            ./modules/podcasts.nix
           ];
           extraArgs.hostname = "ruan";
         };

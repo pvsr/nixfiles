@@ -5,4 +5,5 @@ in
   "radicale-users.age".publicKeys = [ ruan ];
   "transmission-credentials.json.age".publicKeys = [ ruan ];
   "miniflux-credentials.age".publicKeys = [ ruan ];
+  "nginx-podcasts.htpasswd.age".publicKeys = [ ruan ];
 }
