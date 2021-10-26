@@ -38,19 +38,10 @@
     owner = "radicale";
     group = "radicale";
   };
-  age.secrets."miniflux-credentials" = {
-    file = ../secrets/miniflux-credentials.age;
-    owner = "miniflux";
-    group = "miniflux";
-  };
   services = {
     openssh.enable = true;
     openssh.ports = [ 24424 ];
     openssh.passwordAuthentication = false;
-
-    miniflux.enable = true;
-    miniflux.config.LISTEN_ADDR = "0.0.0.0:8080";
-    miniflux.adminCredentialsFile = config.age.secrets."miniflux-credentials".path;
 
     radicale.enable = true;
     radicale.settings = {

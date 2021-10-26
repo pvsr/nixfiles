@@ -152,6 +152,7 @@
             ./modules/transmission.nix
             ./modules/podcasts.nix
             ./modules/postgresql.nix
+            ./modules/miniflux.nix
           ];
           extraArgs.hostname = "ruan";
         };
