@@ -10,7 +10,6 @@
     firefox
     river
     foot
-    seatd
   ];
 
   services.spotifyd = {
