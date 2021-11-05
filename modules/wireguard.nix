@@ -1,9 +1,15 @@
 { config, pkgs, lib, wg-conf, hostname, ... }:
 let
   host = wg-conf.${hostname};
-  selectEndpoint = host: (builtins.removeAttrs host [ "endpointFrom" "listenPort" ]) //
-    lib.optionalAttrs (lib.hasAttrByPath [ "endpointFrom" hostname ] host) { endpoint = host.endpointFrom.${hostname}; };
-  peers = map selectEndpoint (lib.attrValues (lib.filterAttrs (n: v: n != hostname) wg-conf));
+  otherHosts = lib.filterAttrs (n: v: n != hostname) wg-conf;
+  selectEndpoint = host: (builtins.removeAttrs host [
+    "endpointFrom"
+    "listenPort"
+  ]) //
+  lib.optionalAttrs (lib.hasAttrByPath [ "endpointFrom" hostname ] host) {
+    endpoint = host.endpointFrom.${hostname};
+  };
+  peers = map selectEndpoint (lib.attrValues otherHosts);
 in
 {
   environment.systemPackages = with pkgs; [ wireguard wireguard-tools ];
