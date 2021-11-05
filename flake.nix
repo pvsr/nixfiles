@@ -46,7 +46,7 @@
     }:
     let
       pluginOverlay =
-        (final: prev: {
+        final: prev: {
           tmuxPlugins = prev.tmuxPlugins // {
             srcery = prev.tmuxPlugins.mkTmuxPlugin {
               pluginName = "srcery";
@@ -61,12 +61,12 @@
               src = inputs.nvim-colorizer;
             };
           };
-        });
+        };
       sharedOverlays = [
         pluginOverlay
         (final: prev: {
-          qbpm = inputs.qbpm.packages.${prev.system}.qbpm;
-          agenix = agenix.packages.${prev.system}.agenix;
+          inherit (inputs.qbpm.packages."${prev.system}") qbpm;
+          inherit (agenix.packages."${prev.system}") agenix;
         })
       ];
       fishPlugins = with inputs; {

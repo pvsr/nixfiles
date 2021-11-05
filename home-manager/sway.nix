@@ -1,7 +1,7 @@
 { config, lib, pkgs, appFont, ... }:
 let
   cfg = config.wayland.windowManager.sway;
-  modifier = cfg.config.modifier;
+  inherit (cfg.config) modifier;
 
   font = appFont;
   fonts = {
