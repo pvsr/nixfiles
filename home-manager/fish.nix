@@ -25,6 +25,18 @@
           --no-overwrites -i -a "$batch"
       '';
       yts = "mpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
+      session = ''
+        if set -q argv[1]
+          set -gx fish_history $argv[1]
+          set data_dir "$HOME/.local/share/z/sessions/$argv[1]"
+          mkdir -p $data_dir
+          and set -gx Z_DATA "$data_dir/data"
+          and touch $Z_DATA
+        else
+          set -ge fish_history
+          set -ge Z_DATA
+        end
+      '';
     };
     promptInit = ''
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
