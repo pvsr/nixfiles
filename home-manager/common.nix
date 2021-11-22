@@ -85,13 +85,6 @@ let colors = import ./colors.nix; in
     musicDirectory = ~/annex/music;
   };
 
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 3 * 60 * 60;
-    maxCacheTtl = 8 * 60 * 60;
-    pinentryFlavor = "qt";
-  };
-
   programs.mpv = {
     bindings = { };
     config = {
