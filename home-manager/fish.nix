@@ -47,9 +47,9 @@
     shellAliases = {
       nvim_nowrite = "nvim '+set noundofile' '+set noswapfile'";
       pass = "EDITOR=nvim_nowrite command pass";
-      ls = "exa";
-      ll = "exa -lb";
-      la = "exa -lba";
+      ls = "ls --color=auto";
+      ll = "exa -lbg --git";
+      la = "exa -lbag --git";
       tree = "exa -T";
       bell = "echo \\a";
       mp = "mpc toggle";
