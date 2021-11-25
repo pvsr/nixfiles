@@ -129,7 +129,6 @@
             nixos-hardware.nixosModules.common-gpu-amd
           ];
           extraArgs.hostname = "grancel";
-          extraArgs.usePipewire = true;
         };
         ruan = {
           modules = [

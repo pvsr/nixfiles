@@ -36,6 +36,41 @@
     '';
   };
 
+  hardware.bluetooth.enable = true;
+  services.pipewire = {
+    media-session.config.bluez-monitor.rules = [
+      {
+        # Matches all cards
+        matches = [{ "device.name" = "~bluez_card.*"; }];
+        actions = {
+          "update-props" = {
+            "bluez5.auto-connect" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
+          };
+        };
+      }
+      {
+        matches = [
+          # Matches all sources
+          { "node.name" = "~bluez_input.*"; }
+          # Matches all outputs
+          { "node.name" = "~bluez_output.*"; }
+        ];
+        actions = {
+          "node.pause-on-idle" = false;
+        };
+      }
+      {
+        matches = [{ "device.name" = "bluez_card.02:AE:0B:08:BE:87"; }];
+        actions = {
+          "update-props" = {
+            "bluez5.auto-connect" = [ "hfp_ag" "hsp_ag" "a2dp_source" ];
+            "bluez5.a2dp-source-role" = "input";
+          };
+        };
+      }
+    ];
+  };
+
   system.stateVersion = "21.05";
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
