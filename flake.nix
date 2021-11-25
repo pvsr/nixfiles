@@ -2,12 +2,12 @@
   description = "A system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/release-21.05;
-    unstable.url = github:nixos/nixpkgs/nixos-unstable;
+    nixpkgs.url = github:nixos/nixpkgs/release-21.11;
+    # unstable.url = github:nixos/nixpkgs/nixos-unstable;
     nixos-hardware.url = github:nixos/nixos-hardware;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
-    home-manager.url = github:nix-community/home-manager/release-21.05;
+    home-manager.url = github:nix-community/home-manager/release-21.11;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     agenix.url = github:ryantm/agenix;
@@ -36,7 +36,6 @@
   outputs =
     inputs@{ self
     , nixpkgs
-    , unstable
     , nixos-hardware
     , utils
     , home-manager
@@ -85,12 +84,6 @@
       inherit sharedOverlays;
 
       supportedSystems = [ "x86_64-linux" "x86_64-darwin" ];
-
-      channels.nixpkgs.overlaysBuilder = channels: [
-        (final: prev: {
-          inherit (channels.unstable) neovim neovim-unwrapped river foot;
-        })
-      ];
 
       channelsConfig.allowUnfree = true;
 

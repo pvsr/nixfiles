@@ -38,10 +38,8 @@
         end
       '';
     };
-    promptInit = ''
-      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
-    '';
     interactiveShellInit = ''
+      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
       set -U fish_key_bindings fish_hybrid_key_bindings
       set -U fzf_fish_custom_keybindings
       set -g fish_cursor_default block
