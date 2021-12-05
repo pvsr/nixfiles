@@ -10,6 +10,7 @@
     firefox
     river
     foot
+    spotify-tui
   ];
 
   services.spotifyd = {
