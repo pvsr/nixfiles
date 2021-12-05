@@ -17,17 +17,19 @@
       gptfdisk
       htop
       iputils
-      #manix
+      lsof
       moreutils
       ncdu
-      nix-index
       nmap
+      psmisc
       ranger
       ripgrep
       utillinux
       whois
-      psmisc
-      lsof
+
+      manix
+      nix-index
+      nvd
     ];
   };
 
