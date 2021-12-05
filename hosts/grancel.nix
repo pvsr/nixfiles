@@ -24,6 +24,29 @@
     openssh.enable = true;
     openssh.ports = [ 23232 ];
     openssh.passwordAuthentication = false;
+    btrbk = {
+      # sshAccess = [{
+      #   key = "";
+      #   # man 1 ssh_filter_btrbk
+      #   roles = [ "source" "info" "send" ];
+      # }];
+      instances.btrbk = {
+        onCalendar = "daily";
+        settings = {
+          snapshot_preserve_min = "2d";
+          snapshot_preserve = "14d";
+          volume = {
+            "/media/nixos" = {
+              snapshot_dir = "btrbk_snapshots";
+              subvolume = {
+                root = { };
+                home = { };
+              };
+            };
+          };
+        };
+      };
+    };
   };
 
   networking.firewall.allowedTCPPorts = [
@@ -87,6 +110,12 @@
       device = "/dev/disk/by-uuid/e1e91f6c-0c5a-407e-b784-f28431839036";
       fsType = "btrfs";
       options = [ "subvol=home" ];
+    };
+
+  fileSystems."/media/nixos" =
+    {
+      device = "/dev/disk/by-uuid/e1e91f6c-0c5a-407e-b784-f28431839036";
+      fsType = "btrfs";
     };
 
   fileSystems."/boot" =
