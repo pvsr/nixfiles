@@ -1,5 +1,6 @@
 { config, pkgs, lib, fishPlugins, ... }:
 {
+  home.shellAliases.fish = "SHELL=${pkgs.fish}/bin/fish command fish";
   programs.fish = {
     enable = true;
     functions = {
