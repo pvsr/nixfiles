@@ -26,6 +26,7 @@ let colors = import ./colors.nix; in
     qbpm
     sarasa-gothic
     fantasque-sans-mono
+    exa
   ];
 
   home.language.base = "en-US.UTF-8";
@@ -34,6 +35,25 @@ let colors = import ./colors.nix; in
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
+
+  home.shellAliases = {
+    ls = "ls --color=auto";
+    ll = "exa -lbg --git";
+    la = "exa -lbag --git";
+    tree = "exa -T";
+
+    nvim_nowrite = "nvim '+set noundofile' '+set noswapfile'";
+    pass = "EDITOR=nvim_nowrite command pass";
+    bell = "echo \\a";
+    tmux = "tmux attach || tmux";
+
+    "hoi4" = "steam steam://rungameid/394360";
+    "eu4" = "steam steam://rungameid/236850";
+    "ck3" = "steam steam://rungameid/1158310";
+  };
+
+  # needed for aliases to work
+  programs.bash.enable = true;
 
   # TODO customize height per host
   xdg.configFile."youtube-dl/config".text = ''
@@ -47,6 +67,7 @@ let colors = import ./colors.nix; in
   programs.direnv = {
     enable = true;
     enableFishIntegration = true;
+    enableBashIntegration = false;
     nix-direnv.enable = true;
   };
 
@@ -78,6 +99,7 @@ let colors = import ./colors.nix; in
     agents = [ "ssh" ];
     keys = [ "id_rsa" "id_ed25519" ];
     extraFlags = [ "--noask" "--quiet" ];
+    enableBashIntegration = false;
   };
 
   programs.nix-index.enable = true;

@@ -1,10 +1,5 @@
 { config, pkgs, lib, fishPlugins, ... }:
 {
-  home.packages = with pkgs; [
-    fish
-    exa
-  ];
-
   programs.fish = {
     enable = true;
     functions = {
@@ -53,20 +48,6 @@
       ssc = "sudo systemctl";
       scu = "systemctl --user";
       trr = "transmission-remote ruan:9919";
-    };
-    shellAliases = {
-      nvim_nowrite = "nvim '+set noundofile' '+set noswapfile'";
-      pass = "EDITOR=nvim_nowrite command pass";
-      ls = "ls --color=auto";
-      ll = "exa -lbg --git";
-      la = "exa -lbag --git";
-      tree = "exa -T";
-      bell = "echo \\a";
-      mp = "mpc toggle";
-      qpm = "qbpm";
-      "hoi4" = "steam steam://rungameid/394360";
-      "eu4" = "steam steam://rungameid/236850";
-      "ck3" = "steam steam://rungameid/1158310";
     };
     plugins = lib.mapAttrsToList (name: src: { inherit name src; }) fishPlugins;
   };
