@@ -24,4 +24,6 @@
       bind a last-window
     '';
   };
+
+  home.shellAliases.tmux = "command tmux attach || command tmux";
 }

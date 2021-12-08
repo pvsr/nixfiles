@@ -45,7 +45,6 @@ let colors = import ./colors.nix; in
     nvim_nowrite = "nvim '+set noundofile' '+set noswapfile'";
     pass = "EDITOR=nvim_nowrite command pass";
     bell = "echo \\a";
-    tmux = "tmux attach || tmux";
 
     "hoi4" = "steam steam://rungameid/394360";
     "eu4" = "steam steam://rungameid/236850";
