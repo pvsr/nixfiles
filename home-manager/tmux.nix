@@ -5,7 +5,7 @@
     enable = true;
     shortcut = "a";
     keyMode = "vi";
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     newSession = false;
     clock24 = true;
     plugins = with pkgs; [
@@ -18,7 +18,6 @@
     ];
     extraConfig = ''
       set -g mouse on
-      set -ga terminal-overrides ",xterm-256color:Tc"
       set-option -g default-shell "${pkgs.fish}/bin/fish"
       bind C-a send-prefix
       bind a last-window
