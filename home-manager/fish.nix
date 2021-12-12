@@ -33,6 +33,7 @@
           set -ge Z_DATA
         end
       '';
+      fish_mode_prompt = "";
     };
     interactiveShellInit = ''
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
