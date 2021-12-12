@@ -6,7 +6,7 @@
     shortcut = "a";
     keyMode = "vi";
     terminal = "tmux-256color";
-    newSession = false;
+    newSession = true;
     clock24 = true;
     plugins = with pkgs; [
       tmuxPlugins.resurrect
@@ -23,6 +23,4 @@
       bind a last-window
     '';
   };
-
-  home.shellAliases.tmux = "command tmux attach || command tmux";
 }
