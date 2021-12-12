@@ -31,4 +31,5 @@ let colors = import ./colors.nix; in
   };
 
   programs.tmux.extraConfig = "set -ga terminal-overrides \",alacritty:Tc\"";
+  programs.fish.interactiveShellInit = "set -g fish_vi_force_cursor";
 }
