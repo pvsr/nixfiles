@@ -28,9 +28,12 @@
           mkdir -p $data_dir
           and set -gx Z_DATA "$data_dir/data"
           and touch $Z_DATA
+          z > /dev/null
+          or pushd .
         else
           set -ge fish_history
           set -ge Z_DATA
+          popd 2> /dev/null
         end
       '';
       fish_mode_prompt = "";
