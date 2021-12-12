@@ -136,22 +136,6 @@
         "type": "github"
       }
     },
-    "fzf-fish": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1638379226,
-        "narHash": "sha256-dngAKzyD+lmqmxsCSOMViyCgA/+Ve35gLtPS+Lgs8Pc=",
-        "owner": "PatrickF1",
-        "repo": "fzf.fish",
-        "rev": "6b592e4140168820f5df9dd28b0a93e409e0d0c3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "PatrickF1",
-        "repo": "fzf.fish",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -248,7 +232,6 @@
         "fish-plugin-git": "fish-plugin-git",
         "fish-prompt-pvsr": "fish-prompt-pvsr",
         "fish-z": "fish-z",
-        "fzf-fish": "fzf-fish",
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",

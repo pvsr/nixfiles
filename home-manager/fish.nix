@@ -54,5 +54,10 @@
     plugins = lib.mapAttrsToList (name: src: { inherit name src; }) fishPlugins;
   };
 
+  home.packages = with pkgs.fishPlugins; [
+    fzf-fish
+    pisces
+  ];
+
   programs.fzf.enableFishIntegration = false;
 }
