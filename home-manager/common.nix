@@ -52,7 +52,7 @@ let colors = import ./colors.nix; in
   };
 
   # needed for aliases to work
-  programs.bash.enable = true;
+  programs.bash.enable = lib.mkDefault true;
 
   # TODO customize height per host
   xdg.configFile."youtube-dl/config".text = ''

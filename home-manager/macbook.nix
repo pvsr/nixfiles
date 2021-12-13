@@ -28,6 +28,7 @@
     shellAliases.rmi = "hub --git-dir=(realpath ~/dev/report-management-issues/.git) issue";
   };
 
+  programs.bash.enable = false;
   programs.git.userEmail = "price@hubspot.com";
   programs.alacritty.settings.font.size = 16.0;
 }
