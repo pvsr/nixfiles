@@ -9,6 +9,7 @@
     diceware
     qutebrowser
     transmission
+    neovide
   ];
 
   services.gpg-agent = {
