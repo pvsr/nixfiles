@@ -1,11 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   programs.tmux = {
     enable = true;
     shortcut = "a";
     keyMode = "vi";
-    terminal = "tmux-256color";
+    terminal = lib.mkDefault "tmux-256color";
     newSession = true;
     clock24 = true;
     plugins = with pkgs; [
