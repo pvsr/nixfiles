@@ -46,7 +46,7 @@
       server.hosts = [ "0.0.0.0:52032" "[::]:52032" ];
       auth = {
         type = "htpasswd";
-        htpasswd_filename = "/run/secrets/radicale-users";
+        htpasswd_filename = config.age.secrets."radicale-users".path;
         htpasswd_encryption = "bcrypt";
       };
     };
