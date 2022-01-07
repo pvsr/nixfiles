@@ -83,7 +83,7 @@
         };
       }
       {
-        matches = [{ "device.name" = "bluez_card.02:AE:0B:08:BE:87"; }];
+        matches = [{ "device.name" = "bluez_card.DC:E5:5B:22:D5:D8"; }];
         actions = {
           "update-props" = {
             "bluez5.auto-connect" = [ "hfp_ag" "hsp_ag" "a2dp_source" ];
