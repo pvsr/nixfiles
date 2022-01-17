@@ -13,7 +13,7 @@ let
 in
 {
   imports = [
-    ./alacritty.nix
+    ./foot.nix
   ];
 
   home.packages = with pkgs; [
@@ -32,7 +32,7 @@ in
 
   wayland.windowManager.sway.config = with colors; {
     modifier = "Mod4";
-    terminal = lib.mkDefault "SHELL=${pkgs.fish}/bin/fish ${pkgs.alacritty}/bin/alacritty";
+    terminal = lib.mkDefault "SHELL=${pkgs.fish}/bin/fish ${pkgs.foot}/bin/footclient";
     inherit fonts;
 
 
