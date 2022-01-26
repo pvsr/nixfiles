@@ -13,6 +13,7 @@ let
 in
 {
   imports = [
+    ./alacritty.nix
     ./foot.nix
   ];
 
