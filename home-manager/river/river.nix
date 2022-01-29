@@ -1,6 +1,8 @@
 { config, lib, pkgs, appFont, ... }:
 let
   colors = import ../colors.nix;
+  dmenuArgs = "-i -fn \\\"${appFont} 13\\\"";
+  dmenu = lib.escapeShellArg "${pkgs.dmenu-wayland}/bin/dmenu-wl ${dmenuArgs}";
 in
 {
   imports = [
@@ -46,8 +48,9 @@ in
       # "riverctl border-color-unfocused ${}"
       (builtins.readFile ./init)
       ''
-        riverctl map normal $mod D spawn 'exec $(${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop --dmenu="dmenu-wl -i -fn \"${appFont} 13\"")'
-        riverctl map normal $mod P spawn '${pkgs.pass}/bin/passmenu -i -fn "${appFont} 13"'
+        riverctl map normal $mod D spawn "exec $(${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop --dmenu=${dmenu})"
+        riverctl map normal $mod P spawn "${pkgs.pass}/bin/passmenu ${dmenuArgs}"
+        riverctl map normal $mod Q spawn "${pkgs.qbpm}/bin/qbpm choose --menu=${dmenu}"
         riverctl default-layout rivertile
         sh -c "systemctl --user import-environment; systemctl --user start river-session.target"
         exec rivertile -view-padding 6 -outer-padding 6
