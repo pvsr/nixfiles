@@ -3,7 +3,7 @@ riverctl map normal $mod+Shift Return spawn footclient
 riverctl map normal $mod+Shift Slash spawn alacritty
 
 # Mod+Q to close the focused view
-riverctl map normal $mod Q close
+riverctl map normal $mod+Shift Q close
 
 # Mod+E to exit river
 riverctl map normal $mod+Shift E exit
