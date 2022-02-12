@@ -128,6 +128,11 @@
                 o = { "<cmd>Telescope live_grep grep_open_files=true<cr>", "Search open files" },
                 i = { "<cmd>Telescope grep_string<cr>", "Search under cursor" },
               },
+              c = {
+                c = { "<cmd>Git<cr>", "Git" },
+                a = { "<cmd>Git commit -a<cr>", "Commit all" },
+                f = { "<cmd>Git commit %<cr>", "Commit this file" },
+              },
             }, { prefix = "<leader>" })
           EOF
         '';
