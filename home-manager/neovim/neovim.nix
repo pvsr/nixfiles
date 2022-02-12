@@ -61,8 +61,16 @@
       vim-eunuch
       vim-dirvish
       {
-        plugin = airline;
-        config = "set noshowmode";
+        plugin = lualine-nvim;
+        config = ''
+          lua << EOF
+            require("lualine").setup {
+              options = {
+                icons_enabled = false,
+              }
+            }
+          EOF
+        '';
       }
       vim-toml
       haskell-vim
