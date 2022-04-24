@@ -124,10 +124,10 @@
       fsType = "vfat";
     };
 
-  fileSystems."/media/data" =
+  fileSystems."/media/gdata2" =
     {
-      device = "/dev/disk/by-uuid/aec1cba5-6ddb-4156-ad7e-a5a5ed6a00f7";
-      fsType = "ext4";
+      device = "/dev/disk/by-uuid/b29448d8-fe2b-4b80-8a27-2987665ddde6";
+      fsType = "btrfs";
     };
 
   fileSystems."/media/arch" =
