@@ -33,13 +33,21 @@
       instances.btrbk = {
         onCalendar = "daily";
         settings = {
-          snapshot_preserve_min = "2d";
-          snapshot_preserve = "7d";
+          snapshot_preserve_min = "1d";
+          snapshot_preserve = "2d";
+          target_preserve_min = "no";
+          target_preserve = "7d 3w";
+          snapshot_dir = "btrbk_snapshots";
           volume = {
             "/media/nixos" = {
-              snapshot_dir = "btrbk_snapshots";
+              target = "/media/gdata2/btrbk_backups/nixos";
               subvolume = {
                 root = { };
+                home = { };
+              };
+            };
+            "/media/gdata2" = {
+              subvolume = {
                 home = { };
               };
             };
