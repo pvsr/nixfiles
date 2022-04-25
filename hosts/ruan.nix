@@ -69,6 +69,13 @@
     jellyfin.enable = false;
     jellyfin.user = "peter";
     jellyfin.group = "users";
+
+    btrbk = {
+      sshAccess = [{
+        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmuZsWQaHVogdYsIYO1qtpKq+jkBp7k01qPh38Ls3UX";
+        roles = [ "info" "source" "target" "delete" "snapshot" "send" "receive" ];
+      }];
+    };
   };
 
   nix = {

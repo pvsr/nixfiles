@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -20,16 +20,17 @@
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.allowUnfree = true;
 
+  age.secrets."btrbk.id_ed25519" = {
+    file = ../secrets/btrbk.id_ed25519.age;
+    owner = "btrbk";
+    group = "btrbk";
+  };
+
   services = {
     openssh.enable = true;
     openssh.ports = [ 23232 ];
     openssh.passwordAuthentication = false;
     btrbk = {
-      # sshAccess = [{
-      #   key = "";
-      #   # man 1 ssh_filter_btrbk
-      #   roles = [ "source" "info" "send" ];
-      # }];
       instances.btrbk = {
         onCalendar = "daily";
         settings = {
@@ -38,15 +39,18 @@
           target_preserve_min = "no";
           target_preserve = "7d 3w";
           snapshot_dir = "btrbk_snapshots";
+          ssh_identity = config.age.secrets."btrbk.id_ed25519".path;
+          ssh_user = "btrbk";
           volume = {
             "/media/nixos" = {
-              target = "/media/gdata2/btrbk_backups/nixos";
+              target = "ssh://ruan:24424/media/leiston/btrbk_backups/grancel/nixos";
               subvolume = {
                 root = { };
                 home = { };
               };
             };
             "/media/gdata2" = {
+              target = "ssh://ruan:24424/media/leiston/btrbk_backups/grancel/gdata2";
               subvolume = {
                 home = { };
               };
