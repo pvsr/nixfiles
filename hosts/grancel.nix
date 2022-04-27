@@ -34,8 +34,7 @@
       instances.btrbk = {
         onCalendar = "daily";
         settings = {
-          snapshot_preserve_min = "1d";
-          snapshot_preserve = "2d";
+          snapshot_preserve_min = "latest";
           target_preserve_min = "no";
           target_preserve = "7d 3w";
           snapshot_dir = "btrbk_snapshots";
