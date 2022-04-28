@@ -129,6 +129,12 @@
       fsType = "btrfs";
     };
 
+  fileSystems."/media/grancel" =
+    {
+      device = "/dev/disk/by-uuid/6c9585d7-bf04-4f3a-8455-a7d025d68c5d";
+      fsType = "btrfs";
+    };
+
   fileSystems."/boot" =
     {
       device = "/dev/disk/by-uuid/A253-A1F7";
@@ -139,12 +145,6 @@
     {
       device = "/dev/disk/by-uuid/b29448d8-fe2b-4b80-8a27-2987665ddde6";
       fsType = "btrfs";
-    };
-
-  fileSystems."/media/arch" =
-    {
-      device = "/dev/disk/by-uuid/0b865d88-2a0e-438a-96e8-bb3035d0b488";
-      fsType = "ext4";
     };
 
 }
