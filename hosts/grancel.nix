@@ -41,13 +41,6 @@
           ssh_identity = config.age.secrets."btrbk.id_ed25519".path;
           ssh_user = "btrbk";
           volume = {
-            "/media/nixos" = {
-              target = "ssh://ruan:24424/media/leiston/btrbk_backups/grancel/nixos";
-              subvolume = {
-                root = { };
-                home = { };
-              };
-            };
             "/media/gdata2" = {
               target = "ssh://ruan:24424/media/leiston/btrbk_backups/grancel/gdata2";
               subvolume = {
@@ -111,22 +104,16 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/e1e91f6c-0c5a-407e-b784-f28431839036";
+      device = "/dev/disk/by-uuid/6c9585d7-bf04-4f3a-8455-a7d025d68c5d";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
   fileSystems."/home" =
     {
-      device = "/dev/disk/by-uuid/e1e91f6c-0c5a-407e-b784-f28431839036";
+      device = "/dev/disk/by-uuid/6c9585d7-bf04-4f3a-8455-a7d025d68c5d";
       fsType = "btrfs";
       options = [ "subvol=home" ];
-    };
-
-  fileSystems."/media/nixos" =
-    {
-      device = "/dev/disk/by-uuid/e1e91f6c-0c5a-407e-b784-f28431839036";
-      fsType = "btrfs";
     };
 
   fileSystems."/media/grancel" =
