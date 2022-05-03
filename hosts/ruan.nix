@@ -67,6 +67,24 @@
         key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmuZsWQaHVogdYsIYO1qtpKq+jkBp7k01qPh38Ls3UX";
         roles = [ "info" "source" "target" "delete" "snapshot" "send" "receive" ];
       }];
+      instances.btrbk = {
+        onCalendar = "daily";
+        settings = {
+          snapshot_preserve_min = "latest";
+          target_preserve_min = "no";
+          target_preserve = "7d 3w";
+          snapshot_dir = "btrbk_snapshots";
+          volume = {
+            "/media/nixos" = {
+              target = "/media/leiston/btrbk_backups/ruan/nixos";
+              subvolume = {
+                home = { };
+                root = { };
+              };
+            };
+          };
+        };
+      };
     };
   };
 
