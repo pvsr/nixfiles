@@ -27,6 +27,7 @@ let colors = import ./colors.nix; in
     sarasa-gothic
     fantasque-sans-mono
     exa
+    tldr
   ];
 
   home.language.base = "en-US.UTF-8";
