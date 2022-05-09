@@ -54,6 +54,8 @@ let colors = import ./colors.nix; in
   # needed for aliases to work
   programs.bash.enable = lib.mkDefault true;
 
+  programs.man.generateCaches = true;
+
   # TODO customize height per host
   xdg.configFile."youtube-dl/config".text = ''
     -f "bestvideo[height<=?2160]+bestaudio/best"
