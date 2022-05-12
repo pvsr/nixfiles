@@ -41,6 +41,13 @@
           ssh_identity = config.age.secrets."btrbk.id_ed25519".path;
           ssh_user = "btrbk";
           volume = {
+            "/media/grancel" = {
+              target = "ssh://ruan:24424/media/leiston/btrbk_backups/grancel/grancel";
+              subvolume = {
+                home = { };
+                root = { };
+              };
+            };
             "/media/gdata2" = {
               target = "ssh://ruan:24424/media/leiston/btrbk_backups/grancel/gdata2";
               subvolume = {
