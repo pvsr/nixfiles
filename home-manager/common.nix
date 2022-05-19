@@ -27,7 +27,7 @@ let colors = import ./colors.nix; in
     sarasa-gothic
     fantasque-sans-mono
     exa
-    tldr
+    tealdeer
   ];
 
   home.language.base = "en-US.UTF-8";
