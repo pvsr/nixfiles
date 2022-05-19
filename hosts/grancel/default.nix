@@ -24,7 +24,7 @@
   nixpkgs.config.allowUnfree = true;
 
   age.secrets."btrbk.id_ed25519" = {
-    file = ../../secrets/btrbk.id_ed25519.age;
+    file = ./secrets/btrbk.id_ed25519.age;
     owner = "btrbk";
     group = "btrbk";
   };
