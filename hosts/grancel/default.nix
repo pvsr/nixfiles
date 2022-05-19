@@ -1,4 +1,8 @@
 { config, pkgs, ... }: {
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -17,11 +21,10 @@
 
   time.timeZone = "America/New_York";
 
-  hardware.enableRedistributableFirmware = true;
   nixpkgs.config.allowUnfree = true;
 
   age.secrets."btrbk.id_ed25519" = {
-    file = ../secrets/btrbk.id_ed25519.age;
+    file = ../../secrets/btrbk.id_ed25519.age;
     owner = "btrbk";
     group = "btrbk";
   };
@@ -106,39 +109,4 @@
   };
 
   system.stateVersion = "21.05";
-
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/6c9585d7-bf04-4f3a-8455-a7d025d68c5d";
-      fsType = "btrfs";
-      options = [ "subvol=root" ];
-    };
-
-  fileSystems."/home" =
-    {
-      device = "/dev/disk/by-uuid/6c9585d7-bf04-4f3a-8455-a7d025d68c5d";
-      fsType = "btrfs";
-      options = [ "subvol=home" ];
-    };
-
-  fileSystems."/media/grancel" =
-    {
-      device = "/dev/disk/by-uuid/6c9585d7-bf04-4f3a-8455-a7d025d68c5d";
-      fsType = "btrfs";
-    };
-
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/A253-A1F7";
-      fsType = "vfat";
-    };
-
-  fileSystems."/media/gdata2" =
-    {
-      device = "/dev/disk/by-uuid/b29448d8-fe2b-4b80-8a27-2987665ddde6";
-      fsType = "btrfs";
-    };
-
 }

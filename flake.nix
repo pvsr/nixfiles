@@ -120,7 +120,7 @@
                 inherit extraSpecialArgs;
               };
             }
-            (import ./hosts/grancel.nix)
+            (import ./hosts/grancel)
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
