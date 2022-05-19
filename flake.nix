@@ -84,9 +84,6 @@
 
       channelsConfig.allowUnfree = true;
 
-      hostDefaults.specialArgs = {
-        wg-conf = import ./lib/wireguard.nix;
-      };
       hostDefaults.modules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.age
