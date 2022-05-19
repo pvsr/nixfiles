@@ -125,7 +125,6 @@
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
           ];
-          extraArgs.hostname = "grancel";
         };
         ruan = {
           modules = [
@@ -144,7 +143,6 @@
             ./modules/postgresql.nix
             ./modules/miniflux.nix
           ];
-          extraArgs.hostname = "ruan";
         };
         peter = {
           output = "homeConfigurations";

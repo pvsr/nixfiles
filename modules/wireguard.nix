@@ -1,5 +1,6 @@
-{ config, pkgs, lib, wg-conf, hostname, ... }:
+{ config, pkgs, lib, wg-conf, ... }:
 let
+  hostname = config.networking.hostName;
   host = wg-conf.${hostname};
   otherHosts = lib.filterAttrs (n: v: n != hostname) wg-conf;
   selectEndpoint = host: (builtins.removeAttrs host [
