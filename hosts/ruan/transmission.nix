@@ -5,7 +5,7 @@ let
 in
 {
   age.secrets."transmission-credentials.json" = {
-    file = ../secrets/transmission-credentials.json.age;
+    file = ./secrets/transmission-credentials.json.age;
     owner = "transmission";
     group = "transmission";
   };

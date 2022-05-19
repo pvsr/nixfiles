@@ -1,5 +1,12 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ./hardware-configuration.nix
+    ./miniflux.nix
+    ./podcasts.nix
+    ./transmission.nix
+  ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -12,8 +19,6 @@
 
   networking.hosts = { "192.168.0.104" = [ "grancel" ]; };
 
-  #console.font = "Lat2-Terminus16";
-  console.font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
   console.keyMap = "us";
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -26,7 +31,7 @@
   environment.systemPackages = with pkgs; [ agenix ];
 
   age.secrets."radicale-users" = {
-    file = ../secrets/radicale-users.age;
+    file = ./secrets/radicale-users.age;
     owner = "radicale";
     group = "radicale";
   };
@@ -103,51 +108,5 @@
   networking.firewall.allowedUDPPorts = [
   ];
 
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "20.09"; # Did you read the comment?
-
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "uas" "sd_mod" ];
-
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
-      fsType = "btrfs";
-      options = [ "subvol=root" ];
-    };
-
-  fileSystems."/home" =
-    {
-      device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
-      fsType = "btrfs";
-      options = [ "subvol=home" ];
-    };
-
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/AB78-74B8";
-      fsType = "vfat";
-    };
-
-  fileSystems."/var/lib/transmission" =
-    {
-      device = "/dev/disk/by-uuid/367ffdb7-bfaf-4409-9115-5ecbe4261bae";
-      fsType = "btrfs";
-      options = [ "subvol=transmission" ];
-    };
-
-  fileSystems."/media/steam" =
-    {
-      device = "/dev/disk/by-uuid/367ffdb7-bfaf-4409-9115-5ecbe4261bae";
-      fsType = "btrfs";
-      options = [ "subvol=steam" ];
-    };
-
-  fileSystems."/media/data" =
-    {
-      device = "/dev/disk/by-uuid/367ffdb7-bfaf-4409-9115-5ecbe4261bae";
-      fsType = "btrfs";
-    };
+  system.stateVersion = "20.09";
 }

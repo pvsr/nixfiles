@@ -1,4 +1,4 @@
-{ config, lib, pkgs, nixos-hardware, ... }:
+{ config, lib, pkgs, ... }:
 {
   hardware.enableRedistributableFirmware = true;
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];

@@ -134,14 +134,10 @@
                 inherit extraSpecialArgs;
               };
             }
-            (import ./hosts/ruan.nix)
+            (import ./hosts/ruan)
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
-            ./modules/transmission.nix
-            ./modules/podcasts.nix
-            ./modules/postgresql.nix
-            ./modules/miniflux.nix
           ];
         };
         peter = {

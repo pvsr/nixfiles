@@ -8,7 +8,7 @@ in
   networking.firewall.allowedTCPPorts = [ 5999 ];
 
   age.secrets."nginx-podcasts.htpasswd" = {
-    file = ../secrets/nginx-podcasts.htpasswd.age;
+    file = ./secrets/nginx-podcasts.htpasswd.age;
     owner = nginxUser;
     group = nginxGroup;
   };
