@@ -137,20 +137,6 @@
             nixos-hardware.nixosModules.common-gpu-amd
           ];
         };
-        peter = {
-          output = "homeConfigurations";
-
-          builder = args: home-manager.lib.homeManagerConfiguration {
-            system = "x86_64-linux";
-            homeDirectory = "/home/peter";
-            username = "peter";
-            configuration = { config, pkgs, ... }: {
-              imports = [ ./home-manager/arch.nix ];
-              nixpkgs.overlays = sharedOverlays;
-            };
-            inherit extraSpecialArgs;
-          };
-        };
         price = {
           output = "homeConfigurations";
 
