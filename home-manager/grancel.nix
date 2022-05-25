@@ -4,7 +4,6 @@
   imports = [
     ./common.nix
     ./nixos.nix
-    ./river/river.nix
   ];
 
   home.packages = with pkgs; [

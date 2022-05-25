@@ -3,6 +3,7 @@
 {
   imports = [
     ./sway.nix
+    ./river/river.nix
   ];
 
   home.packages = with pkgs; [
