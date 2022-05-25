@@ -71,6 +71,7 @@ let colors = import ./colors.nix; in
     enableFishIntegration = true;
     enableBashIntegration = false;
     nix-direnv.enable = true;
+    nix-direnv.enableFlakes = true;
   };
 
   programs.git = {
