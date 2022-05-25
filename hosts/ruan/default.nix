@@ -39,6 +39,7 @@
     openssh.enable = true;
     openssh.ports = [ 24424 ];
     openssh.passwordAuthentication = false;
+    openssh.extraConfig = "AcceptEnv=TERMINFO";
 
     radicale.enable = true;
     radicale.settings = {
