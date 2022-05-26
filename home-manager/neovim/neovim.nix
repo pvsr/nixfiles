@@ -86,7 +86,10 @@
       vim-rooter
       {
         plugin = srcery-vim;
-        config = "colorscheme srcery";
+        config = ''
+          colorscheme srcery
+          set noshowmode
+        '';
       }
       {
         plugin = nvim-colorizer;
