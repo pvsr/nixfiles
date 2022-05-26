@@ -76,8 +76,6 @@ cnoremap <C-E> <End>
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap <silent> <Leader>c :nohlsearch<CR>
-
 nnoremap <Leader>bd :bdelete<CR>
 nnoremap <Leader>bn :bnext<CR>
 nnoremap <Leader>bp :bprev<CR>
