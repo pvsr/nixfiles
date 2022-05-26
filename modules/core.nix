@@ -1,36 +1,21 @@
 { config, lib, pkgs, ... }:
 {
-  #nix.package = pkgs.nixFlakes;
+  environment.systemPackages = with pkgs; [
+    binutils
+    coreutils
+    curl
+    dnsutils
+    dosfstools
+    file
+    iputils
+    lsof
+    psmisc
+    utillinux
+  ];
 
-  nix.systemFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-
-  environment = {
-
-    systemPackages = with pkgs; [
-      binutils
-      coreutils
-      curl
-      dnsutils
-      dosfstools
-      fd
-      git
-      gptfdisk
-      htop
-      iputils
-      lsof
-      moreutils
-      ncdu
-      nmap
-      psmisc
-      ranger
-      ripgrep
-      utillinux
-      whois
-
-      manix
-      nix-index
-      nvd
-    ];
+  environment.sessionVariables = {
+    PAGER = "less";
+    LESS = "-iFJMRWX -z-4 -x4";
   };
 
   nix = {
@@ -48,9 +33,7 @@
     '';
   };
 
-  services.earlyoom.enable = true;
 
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
-  #users.mutableUsers = false;
 }

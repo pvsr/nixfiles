@@ -28,6 +28,11 @@ let colors = import ./colors.nix; in
     fantasque-sans-mono
     exa
     tealdeer
+    ranger
+    tig
+    jq
+    manix
+    nvd
   ];
 
   home.language.base = "en-US.UTF-8";
@@ -56,15 +61,6 @@ let colors = import ./colors.nix; in
   programs.bash.enable = lib.mkDefault true;
 
   programs.man.generateCaches = true;
-
-  # TODO customize height per host
-  xdg.configFile."youtube-dl/config".text = ''
-    -f "bestvideo[height<=?2160]+bestaudio/best"
-    --sub-lang="en,eng,enUS,en-US,ja,jaJP,ja-JP"
-    --write-sub
-    --write-auto-sub
-    --netrc
-  '';
 
   programs.direnv = {
     enable = true;
@@ -148,4 +144,12 @@ let colors = import ./colors.nix; in
       };
     };
   };
+
+  xdg.configFile."youtube-dl/config".text = ''
+    -f "bestvideo[height<=?2160]+bestaudio/best"
+    --sub-lang="en,eng,enUS,en-US,ja,jaJP,ja-JP"
+    --write-sub
+    --write-auto-sub
+    --netrc
+  '';
 }

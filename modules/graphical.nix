@@ -11,6 +11,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  services.earlyoom.enable = true;
 
   boot.tmpOnTmpfs = true;
 
@@ -37,13 +38,17 @@
 
   environment = {
     sessionVariables = {
-      #QT_QPA_PLATFORMTHEME = "gtk2";
+      PAGER = "less";
+      LESS = "-iFJMRWX -z-4 -x4";
     };
 
     systemPackages = with pkgs; [
       #cursor
       feh
       pulsemixer
+      manpages
     ];
   };
+
+  documentation.dev.enable = true;
 }

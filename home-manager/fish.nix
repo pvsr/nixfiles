@@ -4,22 +4,6 @@
   programs.fish = {
     enable = true;
     functions = {
-      # TODO get playlist position from mpc dummy
-      playlist = ''
-        set current (ncmpcpp --current-song %t 2> /dev/null)
-        and mpc playlist | rg --passthru -F "$current"
-        or mpc playlist
-      '';
-      "90dl" = ''
-        set batch $argv[1]
-        set season (basename $batch)
-        set show_dir (dirname $batch)
-        set show_name (basename (realpath $show_dir))
-        youtube-dl --cookies ~/downloads/cookies.txt \
-          -o "$show_dir/S%(season_number)02d/$show_name.S%(season_number)02d.E%(episode_number)02d.%(title)s.%(ext)s" \
-          --download-archive "~/.local/share/youtube-dl/archives/$suffix.$season.archive" \
-          --no-overwrites -i -a "$batch"
-      '';
       yts = "mpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
       session = ''
         if set -q argv[1]
@@ -62,5 +46,6 @@
     pisces
   ];
 
+  # prefer fzf-fish plugin
   programs.fzf.enableFishIntegration = false;
 }

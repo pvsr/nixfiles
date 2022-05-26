@@ -95,7 +95,6 @@
 
         ./modules/core.nix
         ./modules/cachix.nix
-        ./modules/dev.nix
         ./modules/graphical.nix
         ./modules/steam.nix
         ./modules/wireguard.nix
