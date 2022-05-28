@@ -76,10 +76,6 @@ cnoremap <C-E> <End>
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap <Leader>bd :bdelete<CR>
-nnoremap <Leader>bn :bnext<CR>
-nnoremap <Leader>bp :bprev<CR>
-
 " window management
 nnoremap <A--> <C-W>S
 nnoremap <silent> <A-_> :botright split<CR>

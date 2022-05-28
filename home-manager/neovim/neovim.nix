@@ -129,6 +129,10 @@
               },
               b = {
                 b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+                l = { "<C-^>", "Last buffer" },
+                n = { "<cmd>bnext<cr>", "Next buffer" },
+                p = { "<cmd>bprev<cr>", "Previous buffer" },
+                d = { "<cmd>bdelete<cr>", "Close buffer" },
               },
               g = {
                 name = "grep",
