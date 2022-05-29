@@ -33,6 +33,7 @@ let colors = import ./colors.nix; in
     jq
     manix
     nvd
+    sd
   ];
 
   home.language.base = "en-US.UTF-8";
