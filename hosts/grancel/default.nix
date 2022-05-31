@@ -74,38 +74,15 @@
   };
 
   hardware.bluetooth.enable = true;
-  services.pipewire = {
-    media-session.config.bluez-monitor.rules = [
-      {
-        # Matches all cards
-        matches = [{ "device.name" = "~bluez_card.*"; }];
-        actions = {
-          "update-props" = {
-            "bluez5.auto-connect" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
-          };
-        };
+  environment.etc = {
+    "wireplumber/bluetooth.lua.d/51-bluez-config.lua".text = ''
+        bluez_monitor.properties = {
+          ["bluez5.enable-sbc-xq"] = true,
+          ["bluez5.enable-msbc"] = true,
+          ["bluez5.enable-hw-volume"] = true,
+          ["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
       }
-      {
-        matches = [
-          # Matches all sources
-          { "node.name" = "~bluez_input.*"; }
-          # Matches all outputs
-          { "node.name" = "~bluez_output.*"; }
-        ];
-        actions = {
-          "node.pause-on-idle" = false;
-        };
-      }
-      {
-        matches = [{ "device.name" = "bluez_card.DC:E5:5B:22:D5:D8"; }];
-        actions = {
-          "update-props" = {
-            "bluez5.auto-connect" = [ "hfp_ag" "hsp_ag" "a2dp_source" ];
-            "bluez5.a2dp-source-role" = "input";
-          };
-        };
-      }
-    ];
+    '';
   };
 
   system.stateVersion = "21.05";

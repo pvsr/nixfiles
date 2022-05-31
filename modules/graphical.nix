@@ -46,7 +46,7 @@
       #cursor
       feh
       pulsemixer
-      manpages
+      man-pages
     ];
   };
 
