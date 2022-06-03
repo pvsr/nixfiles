@@ -2,12 +2,12 @@
   description = "A system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/release-22.05;
+    nixpkgs.url = github:nixos/nixpkgs/release-21.11;
     # unstable.url = github:nixos/nixpkgs/nixos-unstable;
     nixos-hardware.url = github:nixos/nixos-hardware;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
-    home-manager.url = github:nix-community/home-manager/release-22.05;
+    home-manager.url = github:nix-community/home-manager/release-21.11;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     agenix.url = github:ryantm/agenix;
