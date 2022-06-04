@@ -5,7 +5,7 @@ let
   podcastPath = "/media/data/annex/hosted-podcasts";
 in
 {
-  networking.firewall.allowedTCPPorts = [ 5999 ];
+  networking.firewall.allowedTCPPorts = [ 5998 5999 ];
 
   age.secrets."nginx-podcasts.htpasswd" = {
     file = ./secrets/nginx-podcasts.htpasswd.age;
