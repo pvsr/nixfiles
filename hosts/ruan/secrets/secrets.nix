@@ -7,6 +7,11 @@ let
     "nginx-podcasts.htpasswd.age"
   ];
 in
-builtins.listToAttrs (map secrets (name: {
-  inherit name;
-  value = { publicKeys = [ ruan ] }; }))
+builtins.listToAttrs (map
+  (name: {
+    inherit name;
+    value = { publicKeys = [ ruan ]; };
+  }
+  )
+  secrets
+)
