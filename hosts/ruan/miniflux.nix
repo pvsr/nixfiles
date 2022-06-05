@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   age.secrets."miniflux-credentials" = {
     file = ./secrets/miniflux-credentials.age;
   };

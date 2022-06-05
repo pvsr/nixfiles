@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
@@ -31,8 +30,8 @@
       fantasque-sans-mono
     ];
     fontconfig.defaultFonts = {
-      monospace = [ "DejaVu Sans Mono" ];
-      sansSerif = [ "DejaVu Sans" ];
+      monospace = ["DejaVu Sans Mono"];
+      sansSerif = ["DejaVu Sans"];
     };
   };
 

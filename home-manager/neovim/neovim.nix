@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
   ];
 
@@ -98,6 +101,7 @@
       {
         plugin = neoformat;
         config = ''
+          let g:neoformat_enabled_nix = ['alejandra']
           augroup fmt
             autocmd!
             autocmd BufWritePre *.py,*.nix undojoin | Neoformat

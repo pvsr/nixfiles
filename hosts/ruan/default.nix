@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./miniflux.nix
@@ -15,9 +18,9 @@
   networking.interfaces.enp37s0.useDHCP = true;
   networking.interfaces.wlp36s0.useDHCP = true;
 
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.nameservers = ["1.1.1.1" "1.0.0.1"];
 
-  networking.hosts = { "192.168.0.104" = [ "grancel" ]; };
+  networking.hosts = {"192.168.0.104" = ["grancel"];};
 
   console.keyMap = "us";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -28,7 +31,7 @@
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [ agenix ];
+  environment.systemPackages = with pkgs; [agenix];
 
   age.secrets."radicale-users" = {
     file = ./secrets/radicale-users.age;
@@ -37,13 +40,13 @@
   };
   services = {
     openssh.enable = true;
-    openssh.ports = [ 24424 ];
+    openssh.ports = [24424];
     openssh.passwordAuthentication = false;
     openssh.extraConfig = "AcceptEnv=TERMINFO";
 
     radicale.enable = true;
     radicale.settings = {
-      server.hosts = [ "0.0.0.0:52032" "[::]:52032" ];
+      server.hosts = ["0.0.0.0:52032" "[::]:52032"];
       auth = {
         type = "htpasswd";
         htpasswd_filename = config.age.secrets."radicale-users".path;
@@ -69,10 +72,12 @@
     jellyfin.group = "users";
 
     btrbk = {
-      sshAccess = [{
-        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmuZsWQaHVogdYsIYO1qtpKq+jkBp7k01qPh38Ls3UX";
-        roles = [ "info" "source" "target" "delete" "snapshot" "send" "receive" ];
-      }];
+      sshAccess = [
+        {
+          key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmuZsWQaHVogdYsIYO1qtpKq+jkBp7k01qPh38Ls3UX";
+          roles = ["info" "source" "target" "delete" "snapshot" "send" "receive"];
+        }
+      ];
       instances.btrbk = {
         onCalendar = "daily";
         settings = {
@@ -84,8 +89,8 @@
             "/media/nixos" = {
               target = "/media/leiston/btrbk_backups/ruan/nixos";
               subvolume = {
-                home = { };
-                root = { };
+                home = {};
+                root = {};
               };
             };
           };

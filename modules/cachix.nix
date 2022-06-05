@@ -1,7 +1,11 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   config = {
-    environment.systemPackages = with pkgs; [ cachix ];
+    environment.systemPackages = with pkgs; [cachix];
 
     nix = {
       extraOptions = "gc-keep-outputs = true";

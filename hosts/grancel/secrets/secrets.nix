@@ -4,11 +4,13 @@ let
     "btrbk.id_ed25519.age"
   ];
 in
-builtins.listToAttrs (map
-  (name: {
-    inherit name;
-    value = { publicKeys = [ grancel ]; };
-  }
+  builtins.listToAttrs (
+    map
+    (
+      name: {
+        inherit name;
+        value = {publicKeys = [grancel];};
+      }
+    )
+    secrets
   )
-  secrets
-)

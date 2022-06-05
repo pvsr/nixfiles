@@ -1,5 +1,10 @@
-{ config, pkgs, lib, fishPlugins, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  fishPlugins,
+  ...
+}: {
   home.shellAliases.fish = "SHELL=${pkgs.fish}/bin/fish command fish";
   programs.fish = {
     enable = true;
@@ -38,7 +43,7 @@
       scu = "systemctl --user";
       trr = "transmission-remote ruan:9919";
     };
-    plugins = lib.mapAttrsToList (name: src: { inherit name src; }) fishPlugins;
+    plugins = lib.mapAttrsToList (name: src: {inherit name src;}) fishPlugins;
   };
 
   home.packages = with pkgs.fishPlugins; [

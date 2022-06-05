@@ -1,17 +1,21 @@
-{ config, lib, pkgs, appFont, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  appFont,
+  ...
+}: let
   cfg = config.wayland.windowManager.sway;
   inherit (cfg.config) modifier;
 
   font = appFont;
   fonts = {
-    names = [ font ];
+    names = [font];
     size = 14.0;
   };
   colors = import ./colors.nix;
   exitMode = "(l)ock, (e)xit, (s)uspend, (r)eboot, (S)hutdown";
-in
-{
+in {
   imports = [
     ./alacritty.nix
     ./foot.nix
@@ -36,7 +40,6 @@ in
     terminal = lib.mkDefault "SHELL=${pkgs.fish}/bin/fish ${pkgs.foot}/bin/footclient";
     inherit fonts;
 
-
     menu = ''
       ${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop \
         --dmenu='dmenu-wl -i -fn "${font} 13"' \
@@ -45,8 +48,11 @@ in
 
     workspaceAutoBackAndForth = true;
 
-    input."*" = { xkb_variant = "altgr-intl"; xkb_options = "ctrl:nocaps"; };
-    output."*" = { bg = "~/background fit"; };
+    input."*" = {
+      xkb_variant = "altgr-intl";
+      xkb_options = "ctrl:nocaps";
+    };
+    output."*" = {bg = "~/background fit";};
 
     keybindings = lib.mkOptionDefault {
       "${modifier}+z" = "workspace back_and_forth";
@@ -59,9 +65,9 @@ in
     };
 
     startup = [
-      { command = "${pkgs.mako}/bin/mako"; }
-      { command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | ${pkgs.wob}/bin/wob"; }
-      { command = "wl-paste -t text --watch clipman store"; }
+      {command = "${pkgs.mako}/bin/mako";}
+      {command = "mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | ${pkgs.wob}/bin/wob";}
+      {command = "wl-paste -t text --watch clipman store";}
       {
         command = lib.concatStringsSep " " [
           "${pkgs.swayidle}/bin/swayidle"
@@ -100,14 +106,20 @@ in
     };
 
     floating.criteria = [
-      { title = "Steam - Update News"; }
-      { class = "(?i)feh"; }
-      { instance = "qb-nvim"; }
+      {title = "Steam - Update News";}
+      {class = "(?i)feh";}
+      {instance = "qb-nvim";}
     ];
     window.hideEdgeBorders = "smart";
     window.commands = [
-      { command = "border pixel 0"; criteria = { class = "Steam"; }; }
-      { command = "border pixel 0"; criteria = { instance = "steam.exe"; }; }
+      {
+        command = "border pixel 0";
+        criteria = {class = "Steam";};
+      }
+      {
+        command = "border pixel 0";
+        criteria = {instance = "steam.exe";};
+      }
     ];
 
     # wrapperFeatures.gtk = true;

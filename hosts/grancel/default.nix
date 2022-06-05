@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -11,9 +15,9 @@
   networking.interfaces.enp6s0.useDHCP = true;
   # networking.interfaces.wlp5s0.useDHCP = true;
 
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.nameservers = ["1.1.1.1" "1.0.0.1"];
 
-  networking.hosts = { "192.168.0.110" = [ "ruan" ]; };
+  networking.hosts = {"192.168.0.110" = ["ruan"];};
 
   console.font = "Lat2-Terminus16";
   console.keyMap = "us";
@@ -31,7 +35,7 @@
 
   services = {
     openssh.enable = true;
-    openssh.ports = [ 23232 ];
+    openssh.ports = [23232];
     openssh.passwordAuthentication = false;
     btrbk = {
       instances.btrbk = {
@@ -47,14 +51,14 @@
             "/media/grancel" = {
               target = "ssh://ruan:24424/media/leiston/btrbk_backups/grancel/grancel";
               subvolume = {
-                home = { };
-                root = { };
+                home = {};
+                root = {};
               };
             };
             "/media/gdata2" = {
               target = "ssh://ruan:24424/media/leiston/btrbk_backups/grancel/gdata2";
               subvolume = {
-                home = { };
+                home = {};
               };
             };
           };

@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     binutils
     coreutils
@@ -23,8 +27,8 @@
     gc.automatic = true;
     optimise.automatic = true;
     useSandbox = true;
-    allowedUsers = [ "@wheel" ];
-    trustedUsers = [ "root" "@wheel" ];
+    allowedUsers = ["@wheel"];
+    trustedUsers = ["root" "@wheel"];
     extraOptions = ''
       min-free = 536870912
       keep-outputs = true
@@ -32,7 +36,6 @@
       fallback = true
     '';
   };
-
 
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;

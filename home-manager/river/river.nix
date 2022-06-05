@@ -1,10 +1,14 @@
-{ config, lib, pkgs, appFont, ... }:
-let
-  colors = import ../colors.nix;
-  dmenuArgs = "-i -fn ${lib.escape [ " " ] "${appFont} 14"}";
-  dmenu = lib.escapeShellArg "${pkgs.dmenu-wayland}/bin/dmenu-wl ${dmenuArgs}";
-in
 {
+  config,
+  lib,
+  pkgs,
+  appFont,
+  ...
+}: let
+  colors = import ../colors.nix;
+  dmenuArgs = "-i -fn ${lib.escape [" "] "${appFont} 14"}";
+  dmenu = lib.escapeShellArg "${pkgs.dmenu-wayland}/bin/dmenu-wl ${dmenuArgs}";
+in {
   imports = [
     ../alacritty.nix
     ../foot.nix
@@ -33,9 +37,9 @@ in
     Unit = {
       Description = "river compositor session";
       # Documentation = [ "man" ];
-      BindsTo = [ "graphical-session.target" ];
-      Wants = [ "graphical-session-pre.target" ];
-      After = [ "graphical-session-pre.target" ];
+      BindsTo = ["graphical-session.target"];
+      Wants = ["graphical-session-pre.target"];
+      After = ["graphical-session-pre.target"];
     };
   };
 

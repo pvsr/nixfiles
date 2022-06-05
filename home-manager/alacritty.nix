@@ -1,6 +1,10 @@
-{ lib, appFont, ... }:
-let colors = import ./colors.nix; in
 {
+  lib,
+  appFont,
+  ...
+}: let
+  colors = import ./colors.nix;
+in {
   programs.alacritty = {
     enable = true;
     settings = {

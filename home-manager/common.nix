@@ -1,6 +1,11 @@
-{ config, pkgs, lib, ... }:
-let colors = import ./colors.nix; in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  colors = import ./colors.nix;
+in {
   imports = [
     ./fish.nix
     ./tmux.nix
@@ -22,7 +27,7 @@ let colors = import ./colors.nix; in
     atool
     pass
     pastel
-    nixpkgs-fmt
+    alejandra
     qbpm
     sarasa-gothic
     fantasque-sans-mono
@@ -72,7 +77,7 @@ let colors = import ./colors.nix; in
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
-    ignores = [ "Session.vim" "healthcheck.out" ];
+    ignores = ["Session.vim" "healthcheck.out"];
     userName = "Peter Rice";
     userEmail = lib.mkDefault "peter@peterrice.xyz";
     extraConfig = {
@@ -94,9 +99,9 @@ let colors = import ./colors.nix; in
 
   programs.keychain = {
     enable = true;
-    agents = [ "ssh" ];
-    keys = [ "id_rsa" "id_ed25519" ];
-    extraFlags = [ "--noask" "--quiet" ];
+    agents = ["ssh"];
+    keys = ["id_rsa" "id_ed25519"];
+    extraFlags = ["--noask" "--quiet"];
     enableBashIntegration = false;
   };
 
@@ -107,7 +112,7 @@ let colors = import ./colors.nix; in
   };
 
   programs.mpv = {
-    bindings = { };
+    bindings = {};
     config = {
       profile = "standard";
     };

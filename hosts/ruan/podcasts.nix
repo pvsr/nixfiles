@@ -1,11 +1,14 @@
-{ pkgs, config, lib, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
   nginxUser = config.services.nginx.user;
   nginxGroup = config.services.nginx.group;
   podcastPath = "/media/data/annex/hosted-podcasts";
-in
-{
-  networking.firewall.allowedTCPPorts = [ 5998 5999 ];
+in {
+  networking.firewall.allowedTCPPorts = [5998 5999];
 
   age.secrets."nginx-podcasts.htpasswd" = {
     file = ./secrets/nginx-podcasts.htpasswd.age;
@@ -17,7 +20,12 @@ in
 
     virtualHosts.podcasts = {
       serverName = "podcasts.peterrice.xyz";
-      listen = [{ addr = "0.0.0.0"; port = 5999; }];
+      listen = [
+        {
+          addr = "0.0.0.0";
+          port = 5999;
+        }
+      ];
       basicAuthFile = config.age.secrets."nginx-podcasts.htpasswd".path;
       locations."/" = {
         root = podcastPath;

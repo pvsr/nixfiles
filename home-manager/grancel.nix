@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./common.nix
     ./nixos.nix
@@ -13,12 +15,11 @@
 
   services.spotifyd = {
     enable = true;
-    package = pkgs.spotifyd.override { withMpris = true; };
+    package = pkgs.spotifyd.override {withMpris = true;};
     settings.global = {
       username_cmd = "${pkgs.pass}/bin/pass show spotify/userid";
       password_cmd = "${pkgs.pass}/bin/pass show spotify.com";
       backend = "pulseaudio";
     };
   };
-
 }

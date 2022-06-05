@@ -1,7 +1,9 @@
-{ config, pkgs, ... }:
-
 {
-  home.packages = with pkgs; [ ];
+  config,
+  pkgs,
+  ...
+}: {
+  home.packages = with pkgs; [];
 
   programs.kakoune = {
     enable = true;
@@ -22,11 +24,13 @@
         assistant = "none";
       };
 
-      keyMappings = [{
-        key = "/";
-        mode = "normal";
-        effect = "/(?i)";
-      }];
+      keyMappings = [
+        {
+          key = "/";
+          mode = "normal";
+          effect = "/(?i)";
+        }
+      ];
     };
   };
 

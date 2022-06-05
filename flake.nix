@@ -30,57 +30,58 @@
     fish-plugin-git.flake = false;
   };
 
-
-  outputs =
-    inputs@{ self
-    , nixpkgs
-    , nixos-hardware
-    , utils
-    , home-manager
-    , agenix
-    , deploy-rs
-    , ...
-    }:
-    let
-      pluginOverlay =
-        final: prev: {
-          tmuxPlugins = prev.tmuxPlugins // {
-            srcery = prev.tmuxPlugins.mkTmuxPlugin {
-              pluginName = "srcery";
-              version = "git";
-              src = inputs.srcery-tmux;
-            };
-          };
-          vimPlugins = prev.vimPlugins // {
-            nvim-colorizer = prev.vimUtils.buildVimPluginFrom2Nix {
-              pname = "nvim-colorizer";
-              version = "git";
-              src = inputs.nvim-colorizer;
-            };
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    nixos-hardware,
+    utils,
+    home-manager,
+    agenix,
+    deploy-rs,
+    ...
+  }: let
+    pluginOverlay = final: prev: {
+      tmuxPlugins =
+        prev.tmuxPlugins
+        // {
+          srcery = prev.tmuxPlugins.mkTmuxPlugin {
+            pluginName = "srcery";
+            version = "git";
+            src = inputs.srcery-tmux;
           };
         };
-      sharedOverlays = [
-        pluginOverlay
-        (final: prev: {
-          inherit (inputs.qbpm.packages."${prev.system}") qbpm;
-          inherit (agenix.packages."${prev.system}") agenix;
-        })
-      ];
-      fishPlugins = with inputs; {
-        inherit fish-prompt-pvsr;
-        z = fish-z;
-        plugin-git = fish-plugin-git;
-      };
-      extraSpecialArgs = {
-        inherit fishPlugins;
-        appFont = "Fantasque Sans Mono";
-      };
-    in
+      vimPlugins =
+        prev.vimPlugins
+        // {
+          nvim-colorizer = prev.vimUtils.buildVimPluginFrom2Nix {
+            pname = "nvim-colorizer";
+            version = "git";
+            src = inputs.nvim-colorizer;
+          };
+        };
+    };
+    sharedOverlays = [
+      pluginOverlay
+      (final: prev: {
+        inherit (inputs.qbpm.packages."${prev.system}") qbpm;
+        inherit (agenix.packages."${prev.system}") agenix;
+      })
+    ];
+    fishPlugins = with inputs; {
+      inherit fish-prompt-pvsr;
+      z = fish-z;
+      plugin-git = fish-plugin-git;
+    };
+    extraSpecialArgs = {
+      inherit fishPlugins;
+      appFont = "Fantasque Sans Mono";
+    };
+  in
     utils.lib.mkFlake {
       inherit self inputs;
       inherit sharedOverlays;
 
-      supportedSystems = [ "x86_64-linux" "x86_64-darwin" ];
+      supportedSystems = ["x86_64-linux" "x86_64-darwin"];
 
       channelsConfig.allowUnfree = true;
 
@@ -139,22 +140,28 @@
         price = {
           output = "homeConfigurations";
 
-          builder = args: home-manager.lib.homeManagerConfiguration {
-            system = "x86_64-darwin";
-            homeDirectory = "/Users/price";
-            username = "price";
-            configuration = { config, pkgs, ... }: {
-              imports = [ ./home-manager/macbook.nix ];
-              nixpkgs.overlays = sharedOverlays;
+          builder = args:
+            home-manager.lib.homeManagerConfiguration {
+              system = "x86_64-darwin";
+              homeDirectory = "/Users/price";
+              username = "price";
+              configuration = {
+                config,
+                pkgs,
+                ...
+              }: {
+                imports = [./home-manager/macbook.nix];
+                nixpkgs.overlays = sharedOverlays;
+              };
+              inherit extraSpecialArgs;
             };
-            inherit extraSpecialArgs;
-          };
         };
       };
 
-      deploy.nodes = nixpkgs.lib.genAttrs [ "grancel" "ruan" ]
-        (hostname:
-          {
+      deploy.nodes =
+        nixpkgs.lib.genAttrs ["grancel" "ruan"]
+        (
+          hostname: {
             inherit hostname;
             profiles.system = {
               user = "root";
@@ -172,6 +179,7 @@
             agenix.packages.${channels.nixpkgs.system}.agenix
           ];
         };
+        formatter = channels.nixpkgs.alejandra;
       };
     };
 }

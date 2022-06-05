@@ -1,6 +1,11 @@
-{ pkgs, lib, appFont, ... }:
-let colors = import ./colors.nix; in
 {
+  pkgs,
+  lib,
+  appFont,
+  ...
+}: let
+  colors = import ./colors.nix;
+in {
   programs.foot = with (builtins.mapAttrs (n: v: lib.removePrefix "#" v) colors); {
     enable = true;
     server.enable = true;
