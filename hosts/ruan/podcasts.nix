@@ -10,6 +10,13 @@
 in {
   networking.firewall.allowedTCPPorts = [5998 5999];
 
+  services.podcasts = {
+    enableFetch = true;
+    enableServe = true;
+    podcastDir = podcastPath;
+    startAt = "5,17:0";
+  };
+
   age.secrets."nginx-podcasts.htpasswd" = {
     file = ./secrets/nginx-podcasts.htpasswd.age;
     owner = nginxUser;

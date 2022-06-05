@@ -14,6 +14,8 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     deploy-rs.url = github:serokell/deploy-rs;
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+    podcasts.url = github:pvsr/podcasts;
+    podcasts.inputs.nixpkgs.follows = "nixpkgs";
     qbpm.url = github:pvsr/qbpm;
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -88,6 +90,7 @@
       hostDefaults.modules = [
         home-manager.nixosModules.home-manager
         agenix.nixosModules.age
+        inputs.podcasts.nixosModules.default
         {
           nix.generateNixPathFromInputs = true;
           nix.generateRegistryFromInputs = true;
