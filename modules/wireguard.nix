@@ -38,7 +38,7 @@ let
   peers = map selectEndpoint (lib.attrValues otherHosts);
 in
 {
-  environment.systemPackages = with pkgs; [ wireguard wireguard-tools ];
+  environment.systemPackages = with pkgs; [ wireguard-tools ];
 
   networking.firewall.allowedUDPPorts = [ host.listenPort ];
 
