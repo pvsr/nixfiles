@@ -56,7 +56,7 @@ in {
         riverctl map normal $mod P spawn "${pkgs.pass}/bin/passmenu ${dmenuArgs}"
         riverctl map normal $mod Q spawn "${pkgs.qbpm}/bin/qbpm choose --menu=${dmenu}"
         riverctl default-layout rivertile
-        sh -c "systemctl --user import-environment; systemctl --user start river-session.target"
+        sh -c "systemctl --user import-environment; systemctl --user start river-session.target; systemctl --user restart graphical-session.target"
         exec rivertile -view-padding 6 -outer-padding 6
       ''
     ];
