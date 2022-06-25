@@ -6,6 +6,7 @@
   imports = [
     ./common.nix
     ./nixos.nix
+    ./tasks.nix
   ];
 
   home.packages = with pkgs; [

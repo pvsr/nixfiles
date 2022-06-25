@@ -6,6 +6,7 @@
   imports = [
     ./common.nix
     ./alacritty.nix
+    ./tasks.nix
   ];
 
   home.packages = with pkgs; [
