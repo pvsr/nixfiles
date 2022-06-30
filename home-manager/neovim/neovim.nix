@@ -75,9 +75,11 @@
             require("lualine").setup {
               options = {
                 icons_enabled = false,
+                globalstatus = true,
               }
             }
           EOF
+          set noshowmode
         '';
       }
       vim-toml
@@ -91,7 +93,6 @@
         plugin = srcery-vim;
         config = ''
           colorscheme srcery
-          set noshowmode
         '';
       }
       {
