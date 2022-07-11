@@ -113,6 +113,7 @@ in {
 
   programs.mpv = {
     bindings = {};
+    scripts = [pkgs.mpvScripts.mpris];
     config = {
       profile = "standard";
     };
