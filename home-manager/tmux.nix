@@ -22,6 +22,7 @@
     extraConfig = ''
       set -g mouse on
       set-option -g default-shell "${pkgs.fish}/bin/fish"
+      set-option -g set-titles on
       bind C-a send-prefix
       bind a last-window
     '';
