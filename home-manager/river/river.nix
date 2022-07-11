@@ -21,6 +21,7 @@ in {
     playerctl
     dmenu-wayland
     clipman
+    yambar
   ];
 
   programs.mpv.profiles.standard.gpu-context = "wayland";
@@ -57,6 +58,7 @@ in {
         riverctl map normal $mod Q spawn "${pkgs.qbpm}/bin/qbpm choose --menu=${dmenu}"
         riverctl default-layout rivertile
         sh -c "systemctl --user import-environment; systemctl --user start river-session.target; systemctl --user restart graphical-session.target"
+        riverctl spawn yambar
         exec rivertile -view-padding 6 -outer-padding 6
       ''
     ];
