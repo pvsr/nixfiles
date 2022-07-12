@@ -7,7 +7,7 @@
 }: let
   colors = import ../colors.nix;
   dmenuArgs = "-i -fn ${lib.escape [" "] "${appFont} 14"}";
-  dmenu = lib.escapeShellArg "${pkgs.dmenu-wayland}/bin/dmenu-wl ${dmenuArgs}";
+  menu = "${pkgs.fuzzel}/bin/fuzzel -f '${appFont}-14'";
 in {
   imports = [
     ../alacritty.nix
@@ -22,6 +22,7 @@ in {
     dmenu-wayland
     clipman
     yambar
+    fuzzel
   ];
 
   programs.mpv.profiles.standard.gpu-context = "wayland";
@@ -53,9 +54,10 @@ in {
       # "riverctl border-color-unfocused ${}"
       (builtins.readFile ./init)
       ''
-        riverctl map normal $mod D spawn ${lib.escapeShellArg "exec $(${pkgs.j4-dmenu-desktop}/bin/j4-dmenu-desktop --dmenu=${dmenu})"}
+        riverctl map normal $mod D spawn "${menu}"
+        # TODO rewrite passmenu to use an arbitrary launcher
         riverctl map normal $mod P spawn "${pkgs.pass}/bin/passmenu ${dmenuArgs}"
-        riverctl map normal $mod Q spawn "${pkgs.qbpm}/bin/qbpm choose --menu=${dmenu}"
+        riverctl map normal $mod Q spawn "${pkgs.qbpm}/bin/qbpm choose --menu=\"${menu} --dmenu\""
         riverctl default-layout rivertile
         sh -c "systemctl --user import-environment; systemctl --user start river-session.target; systemctl --user restart graphical-session.target"
         riverctl spawn yambar
