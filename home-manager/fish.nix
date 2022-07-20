@@ -42,6 +42,10 @@
       ssc = "sudo systemctl";
       scu = "systemctl --user";
       trr = "transmission-remote ruan:9919";
+      gcp = "git commit -p";
+      "gcp!" = "git commit -p --amend";
+      "gcpn!" = "git commit -p --no-edit --amend";
+      gcpm = "git commit -p -m";
     };
     plugins = lib.mapAttrsToList (name: src: {inherit name src;}) fishPlugins;
   };
