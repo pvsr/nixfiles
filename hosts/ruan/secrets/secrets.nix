@@ -4,7 +4,6 @@ let
     "radicale-users.age"
     "transmission-credentials.json.age"
     "miniflux-credentials.age"
-    "nginx-podcasts.htpasswd.age"
   ];
 in
   builtins.listToAttrs (
