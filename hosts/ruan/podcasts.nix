@@ -11,10 +11,15 @@ in {
   networking.firewall.allowedTCPPorts = [5998 5999];
 
   services.podcasts = {
-    enableFetch = true;
-    enableServe = true;
     podcastDir = podcastPath;
-    startAt = "5,17:0";
+    dataDir = "/media/nixos/podcasts";
+    fetch = {
+      enable = true;
+      user = "peter";
+      group = "users";
+      startAt = "5,17:0";
+    };
+    serve.enable = true;
   };
 
   age.secrets."nginx-podcasts.htpasswd" = {
