@@ -3,13 +3,12 @@
   config,
   lib,
   ...
-}: let
-  podcastPath = "/media/data/annex/hosted-podcasts";
-in {
+}: {
   networking.firewall.allowedTCPPorts = [5999];
 
   services.podcasts = {
-    podcastDir = podcastPath;
+    annexDir = "/media/data/annex";
+    podcastSubdir = "hosted-podcasts";
     dataDir = "/media/nixos/podcasts";
     fetch = {
       enable = true;
