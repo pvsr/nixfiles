@@ -107,10 +107,6 @@ in {
 
   programs.nix-index.enable = true;
 
-  services.mpd = {
-    musicDirectory = ~/annex/music;
-  };
-
   programs.mpv = {
     bindings = {};
     scripts = [pkgs.mpvScripts.mpris];
