@@ -145,7 +145,7 @@
 
           builder = args:
             home-manager.lib.homeManagerConfiguration {
-              system = "x86_64-darwin";
+              system = "aarch64-darwin";
               homeDirectory = "/Users/price";
               username = "price";
               configuration = {
