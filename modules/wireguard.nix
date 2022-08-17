@@ -28,6 +28,11 @@
         grancel = "ruan:53114";
       };
     };
+    jurai = {
+      allowedIPs = ["10.0.0.4/32" "fdc9:281f:4d7:9ee9::4/128"];
+      listenPort = 53776;
+      publicKey = "LhVpSQFQHgmuYZlW6PhkUd8RW61EcMHIEmfwAFHhkm0=";
+    };
   };
   hostname = config.networking.hostName;
   host = wg-conf.${hostname};
