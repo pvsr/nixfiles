@@ -99,13 +99,6 @@
     };
   };
 
-  nix = {
-    #package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-
   networking.firewall.allowedTCPPorts = [
     24424
     8080

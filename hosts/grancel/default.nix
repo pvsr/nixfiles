@@ -71,12 +71,6 @@
     23232
   ];
 
-  nix = {
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-
   hardware.bluetooth.enable = true;
   environment.etc = {
     "wireplumber/bluetooth.lua.d/51-bluez-config.lua".text = ''

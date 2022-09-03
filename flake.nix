@@ -101,6 +101,7 @@
         }
 
         ./modules/core.nix
+        ./modules/nixos.nix
         ./modules/cachix.nix
         ./modules/graphical.nix
         ./modules/steam.nix
@@ -152,6 +153,7 @@
               // {
                 modules = [
                   (import ./hosts/jurai)
+                  ./modules/core.nix
                   {
                     imports = [home-manager.darwinModule];
                     users.users.price.home = "/Users/price";
