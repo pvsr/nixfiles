@@ -9,6 +9,8 @@
 
     home-manager.url = github:nix-community/home-manager/release-22.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    darwin.url = github:lnl7/nix-darwin;
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     agenix.url = github:ryantm/agenix;
     agenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -38,6 +40,7 @@
     nixos-hardware,
     utils,
     home-manager,
+    darwin,
     agenix,
     deploy-rs,
     ...
@@ -83,7 +86,7 @@
       inherit self inputs;
       inherit sharedOverlays;
 
-      supportedSystems = ["x86_64-linux" "x86_64-darwin"];
+      supportedSystems = ["x86_64-linux" "aarch64-darwin"];
 
       channelsConfig.allowUnfree = true;
 
@@ -140,24 +143,27 @@
             nixos-hardware.nixosModules.common-gpu-amd
           ];
         };
-        price = {
-          output = "homeConfigurations";
+        jurai = {
+          system = "aarch64-darwin";
+          output = "darwinConfigurations";
 
           builder = args:
-            home-manager.lib.homeManagerConfiguration {
-              system = "aarch64-darwin";
-              homeDirectory = "/Users/price";
-              username = "price";
-              configuration = {
-                config,
-                pkgs,
-                ...
-              }: {
-                imports = [./home-manager/macbook.nix];
-                nixpkgs.overlays = sharedOverlays;
-              };
-              inherit extraSpecialArgs;
-            };
+            darwin.lib.darwinSystem (args
+              // {
+                modules = [
+                  (import ./hosts/jurai)
+                  {
+                    imports = [home-manager.darwinModule];
+                    users.users.price.home = "/Users/price";
+                    home-manager = {
+                      users.price = ./home-manager/macbook.nix;
+                      useGlobalPkgs = true;
+                      useUserPackages = true;
+                      inherit extraSpecialArgs;
+                    };
+                  }
+                ];
+              });
         };
       };
 
