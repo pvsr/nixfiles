@@ -21,6 +21,7 @@
     ];
     extraConfig = ''
       set -g mouse on
+      set -ga update-environment WAYLAND_DISPLAY
       set-option -g default-shell "${pkgs.fish}/bin/fish"
       set-option -g set-titles on
       bind C-a send-prefix
