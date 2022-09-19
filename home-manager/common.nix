@@ -21,21 +21,15 @@ in {
     git-absorb
     fd
     ripgrep
-    bat
-    htop
     moreutils
     atool
-    pass
     pastel
     alejandra
     qbpm
     sarasa-gothic
     fantasque-sans-mono
-    exa
-    tealdeer
     ranger
     tig
-    jq
     manix
     nvd
     sd
@@ -49,11 +43,6 @@ in {
   };
 
   home.shellAliases = {
-    ls = "ls --color=auto";
-    ll = "exa -lbg --git";
-    la = "exa -lbag --git";
-    tree = "exa -T";
-
     nvim_nowrite = "nvim '+set noundofile' '+set noswapfile'";
     pass = "EDITOR=nvim_nowrite command pass";
     bell = "echo \\a";
@@ -106,6 +95,14 @@ in {
   };
 
   programs.nix-index.enable = true;
+  programs.tealdeer.enable = true;
+  programs.bat.enable = true;
+  programs.htop.enable = true;
+  programs.password-store.enable = true;
+  programs.jq.enable = true;
+
+  programs.exa.enable = true;
+  programs.exa.enableAliases = true;
 
   programs.mpv = {
     bindings = {};
