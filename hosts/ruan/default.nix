@@ -71,6 +71,15 @@
     jellyfin.user = "peter";
     jellyfin.group = "users";
 
+    nitter = {
+      enable = true;
+      server.port = 7775;
+      server.hostname = "192.168.0.110:7775";
+      preferences.replaceTwitter = "192.168.0.110:7775";
+      preferences.hlsPlayback = true;
+      preferences.theme = "Twitter Dark";
+    };
+
     btrbk = {
       sshAccess = [
         {
@@ -103,6 +112,7 @@
     24424
     8080
     52032
+    7775
   ];
   networking.firewall.allowedUDPPorts = [
   ];
