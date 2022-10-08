@@ -9,7 +9,8 @@ in {
   imports = [
     ./fish.nix
     ./tmux.nix
-    ./neovim/neovim.nix
+    ./neovim
+    ./helix
   ];
 
   programs.home-manager.enable = true;
@@ -36,11 +37,6 @@ in {
   ];
 
   home.language.base = "en-US.UTF-8";
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-  };
 
   home.shellAliases = {
     nvim_nowrite = "nvim '+set noundofile' '+set noswapfile'";

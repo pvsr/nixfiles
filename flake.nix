@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/release-22.05;
-    # unstable.url = github:nixos/nixpkgs/nixos-unstable;
+    unstable.url = github:nixos/nixpkgs/nixos-unstable;
     nixos-hardware.url = github:nixos/nixos-hardware;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
@@ -37,6 +37,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    unstable,
     nixos-hardware,
     utils,
     home-manager,
@@ -89,6 +90,9 @@
       supportedSystems = ["x86_64-linux" "aarch64-darwin"];
 
       channelsConfig.allowUnfree = true;
+      channels.nixpkgs.overlaysBuilder = channels: [
+        (final: prev: {inherit (channels.unstable) helix;})
+      ];
 
       hostDefaults.modules = [
         home-manager.nixosModules.home-manager
@@ -131,6 +135,7 @@
           ];
         };
         ruan = {
+          channelName = "nixpkgs";
           modules = [
             {
               home-manager = {
@@ -145,6 +150,7 @@
           ];
         };
         jurai = {
+          channelName = "nixpkgs";
           system = "aarch64-darwin";
           output = "darwinConfigurations";
 

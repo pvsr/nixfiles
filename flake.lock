@@ -281,6 +281,7 @@
         "podcasts": "podcasts",
         "qbpm": "qbpm",
         "srcery-tmux": "srcery-tmux",
+        "unstable": "unstable",
         "utils": "utils_3"
       }
     },
@@ -297,6 +298,22 @@
       "original": {
         "owner": "srcery-colors",
         "repo": "srcery-tmux",
+        "type": "github"
+      }
+    },
+    "unstable": {
+      "locked": {
+        "lastModified": 1664989420,
+        "narHash": "sha256-Q8IxomUjjmewsoJgO3htkXLfCckQ7HkDJ/ZhdYVf/fA=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "37bd39839acf99c5b738319f42478296f827f274",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
