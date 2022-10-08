@@ -32,6 +32,8 @@
     fish-z.flake = false;
     fish-plugin-git.url = github:jhillyerd/plugin-git;
     fish-plugin-git.flake = false;
+    fish-async-prompt.url = github:acomagu/fish-async-prompt;
+    fish-async-prompt.flake = false;
   };
 
   outputs = inputs @ {
@@ -74,7 +76,7 @@
       })
     ];
     fishPlugins = with inputs; {
-      inherit fish-prompt-pvsr;
+      inherit fish-prompt-pvsr fish-async-prompt;
       z = fish-z;
       plugin-git = fish-plugin-git;
     };
