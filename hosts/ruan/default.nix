@@ -8,6 +8,8 @@
     ./miniflux.nix
     ./podcasts.nix
     ./transmission.nix
+    ../../modules/graphical.nix
+    ../../modules/steam.nix
   ];
 
   boot.loader.systemd-boot.enable = true;

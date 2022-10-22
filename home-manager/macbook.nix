@@ -10,6 +10,8 @@
   ];
 
   home.packages = with pkgs; [
+    sarasa-gothic
+    fantasque-sans-mono
   ];
 
   #packageOverrides = pkgs: rec {

@@ -109,8 +109,6 @@
         ./modules/core.nix
         ./modules/nixos.nix
         ./modules/cachix.nix
-        ./modules/graphical.nix
-        ./modules/steam.nix
         ./modules/wireguard.nix
 
         ./users/peter.nix
@@ -151,6 +149,19 @@
             nixos-hardware.nixosModules.common-gpu-amd
           ];
         };
+        crossbell = {
+          channelName = "nixpkgs";
+          modules = [
+            {
+              home-manager = {
+                users.peter = import ./home-manager/common.nix;
+                inherit extraSpecialArgs;
+              };
+            }
+            (import ./hosts/crossbell)
+            nixos-hardware.nixosModules.common-pc-ssd
+          ];
+        };
         jurai = {
           channelName = "nixpkgs";
           system = "aarch64-darwin";
@@ -178,7 +189,7 @@
       };
 
       deploy.nodes =
-        nixpkgs.lib.genAttrs ["grancel" "ruan"]
+        nixpkgs.lib.genAttrs ["grancel" "ruan" "crossbell"]
         (
           hostname: {
             inherit hostname;
@@ -186,6 +197,7 @@
               user = "root";
               path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.${hostname};
             };
+            sshOpts = ["-t"];
           }
         );
 

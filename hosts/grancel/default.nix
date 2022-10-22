@@ -5,6 +5,8 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/graphical.nix
+    ../../modules/steam.nix
   ];
 
   boot.loader.systemd-boot.enable = true;

@@ -10,6 +10,7 @@
 
   home.packages = with pkgs; [
     diceware
+    qbpm
     qutebrowser
     transmission
     neovide

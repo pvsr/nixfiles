@@ -26,9 +26,6 @@ in {
     atool
     pastel
     alejandra
-    qbpm
-    sarasa-gothic
-    fantasque-sans-mono
     ranger
     tig
     manix
