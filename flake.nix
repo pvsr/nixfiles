@@ -109,7 +109,6 @@
         ./modules/core.nix
         ./modules/nixos.nix
         ./modules/cachix.nix
-        ./modules/wireguard.nix
 
         ./users/peter.nix
         {

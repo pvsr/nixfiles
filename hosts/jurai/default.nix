@@ -13,5 +13,4 @@
     "sequel-ace"
     "spotify"
   ];
-  # homebrew.masApps.wireguard = 1451685025;
 }
