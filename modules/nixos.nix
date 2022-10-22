@@ -14,4 +14,7 @@
 
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
+
+  services.tailscale.enable = true;
+  networking.firewall.checkReversePath = "loose";
 }
