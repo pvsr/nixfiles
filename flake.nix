@@ -203,7 +203,7 @@
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
       outputsBuilder = channels: {
-        devShell = channels.nixpkgs.mkShell {
+        devShells.default = channels.nixpkgs.mkShell {
           buildInputs = [
             deploy-rs.packages.${channels.nixpkgs.system}.deploy-rs
             agenix.packages.${channels.nixpkgs.system}.agenix
