@@ -11,24 +11,24 @@
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/6c9585d7-bf04-4f3a-8455-a7d025d68c5d";
+    device = "/dev/disk/by-label/grancel";
     fsType = "btrfs";
     options = ["subvol=root"];
   };
 
   fileSystems."/media/grancel" = {
-    device = "/dev/disk/by-uuid/6c9585d7-bf04-4f3a-8455-a7d025d68c5d";
+    device = "/dev/disk/by-label/grancel";
     fsType = "btrfs";
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/6c9585d7-bf04-4f3a-8455-a7d025d68c5d";
+    device = "/dev/disk/by-label/grancel";
     fsType = "btrfs";
     options = ["subvol=home"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/A253-A1F7";
+    device = "/dev/disk/by-label/boot";
     fsType = "vfat";
   };
 
