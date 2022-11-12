@@ -36,6 +36,11 @@
       "#8ec07c"
       "#d65d0e"
       "#fe8019"
+      ''
+      "ui.selection" = { bg = "bg3", modifiers = ["reversed"] }
+      "ui.cursor.primary" = { modifiers = ["reversed"] }
+      "ui.cursor.match" = { bg = "bg2" }
+      ''
     ];
     srceryColors = [
       "#1c1b19"
@@ -67,6 +72,11 @@
       "#2be4d0"
       "#ff5f00"
       "#ff8700"
+      ''
+      "ui.selection" = { bg = "bg2" }
+      "ui.cursor.primary" = { bg = "fg4", fg = "bg1" }
+      "ui.cursor.match" = { bg = "bg3" }
+      ''
     ];
   in
     builtins.replaceStrings gruvboxColors srceryColors gruvbox;
