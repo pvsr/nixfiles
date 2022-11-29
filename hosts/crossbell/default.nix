@@ -26,7 +26,7 @@
       "rss.peterrice.xyz".extraConfig = "reverse_proxy ruan:8080";
       "calendar.peterrice.xyz".extraConfig = "reverse_proxy ruan:52032";
       "podcasts.peterrice.xyz".extraConfig = "reverse_proxy ruan:5999";
-      "tailscale.peterrice.xyz".extraConfig = "reverse_proxy ruan:9753";
+      "tailscale.peterrice.xyz".extraConfig = "reverse_proxy 130.44.173.152:9753";
     };
   };
 
