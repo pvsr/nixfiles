@@ -74,6 +74,12 @@
       };
     };
 
+    komga = {
+      enable = true;
+      port = 19191;
+      openFirewall = true;
+    };
+
     jellyfin.enable = false;
     jellyfin.user = "peter";
     jellyfin.group = "users";
