@@ -14,8 +14,6 @@
 
     agenix.url = github:ryantm/agenix;
     agenix.inputs.nixpkgs.follows = "nixpkgs";
-    deploy-rs.url = github:serokell/deploy-rs;
-    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
     podcasts.url = github:pvsr/podcasts;
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
     qbpm.url = github:pvsr/qbpm;
@@ -45,7 +43,6 @@
     home-manager,
     darwin,
     agenix,
-    deploy-rs,
     ...
   }: let
     pluginOverlay = final: prev: {
@@ -187,26 +184,9 @@
         };
       };
 
-      deploy.nodes =
-        nixpkgs.lib.genAttrs ["grancel" "ruan" "crossbell"]
-        (
-          hostname: {
-            inherit hostname;
-            profiles.system = {
-              user = "root";
-              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.${hostname};
-            };
-            sshOpts = ["-t"];
-            magicRollback = false;
-          }
-        );
-
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-
       outputsBuilder = channels: {
         devShells.default = channels.nixpkgs.mkShell {
           buildInputs = [
-            deploy-rs.packages.${channels.nixpkgs.system}.deploy-rs
             agenix.packages.${channels.nixpkgs.system}.agenix
           ];
         };

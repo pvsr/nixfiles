@@ -40,28 +40,6 @@
         "type": "github"
       }
     },
-    "deploy-rs": {
-      "inputs": {
-        "flake-compat": "flake-compat",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": "utils"
-      },
-      "locked": {
-        "lastModified": 1672327199,
-        "narHash": "sha256-pFlngSHXKBhAmbaKZ4FYtu57LLunG+vWdL7a5vw1RvQ=",
-        "owner": "serokell",
-        "repo": "deploy-rs",
-        "rev": "a5619f5660a00f58c2b7c16d89058e92327ac9b8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "serokell",
-        "repo": "deploy-rs",
-        "type": "github"
-      }
-    },
     "fish-async-prompt": {
       "flake": false,
       "locked": {
@@ -143,22 +121,6 @@
       }
     },
     "flake-compat_2": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1668681692,
-        "narHash": "sha256-Ht91NGdewz8IQLtWZ9LCeNXMSXHUss+9COoqu6JLmXU=",
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "rev": "009399224d5e398d03b22badca40a37ac85412a1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "type": "github"
-      }
-    },
-    "flake-compat_3": {
       "flake": false,
       "locked": {
         "lastModified": 1668681692,
@@ -416,7 +378,7 @@
           "nixpkgs"
         ],
         "pre-commit-hooks": "pre-commit-hooks",
-        "utils": "utils_2"
+        "utils": "utils"
       },
       "locked": {
         "lastModified": 1672180263,
@@ -434,7 +396,7 @@
     },
     "pre-commit-hooks": {
       "inputs": {
-        "flake-compat": "flake-compat_2",
+        "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "gitignore": "gitignore",
         "nixpkgs": "nixpkgs_2",
@@ -456,7 +418,7 @@
     },
     "pre-commit-hooks_2": {
       "inputs": {
-        "flake-compat": "flake-compat_3",
+        "flake-compat": "flake-compat_2",
         "flake-utils": "flake-utils_3",
         "gitignore": "gitignore_2",
         "nixpkgs": "nixpkgs_3",
@@ -502,7 +464,6 @@
       "inputs": {
         "agenix": "agenix",
         "darwin": "darwin",
-        "deploy-rs": "deploy-rs",
         "fish-async-prompt": "fish-async-prompt",
         "fish-plugin-git": "fish-plugin-git",
         "fish-prompt-pvsr": "fish-prompt-pvsr",
@@ -515,7 +476,7 @@
         "qbpm": "qbpm",
         "srcery-tmux": "srcery-tmux",
         "unstable": "unstable",
-        "utils": "utils_3"
+        "utils": "utils_2"
       }
     },
     "srcery-tmux": {
@@ -552,21 +513,6 @@
     },
     "utils": {
       "locked": {
-        "lastModified": 1667395993,
-        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_2": {
-      "locked": {
         "lastModified": 1656928814,
         "narHash": "sha256-RIFfgBuKz6Hp89yRr7+NR5tzIAbn52h8vT6vXkYjZoM=",
         "owner": "numtide",
@@ -580,7 +526,7 @@
         "type": "github"
       }
     },
-    "utils_3": {
+    "utils_2": {
       "inputs": {
         "flake-utils": "flake-utils_4"
       },
