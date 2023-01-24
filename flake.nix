@@ -90,7 +90,7 @@
 
       channelsConfig.allowUnfree = true;
       channels.nixpkgs.overlaysBuilder = channels: [
-        (final: prev: {inherit (channels.unstable) helix yambar;})
+        (final: prev: {inherit (channels.unstable) helix yambar spotifyd;})
       ];
 
       hostDefaults.modules = [
