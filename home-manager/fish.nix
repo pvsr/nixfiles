@@ -8,6 +8,14 @@
   home.shellAliases.fish = "SHELL=${pkgs.fish}/bin/fish command fish";
   programs.fish = {
     enable = true;
+    interactiveShellInit = ''
+      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+      set -g fish_key_bindings fish_hybrid_key_bindings
+      set -g fish_cursor_default block
+      set -g fish_cursor_insert line
+      set -g fish_cursor_replace_one underscore
+      set -g fish_greeting
+    '';
     functions = {
       yts = "mpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
       session = ''
@@ -28,14 +36,6 @@
       fish_mode_prompt = "";
       fzf_key_bindings = "";
     };
-    interactiveShellInit = ''
-      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
-      set -g fish_key_bindings fish_hybrid_key_bindings
-      set -g fish_cursor_default block
-      set -g fish_cursor_insert line
-      set -g fish_cursor_replace_one underscore
-      set -g fish_greeting
-    '';
     shellAbbrs = {
       suod = "sudo";
       sc = "systemctl";
@@ -46,6 +46,8 @@
       "gcp!" = "git commit -p --amend";
       "gcpn!" = "git commit -p --no-edit --amend";
       gcpm = "git commit -p -m";
+      mms = "mpv --no-video --shuffle ~/annex/music";
+      pmpv = "mpv (wl-paste)";
     };
     plugins = lib.mapAttrsToList (name: src: {inherit name src;}) fishPlugins;
   };
