@@ -14,6 +14,7 @@
   fileSystems."/" = {
     device = "/dev/disk/by-label/root";
     fsType = "btrfs";
+    options = ["defaults" "compress=zstd"];
   };
 
   swapDevices = [
