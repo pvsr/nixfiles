@@ -51,6 +51,7 @@
   fileSystems."/media/leiston" = {
     device = "/dev/disk/by-uuid/c76abfad-5b5a-478f-a85e-dde18ffe202f";
     fsType = "btrfs";
+    options =["nofail"]
   };
 
   swapDevices = [];
