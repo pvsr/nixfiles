@@ -11,10 +11,10 @@
 
   time.timeZone = "America/New_York";
 
-  users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwIv6+ZEHCVNmIS1vfUO+bqIP2y3hv3h/AzzmvTQ3HI" ];
   services = {
     openssh.enable = true;
     openssh.ports = [18325];
+    openssh.permitRootLogin = "no";
     openssh.passwordAuthentication = false;
 
     caddy.enable = true;
