@@ -26,6 +26,7 @@
         rulers = [80];
         color-modes = true;
         whitespace.render.tab = "all";
+        whitespace.render.newline = "all";
         cursor-shape = {
           insert = "bar";
           normal = "block";
