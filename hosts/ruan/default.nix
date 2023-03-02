@@ -44,7 +44,7 @@
     openssh.enable = true;
     openssh.ports = [24424];
     openssh.passwordAuthentication = false;
-    openssh.extraConfig = "AcceptEnv=TERMINFO";
+    openssh.extraConfig = "AcceptEnv=TERMINFO COLORTERM";
 
     headscale.enable = true;
     headscale.serverUrl = "https://tailscale.peterrice.xyz";
