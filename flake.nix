@@ -7,7 +7,7 @@
     nixos-hardware.url = github:nixos/nixos-hardware;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
-    home-manager.url = github:nix-community/home-manager/release-22.05;
+    home-manager.url = github:nix-community/home-manager/release-22.11;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = github:lnl7/nix-darwin;
     darwin.inputs.nixpkgs.follows = "nixpkgs";
