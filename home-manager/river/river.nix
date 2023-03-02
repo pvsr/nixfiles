@@ -7,7 +7,7 @@
 }: let
   colors = import ../colors.nix;
   dmenuArgs = "-i -fn ${lib.escape [" "] "${appFont} 14"}";
-  menu = "${pkgs.fuzzel}/bin/fuzzel -f '${appFont}-14'";
+  menu = "${pkgs.fuzzel}/bin/fuzzel";
 in {
   imports = [
     ../alacritty.nix
@@ -66,4 +66,9 @@ in {
     ];
     executable = true;
   };
+
+  xdg.configFile."fuzzel/fuzzel.ini".text = ''
+    font=${appFont}:size=14
+    terminal=${pkgs.foot}/bin/footclient
+  '';
 }
