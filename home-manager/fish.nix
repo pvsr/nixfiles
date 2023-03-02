@@ -38,15 +38,22 @@
     };
     shellAbbrs = {
       suod = "sudo";
+      # TODO only enable when commands are present
       sc = "systemctl";
       ssc = "sudo systemctl";
       scu = "systemctl --user";
+      jcl = "journalctl -xe";
+      jcb = "journalctl -xb";
+      jcf = "journalctl -xf";
+      jcu = "journalctl -xeu";
+      jcuf = "journalctl -xfu";
       trr = "transmission-remote ruan:9919";
       gcp = "git commit -p";
       "gcp!" = "git commit -p --amend";
       "gcpn!" = "git commit -p --no-edit --amend";
       gcpm = "git commit -p -m";
-      mms = "mpv --no-video --shuffle ~/annex/music";
+      gan = "git annex";
+      mshuf = "mpv --no-video --shuffle ~/annex/music";
       pmpv = "mpv (wl-paste)";
     };
     plugins = lib.mapAttrsToList (name: src: {inherit name src;}) fishPlugins;
