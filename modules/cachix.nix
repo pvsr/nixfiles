@@ -5,8 +5,6 @@
   ...
 }: {
   config = {
-    environment.systemPackages = with pkgs; [cachix];
-
     nix = {
       extraOptions = "gc-keep-outputs = true";
 
