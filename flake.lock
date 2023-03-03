@@ -82,11 +82,11 @@
     "fish-plugin-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1677609049,
-        "narHash": "sha256-CCIrcR2y3Qdw0TpUO03WfxpgDnJDipg9Vl/FEjZa6vY=",
+        "lastModified": 1667775184,
+        "narHash": "sha256-wEodvtKkv9zxCDJcziCx2+KEdFo+yKgBnLOc/cu9mJ8=",
         "owner": "jhillyerd",
         "repo": "plugin-git",
-        "rev": "1c1d7730edd700ad8c8ddb0dac69ac419265f767",
+        "rev": "a7bf861097d34f4db0fd7384bc19c712148feb55",
         "type": "github"
       },
       "original": {
