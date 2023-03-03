@@ -17,7 +17,7 @@
       set -g fish_greeting
     '';
     functions = {
-      yts = "mpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
+      yts = "umpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
       session = ''
         if set -q argv[1]
           set -gx fish_history $argv[1]
@@ -55,7 +55,7 @@
       gcpm = "git commit -p -m";
       gan = "git annex";
       mshuf = "mpv --no-video --shuffle ~/annex/music";
-      pmpv = "mpv (wl-paste)";
+      pmpv = "umpv (wl-paste)";
     };
     plugins = lib.mapAttrsToList (name: src: {inherit name src;}) fishPlugins;
   };

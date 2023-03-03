@@ -122,6 +122,12 @@ in {
         force-window = "immediate";
         terminal = false;
       };
+      "protocol.https" = {
+        keep-open = true;
+      };
+      "protocol.http" = {
+        profile = "protocol.https";
+      };
       standard = {
         cache = true;
         audio-display = false;
