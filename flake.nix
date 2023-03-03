@@ -6,6 +6,8 @@
     unstable.url = github:nixos/nixpkgs/nixos-unstable;
     nixos-hardware.url = github:nixos/nixos-hardware;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
+    pre-commit-hooks.url = github:cachix/pre-commit-hooks.nix;
+    pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = github:nix-community/home-manager/release-22.11;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -185,7 +187,14 @@
       };
 
       outputsBuilder = channels: {
+        checks = {
+          pre-commit-check = inputs.pre-commit-hooks.lib.${channels.nixpkgs.system}.run {
+            src = ./.;
+            hooks.alejandra.enable = true;
+          };
+        };
         devShells.default = channels.nixpkgs.mkShell {
+          inherit (self.checks.${channels.nixpkgs.system}.pre-commit-check) shellHook;
           buildInputs = [
             agenix.packages.${channels.nixpkgs.system}.agenix
           ];
