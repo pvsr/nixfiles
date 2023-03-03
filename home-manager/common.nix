@@ -9,7 +9,6 @@ in {
   imports = [
     ./fish.nix
     ./tmux.nix
-    ./neovim
     ./helix
   ];
 
