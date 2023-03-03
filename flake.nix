@@ -186,20 +186,27 @@
         };
       };
 
-      outputsBuilder = channels: {
+      outputsBuilder = channels: let
+        pkgs = channels.nixpkgs;
+        deploy = host: user: (pkgs.writeScriptBin "deploy-${host}" ''
+          nixos-rebuild --fast --flake .#${host} --target-host ${user}@${host} --use-remote-sudo switch
+        '');
+      in {
+        formatter = pkgs.alejandra;
         checks = {
-          pre-commit-check = inputs.pre-commit-hooks.lib.${channels.nixpkgs.system}.run {
+          pre-commit-check = inputs.pre-commit-hooks.lib.${pkgs.system}.run {
             src = ./.;
             hooks.alejandra.enable = true;
           };
         };
-        devShells.default = channels.nixpkgs.mkShell {
-          inherit (self.checks.${channels.nixpkgs.system}.pre-commit-check) shellHook;
+        devShells.default = pkgs.mkShell {
+          inherit (self.checks.${pkgs.system}.pre-commit-check) shellHook;
           buildInputs = [
-            agenix.packages.${channels.nixpkgs.system}.agenix
+            agenix.packages.${pkgs.system}.agenix
+            (deploy "ruan" "peter")
+            (deploy "crossbell" "root")
           ];
         };
-        formatter = channels.nixpkgs.alejandra;
       };
     };
 }
