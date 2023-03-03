@@ -61,7 +61,7 @@ in {
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
-    ignores = ["Session.vim" "healthcheck.out"];
+    ignores = ["Session.vim" "healthcheck.out" ".envrc" ".direnv"];
     userName = "Peter Rice";
     userEmail = lib.mkDefault "peter@peterrice.xyz";
     extraConfig = {
