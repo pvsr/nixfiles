@@ -94,6 +94,7 @@ in {
   programs.htop.enable = true;
   programs.password-store.enable = true;
   programs.jq.enable = true;
+  programs.zoxide.enable = true;
 
   programs.exa.enable = true;
   programs.exa.enableAliases = true;

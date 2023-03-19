@@ -21,15 +21,13 @@
       session = ''
         if set -q argv[1]
           set -gx fish_history $argv[1]
-          set data_dir "$HOME/.local/share/z/sessions/$argv[1]"
+          set data_dir "$HOME/.local/share/zoxide/sessions/$argv[1]"
           mkdir -p $data_dir
-          and set -gx Z_DATA "$data_dir/data"
-          and touch $Z_DATA
-          z > /dev/null
-          or pushd .
+          and set -gx _ZO_DATA_DIR "$data_dir"
+          pushd (zoxide query 2> /dev/null; or echo .)
         else
           set -ge fish_history
-          set -ge Z_DATA
+          set -ge _ZO_DATA
           popd 2> /dev/null
         end
       '';
