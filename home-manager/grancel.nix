@@ -23,4 +23,6 @@
       backend = "pulseaudio";
     };
   };
+
+  services.mpris-proxy.enable = true;
 }
