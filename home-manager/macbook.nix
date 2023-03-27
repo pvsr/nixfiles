@@ -9,6 +9,11 @@
     #./tasks.nix
   ];
 
+  home = {
+    username = "price";
+    homeDirectory = "/Users/price";
+  };
+
   home.packages = with pkgs; [
     sarasa-gothic
     fantasque-sans-mono

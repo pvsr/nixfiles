@@ -160,26 +160,14 @@
         jurai = {
           channelName = "nixpkgs";
           system = "aarch64-darwin";
-          output = "darwinConfigurations";
+          output = "homeConfigurations";
 
           builder = args:
-            darwin.lib.darwinSystem (args
-              // {
-                modules = [
-                  (import ./hosts/jurai)
-                  ./modules/core.nix
-                  {
-                    imports = [home-manager.darwinModule];
-                    users.users.price.home = "/Users/price";
-                    home-manager = {
-                      users.price = ./home-manager/macbook.nix;
-                      useGlobalPkgs = true;
-                      useUserPackages = true;
-                      inherit extraSpecialArgs;
-                    };
-                  }
-                ];
-              });
+            home-manager.lib.homeManagerConfiguration {
+              inherit extraSpecialArgs;
+              pkgs = self.pkgs.${args.system}.nixpkgs;
+              modules = [./home-manager/macbook.nix];
+            };
         };
       };
 
