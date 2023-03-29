@@ -101,7 +101,14 @@ in {
 
   programs.mpv = {
     bindings = {};
-    scripts = [pkgs.mpvScripts.mpris];
+    scripts = with pkgs.mpvScripts; [
+      # TODO
+      # autocrop
+      mpris
+      sponsorblock
+      thumbnail
+      youtube-quality
+    ];
     config = {
       profile = "standard";
     };
@@ -124,6 +131,7 @@ in {
         terminal = false;
       };
       "protocol.https" = {
+        force-window = "immediate";
         keep-open = true;
       };
       "protocol.http" = {

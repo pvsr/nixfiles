@@ -58,6 +58,7 @@ in {
         # TODO rewrite passmenu to use an arbitrary launcher
         riverctl map normal $mod P spawn "${pkgs.pass}/bin/passmenu ${dmenuArgs}"
         riverctl map normal $mod Q spawn "${pkgs.qbpm}/bin/qbpm choose --menu=\"${menu} --dmenu\""
+        riverctl map normal $mod X spawn 'umpv $(wl-paste)'
         riverctl default-layout rivertile
         sh -c "systemctl --user import-environment; systemctl --user start river-session.target; systemctl --user restart graphical-session.target"
         riverctl spawn yambar
