@@ -13,6 +13,9 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = github:lnl7/nix-darwin;
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-on-droid.url = github:t184256/nix-on-droid;
+    nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
+    nix-on-droid.inputs.home-manager.follows = "home-manager";
 
     agenix.url = github:ryantm/agenix;
     agenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -85,7 +88,7 @@
       inherit self inputs;
       inherit sharedOverlays;
 
-      supportedSystems = ["x86_64-linux" "aarch64-darwin"];
+      supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
 
       channelsConfig.allowUnfree = true;
       channels.nixpkgs.overlaysBuilder = channels: [
@@ -167,6 +170,32 @@
               inherit extraSpecialArgs;
               pkgs = self.pkgs.${args.system}.nixpkgs;
               modules = [./home-manager/macbook.nix];
+            };
+        };
+        arseille = {
+          channelName = "nixpkgs";
+          system = "aarch64-linux";
+          output = "nixOnDroidConfigurations";
+
+          builder = args:
+            inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+              system.stateVersion = "22.11";
+              home-manager-path = home-manager.outPath;
+              pkgs = import nixpkgs {
+                inherit (args) system;
+                overlays = [inputs.nix-on-droid.overlays.default] ++ sharedOverlays;
+              };
+              modules = [
+                ./hosts/arseille/default.nix
+                ({...}: {
+                  home-manager = {
+                    config = import ./home-manager/arseille.nix;
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    inherit extraSpecialArgs;
+                  };
+                })
+              ];
             };
         };
       };
