@@ -46,11 +46,6 @@
     openssh.passwordAuthentication = false;
     openssh.extraConfig = "AcceptEnv=TERMINFO COLORTERM";
 
-    headscale.enable = true;
-    headscale.serverUrl = "https://tailscale.peterrice.xyz";
-    headscale.port = 9753;
-    headscale.address = "0.0.0.0";
-
     radicale.enable = true;
     radicale.settings = {
       server.hosts = ["0.0.0.0:52032" "[::]:52032"];
@@ -126,7 +121,6 @@
     8080
     52032
     7775
-    9753
   ];
   networking.firewall.allowedUDPPorts = [
   ];
