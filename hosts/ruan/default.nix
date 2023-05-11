@@ -69,6 +69,9 @@
       };
     };
 
+    weather.enable = true;
+    weather.bind = "100.64.0.3:15658";
+
     komga = {
       enable = true;
       port = 19191;
@@ -120,6 +123,7 @@
     24424
     8080
     52032
+    15658
     7775
   ];
   networking.firewall.allowedUDPPorts = [

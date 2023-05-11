@@ -21,6 +21,8 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     podcasts.url = github:pvsr/podcasts;
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
+    weather.url = github:pvsr/weather;
+    weather.inputs.nixpkgs.follows = "nixpkgs";
     qbpm.url = github:pvsr/qbpm;
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -99,6 +101,7 @@
         home-manager.nixosModules.home-manager
         agenix.nixosModules.age
         inputs.podcasts.nixosModules.default
+        inputs.weather.nixosModules.default
         {
           nix.generateNixPathFromInputs = true;
           nix.generateRegistryFromInputs = true;
