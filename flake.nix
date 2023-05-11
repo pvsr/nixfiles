@@ -19,12 +19,19 @@
 
     agenix.url = github:ryantm/agenix;
     agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.inputs.darwin.follows = "darwin";
     podcasts.url = github:pvsr/podcasts;
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
+    podcasts.inputs.utils.follows = "utils";
+    podcasts.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     weather.url = github:pvsr/weather;
     weather.inputs.nixpkgs.follows = "nixpkgs";
+    weather.inputs.flake-utils.follows = "utils";
+    weather.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     qbpm.url = github:pvsr/qbpm;
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
+    qbpm.inputs.flake-utils.follows = "utils";
+    qbpm.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
 
     # sources
     srcery-tmux.url = github:srcery-colors/srcery-tmux;
