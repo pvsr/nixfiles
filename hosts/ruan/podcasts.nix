@@ -18,7 +18,8 @@
     };
     serve = {
       enable = true;
-      bind = "0.0.0.0:5999";
+      bind = "100.64.0.3:5999";
     };
   };
+  systemd.services.serve-podcasts.after = ["tailscaled.service"];
 }

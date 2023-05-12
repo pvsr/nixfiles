@@ -9,7 +9,8 @@
 
   services.miniflux = {
     enable = true;
-    config.LISTEN_ADDR = "0.0.0.0:8080";
+    config.LISTEN_ADDR = "100.64.0.3:8080";
     adminCredentialsFile = config.age.secrets."miniflux-credentials".path;
   };
+  systemd.services.miniflux.after = ["tailscaled.service"];
 }

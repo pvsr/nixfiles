@@ -2,7 +2,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  zemuriaAddress = "100.64.0.3";
+in {
   imports = [
     ./hardware-configuration.nix
     ./miniflux.nix
@@ -48,7 +50,7 @@
 
     radicale.enable = true;
     radicale.settings = {
-      server.hosts = ["0.0.0.0:52032" "[::]:52032"];
+      server.hosts = ["${zemuriaAddress}:52032"];
       auth = {
         type = "htpasswd";
         htpasswd_filename = config.age.secrets."radicale-users".path;
@@ -70,7 +72,7 @@
     };
 
     weather.enable = true;
-    weather.bind = "100.64.0.3:15658";
+    weather.bind = "${zemuriaAddress}:15658";
 
     komga = {
       enable = true;
@@ -85,8 +87,8 @@
     nitter = {
       enable = true;
       server.port = 7775;
-      server.hostname = "192.168.0.110:7775";
-      preferences.replaceTwitter = "192.168.0.110:7775";
+      server.hostname = "${zemuriaAddress}:7775";
+      preferences.replaceTwitter = "ruan:7775";
       preferences.hlsPlayback = true;
       preferences.theme = "Twitter Dark";
     };
@@ -118,6 +120,9 @@
       };
     };
   };
+  systemd.services.radicale.after = ["tailscaled.service"];
+  systemd.services.weather.after = ["tailscaled.service"];
+  systemd.services.nitter.after = ["tailscaled.service"];
 
   networking.firewall.allowedTCPPorts = [
     24424
