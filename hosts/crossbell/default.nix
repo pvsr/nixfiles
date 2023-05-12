@@ -16,7 +16,7 @@
     headscale.enable = true;
     headscale.serverUrl = "https://tailscale.peterrice.xyz";
     headscale.port = 9753;
-    headscale.address = "0.0.0.0";
+    headscale.address = "127.0.0.1";
 
     openssh.enable = true;
     openssh.ports = [18325];
