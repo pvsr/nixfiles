@@ -5,7 +5,7 @@
     nixpkgs.url = github:nixos/nixpkgs/release-23.05;
     unstable.url = github:nixos/nixpkgs/nixos-unstable;
     nixos-hardware.url = github:nixos/nixos-hardware;
-    utils.url = github:gytis-ivaskevicius/flake-utils-plus;
+    utils.url = github:ravensiris/flake-utils-plus/ravensiris/fix-devshell-legacy-packages;
     pre-commit-hooks.url = github:cachix/pre-commit-hooks.nix;
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
