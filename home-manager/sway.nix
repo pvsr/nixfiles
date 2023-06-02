@@ -210,7 +210,7 @@ in {
     export _JAVA_AWT_WM_NONREPARENTING=1
   '';
 
-  programs.mako = with colors; {
+  services.mako = with colors; {
     enable = true;
     font = "${font} 14";
     backgroundColor = brightBlue;

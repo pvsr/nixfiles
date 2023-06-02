@@ -20,7 +20,7 @@
 
     openssh.enable = true;
     openssh.ports = [18325];
-    openssh.passwordAuthentication = false;
+    openssh.settings.PasswordAuthentication = false;
 
     caddy.enable = true;
     caddy.virtualHosts = {

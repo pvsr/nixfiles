@@ -12,7 +12,7 @@
   };
   services.earlyoom.enable = true;
 
-  boot.tmpOnTmpfs = true;
+  boot.tmp.useTmpfs = true;
 
   security.sudo.wheelNeedsPassword = false;
 

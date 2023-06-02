@@ -2,14 +2,14 @@
   description = "A system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/release-22.11;
+    nixpkgs.url = github:nixos/nixpkgs/release-23.05;
     unstable.url = github:nixos/nixpkgs/nixos-unstable;
     nixos-hardware.url = github:nixos/nixos-hardware;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
     pre-commit-hooks.url = github:cachix/pre-commit-hooks.nix;
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = github:nix-community/home-manager/release-22.11;
+    home-manager.url = github:nix-community/home-manager/release-23.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = github:lnl7/nix-darwin;
     darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,6 +20,7 @@
     agenix.url = github:ryantm/agenix;
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.darwin.follows = "darwin";
+    agenix.inputs.home-manager.follows = "home-manager";
     podcasts.url = github:pvsr/podcasts;
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
     podcasts.inputs.utils.follows = "utils";

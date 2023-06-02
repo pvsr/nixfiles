@@ -38,7 +38,7 @@
   services = {
     openssh.enable = true;
     openssh.ports = [23232];
-    openssh.passwordAuthentication = false;
+    openssh.settings.PasswordAuthentication = false;
     btrbk = {
       instances.btrbk = {
         onCalendar = "daily";

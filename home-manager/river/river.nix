@@ -27,7 +27,7 @@ in {
 
   programs.mpv.profiles.standard.gpu-context = "wayland";
 
-  programs.mako = with colors; {
+  services.mako = with colors; {
     enable = true;
     font = "${appFont} 14";
     backgroundColor = brightBlue;

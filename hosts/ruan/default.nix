@@ -31,7 +31,6 @@ in {
 
   time.timeZone = "America/New_York";
 
-  hardware.video.hidpi.enable = true;
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.allowUnfree = true;
 
@@ -45,8 +44,8 @@ in {
   services = {
     openssh.enable = true;
     openssh.ports = [24424];
-    openssh.passwordAuthentication = false;
-    openssh.extraConfig = "AcceptEnv=TERMINFO COLORTERM";
+    openssh.settings.PasswordAuthentication = false;
+    openssh.settings.AcceptEnv = "TERMINFO COLORTERM";
 
     radicale.enable = true;
     radicale.settings = {
