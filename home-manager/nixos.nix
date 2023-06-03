@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    ./sway.nix
     ./river/river.nix
   ];
 
