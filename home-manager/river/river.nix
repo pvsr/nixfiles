@@ -7,10 +7,8 @@
 }: let
   colors = import ../colors.nix;
   dmenuArgs = "-i -fn ${lib.escape [" "] "${appFont} 14"}";
-  menu = "${pkgs.fuzzel}/bin/fuzzel";
 in {
   imports = [
-    ../alacritty.nix
     ../foot.nix
   ];
 
@@ -20,25 +18,40 @@ in {
     pamixer
     playerctl
     dmenu-wayland
-    clipman
     yambar
-    fuzzel
   ];
 
-  programs.mpv.profiles.standard.gpu-context = "wayland";
+  programs = {
+    mpv.profiles.standard.gpu-context = "wayland";
+    fuzzel.enable = true;
+    fuzzel.settings = {
+      main = {
+        font = "${appFont}:size=14";
+        terminal = "${pkgs.foot}/bin/footclient";
+      };
+      # colors = {};
+    };
+  };
 
-  services.mako = with colors; {
-    enable = true;
-    font = "${appFont} 14";
-    backgroundColor = brightBlue;
-    borderColor = blue;
-    textColor = xgray1;
+  services = {
+    mako = with colors; {
+      enable = true;
+      font = "${appFont} 14";
+      backgroundColor = brightBlue;
+      borderColor = blue;
+      textColor = xgray1;
+    };
+
+    clipman.enable = true;
+    clipman.systemdTarget = "river-session.target";
+
+    playerctld.enable = true;
   };
 
   systemd.user.targets.river-session = {
     Unit = {
       Description = "river compositor session";
-      # Documentation = [ "man" ];
+      Documentation = ["man:systemd.special(7)"];
       BindsTo = ["graphical-session.target"];
       Wants = ["graphical-session-pre.target"];
       After = ["graphical-session-pre.target"];
@@ -54,22 +67,18 @@ in {
       # "riverctl border-color-unfocused ${}"
       (builtins.readFile ./init)
       ''
-        riverctl map normal $mod D spawn "${menu}"
+        riverctl map normal $mod D spawn fuzzel
         # TODO rewrite passmenu to use an arbitrary launcher
-        riverctl map normal $mod P spawn "${pkgs.pass}/bin/passmenu ${dmenuArgs}"
-        riverctl map normal $mod Q spawn "${pkgs.qbpm}/bin/qbpm choose --menu=\"${menu} --dmenu\""
+        riverctl map normal $mod P spawn 'passmenu ${dmenuArgs}'
+        riverctl map normal $mod Q spawn 'qbpm choose --menu=fuzzel'
         riverctl map normal $mod X spawn 'umpv $(wl-paste)'
         riverctl default-layout rivertile
         sh -c "systemctl --user import-environment; systemctl --user start river-session.target; systemctl --user restart graphical-session.target"
-        riverctl spawn yambar
+        riverctl spawn ${pkgs.yambar}/bin/yambar
+        [[ -e ~/.background ]] && riverctl spawn '${pkgs.swaybg}/bin/swaybg -i ~/.background'
         exec rivertile -view-padding 6 -outer-padding 6
       ''
     ];
     executable = true;
   };
-
-  xdg.configFile."fuzzel/fuzzel.ini".text = ''
-    font=${appFont}:size=14
-    terminal=${pkgs.foot}/bin/footclient
-  '';
 }
