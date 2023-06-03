@@ -32,8 +32,6 @@
         end
       '';
       fish_mode_prompt = "";
-      fzf_key_bindings = "";
-      alejandra = "command alejandra $argv &| rg --passthru -U --replace '' '\n*[👏👉⭐].*'";
     };
     shellAbbrs = {
       suod = "sudo";
