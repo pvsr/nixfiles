@@ -46,38 +46,6 @@
         "type": "github"
       }
     },
-    "fish-async-prompt": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1677372971,
-        "narHash": "sha256-YgqZINmY4nKphlqwHo2B0NfP4nmSxIIuAMUuoftI9Lg=",
-        "owner": "acomagu",
-        "repo": "fish-async-prompt",
-        "rev": "4c732cc043b8dd04e64a169ec6bbf3a9b394819f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "acomagu",
-        "repo": "fish-async-prompt",
-        "type": "github"
-      }
-    },
-    "fish-plugin-git": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1679069453,
-        "narHash": "sha256-tsw+npcOga8NBM1F8hnsT69k33FS5nK1zaPB1ohasPk=",
-        "owner": "jhillyerd",
-        "repo": "plugin-git",
-        "rev": "1697adf8861a15178f4794de566d14d295c79b39",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jhillyerd",
-        "repo": "plugin-git",
-        "type": "github"
-      }
-    },
     "fish-prompt-pvsr": {
       "flake": false,
       "locked": {
@@ -438,8 +406,6 @@
       "inputs": {
         "agenix": "agenix",
         "darwin": "darwin",
-        "fish-async-prompt": "fish-async-prompt",
-        "fish-plugin-git": "fish-plugin-git",
         "fish-prompt-pvsr": "fish-prompt-pvsr",
         "home-manager": "home-manager",
         "nix-on-droid": "nix-on-droid",

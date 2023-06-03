@@ -59,8 +59,10 @@
   };
 
   home.packages = with pkgs.fishPlugins; [
-    fzf-fish
     pisces
+    fzf-fish
+    plugin-git
+    async-prompt
   ];
 
   # prefer fzf-fish plugin

@@ -41,10 +41,6 @@
     nvim-colorizer.flake = false;
     fish-prompt-pvsr.url = github:pvsr/fish-prompt-pvsr;
     fish-prompt-pvsr.flake = false;
-    fish-plugin-git.url = github:jhillyerd/plugin-git;
-    fish-plugin-git.flake = false;
-    fish-async-prompt.url = github:acomagu/fish-async-prompt;
-    fish-async-prompt.flake = false;
   };
 
   outputs = inputs @ {
@@ -86,8 +82,7 @@
       })
     ];
     fishPlugins = with inputs; {
-      inherit fish-prompt-pvsr fish-async-prompt;
-      plugin-git = fish-plugin-git;
+      inherit fish-prompt-pvsr;
     };
     extraSpecialArgs = {
       inherit fishPlugins;
