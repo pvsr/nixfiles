@@ -83,6 +83,15 @@ in {
     jellyfin.user = "peter";
     jellyfin.group = "users";
 
+    nitter = {
+      enable = true;
+      server.port = 7775;
+      server.hostname = "${zemuriaAddress}:7775";
+      preferences.replaceTwitter = "ruan:7775";
+      preferences.hlsPlayback = true;
+      preferences.theme = "Twitter Dark";
+    };
+
     btrbk = {
       sshAccess = [
         {
