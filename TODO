@@ -7,6 +7,4 @@ swayidle
 
 yambar
 
-fix home.sessionVariables
-
 fix any-nix-shell with fish-async-prompt

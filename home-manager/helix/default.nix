@@ -6,8 +6,7 @@
 }: {
   imports = [./srcery.nix];
 
-  # TODO fix this
-  home.sessionVariables = lib.mkForce {
+  home.sessionVariables = {
     EDITOR = "hx";
     VISUAL = "hx";
   };
