@@ -6,8 +6,6 @@
 }: {
   imports = [./srcery.nix];
 
-  programs.fish.shellAbbrs.nvim = "hx";
-
   # TODO fix this
   home.sessionVariables = lib.mkForce {
     EDITOR = "hx";
@@ -18,6 +16,8 @@
 
   programs.helix = {
     enable = true;
+    # TODO 23.11
+    # defaultEditor = true;
     settings = {
       theme = "srcery";
       editor = {
@@ -25,6 +25,7 @@
         scrolloff = 2;
         rulers = [80];
         color-modes = true;
+        bufferline = "multiple";
         whitespace.render.tab = "all";
         whitespace.render.newline = "all";
         cursor-shape = {
@@ -32,6 +33,13 @@
           normal = "block";
           select = "underline";
         };
+        lsp = {
+          display-inlay-hints = true;
+        };
+      };
+      keys.insert = {
+        "C-l" = "move_char_right";
+        "C-space" = ["match_brackets" "move_char_right"];
       };
     };
   };
