@@ -79,9 +79,10 @@ in {
       openFirewall = true;
     };
 
-    jellyfin.enable = false;
+    jellyfin.enable = true;
     jellyfin.user = "peter";
     jellyfin.group = "users";
+    jellyfin.openFirewall = true; # 8096 only
 
     nitter = {
       enable = true;
