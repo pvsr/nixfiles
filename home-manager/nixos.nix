@@ -31,7 +31,6 @@
     sub-langs = "en*,ja*";
   };
 
-  programs.beets.enable = true;
   programs.beets.settings = {
     directory = "~/music";
     library = "~/library.blb";

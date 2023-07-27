@@ -7,4 +7,6 @@
     ./common.nix
     ./nixos.nix
   ];
+
+  programs.beets.enable = true;
 }
