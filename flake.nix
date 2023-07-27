@@ -62,6 +62,15 @@
             src = inputs.srcery-tmux;
           };
         };
+      fishPlugins =
+        prev.fishPlugins
+        // {
+          fish-prompt-pvsr = prev.fishPlugins.buildFishPlugin {
+            pname = "fish-prompt-pvsr";
+            version = "git";
+            src = inputs.fish-prompt-pvsr;
+          };
+        };
     };
     sharedOverlays = [
       pluginOverlay
@@ -70,11 +79,7 @@
         inherit (agenix.packages."${prev.system}") agenix;
       })
     ];
-    fishPlugins = with inputs; {
-      inherit fish-prompt-pvsr;
-    };
     extraSpecialArgs = {
-      inherit fishPlugins;
       appFont = "Fantasque Sans Mono";
     };
   in

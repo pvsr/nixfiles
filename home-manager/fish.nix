@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  fishPlugins,
   ...
 }: {
   home.shellAliases.fish = "SHELL=${pkgs.fish}/bin/fish command fish";
@@ -53,7 +52,6 @@
       mshuf = "mpv --no-video --shuffle ~/annex/music";
       pmpv = "umpv (wl-paste)";
     };
-    plugins = lib.mapAttrsToList (name: src: {inherit name src;}) fishPlugins;
   };
 
   home.packages = with pkgs.fishPlugins; [
@@ -61,6 +59,7 @@
     fzf-fish
     plugin-git
     async-prompt
+    fish-prompt-pvsr
   ];
 
   # prefer fzf-fish plugin
