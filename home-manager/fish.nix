@@ -14,6 +14,7 @@
       set -g fish_cursor_insert line
       set -g fish_cursor_replace_one underscore
       set -g fish_greeting
+      __git.init
     '';
     functions = {
       yts = "umpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
