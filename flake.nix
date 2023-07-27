@@ -119,17 +119,19 @@
         }
       ];
 
-      hosts = {
+      hosts = let
+        buildHmUserModule = config: {
+          home-manager = {
+            inherit extraSpecialArgs;
+            users.peter = import config;
+          };
+        };
+      in {
         grancel = {
           channelName = "nixpkgs";
           modules = [
-            {
-              home-manager = {
-                users.peter = import ./home-manager/grancel.nix;
-                inherit extraSpecialArgs;
-              };
-            }
             (import ./hosts/grancel)
+            (buildHmUserModule ./home-manager/grancel.nix)
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
@@ -138,13 +140,8 @@
         ruan = {
           channelName = "nixpkgs";
           modules = [
-            {
-              home-manager = {
-                users.peter = import ./home-manager/ruan.nix;
-                inherit extraSpecialArgs;
-              };
-            }
             (import ./hosts/ruan)
+            (buildHmUserModule ./home-manager/ruan.nix)
             nixos-hardware.nixosModules.common-pc-ssd
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
@@ -153,13 +150,8 @@
         crossbell = {
           channelName = "nixpkgs";
           modules = [
-            {
-              home-manager = {
-                users.peter = import ./home-manager/common.nix;
-                inherit extraSpecialArgs;
-              };
-            }
             (import ./hosts/crossbell)
+            (buildHmUserModule ./home-manager/common.nix)
             nixos-hardware.nixosModules.common-pc-ssd
           ];
         };
