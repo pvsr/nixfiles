@@ -12,7 +12,6 @@
     qbpm
     qutebrowser
     transmission
-    youtube-dl
     neovide
   ];
 
@@ -24,6 +23,13 @@
   };
 
   programs.mpv.enable = true;
+  programs.yt-dlp.enable = true;
+  programs.yt-dlp.settings = {
+    embed-subs = true;
+    write-auto-subs = true;
+    embed-thumbnail = true;
+    sub-langs = "en*,ja*";
+  };
 
   programs.beets.enable = true;
   programs.beets.settings = {
@@ -41,12 +47,4 @@
     };
     scrub.auto = true;
   };
-
-  xdg.configFile."youtube-dl/config".text = ''
-    -f "bestvideo[height<=?2160]+bestaudio/best"
-    --sub-lang="en,eng,enUS,en-US,ja,jaJP,ja-JP"
-    --write-sub
-    --write-auto-sub
-    --netrc
-  '';
 }
