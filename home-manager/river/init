@@ -1,5 +1,5 @@
 # Mod+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
-riverctl map normal $mod+Shift Return spawn footclient
+riverctl map normal $mod+Shift Return spawn "footclient tmux attach"
 riverctl map normal $mod+Shift Slash spawn foot
 
 # Mod+Q to close the focused view
