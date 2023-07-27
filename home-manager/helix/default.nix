@@ -40,6 +40,7 @@
         "C-l" = "move_char_right";
         "C-space" = ["match_brackets" "move_char_right"];
       };
+      keys.normal.minus = "file_picker_in_current_buffer_directory";
     };
   };
 }
