@@ -100,8 +100,7 @@ in {
   programs.mpv = {
     bindings = {};
     scripts = with pkgs.mpvScripts; [
-      # TODO
-      # autocrop
+      autocrop
       mpris
       sponsorblock
       thumbnail
@@ -146,6 +145,9 @@ in {
         demuxer-mkv-subtitle-preroll = true;
         # TODO
         slang = "eng,en,enUS,en-US";
+        ytdl-raw-options = "sub-langs=\"en*,ja*\"";
+        # for thumbnail script
+        osc = false;
       };
     };
   };
