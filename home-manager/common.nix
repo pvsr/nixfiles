@@ -36,8 +36,6 @@ in {
   home.language.base = "en-US.UTF-8";
 
   home.shellAliases = {
-    nvim_nowrite = "nvim '+set noundofile' '+set noswapfile'";
-    pass = "EDITOR=nvim_nowrite command pass";
     bell = "echo \\a";
 
     "hoi4" = "steam steam://rungameid/394360";

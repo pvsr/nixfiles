@@ -37,8 +37,6 @@
     # sources
     srcery-tmux.url = github:srcery-colors/srcery-tmux;
     srcery-tmux.flake = false;
-    nvim-colorizer.url = github:norcalli/nvim-colorizer.lua;
-    nvim-colorizer.flake = false;
     fish-prompt-pvsr.url = github:pvsr/fish-prompt-pvsr;
     fish-prompt-pvsr.flake = false;
   };
@@ -62,15 +60,6 @@
             pluginName = "srcery";
             version = "git";
             src = inputs.srcery-tmux;
-          };
-        };
-      vimPlugins =
-        prev.vimPlugins
-        // {
-          nvim-colorizer = prev.vimUtils.buildVimPluginFrom2Nix {
-            pname = "nvim-colorizer";
-            version = "git";
-            src = inputs.nvim-colorizer;
           };
         };
     };
