@@ -7,10 +7,10 @@
     ./common.nix
     ./nixos.nix
     ./tasks.nix
+    ./firefox.nix
   ];
 
   home.packages = with pkgs; [
-    firefox
     spotify-tui
   ];
 
