@@ -12,6 +12,7 @@
 
   home.packages = with pkgs; [
     spotify-tui
+    sptlrx
   ];
 
   services.spotifyd = {
