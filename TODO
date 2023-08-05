@@ -1,9 +1,9 @@
 qutebrowser
 
-navidrome
-
 swayidle
 
-yambar
+yambar (dhall?)
 
 fix any-nix-shell with fish-async-prompt
+
+overwrite stale gsettings or at least set a cursor
