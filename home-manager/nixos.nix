@@ -12,7 +12,6 @@
     qbpm
     qutebrowser
     transmission
-    neovide
   ];
 
   services.gpg-agent = {
