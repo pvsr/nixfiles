@@ -103,8 +103,10 @@ in {
       autocrop
       mpris
       sponsorblock
+
+      # mutually exclusive osc replacements
       thumbnail
-      youtube-quality
+      # youtube-quality
     ];
     config = {
       profile = "standard";
@@ -146,7 +148,7 @@ in {
         # TODO
         slang = "eng,en,enUS,en-US";
         ytdl-raw-options = "sub-langs=\"en*,ja*\"";
-        # for thumbnail script
+        # for thumbnail/youtube-quality
         osc = false;
       };
     };
