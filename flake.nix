@@ -90,6 +90,9 @@
       supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
 
       channelsConfig.allowUnfree = true;
+      channels.nixpkgs.overlaysBuilder = channels: [
+        (final: prev: {transmission = channels.unstable.transmission_4;})
+      ];
 
       hostDefaults.modules = [
         home-manager.nixosModules.home-manager
