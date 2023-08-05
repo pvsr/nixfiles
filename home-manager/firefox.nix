@@ -25,6 +25,12 @@
             updateInterval = daily;
             definedAliases = ["y"];
           };
+          "GitHub" = {
+            urls = [{template = "https://github.com/search?type=repositories&q={searchTerms}";}];
+            iconUpdateURL = "https://github.githubassets.com/favicons/favicon.svg";
+            updateInterval = daily;
+            definedAliases = ["gi"];
+          };
           "Wiktionary" = {
             urls = [{template = "https://www.wiktionary.org/search-redirect.php?family=wiktionary&language=en&go=Go&search={searchTerms}";}];
             iconUpdateURL = "https://www.wiktionary.org/static/favicon/piece.ico";
