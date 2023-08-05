@@ -33,7 +33,7 @@
           };
           "Wiktionary" = {
             urls = [{template = "https://www.wiktionary.org/search-redirect.php?family=wiktionary&language=en&go=Go&search={searchTerms}";}];
-            iconUpdateURL = "https://www.wiktionary.org/static/favicon/piece.ico";
+            iconUpdateURL = "https://en.wiktionary.org/static/favicon/wiktionary/en.ico";
             updateInterval = daily;
             definedAliases = ["wikt"];
           };
