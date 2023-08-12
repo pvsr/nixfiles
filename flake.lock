@@ -376,11 +376,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1680830317,
-        "narHash": "sha256-Y6/XiMLRX53Km2zdq31IdIs6wcL/SzywiP/tbs5xWyk=",
+        "lastModified": 1691814253,
+        "narHash": "sha256-K8liQiDWjsCZ/pbd10c8y2Q/hm2RC1bFBHkUmjlOFzA=",
         "owner": "pvsr",
         "repo": "qbpm",
-        "rev": "cca66507494d7dc5556c10efdebe615c0bceb20d",
+        "rev": "f368a76e93266d84f2e2a2e0171019ef7bd8ccfc",
         "type": "github"
       },
       "original": {
