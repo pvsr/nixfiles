@@ -35,6 +35,18 @@ in {
 
   home.language.base = "en-US.UTF-8";
 
+  xdg.userDirs = {
+    enable = true;
+    desktop = "desktop";
+    documents = "documents";
+    download = "downloads";
+    music = "music";
+    pictures = "pictures";
+    publicShare = "public";
+    templates = "templates";
+    videos = "videos";
+  };
+
   home.shellAliases = {
     bell = "echo \\a";
 
