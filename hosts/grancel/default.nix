@@ -13,10 +13,6 @@
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.useDHCP = false;
-  networking.interfaces.enp6s0.useDHCP = true;
-  # networking.interfaces.wlp5s0.useDHCP = true;
-
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
 
   networking.hosts = {"192.168.0.110" = ["ruan"];};
