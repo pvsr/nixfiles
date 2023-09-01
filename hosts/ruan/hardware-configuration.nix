@@ -21,6 +21,12 @@
     options = ["subvol=home" "defaults" "compress=zstd"];
   };
 
+  fileSystems."/var/lib/swap" = {
+    device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
+    fsType = "btrfs";
+    options = ["subvol=swap"];
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/AB78-74B8";
     fsType = "vfat";
@@ -57,10 +63,5 @@
     options = ["nofail" "defaults" "compress=zstd"];
   };
 
-  swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 4 * 1024;
-    }
-  ];
+  swapDevices = [{device = "/var/lib/swap/swapfile";}];
 }

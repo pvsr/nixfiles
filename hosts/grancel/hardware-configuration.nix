@@ -31,6 +31,14 @@
     options = ["subvol=home" "defaults" "compress=zstd"];
   };
 
+  fileSystems."/var/lib/swap" = {
+    device = "/dev/disk/by-label/grancel";
+    fsType = "btrfs";
+    options = ["subvol=swap"];
+  };
+
+  swapDevices = [{device = "/var/lib/swap/swapfile";}];
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/boot";
     fsType = "vfat";
@@ -42,11 +50,4 @@
     fsType = "btrfs";
     options = ["defaults" "compress=zstd"];
   };
-
-  swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 8 * 1024;
-    }
-  ];
 }
