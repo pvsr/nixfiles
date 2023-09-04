@@ -90,14 +90,6 @@ in {
     ];
   };
 
-  programs.keychain = {
-    enable = true;
-    agents = ["ssh"];
-    keys = ["id_rsa" "id_ed25519"];
-    extraFlags = ["--noask" "--quiet"];
-    enableBashIntegration = false;
-  };
-
   programs.nix-index.enable = true;
   programs.tealdeer.enable = true;
   programs.bat.enable = true;
