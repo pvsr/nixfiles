@@ -50,4 +50,17 @@
     fsType = "btrfs";
     options = ["defaults" "compress=zstd"];
   };
+
+  fileSystems."/media/grancel-new" = {
+    device = "/dev/disk/by-label/grancel-new";
+    fsType = "btrfs";
+    options = ["defaults" "compress=zstd"];
+  };
+
+  specialisation.new-partitions.configuration.fileSystems = {
+    "/".device = lib.mkForce "/dev/disk/by-label/grancel-new";
+    "/home".device = lib.mkForce "/dev/disk/by-label/grancel-new";
+    "/var/lib/swap".device = lib.mkForce "/dev/disk/by-label/grancel-new";
+    "/boot".device = lib.mkForce "/dev/disk/by-label/boot-new";
+  };
 }

@@ -47,14 +47,15 @@
           ssh_user = "btrbk";
           volume = {
             "/media/grancel" = {
-              target = "ssh://ruan:24424/media/leiston/btrbk_backups/grancel/grancel";
+              target."/media/grancel-new/btrbk_backups/grancel" = {};
+              target."ssh://ruan:24424/media/leiston/btrbk_backups/grancel/grancel" = {};
               subvolume = {
                 home = {};
                 root = {};
               };
             };
             "/media/gdata2" = {
-              target = "ssh://ruan:24424/media/leiston/btrbk_backups/grancel/gdata2";
+              target."ssh://ruan:24424/media/leiston/btrbk_backups/grancel/gdata2" = {};
               subvolume = {
                 home = {};
               };
