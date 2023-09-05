@@ -78,6 +78,12 @@
             updateInterval = daily;
             definedAliases = ["@nxw"];
           };
+          "Python Documentation" = {
+            urls = [{template = "https://docs.python.org/3/search.html?check_keywords=yes&area=default&q={searchTerms}";}];
+            iconUpdateURL = "https://docs.python.org/3/_static/py.svg";
+            updateInterval = daily;
+            definedAliases = ["pd"];
+          };
         };
       };
     };
