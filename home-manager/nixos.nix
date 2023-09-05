@@ -14,6 +14,12 @@
     transmission
   ];
 
+  home.pointerCursor = {
+    package = pkgs.vanilla-dmz;
+    name = "Vanilla-DMZ";
+    gtk.enable = true;
+  };
+
   services.gpg-agent = {
     enable = true;
     defaultCacheTtl = 3 * 60 * 60;
