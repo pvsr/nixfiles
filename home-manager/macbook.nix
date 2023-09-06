@@ -30,6 +30,9 @@
   #  package = pkgs.jdk1;
   #};
 
+  # TODO 23.11: readd firefox module
+  # programs.firefox.package = null;
+
   programs.fish = {
     enable = true;
     shellAbbrs = {
