@@ -2,8 +2,15 @@
   config,
   lib,
   pkgs,
+  flake,
   ...
 }: {
+  imports = [
+    flake.inputs.nixos-hardware.nixosModules.common-pc-ssd
+    flake.inputs.nixos-hardware.nixosModules.common-cpu-amd
+    flake.inputs.nixos-hardware.nixosModules.common-gpu-amd
+  ];
+
   hardware.enableRedistributableFirmware = true;
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
   boot.initrd.kernelModules = [];

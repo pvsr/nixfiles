@@ -4,6 +4,12 @@
   pkgs,
   ...
 }: {
+  imports = [
+    flake.inputs.nixos-hardware.nixosModules.common-pc-ssd
+    flake.inputs.nixos-hardware.nixosModules.common-cpu-amd
+    flake.inputs.nixos-hardware.nixosModules.common-gpu-amd
+  ];
+
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "uas" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];

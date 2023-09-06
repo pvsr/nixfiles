@@ -22,8 +22,8 @@ in {
   networking.interfaces.enp37s0.useDHCP = true;
   networking.interfaces.wlp36s0.useDHCP = true;
 
+  networking.hostName = "ruan";
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
-
   networking.hosts = {"192.168.0.104" = ["grancel"];};
 
   console.keyMap = "us";

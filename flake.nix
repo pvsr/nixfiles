@@ -5,7 +5,7 @@
     nixpkgs.url = github:nixos/nixpkgs/release-23.05;
     unstable.url = github:nixos/nixpkgs/nixos-unstable;
     nixos-hardware.url = github:nixos/nixos-hardware;
-    utils.url = github:ravensiris/flake-utils-plus/ravensiris/fix-devshell-legacy-packages;
+    flake-parts.url = "github:hercules-ci/flake-parts";
     pre-commit-hooks.url = github:cachix/pre-commit-hooks.nix;
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -23,15 +23,12 @@
     agenix.inputs.home-manager.follows = "home-manager";
     podcasts.url = github:pvsr/podcasts;
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
-    podcasts.inputs.utils.follows = "utils";
     podcasts.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     weather.url = github:pvsr/weather;
     weather.inputs.nixpkgs.follows = "nixpkgs";
-    weather.inputs.flake-utils.follows = "utils";
     weather.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     qbpm.url = github:pvsr/qbpm;
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
-    qbpm.inputs.flake-utils.follows = "utils";
     qbpm.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
 
     # sources
@@ -46,10 +43,9 @@
     nixpkgs,
     unstable,
     nixos-hardware,
-    utils,
+    flake-parts,
     home-manager,
     darwin,
-    agenix,
     ...
   }: let
     pluginOverlay = final: prev: {
@@ -72,137 +68,137 @@
           };
         };
     };
-    sharedOverlays = [
+    overlays = [
       pluginOverlay
-      (final: prev: {
-        inherit (inputs.qbpm.packages."${prev.system}") qbpm;
-        inherit (agenix.packages."${prev.system}") agenix;
+      (final: prev: let
+        system = prev.stdenv.hostPlatform.system;
+        unstable = inputs.unstable.legacyPackages.${system};
+      in {
+        inherit (inputs.qbpm.packages.${system}) qbpm;
+        inherit (inputs.agenix.packages.${system}) agenix;
+        inherit (unstable) foot;
+        transmission = unstable.transmission_4;
       })
     ];
-    extraSpecialArgs = {
-      appFont = "Fantasque Sans Mono";
-    };
+    specialArgs.flake = {inherit self inputs;};
+    extraSpecialArgs =
+      specialArgs
+      // {
+        appFont = "Fantasque Sans Mono";
+      };
   in
-    utils.lib.mkFlake {
-      inherit self inputs;
-      inherit sharedOverlays;
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
 
-      supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
+      flake.nixosModules = {
+        core = import ./modules/core.nix;
+        nixos = import ./modules/nixos.nix;
+        cachix = import ./modules/cachix.nix;
 
-      channelsConfig.allowUnfree = true;
-      channels.nixpkgs.overlaysBuilder = channels: [
-        (final: prev: {transmission = channels.unstable.transmission_4;})
-      ];
+        grancel = import ./hosts/grancel;
+        ruan = import ./hosts/ruan;
+        crossbell = import ./hosts/crossbell;
 
-      hostDefaults.modules = [
-        home-manager.nixosModules.home-manager
-        agenix.nixosModules.age
-        inputs.podcasts.nixosModules.default
-        inputs.weather.nixosModules.default
-        {
-          nix.generateNixPathFromInputs = true;
-          nix.generateRegistryFromInputs = true;
-          nix.linkInputs = true;
-        }
-
-        ./modules/core.nix
-        ./modules/nixos.nix
-        ./modules/cachix.nix
-
-        ./users/peter.nix
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = extraSpecialArgs;
-        }
-      ];
-
-      hosts = {
-        grancel = {
-          channelName = "nixpkgs";
-          modules = [
-            (import ./hosts/grancel)
-            {home-manager.users.peter = import ./home-manager/grancel.nix;}
-            nixos-hardware.nixosModules.common-pc-ssd
-            nixos-hardware.nixosModules.common-cpu-amd
-            nixos-hardware.nixosModules.common-gpu-amd
+        peter = import ./users/peter.nix;
+        home-manager = {
+          pkgs,
+          config,
+          ...
+        }: {
+          imports = [
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = extraSpecialArgs;
+              home-manager.users.peter = import ./home-manager/${config.networking.hostName}.nix;
+            }
           ];
-        };
-        ruan = {
-          channelName = "nixpkgs";
-          modules = [
-            (import ./hosts/ruan)
-            {home-manager.users.peter = import ./home-manager/ruan.nix;}
-            nixos-hardware.nixosModules.common-pc-ssd
-            nixos-hardware.nixosModules.common-cpu-amd
-            nixos-hardware.nixosModules.common-gpu-amd
-          ];
-        };
-        crossbell = {
-          channelName = "nixpkgs";
-          modules = [
-            (import ./hosts/crossbell)
-            {home-manager.users.peter = import ./home-manager/common.nix;}
-            nixos-hardware.nixosModules.common-pc-ssd
-          ];
-        };
-        jurai = {
-          channelName = "nixpkgs";
-          system = "aarch64-darwin";
-          output = "homeConfigurations";
-
-          builder = args:
-            home-manager.lib.homeManagerConfiguration {
-              inherit extraSpecialArgs;
-              pkgs = self.pkgs.${args.system}.nixpkgs;
-              modules = [./home-manager/macbook.nix];
-            };
-        };
-        arseille = {
-          channelName = "nixpkgs";
-          system = "aarch64-linux";
-          output = "nixOnDroidConfigurations";
-
-          builder = args:
-            inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-              system.stateVersion = "22.11";
-              home-manager-path = home-manager.outPath;
-              pkgs = import nixpkgs {
-                inherit (args) system;
-                overlays = [inputs.nix-on-droid.overlays.default] ++ sharedOverlays;
-              };
-              modules = [
-                ./hosts/arseille/default.nix
-                ({...}: {
-                  home-manager = {
-                    config = import ./home-manager/arseille.nix;
-                    useGlobalPkgs = true;
-                    useUserPackages = true;
-                    inherit extraSpecialArgs;
-                  };
-                })
-              ];
-            };
         };
       };
 
-      outputsBuilder = channels: let
-        pkgs = channels.nixpkgs;
-        deploy = host: user: (pkgs.writeScriptBin "deploy-${host}" ''
-          nixos-rebuild --fast --flake .#${host} --target-host ${user}@${host} --use-remote-sudo switch
-        '');
+      flake.nixosConfigurations = let
+        mkNixosSystem = imports:
+          nixpkgs.lib.nixosSystem {
+            inherit specialArgs;
+            modules = [
+              {
+                inherit imports;
+                nixpkgs = {
+                  inherit overlays;
+                  hostPlatform = "x86_64-linux";
+                };
+              }
+              self.nixosModules.core
+              self.nixosModules.nixos
+              self.nixosModules.cachix
+              self.nixosModules.peter
+              self.nixosModules.home-manager
+              inputs.agenix.nixosModules.age
+            ];
+          };
       in {
+        grancel = mkNixosSystem [
+          self.nixosModules.grancel
+        ];
+        ruan = mkNixosSystem [
+          self.nixosModules.ruan
+          inputs.podcasts.nixosModules.default
+          inputs.weather.nixosModules.default
+        ];
+        crossbell = mkNixosSystem [
+          self.nixosModules.crossbell
+        ];
+      };
+
+      flake.legacyPackages.aarch64-linux.nixOnDroidConfigurations.arseille = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+        pkgs = import nixpkgs {
+          overlays = [inputs.nix-on-droid.overlays.default] ++ overlays;
+          system = "aarch64-linux";
+        };
+        system.stateVersion = "22.11";
+        home-manager-path = home-manager.outPath;
+        modules = [
+          ./hosts/arseille
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = extraSpecialArgs;
+            home-manager.config = import ./home-manager/arseille.nix;
+          }
+        ];
+      };
+
+      perSystem = {
+        pkgs,
+        system,
+        self',
+        inputs',
+        ...
+      }: {
+        _module.args.pkgs = import nixpkgs {
+          inherit system overlays;
+        };
+        legacyPackages.homeConfigurations.jurai = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs extraSpecialArgs;
+          modules = [{imports = [./home-manager/macbook.nix];}];
+        };
+
         formatter = pkgs.alejandra;
         checks = {
-          pre-commit-check = inputs.pre-commit-hooks.lib.${pkgs.system}.run {
+          pre-commit-check = inputs'.pre-commit-hooks.lib.run {
             src = ./.;
             hooks.alejandra.enable = true;
           };
         };
         devShells.default = pkgs.mkShell {
-          inherit (self.checks.${pkgs.system}.pre-commit-check) shellHook;
-          buildInputs = [
-            agenix.packages.${pkgs.system}.agenix
+          inherit (self'.checks.pre-commit-check) shellHook;
+          buildInputs = let
+            deploy = host: user: (pkgs.writeScriptBin "deploy-${host}" ''
+              nixos-rebuild --fast --flake .#${host} --target-host ${user}@${host} --use-remote-sudo switch
+            '');
+          in [
+            inputs'.agenix.packages.agenix
             (deploy "ruan" "peter")
             (deploy "crossbell" "root")
           ];
