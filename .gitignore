@@ -1,3 +1,4 @@
 home.nix
 config.nix
 result
+.pre-commit-config.yaml
