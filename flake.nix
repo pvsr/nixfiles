@@ -11,15 +11,12 @@
 
     home-manager.url = github:nix-community/home-manager/release-23.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    darwin.url = github:lnl7/nix-darwin;
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.url = github:t184256/nix-on-droid;
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.inputs.home-manager.follows = "home-manager";
 
     agenix.url = github:ryantm/agenix;
     agenix.inputs.nixpkgs.follows = "nixpkgs";
-    agenix.inputs.darwin.follows = "darwin";
     agenix.inputs.home-manager.follows = "home-manager";
     podcasts.url = github:pvsr/podcasts;
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
@@ -42,10 +39,7 @@
     self,
     nixpkgs,
     unstable,
-    nixos-hardware,
-    flake-parts,
     home-manager,
-    darwin,
     ...
   }: let
     pluginOverlay = final: prev: {
@@ -87,7 +81,7 @@
         appFont = "Fantasque Sans Mono";
       };
   in
-    flake-parts.lib.mkFlake {inherit inputs;} {
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
 
       flake.nixosModules = {
@@ -106,7 +100,7 @@
           ...
         }: {
           imports = [
-            inputs.home-manager.nixosModules.home-manager
+            home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
