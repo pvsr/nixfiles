@@ -180,7 +180,7 @@
 
         formatter = pkgs.alejandra;
         checks = {
-          pre-commit-check = inputs'.pre-commit-hooks.lib.run {
+          pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
             src = ./.;
             hooks.alejandra.enable = true;
           };
