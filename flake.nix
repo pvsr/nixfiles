@@ -85,7 +85,7 @@
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
 
       flake.nixosModules = {
-        core = import ./modules/core.nix;
+        nix = import ./modules/nix.nix;
         nixos = import ./modules/nixos.nix;
         cachix = import ./modules/cachix.nix;
 
@@ -123,7 +123,7 @@
                   hostPlatform = "x86_64-linux";
                 };
               }
-              self.nixosModules.core
+              self.nixosModules.nix
               self.nixosModules.nixos
               self.nixosModules.cachix
               self.nixosModules.peter
