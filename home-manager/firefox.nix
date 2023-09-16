@@ -10,7 +10,7 @@
       name = "default";
       search = {
         force = true;
-        default = "DuckDuckGo";
+        default = "Kagi";
         engines = let
           daily = 24 * 60 * 60 * 1000;
         in {
@@ -19,6 +19,20 @@
           "eBay".metaData.hidden = true;
           "Wikipedia (en)".metaData.alias = "w";
           "Google".metaData.alias = "g";
+          "Kagi" = {
+            urls = [
+              {
+                template = "https://kagi.com/search?q={searchTerms}";
+              }
+              {
+                template = "https://kagi.com/api/autosuggest?q={searchTerms}";
+                type = "application/x-suggestions+json";
+              }
+            ];
+            iconUpdateURL = "https://github.com/kagisearch/browser_extensions/blob/e65c723370a2ee3960120612d2d46f3c9bfb6d87/shared/icons/icon_32px.png?raw=true";
+            updateInterval = daily;
+            definedAliases = ["k"];
+          };
           "YouTube" = {
             urls = [{template = "https://www.youtube.com/results?search_query={searchTerms}";}];
             iconUpdateURL = "https://www.youtube.com/s/desktop/271dfaff/img/favicon_144x144.png";
