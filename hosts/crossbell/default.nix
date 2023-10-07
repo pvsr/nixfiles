@@ -23,8 +23,9 @@
       ip_prefixes = ["100.64.0.0/10"];
       server_url = "https://tailscale.peterrice.xyz";
       dns_config.base_domain = "ts.peterrice.xyz";
-      dns_config.nameservers = ["1.1.1.1"];
-      dns_config.domains = ["peter.ts.peterrice.xyz" "ts.peterrice.xyz"];
+      dns_config.magic_dns = true;
+      dns_config.nameservers = ["1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001"];
+      dns_config.override_local_dns = true;
     };
 
     openssh.enable = true;

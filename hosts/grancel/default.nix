@@ -15,7 +15,6 @@
 
   networking.hostName = "grancel";
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
-  networking.hosts = {"192.168.0.110" = ["ruan"];};
 
   console.font = "Lat2-Terminus16";
   console.keyMap = "us";
