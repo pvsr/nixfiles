@@ -35,15 +35,9 @@
     fish-prompt-pvsr.flake = false;
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    unstable,
-    home-manager,
-    ...
-  }: let
+  outputs = inputs: let
     overlays = [(import ./overlay.nix inputs)];
-    specialArgs.flake = {inherit self inputs;};
+    specialArgs.flake = {inherit inputs;};
     specialArgs.appFont = "Fantasque Sans Mono";
     extraSpecialArgs = specialArgs;
   in
@@ -51,11 +45,11 @@
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
 
       flake.nixosConfigurations = builtins.mapAttrs (hostName: hostModule:
-        nixpkgs.lib.nixosSystem {
+        inputs.nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
             hostModule
-            home-manager.nixosModules.home-manager
+            inputs.home-manager.nixosModules.home-manager
             inputs.agenix.nixosModules.age
             {
               nixpkgs = {
@@ -76,12 +70,12 @@
         }) (import ./hosts);
 
       flake.legacyPackages.aarch64-linux.nixOnDroidConfigurations.arseille = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-        pkgs = import nixpkgs {
+        pkgs = import inputs.nixpkgs {
           overlays = [inputs.nix-on-droid.overlays.default] ++ overlays;
           system = "aarch64-linux";
         };
         system.stateVersion = "22.11";
-        home-manager-path = home-manager.outPath;
+        home-manager-path = inputs.home-manager.outPath;
         modules = [
           ./hosts/arseille
           {
@@ -100,10 +94,10 @@
         inputs',
         ...
       }: {
-        _module.args.pkgs = import nixpkgs {
+        _module.args.pkgs = import inputs.nixpkgs {
           inherit system overlays;
         };
-        legacyPackages.homeConfigurations.jurai = home-manager.lib.homeManagerConfiguration {
+        legacyPackages.homeConfigurations.jurai = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs extraSpecialArgs;
           modules = [./home-manager/macbook.nix];
         };
