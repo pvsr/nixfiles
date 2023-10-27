@@ -88,60 +88,33 @@
         nix = import ./modules/nix.nix;
         nixos = import ./modules/nixos.nix;
 
-        grancel = import ./hosts/grancel;
-        ruan = import ./hosts/ruan;
-        crossbell = import ./hosts/crossbell;
-
         peter = import ./users/peter.nix;
-        home-manager = {
-          pkgs,
-          config,
-          ...
-        }: {
-          imports = [
+      };
+
+      flake.nixosConfigurations = builtins.mapAttrs (hostName: hostModule:
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          modules = [
+            hostModule
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = extraSpecialArgs;
-              home-manager.users.peter = import ./home-manager/${config.networking.hostName}.nix;
+              nixpkgs = {
+                inherit overlays;
+                hostPlatform = "x86_64-linux";
+              };
+              home-manager = {
+                inherit extraSpecialArgs;
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.peter = import ./home-manager/${hostName}.nix;
+              };
             }
+            self.nixosModules.nix
+            self.nixosModules.nixos
+            self.nixosModules.peter
+            inputs.agenix.nixosModules.age
           ];
-        };
-      };
-
-      flake.nixosConfigurations = let
-        mkNixosSystem = imports:
-          nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            modules = [
-              {
-                inherit imports;
-                nixpkgs = {
-                  inherit overlays;
-                  hostPlatform = "x86_64-linux";
-                };
-              }
-              self.nixosModules.nix
-              self.nixosModules.nixos
-              self.nixosModules.peter
-              self.nixosModules.home-manager
-              inputs.agenix.nixosModules.age
-            ];
-          };
-      in {
-        grancel = mkNixosSystem [
-          self.nixosModules.grancel
-        ];
-        ruan = mkNixosSystem [
-          self.nixosModules.ruan
-          inputs.podcasts.nixosModules.default
-          inputs.weather.nixosModules.default
-        ];
-        crossbell = mkNixosSystem [
-          self.nixosModules.crossbell
-        ];
-      };
+        }) (import ./hosts);
 
       flake.legacyPackages.aarch64-linux.nixOnDroidConfigurations.arseille = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
         pkgs = import nixpkgs {

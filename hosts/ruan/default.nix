@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  flake,
   ...
 }: let
   zemuriaAddress = "100.64.0.3";
@@ -12,6 +13,8 @@ in {
     ./transmission.nix
     ../../modules/graphical.nix
     ../../modules/steam.nix
+    flake.inputs.weather.nixosModules.default
+    flake.inputs.podcasts.nixosModules.default
   ];
 
   boot.loader.systemd-boot.enable = true;
