@@ -105,7 +105,7 @@
         };
         legacyPackages.homeConfigurations.jurai = home-manager.lib.homeManagerConfiguration {
           inherit pkgs extraSpecialArgs;
-          modules = [{imports = [./home-manager/macbook.nix];}];
+          modules = [./home-manager/macbook.nix];
         };
 
         formatter = pkgs.alejandra;
