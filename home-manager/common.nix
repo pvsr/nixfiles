@@ -142,6 +142,7 @@ in {
         ytdl-raw-options = "sub-langs=\"en*,ja*\"";
         # for thumbnail/youtube-quality
         osc = false;
+        script-opts-append = "autocrop-auto=no";
       };
     };
   };
