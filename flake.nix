@@ -50,19 +50,13 @@
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
 
-      flake.nixosModules = {
-        nix = import ./modules/nix.nix;
-        nixos = import ./modules/nixos.nix;
-
-        peter = import ./users/peter.nix;
-      };
-
       flake.nixosConfigurations = builtins.mapAttrs (hostName: hostModule:
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
             hostModule
             home-manager.nixosModules.home-manager
+            inputs.agenix.nixosModules.age
             {
               nixpkgs = {
                 inherit overlays;
@@ -75,10 +69,9 @@
                 users.peter = import ./home-manager/${hostName}.nix;
               };
             }
-            self.nixosModules.nix
-            self.nixosModules.nixos
-            self.nixosModules.peter
-            inputs.agenix.nixosModules.age
+            (import ./modules/nix.nix)
+            (import ./modules/nixos.nix)
+            (import ./users/peter.nix)
           ];
         }) (import ./hosts);
 
