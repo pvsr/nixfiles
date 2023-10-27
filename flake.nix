@@ -42,44 +42,10 @@
     home-manager,
     ...
   }: let
-    pluginOverlay = final: prev: {
-      tmuxPlugins =
-        prev.tmuxPlugins
-        // {
-          srcery = prev.tmuxPlugins.mkTmuxPlugin {
-            pluginName = "srcery";
-            version = "git";
-            src = inputs.srcery-tmux;
-          };
-        };
-      fishPlugins =
-        prev.fishPlugins
-        // {
-          fish-prompt-pvsr = prev.fishPlugins.buildFishPlugin {
-            pname = "fish-prompt-pvsr";
-            version = "git";
-            src = inputs.fish-prompt-pvsr;
-          };
-        };
-    };
-    overlays = [
-      pluginOverlay
-      (final: prev: let
-        system = prev.stdenv.hostPlatform.system;
-        unstable = inputs.unstable.legacyPackages.${system};
-      in {
-        inherit (inputs.qbpm.packages.${system}) qbpm;
-        inherit (inputs.agenix.packages.${system}) agenix;
-        inherit (unstable) foot;
-        transmission = unstable.transmission_4;
-      })
-    ];
+    overlays = [(import ./overlay.nix inputs)];
     specialArgs.flake = {inherit self inputs;};
-    extraSpecialArgs =
-      specialArgs
-      // {
-        appFont = "Fantasque Sans Mono";
-      };
+    specialArgs.appFont = "Fantasque Sans Mono";
+    extraSpecialArgs = specialArgs;
   in
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
