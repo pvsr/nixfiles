@@ -37,7 +37,7 @@
 
   outputs = inputs: let
     overlays = [(import ./overlay.nix inputs)];
-    specialArgs.flake = {inherit inputs;};
+    specialArgs.inputs = inputs;
     specialArgs.appFont = "Fantasque Sans Mono";
     extraSpecialArgs = specialArgs;
   in

@@ -2,11 +2,11 @@
   config,
   lib,
   pkgs,
-  flake,
+  inputs,
   ...
 }: {
   imports = [
-    flake.inputs.nixos-hardware.nixosModules.common-pc-ssd
+    inputs.nixos-hardware.nixosModules.common-pc-ssd
   ];
 
   boot.initrd.availableKernelModules = ["ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk"];

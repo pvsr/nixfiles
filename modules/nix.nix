@@ -1,12 +1,8 @@
 {
-  flake,
   lib,
+  inputs,
   ...
-}: let
-  inputs = with flake.inputs; {
-    inherit self nixpkgs unstable home-manager;
-  };
-in {
+}: {
   nix = {
     settings = {
       auto-optimise-store = true;
@@ -17,7 +13,7 @@ in {
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    registry = builtins.mapAttrs (_: value: {flake = value;}) inputs;
+    registry = builtins.mapAttrs (_: flake: {inherit flake;}) inputs;
   };
 
   environment.etc =
