@@ -87,7 +87,6 @@
       flake.nixosModules = {
         nix = import ./modules/nix.nix;
         nixos = import ./modules/nixos.nix;
-        cachix = import ./modules/cachix.nix;
 
         grancel = import ./hosts/grancel;
         ruan = import ./hosts/ruan;
@@ -125,7 +124,6 @@
               }
               self.nixosModules.nix
               self.nixosModules.nixos
-              self.nixosModules.cachix
               self.nixosModules.peter
               self.nixosModules.home-manager
               inputs.agenix.nixosModules.age

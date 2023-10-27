@@ -53,6 +53,7 @@
   };
 
   documentation.dev.enable = true;
+  nix.extraOptions = "keep-outputs = true";
 
   # srcery
   console.colors = [
