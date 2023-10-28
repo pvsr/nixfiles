@@ -60,12 +60,12 @@
                 inherit extraSpecialArgs;
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.peter = import ./home-manager/${hostName}.nix;
+                users.peter = ./home-manager/${hostName}.nix;
               };
             }
-            (import ./modules/nix.nix)
-            (import ./modules/nixos.nix)
-            (import ./users/peter.nix)
+            ./modules/nix.nix
+            ./modules/nixos.nix
+            ./users/peter.nix
           ];
         }) (import ./hosts);
 
@@ -82,7 +82,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = extraSpecialArgs;
-            home-manager.config = import ./home-manager/arseille.nix;
+            home-manager.config = ./home-manager/arseille.nix;
           }
         ];
       };
