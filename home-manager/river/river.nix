@@ -74,6 +74,7 @@ in {
         riverctl map normal $mod X spawn 'umpv $(wl-paste)'
         riverctl default-layout rivertile
         sh -c "systemctl --user import-environment; systemctl --user start river-session.target; systemctl --user restart graphical-session.target"
+        riverctl spawn ${pkgs.mako}/bin/mako
         riverctl spawn ${pkgs.yambar}/bin/yambar
         [[ -e ~/.background ]] && riverctl spawn '${pkgs.swaybg}/bin/swaybg -i ~/.background'
         exec rivertile -view-padding 6 -outer-padding 6
