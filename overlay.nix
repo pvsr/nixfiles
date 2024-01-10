@@ -4,8 +4,7 @@ inputs: final: prev: let
 in {
   inherit (inputs.qbpm.packages.${system}) qbpm;
   inherit (inputs.agenix.packages.${system}) agenix;
-  inherit (unstable) foot;
-  transmission = unstable.transmission_4;
+  transmission = prev.transmission_4;
   tmuxPlugins =
     prev.tmuxPlugins
     // {

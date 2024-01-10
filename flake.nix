@@ -2,14 +2,14 @@
   description = "A system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/release-23.05;
+    nixpkgs.url = github:nixos/nixpkgs/release-23.11;
     unstable.url = github:nixos/nixpkgs/nixos-unstable;
     nixos-hardware.url = github:nixos/nixos-hardware;
     flake-parts.url = "github:hercules-ci/flake-parts";
     pre-commit-hooks.url = github:cachix/pre-commit-hooks.nix;
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = github:nix-community/home-manager/release-23.05;
+    home-manager.url = github:nix-community/home-manager/release-23.11;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.url = github:t184256/nix-on-droid;
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
