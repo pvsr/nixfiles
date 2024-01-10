@@ -126,6 +126,13 @@ in {
   systemd.services.weather.after = ["tailscaled.service"];
   systemd.services.nitter.after = ["tailscaled.service"];
 
+  systemd.services.komga.serviceConfig.EnvironmentFile = config.age.secrets."komga-environment".path;
+  age.secrets."komga-environment" = {
+    file = ./secrets/komga-environment.age;
+    owner = "komga";
+    group = "komga";
+  };
+
   networking.firewall.allowedTCPPorts = [
     24424
     8080

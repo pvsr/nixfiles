@@ -4,6 +4,7 @@ let
     "radicale-users.age"
     "transmission-credentials.json.age"
     "miniflux-credentials.age"
+    "komga-environment.age"
   ];
 in
   builtins.listToAttrs (
