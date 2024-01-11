@@ -19,6 +19,22 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  programs.river = {
+    enable = true;
+    extraPackages = with pkgs; [
+      foot
+      feh
+      xdg-utils
+      wl-clipboard
+      libnotify
+      dmenu-wayland
+      swaylock
+      pamixer
+      playerctl
+      pulsemixer
+    ];
+  };
+
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
@@ -45,9 +61,6 @@
     };
 
     systemPackages = with pkgs; [
-      #cursor
-      feh
-      pulsemixer
       man-pages
     ];
   };

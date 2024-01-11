@@ -12,15 +12,6 @@ in {
     ../foot.nix
   ];
 
-  home.packages = with pkgs; [
-    river
-    wl-clipboard
-    pamixer
-    playerctl
-    dmenu-wayland
-    yambar
-  ];
-
   programs = {
     mpv.profiles.standard.gpu-context = "wayland";
     fuzzel.enable = true;
