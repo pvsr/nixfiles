@@ -115,7 +115,6 @@ in {
   };
   systemd.services.radicale.after = ["tailscaled.service"];
   systemd.services.weather.after = ["tailscaled.service"];
-  systemd.services.nitter.after = ["tailscaled.service"];
 
   networking.firewall.allowedTCPPorts = [
     24424
