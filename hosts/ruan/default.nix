@@ -127,4 +127,5 @@ in {
   ];
 
   system.stateVersion = "20.09";
+  services.postgresql.package = pkgs.postgresql_15;
 }
