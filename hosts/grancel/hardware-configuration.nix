@@ -39,7 +39,7 @@
   };
 
   fileSystems."/var/lib/swap" = {
-    device = "/dev/disk/by-label/grancel";
+    device = "/dev/disk/by-label/grancel-new";
     fsType = "btrfs";
     options = ["subvol=swap"];
   };
