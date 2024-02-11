@@ -125,6 +125,6 @@ in {
   networking.firewall.allowedUDPPorts = [
   ];
 
-  system.stateVersion = "20.09";
+  system.stateVersion = "23.11";
   services.postgresql.package = pkgs.postgresql_15;
 }
