@@ -86,15 +86,6 @@ in {
     jellyfin.group = "users";
     jellyfin.openFirewall = true; # 8096 only
 
-    nitter = {
-      enable = true;
-      server.port = 7775;
-      server.hostname = "${zemuriaAddress}:7775";
-      preferences.replaceTwitter = "ruan:7775";
-      preferences.hlsPlayback = true;
-      preferences.theme = "Twitter Dark";
-    };
-
     btrbk = {
       sshAccess = [
         {
@@ -131,7 +122,6 @@ in {
     8080
     52032
     15658
-    7775
   ];
   networking.firewall.allowedUDPPorts = [
   ];
