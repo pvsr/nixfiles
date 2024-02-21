@@ -12,13 +12,10 @@
   ];
 
   hardware.enableRedistributableFirmware = true;
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
-
-  networking.interfaces.enp4s0.useDHCP = true;
-  # networking.interfaces.wlp3s0.useDHCP = true;
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/grancel";
@@ -39,7 +36,7 @@
   };
 
   fileSystems."/var/lib/swap" = {
-    device = "/dev/disk/by-label/grancel-new";
+    device = "/dev/disk/by-label/grancel";
     fsType = "btrfs";
     options = ["subvol=swap"];
   };
@@ -56,18 +53,5 @@
     device = "/dev/disk/by-uuid/b29448d8-fe2b-4b80-8a27-2987665ddde6";
     fsType = "btrfs";
     options = ["defaults" "compress=zstd"];
-  };
-
-  fileSystems."/media/grancel-new" = {
-    device = "/dev/disk/by-label/grancel-new";
-    fsType = "btrfs";
-    options = ["defaults" "compress=zstd"];
-  };
-
-  specialisation.new-partitions.configuration.fileSystems = {
-    "/".device = lib.mkForce "/dev/disk/by-label/grancel-new";
-    "/home".device = lib.mkForce "/dev/disk/by-label/grancel-new";
-    "/var/lib/swap".device = lib.mkForce "/dev/disk/by-label/grancel-new";
-    "/boot".device = lib.mkForce "/dev/disk/by-label/boot-new";
   };
 }
