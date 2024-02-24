@@ -10,6 +10,7 @@ in {
     ./fish.nix
     ./tmux.nix
     ./helix
+    ./git.nix
   ];
 
   programs.home-manager.enable = true;
@@ -53,18 +54,6 @@ in {
     enable = true;
     enableBashIntegration = false;
     nix-direnv.enable = true;
-  };
-
-  programs.git = {
-    enable = true;
-    package = pkgs.gitAndTools.gitFull;
-    ignores = ["Session.vim" "healthcheck.out" ".envrc" ".direnv"];
-    userName = "Peter Rice";
-    userEmail = lib.mkDefault "peter@peterrice.xyz";
-    extraConfig = {
-      commit.verbose = true;
-      pull.rebase = true;
-    };
   };
 
   programs.fzf = {
