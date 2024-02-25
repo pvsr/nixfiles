@@ -35,6 +35,7 @@
           popd 2> /dev/null
         end
       '';
+      fzf_key_bindings = "";
       fish_mode_prompt = "";
       fish_prompt_loading_indicator = ''
         echo -n "$argv[1]" | sed -r 's/\x1B\[[0-9;]*[JKmsu]//g' | read -zl uncolored_last_prompt
