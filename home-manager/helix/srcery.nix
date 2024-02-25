@@ -5,6 +5,7 @@
   ...
 }: {
   xdg.configFile."helix/themes/srcery.toml".text = let
+    # TODO use inherits instead?
     gruvbox = builtins.readFile "${pkgs.helix}/lib/runtime/themes/gruvbox.toml";
     gruvboxColors = [
       "#282828"

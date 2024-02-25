@@ -6,17 +6,9 @@
 }: {
   imports = [./srcery.nix];
 
-  home.sessionVariables = {
-    EDITOR = "hx";
-    VISUAL = "hx";
-  };
-
-  programs.git.extraConfig.core.editor = "hx";
-
   programs.helix = {
     enable = true;
-    # TODO 23.11
-    # defaultEditor = true;
+    defaultEditor = true;
     settings = {
       theme = "srcery";
       editor = {
@@ -25,6 +17,7 @@
         rulers = [80];
         color-modes = true;
         bufferline = "multiple";
+        smart-tab.supersede-menu = true;
         whitespace.render.tab = "all";
         whitespace.render.newline = "all";
         cursor-shape = {
@@ -38,9 +31,25 @@
       };
       keys.insert = {
         "C-l" = "move_char_right";
-        "C-space" = ["match_brackets" "move_char_right"];
       };
       keys.normal.minus = "file_picker_in_current_buffer_directory";
+    };
+    languages = {
+      language-server.ruff-lsp = {
+        command = "ruff-lsp";
+      };
+      language = [
+        {
+          name = "python";
+          auto-format = true;
+          language-servers = ["ruff-lsp" "pylsp"];
+        }
+        {
+          name = "nix";
+          formatter = {command = "alejandra";};
+          auto-format = true;
+        }
+      ];
     };
   };
 }
