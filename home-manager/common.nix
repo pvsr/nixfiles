@@ -32,6 +32,8 @@ in {
     manix
     nvd
     sd
+    duf
+    du-dust
   ];
 
   home.language.base = "en-US.UTF-8";
