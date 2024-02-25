@@ -77,9 +77,6 @@ in {
   programs.jq.enable = true;
   programs.zoxide.enable = true;
 
-  programs.eza.enable = true;
-  programs.eza.enableAliases = true;
-
   programs.mpv = {
     bindings = {};
     scripts = with pkgs.mpvScripts; [

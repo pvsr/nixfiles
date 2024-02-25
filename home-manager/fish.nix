@@ -5,6 +5,10 @@
   ...
 }: {
   home.shellAliases.fish = "SHELL=${pkgs.fish}/bin/fish command fish";
+
+  programs.eza.enable = true;
+  programs.eza.git = true;
+
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
@@ -56,6 +60,13 @@
       gan = "git annex";
       mshuf = "mpv --no-video --shuffle ~/annex/music";
       pmpv = "umpv (wl-paste)";
+      ls = "eza";
+      ll = "eza -l";
+      la = "eza -la";
+      e = "eza -l";
+      ea = "eza -la";
+      er = "eza -ls modified";
+      et = "eza -T";
     };
   };
 
