@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  networking.firewall.allowedTCPPorts = [5999];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [5999];
 
   services.podcasts = {
     annexDir = "/media/data/annex";
@@ -22,4 +22,5 @@
     };
   };
   systemd.services.serve-podcasts.after = ["tailscaled.service"];
+  systemd.services.serve-podcasts.wants = ["tailscaled.service"];
 }

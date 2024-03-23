@@ -4,7 +4,11 @@
   inputs,
   ...
 }: let
-  zemuriaAddress = "100.64.0.3";
+  tailscaleAddress = "100.64.0.3";
+  requireTailscale = {
+    after = ["tailscaled.service"];
+    wants = ["tailscaled.service"];
+  };
 in {
   imports = [
     ./hardware-configuration.nix
@@ -45,13 +49,13 @@ in {
   };
   services = {
     openssh.enable = true;
-    openssh.ports = [24424];
+    openssh.ports = [22 24424];
     openssh.settings.PasswordAuthentication = false;
     openssh.settings.AcceptEnv = "TERMINFO COLORTERM";
 
     radicale.enable = true;
     radicale.settings = {
-      server.hosts = ["${zemuriaAddress}:52032"];
+      server.hosts = ["${tailscaleAddress}:52032"];
       auth = {
         type = "htpasswd";
         htpasswd_filename = config.age.secrets."radicale-users".path;
@@ -73,7 +77,7 @@ in {
     };
 
     weather.enable = true;
-    weather.bind = "${zemuriaAddress}:15658";
+    weather.bind = "${tailscaleAddress}:15658";
 
     komga = {
       enable = true;
@@ -113,16 +117,18 @@ in {
       };
     };
   };
-  systemd.services.radicale.after = ["tailscaled.service"];
-  systemd.services.weather.after = ["tailscaled.service"];
+  systemd.services.radicale = requireTailscale;
+  systemd.services.weather = requireTailscale;
 
   networking.firewall.allowedTCPPorts = [
-    24424
-    8080
-    52032
-    15658
+    24424 # sshd
+    15658 # weather
   ];
-  networking.firewall.allowedUDPPorts = [
+
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
+    22
+    52032 # radicale
+    47808 # dev
   ];
 
   system.stateVersion = "23.11";

@@ -13,4 +13,6 @@
     adminCredentialsFile = config.age.secrets."miniflux-credentials".path;
   };
   systemd.services.miniflux.after = ["tailscaled.service"];
+  systemd.services.miniflux.wants = ["tailscaled.service"];
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [8080];
 }

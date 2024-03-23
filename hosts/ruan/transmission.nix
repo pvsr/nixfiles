@@ -18,7 +18,6 @@ in {
     settings = {
       download-dir = "${cfg.home}/downloads";
       peer-port = 51555;
-      #rpc-host-whitelist = host;
       rpc-port = 9919;
       rpc-host-whitelist = "ruan";
       rpc-bind-address = "0.0.0.0";
