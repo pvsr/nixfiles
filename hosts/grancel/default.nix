@@ -52,12 +52,6 @@
                 root = {};
               };
             };
-            "/media/gdata2" = {
-              target."ssh://ruan:24424/media/leiston/btrbk_backups/grancel/gdata2" = {};
-              subvolume = {
-                home = {};
-              };
-            };
           };
         };
       };
