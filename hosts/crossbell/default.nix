@@ -41,6 +41,7 @@
       "rss.peterrice.xyz".extraConfig = "reverse_proxy ruan:8080";
       "comics.peterrice.xyz".extraConfig = "reverse_proxy ruan:19191";
       "weather.peterrice.xyz".extraConfig = "reverse_proxy ruan:15658";
+      "recipes.peterrice.xyz".extraConfig = "reverse_proxy ruan:36597";
       "calendar.peterrice.xyz".extraConfig = "reverse_proxy ruan:52032";
       "podcasts.peterrice.xyz".extraConfig = "reverse_proxy ruan:5999";
       "tailscale.peterrice.xyz".extraConfig = "reverse_proxy localhost:9753";

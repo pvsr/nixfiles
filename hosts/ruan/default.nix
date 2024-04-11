@@ -47,6 +47,9 @@ in {
     owner = "radicale";
     group = "radicale";
   };
+  age.secrets."tandoor-key" = {
+    file = ./secrets/tandoor-key.age;
+  };
   services = {
     openssh.enable = true;
     openssh.ports = [22 24424];
@@ -85,6 +88,13 @@ in {
       openFirewall = true;
     };
 
+    tandoor-recipes = {
+      enable = true;
+      address = tailscaleAddress;
+      port = 36597;
+      extraConfig.SECRET_KEY_FILE = config.age.secrets."tandoor-key".path;
+    };
+
     jellyfin.enable = true;
     jellyfin.user = "peter";
     jellyfin.group = "users";
@@ -119,10 +129,12 @@ in {
   };
   systemd.services.radicale = requireTailscale;
   systemd.services.weather = requireTailscale;
+  systemd.services.tandoor-recipes = requireTailscale;
 
   networking.firewall.allowedTCPPorts = [
     24424 # sshd
     15658 # weather
+    36597 # tandoor
   ];
 
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
