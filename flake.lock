@@ -405,11 +405,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1712522689,
-        "narHash": "sha256-R2x8xmuxLUUgjbDlEJ5XEKfQBXQEF5DkU3E2KnxZkKQ=",
+        "lastModified": 1714346161,
+        "narHash": "sha256-QsmpO9zWa9PLDm8CACdbAO3GDX6+mJuSsEaRpgSGUpE=",
         "owner": "pvsr",
         "repo": "podcasts",
-        "rev": "e9a6c710df66284ca0aa72485ce04d754b7fe9db",
+        "rev": "e1d17b88903b731d27f4d4775080991ae0a887df",
         "type": "github"
       },
       "original": {

@@ -19,6 +19,7 @@
     serve = {
       enable = true;
       bind = "100.64.0.3:5999";
+      timeout = 120;
     };
   };
   systemd.services.serve-podcasts.after = ["tailscaled.service"];
