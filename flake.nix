@@ -26,7 +26,6 @@
     weather.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     qbpm.url = github:pvsr/qbpm;
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
-    qbpm.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
 
     # sources
     srcery-tmux.url = github:srcery-colors/srcery-tmux;
