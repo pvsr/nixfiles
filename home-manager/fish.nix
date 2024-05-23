@@ -63,6 +63,7 @@
       mshuf = "mpv --no-video --shuffle ~/annex/music";
       pmpv = "umpv (wl-paste)";
       ls = "eza";
+      l = "eza -l";
       ll = "eza -l";
       la = "eza -la";
       e = "eza -l";
