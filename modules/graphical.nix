@@ -48,7 +48,6 @@
       noto-fonts-cjk
       noto-fonts-emoji
       libertinus
-      iosevka
       sarasa-gothic
       font-awesome
       fantasque-sans-mono
