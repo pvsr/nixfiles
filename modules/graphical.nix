@@ -22,6 +22,8 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  xdg.icons.enable = true;
+
   programs.river = {
     enable = true;
     extraPackages = with pkgs; [
