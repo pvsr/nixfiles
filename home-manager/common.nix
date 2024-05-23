@@ -37,14 +37,21 @@ in {
 
   home.language.base = "en-US.UTF-8";
 
-  home.shellAliases = {
-    bell = "echo \\a";
-
-    "hoi4" = "steam steam://rungameid/394360";
-    "eu4" = "steam steam://rungameid/236850";
-    "ck3" = "steam steam://rungameid/1158310";
-    "vic3" = "steam steam://rungameid/529340";
-  };
+  home.shellAliases =
+    {
+      bell = "echo \\a";
+    }
+    //
+    # TODO only if steam command exists
+    lib.mapAttrs (n: id: "steam steam://rungameid/${id}")
+    {
+      "hoi4" = "394360";
+      "eu4" = "236850";
+      "ck3" = "1158310";
+      "vic3" = "529340";
+      "bg3" = "1086940";
+      "p5r" = "1687950";
+    };
 
   # needed for aliases to work
   programs.bash.enable = lib.mkDefault true;
