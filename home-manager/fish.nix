@@ -21,7 +21,8 @@
       __git.init
     '';
     functions = {
-      yts = "umpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
+      yts = "mpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
+      uts = "umpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
       session = ''
         if set -q argv[1]
           set -gx fish_history $argv[1]
