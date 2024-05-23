@@ -72,6 +72,7 @@ in {
   programs.tealdeer.enable = true;
   programs.bat.enable = true;
   programs.htop.enable = true;
+  programs.bottom.enable = true;
   programs.password-store.enable = true;
   programs.jq.enable = true;
   programs.zoxide.enable = true;
