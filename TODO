@@ -4,8 +4,6 @@ swayidle
 
 yambar (dhall?)
 
-fix any-nix-shell with fish-async-prompt
-
 wob
 
 helix theme: cursor invisible on ruler

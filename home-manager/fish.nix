@@ -3,8 +3,12 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  zoxideFile = pkgs.runCommandLocal "zoxide.fish" {nativeBuildInputs = [pkgs.zoxide];} "zoxide init fish > $out";
+in {
   home.shellAliases.fish = "SHELL=${pkgs.fish}/bin/fish command fish";
+
+  programs.zoxide.enableFishIntegration = false;
 
   programs.eza.enable = true;
   programs.eza.git = true;
@@ -12,7 +16,7 @@
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
-      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+      ${lib.optionalString config.programs.zoxide.enable "source ${zoxideFile}"}
       set -g fish_key_bindings fish_hybrid_key_bindings
       set -g fish_cursor_default block
       set -g fish_cursor_insert line
@@ -37,6 +41,10 @@
         end
       '';
       fzf_key_bindings = "";
+      # TODO remove when default changes in next major release
+      fish_user_key_bindings = ''
+        bind \cc 'commandline ""'
+      '';
       fish_mode_prompt = "";
       fish_prompt_loading_indicator = ''
         echo -n "$argv[1]" | sed -r 's/\x1B\[[0-9;]*[JKmsu]//g' | read -zl uncolored_last_prompt

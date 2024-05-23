@@ -13,6 +13,7 @@
   ];
 
   programs.fish.enable = true;
+  programs.fish.useBabelfish = true;
   users.defaultUserShell = pkgs.fish;
 
   programs.ssh.startAgent = true;
