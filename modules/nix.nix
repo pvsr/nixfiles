@@ -10,9 +10,6 @@
       allowed-users = ["@wheel"];
       trusted-users = ["root" "@wheel"];
     };
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
     registry = builtins.mapAttrs (_: flake: {inherit flake;}) inputs;
   };
 

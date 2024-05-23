@@ -25,6 +25,8 @@
     options = ["subvol=tmp_root" "defaults" "compress=zstd"];
   };
 
+  # TODO debug postDeviceCommands with systemd-initrd (change id: myz)
+  boot.initrd.systemd.enable = false;
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     mkdir /mnt
     mount /dev/disk/by-label/grancel /mnt

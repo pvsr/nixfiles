@@ -16,6 +16,8 @@
     pulse.enable = true;
   };
 
+  services.openssh.settings.AcceptEnv = "TERMINFO COLORTERM";
+
   boot.tmp = {
     useTmpfs = true;
     tmpfsSize = "75%";

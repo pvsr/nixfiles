@@ -17,6 +17,7 @@ in {
     ./transmission.nix
     ../../modules/graphical.nix
     ../../modules/steam.nix
+    inputs.srvos.nixosModules.desktop
     inputs.weather.nixosModules.default
     inputs.podcasts.nixosModules.default
   ];
@@ -25,12 +26,9 @@ in {
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.useDHCP = false;
-  networking.interfaces.enp37s0.useDHCP = true;
-  networking.interfaces.wlp36s0.useDHCP = true;
-
   networking.hostName = "ruan";
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
+  networking.useDHCP = true;
 
   console.keyMap = "us";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -53,8 +51,6 @@ in {
   services = {
     openssh.enable = true;
     openssh.ports = [22 24424];
-    openssh.settings.PasswordAuthentication = false;
-    openssh.settings.AcceptEnv = "TERMINFO COLORTERM";
 
     radicale.enable = true;
     radicale.settings = {

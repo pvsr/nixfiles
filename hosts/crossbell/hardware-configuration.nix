@@ -14,8 +14,6 @@
   boot.kernelModules = [];
   boot.extraModulePackages = [];
 
-  boot.loader.grub.device = "/dev/vda";
-
   fileSystems."/" = {
     device = "/dev/disk/by-label/root";
     fsType = "btrfs";
@@ -25,8 +23,6 @@
   swapDevices = [
     {device = "/dev/disk/by-label/swap";}
   ];
-
-  networking.useDHCP = lib.mkDefault true;
 
   # virtualisation.hypervGuest.enable = true;
 }

@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ../../modules/graphical.nix
     ../../modules/steam.nix
+    inputs.srvos.nixosModules.desktop
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -17,6 +18,7 @@
 
   networking.hostName = "grancel";
   networking.nameservers = ["1.1.1.1" "1.0.0.1"];
+  networking.useDHCP = true;
 
   console.font = "Lat2-Terminus16";
   console.keyMap = "us";
@@ -35,7 +37,6 @@
   services = {
     openssh.enable = true;
     openssh.ports = [22 23232];
-    openssh.settings.PasswordAuthentication = false;
     btrbk = {
       instances.btrbk = {
         onCalendar = "daily";

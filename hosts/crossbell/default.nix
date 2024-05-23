@@ -1,13 +1,15 @@
 {
   config,
   pkgs,
+  lib,
+  inputs,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
+    inputs.srvos.nixosModules.server
+    inputs.srvos.nixosModules.hardware-vultr-vm
   ];
-
-  networking.hostName = "crossbell";
 
   time.timeZone = "America/New_York";
 
@@ -15,6 +17,16 @@
 
   users.users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwIv6+ZEHCVNmIS1vfUO+bqIP2y3hv3h/AzzmvTQ3HI"];
   environment.systemPackages = [config.services.headscale.package];
+
+  # override setting from srvos
+  programs.vim =
+    {
+      defaultEditor = false;
+    }
+    // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.11") {
+      enable = false;
+    };
+
   services = {
     headscale.enable = true;
     headscale.address = "127.0.0.1";
@@ -30,7 +42,6 @@
 
     openssh.enable = true;
     openssh.ports = [18325];
-    openssh.settings.PasswordAuthentication = false;
 
     caddy.enable = true;
     caddy.virtualHosts = {

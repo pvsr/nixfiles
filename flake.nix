@@ -13,6 +13,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.url = github:nix-community/impermanence;
     nix-on-droid.url = github:nix-community/nix-on-droid/release-24.05;
+    srvos.url = github:nix-community/srvos;
+    srvos.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.inputs.home-manager.follows = "home-manager";
 
