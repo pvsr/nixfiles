@@ -26,7 +26,6 @@ in {
     moreutils
     atool
     pastel
-    alejandra
     ranger
     tig
     manix
