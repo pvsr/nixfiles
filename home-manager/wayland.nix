@@ -12,6 +12,7 @@ in {
   ];
 
   home.packages = with pkgs; [
+    xwayland
     feh
     xdg-utils
     wl-clipboard
