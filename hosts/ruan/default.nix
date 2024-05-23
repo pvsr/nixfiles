@@ -66,19 +66,6 @@ in {
       };
     };
 
-    # mpd.enable = true;
-    # mpd.startWhenNeeded = true;
-
-    samba.enable = false;
-    # samba.syncPasswordsByPam = true;
-    samba.shares = {
-      public = {
-        path = "/home/peter/annex";
-        "read only" = true;
-        browsable = "yes";
-      };
-    };
-
     weather.enable = true;
     weather.bind = "${tailscaleAddress}:15658";
 

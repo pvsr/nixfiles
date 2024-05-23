@@ -19,17 +19,6 @@
     fantasque-sans-mono
   ];
 
-  #packageOverrides = pkgs: rec {
-  #  maven = pkgs.maven.override {
-  #    jre = pkgs.jdk11;
-  #  };
-  #};
-
-  #programs.java = {
-  #  enable = true;
-  #  package = pkgs.jdk1;
-  #};
-
   # TODO 23.11: readd firefox module
   # programs.firefox.package = null;
 
