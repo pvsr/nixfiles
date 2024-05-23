@@ -14,7 +14,7 @@
       enable = true;
       user = "peter";
       group = "users";
-      startAt = "5,17:0";
+      startAt = "0,8,16:0";
     };
     serve = {
       enable = true;
