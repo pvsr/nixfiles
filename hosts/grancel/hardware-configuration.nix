@@ -12,6 +12,8 @@
   ];
 
   hardware.enableRedistributableFirmware = true;
+  # TODO remove when default catches up
+  boot.kernelPackages = pkgs.linuxPackages_6_8;
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
