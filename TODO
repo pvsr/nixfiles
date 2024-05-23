@@ -6,8 +6,6 @@ yambar (dhall?)
 
 wob
 
-helix theme: cursor invisible on ruler
-
 move some services to containers
 map service data dirs to annex, e.g. /var/lib/podcasts -> ~/annex/hosted-podcasts
 
