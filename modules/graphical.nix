@@ -26,18 +26,6 @@
 
   programs.river = {
     enable = true;
-    extraPackages = with pkgs; [
-      foot
-      feh
-      xdg-utils
-      wl-clipboard
-      libnotify
-      dmenu-wayland
-      swaylock
-      pamixer
-      playerctl
-      pulsemixer
-    ];
   };
 
   fonts = {

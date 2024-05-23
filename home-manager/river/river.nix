@@ -9,35 +9,8 @@
   dmenuArgs = "-i -fn ${lib.escape [" "] "${appFont} 14"}";
 in {
   imports = [
-    ../foot.nix
+    ../wayland.nix
   ];
-
-  programs = {
-    mpv.profiles.standard.gpu-context = "wayland";
-    fuzzel.enable = true;
-    fuzzel.settings = {
-      main = {
-        font = "${appFont}:size=14";
-        terminal = "${pkgs.foot}/bin/footclient";
-      };
-      # colors = {};
-    };
-  };
-
-  services = {
-    mako = with colors; {
-      enable = true;
-      font = "${appFont} 14";
-      backgroundColor = brightBlue;
-      borderColor = blue;
-      textColor = xgray1;
-    };
-
-    clipman.enable = true;
-    clipman.systemdTarget = "river-session.target";
-
-    playerctld.enable = true;
-  };
 
   systemd.user.targets.river-session = {
     Unit = {
