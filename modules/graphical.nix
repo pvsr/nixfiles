@@ -24,10 +24,6 @@
 
   xdg.icons.enable = true;
 
-  programs.river = {
-    enable = true;
-  };
-
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [

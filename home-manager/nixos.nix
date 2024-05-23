@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    ./river/river.nix
     ./niri
   ];
 
