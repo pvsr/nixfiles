@@ -2,11 +2,11 @@
 {
   imports = [
     ./desktop.nix
+    ./qutebrowser
     ./niri
   ];
 
   home.packages = with pkgs; [
-    qutebrowser
     nvtopPackages.amd
   ];
 
