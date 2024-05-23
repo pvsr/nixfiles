@@ -40,6 +40,7 @@ in {
         sh -c "systemctl --user import-environment; systemctl --user start river-session.target; systemctl --user restart graphical-session.target"
         riverctl spawn ${pkgs.mako}/bin/mako
         riverctl spawn ${pkgs.yambar}/bin/yambar
+        riverctl map normal $mod+Shift C spawn "pkill yambar; ${pkgs.yambar}/bin/yambar"
         [[ -e ~/.background ]] && riverctl spawn '${pkgs.swaybg}/bin/swaybg -i ~/.background'
         exec rivertile -view-padding 6 -outer-padding 6
       ''

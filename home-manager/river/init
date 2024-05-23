@@ -147,3 +147,5 @@ riverctl float-filter-add title "popup title with spaces"
 
 # Set app-ids of views which should use client side decorations
 riverctl csd-filter-add "gedit"
+
+riverctl keyboard-layout -options ctrl:nocaps us
