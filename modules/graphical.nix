@@ -14,7 +14,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  services.earlyoom.enable = true;
 
   boot.tmp = {
     useTmpfs = true;
