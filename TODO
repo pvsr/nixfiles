@@ -2,15 +2,20 @@ qutebrowser
 
 swayidle
 
-yambar (dhall?)
+waybar
 
 wob
 
-move some services to containers
-map service data dirs to annex, e.g. /var/lib/podcasts -> ~/annex/hosted-podcasts
-
 xdg-ninja environment variables
 
-tmux should survive foot crashing
+srvos
 
-starship?
+rg smart case
+
+bind: route *.peterrice.xyz to ruan on LAN??
+
+replace feh and any other x only stuff
+
+replace miniflux and remove postgres
+
+impermanence for other hosts

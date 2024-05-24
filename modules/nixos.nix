@@ -20,4 +20,6 @@
 
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
+  systemd.network.wait-online.ignoredInterfaces = ["tailscale0"];
+  networking.firewall.trustedInterfaces = ["tailscale0"];
 }

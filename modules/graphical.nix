@@ -1,7 +1,14 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  modulesPath,
+  ...
+}: {
   imports = [
     ./bluetooth.nix
+    "${modulesPath}/programs/wayland/wayland-session.nix"
   ];
+
+  xdg.portal.configPackages = [pkgs.niri];
 
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;

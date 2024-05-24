@@ -9,10 +9,9 @@
 in {
   programs.foot = with (builtins.mapAttrs (n: v: lib.removePrefix "#" v) colors); {
     enable = true;
-    server.enable = true;
     settings = {
       main = {
-        font = "${appFont}:size=13";
+        font = "${appFont}:size=15";
         pad = "0x0";
       };
       colors = {

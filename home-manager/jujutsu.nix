@@ -12,6 +12,7 @@
           name = "Peter Rice";
           email = lib.mkDefault "peter@peterrice.xyz";
         };
+        git.auto-local-branch = true;
       };
     };
     fish = {

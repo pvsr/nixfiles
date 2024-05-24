@@ -59,7 +59,7 @@
             definedAliases = ["ji"];
           };
           "RateYourMusic" = {
-            urls = [{template = "https://rateyourmusic.com/search?searchtype=a&searchterm={searchTerms}";}];
+            urls = [{template = "https://rateyourmusic.com/search?searchtype=&searchterm={searchTerms}";}];
             iconUpdateURL = "https://e.snmc.io/3.0/img/logo/sonemic-32.png";
             updateInterval = weekly;
             definedAliases = ["ra"];
@@ -75,17 +75,17 @@
               {template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";}
             ];
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = ["@np"];
+            definedAliases = ["@np" "@nxp"];
           };
           "NixOS Options" = {
             urls = [{template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";}];
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = ["@no"];
+            definedAliases = ["@nxo" "@no"];
           };
           "NixOS Wiki" = {
             urls = [{template = "https://wiki.nixos.org/index.php?search={searchTerms}";}];
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = ["@nw"];
+            definedAliases = ["@nxw" "@nw"];
           };
           "Python Documentation" = {
             urls = [{template = "https://docs.python.org/3/search.html?check_keywords=yes&area=default&q={searchTerms}";}];

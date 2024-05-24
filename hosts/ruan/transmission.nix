@@ -19,9 +19,8 @@ in {
       download-dir = "${cfg.home}/downloads";
       peer-port = 51555;
       rpc-port = 9919;
-      rpc-host-whitelist = "ruan";
       rpc-bind-address = "0.0.0.0";
-      rpc-whitelist = "127.0.0.1,192.168.*.*";
+      rpc-whitelist = "127.0.0.1,192.168.*.*,100.64.0.*";
     };
   };
 

@@ -11,19 +11,19 @@
     terminal = lib.mkDefault "tmux-256color";
     newSession = true;
     clock24 = true;
+    escapeTime = 0;
     plugins = with pkgs; [
       tmuxPlugins.resurrect
       tmuxPlugins.pain-control
       tmuxPlugins.prefix-highlight
-      tmuxPlugins.sensible
       tmuxPlugins.yank
       tmuxPlugins.srcery
     ];
     extraConfig = ''
       set -g mouse on
-      set -ga update-environment WAYLAND_DISPLAY
+      set -ga update-environment "WAYLAND_DISPLAY NIRI_SOCKET COLORTERM"
       set-option -g default-shell "${pkgs.fish}/bin/fish"
-      set-option -g set-titles on
+      set-option -g renumber-windows on
       bind C-a send-prefix
       bind a last-window
     '';

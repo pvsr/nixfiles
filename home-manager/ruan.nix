@@ -9,7 +9,7 @@
   ];
 
   home.packages = with pkgs; [
-    nvtop-amd
+    nvtopPackages.amd
   ];
 
   programs.beets.enable = true;

@@ -32,7 +32,7 @@
 
   services = {
     openssh.enable = true;
-    openssh.ports = [23232];
+    openssh.ports = [22 23232];
     openssh.settings.PasswordAuthentication = false;
     btrbk = {
       instances.btrbk = {
