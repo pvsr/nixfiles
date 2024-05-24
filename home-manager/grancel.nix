@@ -11,7 +11,7 @@
   ];
 
   home.packages = with pkgs; [
-    nvtop-amd
+    nvtopPackages.amd
     sptlrx
   ];
 

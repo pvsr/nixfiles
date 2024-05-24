@@ -36,7 +36,7 @@
     enable = true;
     defaultCacheTtl = 3 * 60 * 60;
     maxCacheTtl = 8 * 60 * 60;
-    pinentryFlavor = "curses";
+    pinentryPackage = pkgs.pinentry-curses;
   };
 
   programs.mpv.enable = true;
