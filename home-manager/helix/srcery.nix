@@ -3,84 +3,54 @@
   pkgs,
   lib,
   ...
-}: {
-  xdg.configFile."helix/themes/srcery.toml".text = let
-    # TODO use inherits instead?
-    gruvbox = builtins.readFile "${pkgs.helix}/lib/runtime/themes/gruvbox.toml";
-    gruvboxColors = [
-      "#282828"
-      "#3c3836"
-      "#504945"
-      "#665c54"
-      "#7c6f64"
+}: let
+  colors = import ../../colors.nix;
+in {
+  programs.helix.themes.srcery = {
+    inherits = "gruvbox";
+    "ui.selection".bg = "bg2";
+    "ui.cursor.primary" = {
+      bg = "fg4";
+      fg = "bg1";
+    };
+    "ui.cursor.match".bg = "bg3";
+    "ui.virtual.jump-label" = {
+      bg = "bg2";
+      modifiers = ["bold"];
+    };
+    "ui.bufferline.active".bg = "bg3";
+    palette = {
+      bg0 = "#1c1b19";
+      bg1 = "#262626";
+      bg2 = "#303030";
+      bg3 = "#3a3a3a";
+      bg4 = "#444444";
 
-      "#fbf1c7"
-      "#ebdbb2"
-      "#d5c4a1"
-      "#bdae93"
-      "#a89984"
+      fg0 = "#fce8c3";
+      fg1 = "#fce8c3";
+      fg2 = "#baa67f";
+      fg3 = "#baa67f";
+      fg4 = "#918175";
 
-      "#a89984"
-      "#928374"
+      gray0 = "#918175";
+      gray1 = "#585858";
 
-      "#cc241d"
-      "#fb4934"
-      "#98971a"
-      "#b8bb26"
-      "#d79921"
-      "#fabd2f"
-      "#458588"
-      "#83a598"
-      "#b16286"
-      "#d3869b"
-      "#689d6a"
-      "#8ec07c"
-      "#d65d0e"
-      "#fe8019"
-      ''
-        "ui.selection" = { bg = "bg3", modifiers = ["reversed"] }
-        "ui.cursor.primary" = { modifiers = ["reversed"] }
-        "ui.cursor.match" = { bg = "bg2" }
-      ''
-    ];
-    srceryColors = [
-      "#1c1b19"
-      "#262626"
-      "#303030"
-      "#3a3a3a"
-      "#444444"
-
-      "#fce8c3"
-      "#fce8c3"
-      "#baa67f"
-      "#baa67f"
-      "#918175"
-
-      "#918175"
-      "#585858"
-
-      "#ef2f27"
-      "#f75341"
-      "#519f50"
-      "#98bc37"
-      "#fbb829"
-      "#fed06e"
-      "#2c78bf"
-      "#68a8e4"
-      "#e02c6d"
-      "#ff5c8f"
-      "#0aaeb3"
-      "#2be4d0"
-      "#ff5f00"
-      "#ff8700"
-      ''
-        "ui.selection" = { bg = "bg2" }
-        "ui.cursor.primary" = { bg = "fg4", fg = "bg1" }
-        "ui.cursor.match" = { bg = "bg3" }
-      ''
-    ];
-  in
-    builtins.replaceStrings gruvboxColors srceryColors gruvbox;
+      red0 = "#ef2f27";
+      red1 = "#f75341";
+      green0 = "#519f50";
+      green1 = "#98bc37";
+      yellow0 = "#fbb829";
+      yellow1 = "#fed06e";
+      blue0 = "#2c78bf";
+      blue1 = "#68a8e4";
+      purple0 = "#e02c6d";
+      purple1 = "#ff5c8f";
+      aqua0 = "#0aaeb3";
+      aqua1 = "#2be4d0";
+      orange0 = "#ff5f00";
+      orange1 = "#ff8700";
+    };
+  };
 
   programs.helix.settings.theme = "srcery";
 }
