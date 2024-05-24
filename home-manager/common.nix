@@ -34,6 +34,7 @@ in {
     sd
     duf
     du-dust
+    foot.terminfo
   ];
 
   home.language.base = "en-US.UTF-8";
