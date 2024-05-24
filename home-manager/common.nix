@@ -11,6 +11,7 @@ in {
     ./tmux.nix
     ./helix
     ./git.nix
+    ./jujutsu.nix
   ];
 
   programs.home-manager.enable = true;
