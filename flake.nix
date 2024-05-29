@@ -68,7 +68,7 @@
           ];
         }) (import ./hosts);
 
-      flake.legacyPackages.aarch64-linux.nixOnDroidConfigurations.arseille = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+      flake.nixOnDroidConfigurations.default = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
         pkgs = import inputs.nixpkgs {
           overlays = [inputs.nix-on-droid.overlays.default] ++ overlays;
           system = "aarch64-linux";
