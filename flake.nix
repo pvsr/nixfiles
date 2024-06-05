@@ -11,6 +11,7 @@
 
     home-manager.url = github:nix-community/home-manager/release-24.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    impermanence.url = github:nix-community/impermanence;
     nix-on-droid.url = github:t184256/nix-on-droid;
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.inputs.home-manager.follows = "home-manager";

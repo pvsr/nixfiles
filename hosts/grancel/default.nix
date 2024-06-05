@@ -1,9 +1,11 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
+    inputs.impermanence.nixosModules.impermanence
     ./hardware-configuration.nix
     ../../modules/graphical.nix
     ../../modules/steam.nix
@@ -49,7 +51,8 @@
               target."ssh://ruan:24424/media/leiston/btrbk_backups/grancel/grancel" = {};
               subvolume = {
                 home = {};
-                root = {};
+                nix = {};
+                persist = {};
               };
             };
           };
@@ -63,4 +66,26 @@
   ];
 
   system.stateVersion = "23.11";
+
+  users.mutableUsers = false;
+  users.users.root.hashedPasswordFile = "/media/grancel/persist/passwords/root";
+  users.users.peter.hashedPasswordFile = "/media/grancel/persist/passwords/peter";
+  environment.persistence."/media/grancel/persist" = {
+    hideMounts = true;
+    directories = [
+      "/var/log"
+      "/var/lib/bluetooth"
+      "/var/lib/machines"
+      "/var/lib/nixos"
+      "/var/lib/systemd"
+      "/var/lib/tailscale"
+    ];
+    files = [
+      "/etc/machine-id"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+    ];
+  };
 }
