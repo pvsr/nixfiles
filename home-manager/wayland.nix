@@ -13,7 +13,7 @@ in {
 
   home.packages = with pkgs; [
     xwayland
-    feh
+    imv
     xdg-utils
     wl-clipboard
     libnotify
