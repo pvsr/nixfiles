@@ -12,7 +12,7 @@
     home-manager.url = github:nix-community/home-manager/release-24.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.url = github:nix-community/impermanence;
-    nix-on-droid.url = github:t184256/nix-on-droid;
+    nix-on-droid.url = github:nix-community/nix-on-droid/release-24.05;
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.inputs.home-manager.follows = "home-manager";
 
@@ -70,11 +70,11 @@
         }) (import ./hosts);
 
       flake.nixOnDroidConfigurations.default = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+        inherit extraSpecialArgs;
         pkgs = import inputs.nixpkgs {
-          overlays = [inputs.nix-on-droid.overlays.default] ++ overlays;
           system = "aarch64-linux";
+          overlays = [inputs.nix-on-droid.overlays.default] ++ overlays;
         };
-        system.stateVersion = "22.11";
         home-manager-path = inputs.home-manager.outPath;
         modules = [
           ./hosts/arseille
