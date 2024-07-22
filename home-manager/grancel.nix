@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    ./common.nix
     ./nixos.nix
     ./tasks.nix
     ./firefox.nix

@@ -10,6 +10,7 @@
     lsof
     psmisc
     utillinux
+    foot.terminfo
   ];
 
   programs.fish.enable = true;
