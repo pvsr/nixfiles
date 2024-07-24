@@ -6,7 +6,6 @@
 }: {
   config.programs.git = {
     enable = true;
-    package = pkgs.gitAndTools.gitFull;
     ignores = [".envrc" ".direnv"];
     userName = "Peter Rice";
     userEmail = lib.mkDefault "peter@peterrice.xyz";
