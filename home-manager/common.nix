@@ -18,10 +18,13 @@
   home.packages = with pkgs; [
     fd
     ripgrep
-    ranger
     nvd
     duf
     du-dust
+    (ranger.override {
+      imagePreviewSupport = false;
+      sixelPreviewSupport = false;
+    })
   ];
 
   home.language.base = "en-US.UTF-8";
