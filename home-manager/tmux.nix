@@ -24,8 +24,11 @@
       set -ga update-environment "WAYLAND_DISPLAY NIRI_SOCKET COLORTERM"
       set-option -g default-shell "${pkgs.fish}/bin/fish"
       set-option -g renumber-windows on
+
       bind C-a send-prefix
       bind a last-window
+
+      set -g @resurrect-dir "$HOME/.local/state/tmux/resurrect"
     '';
   };
 }

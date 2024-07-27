@@ -9,6 +9,7 @@
       sandbox = true;
       allowed-users = ["@wheel"];
       trusted-users = ["root" "@wheel"];
+      use-xdg-base-directories = true;
     };
     registry = builtins.mapAttrs (_: flake: {inherit flake;}) inputs;
   };
