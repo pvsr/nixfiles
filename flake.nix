@@ -104,11 +104,11 @@
           modules = [./home-manager/macbook.nix];
         };
 
-        formatter = pkgs.alejandra;
+        formatter = pkgs.nixfmt-rfc-style;
         checks = {
           pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
             src = ./.;
-            hooks.alejandra = {
+            hooks.nixfmt = {
               enable = true;
               stages = ["pre-push"];
             };
