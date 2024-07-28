@@ -8,7 +8,7 @@
     enable = true;
     ignores = [".envrc" ".direnv"];
     userName = "Peter Rice";
-    userEmail = lib.mkDefault "peter@peterrice.xyz";
+    userEmail = lib.mkDefault "peterrice@fastmail.com";
     extraConfig = {
       init.defaultBranch = "main";
       commit.verbose = true;
