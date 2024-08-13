@@ -52,7 +52,6 @@
               target."ssh://ruan:24424/media/leiston/btrbk_backups/grancel/grancel" = {};
               subvolume = {
                 home = {};
-                nix = {};
                 persist = {};
               };
             };
