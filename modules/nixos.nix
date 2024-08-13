@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   environment.systemPackages = with pkgs; [
     binutils
     coreutils
@@ -30,4 +30,7 @@
 
   systemd.oomd.enableRootSlice = true;
   systemd.oomd.enableUserSlices = true;
+
+  # override srvos, needed by btrbk only
+  security.sudo.execWheelOnly = lib.mkForce false;
 }
