@@ -82,10 +82,4 @@
     fsType = "vfat";
     options = ["defaults"];
   };
-
-  fileSystems."/media/gdata2" = {
-    device = "/dev/disk/by-uuid/b29448d8-fe2b-4b80-8a27-2987665ddde6";
-    fsType = "btrfs";
-    options = ["defaults" "compress=zstd"];
-  };
 }
