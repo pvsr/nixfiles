@@ -46,7 +46,7 @@
         {
           name = "nix";
           formatter = {
-            command = "alejandra";
+            command = "nixfmt";
           };
           auto-format = true;
         }
