@@ -1,13 +1,9 @@
 {
-  config,
   lib,
   pkgs,
   appFont,
   ...
-}: let
-  colors = import ../colors.nix;
-  dmenuArgs = "-i -fn ${lib.escape [" "] "${appFont} 14"}";
-in {
+}: {
   imports = [
     ../wayland.nix
   ];

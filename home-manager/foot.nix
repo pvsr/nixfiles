@@ -1,8 +1,6 @@
 {
-  pkgs,
   lib,
   appFont,
-  flake,
   ...
 }: let
   colors = import ./colors.nix;

@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   ...
 }: {
   age.secrets."miniflux-credentials" = {

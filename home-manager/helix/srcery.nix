@@ -1,11 +1,6 @@
 {
-  config,
-  pkgs,
-  lib,
   ...
-}: let
-  colors = import ../../colors.nix;
-in {
+}: {
   programs.helix.themes.srcery = {
     inherits = "gruvbox";
     "ui.selection".bg = "bg2";

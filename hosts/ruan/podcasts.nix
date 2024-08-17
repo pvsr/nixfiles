@@ -1,7 +1,4 @@
 {
-  pkgs,
-  config,
-  lib,
   ...
 }: {
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [5999];

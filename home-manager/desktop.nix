@@ -3,9 +3,7 @@
   pkgs,
   lib,
   ...
-}: let
-  colors = import ./colors.nix;
-in {
+}: {
   imports = [
     ./common.nix
   ];
