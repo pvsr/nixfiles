@@ -79,6 +79,7 @@
       "/var/lib/nixos"
       "/var/lib/systemd"
       "/var/lib/tailscale"
+      "/etc/nixos"
     ];
     files = [
       "/etc/machine-id"
