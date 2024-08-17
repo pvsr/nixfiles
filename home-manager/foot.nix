@@ -1,10 +1,8 @@
-{
-  lib,
-  appFont,
-  ...
-}: let
+{ lib, appFont, ... }:
+let
   colors = import ./colors.nix;
-in {
+in
+{
   programs.foot = with (builtins.mapAttrs (n: v: lib.removePrefix "#" v) colors); {
     enable = true;
     settings = {

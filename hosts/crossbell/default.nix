@@ -3,7 +3,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     inputs.srvos.nixosModules.server
@@ -14,8 +15,10 @@
 
   nix.gc.automatic = true;
 
-  users.users.root.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwIv6+ZEHCVNmIS1vfUO+bqIP2y3hv3h/AzzmvTQ3HI"];
-  environment.systemPackages = [config.services.headscale.package];
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwIv6+ZEHCVNmIS1vfUO+bqIP2y3hv3h/AzzmvTQ3HI"
+  ];
+  environment.systemPackages = [ config.services.headscale.package ];
 
   # override setting from srvos
   programs.vim =
@@ -31,16 +34,21 @@
     headscale.address = "127.0.0.1";
     headscale.port = 9753;
     headscale.settings = {
-      ip_prefixes = ["100.64.0.0/10"];
+      ip_prefixes = [ "100.64.0.0/10" ];
       server_url = "https://tailscale.peterrice.xyz";
       dns_config.base_domain = "ts.peterrice.xyz";
       dns_config.magic_dns = true;
-      dns_config.nameservers = ["1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001"];
+      dns_config.nameservers = [
+        "1.1.1.1"
+        "1.0.0.1"
+        "2606:4700:4700::1111"
+        "2606:4700:4700::1001"
+      ];
       dns_config.override_local_dns = true;
     };
 
     openssh.enable = true;
-    openssh.ports = [18325];
+    openssh.ports = [ 18325 ];
 
     caddy.enable = true;
     caddy.virtualHosts = {

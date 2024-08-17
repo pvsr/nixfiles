@@ -3,13 +3,15 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   tailscaleAddress = "100.64.0.3";
   requireTailscale = {
-    after = ["tailscaled.service"];
-    wants = ["tailscaled.service"];
+    after = [ "tailscaled.service" ];
+    wants = [ "tailscaled.service" ];
   };
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     ./miniflux.nix
@@ -27,7 +29,10 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "ruan";
-  networking.nameservers = ["1.1.1.1" "1.0.0.1"];
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
   networking.useDHCP = true;
 
   console.keyMap = "us";
@@ -38,7 +43,7 @@ in {
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [agenix];
+  environment.systemPackages = with pkgs; [ agenix ];
 
   age.secrets."radicale-users" = {
     file = ./secrets/radicale-users.age;
@@ -50,11 +55,14 @@ in {
   };
   services = {
     openssh.enable = true;
-    openssh.ports = [22 24424];
+    openssh.ports = [
+      22
+      24424
+    ];
 
     radicale.enable = true;
     radicale.settings = {
-      server.hosts = ["${tailscaleAddress}:52032"];
+      server.hosts = [ "${tailscaleAddress}:52032" ];
       auth = {
         type = "htpasswd";
         htpasswd_filename = config.age.secrets."radicale-users".path;
@@ -87,7 +95,15 @@ in {
       sshAccess = [
         {
           key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFmuZsWQaHVogdYsIYO1qtpKq+jkBp7k01qPh38Ls3UX";
-          roles = ["info" "source" "target" "delete" "snapshot" "send" "receive"];
+          roles = [
+            "info"
+            "source"
+            "target"
+            "delete"
+            "snapshot"
+            "send"
+            "receive"
+          ];
         }
       ];
       instances.btrbk = {
@@ -101,8 +117,8 @@ in {
             "/media/nixos" = {
               target = "/media/leiston/btrbk_backups/ruan/nixos";
               subvolume = {
-                home = {};
-                root = {};
+                home = { };
+                root = { };
               };
             };
           };

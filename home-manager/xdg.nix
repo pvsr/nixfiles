@@ -1,9 +1,13 @@
+{ config, ... }:
+let
+  inherit (config.xdg)
+    cacheHome
+    configHome
+    dataHome
+    stateHome
+    ;
+in
 {
-  config,
-  ...
-}: let
-  inherit (config.xdg) cacheHome configHome dataHome stateHome;
-in {
   xdg.userDirs = {
     enable = true;
     desktop = "${config.home.homeDirectory}/desktop";

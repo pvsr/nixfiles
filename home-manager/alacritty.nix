@@ -1,10 +1,8 @@
-{
-  lib,
-  appFont,
-  ...
-}: let
+{ lib, appFont, ... }:
+let
   colors = import ./colors.nix;
-in {
+in
+{
   programs.alacritty = {
     enable = true;
     settings = {
@@ -17,7 +15,16 @@ in {
         primary.foreground = brightWhite;
 
         normal = {
-          inherit black red green yellow blue magenta cyan white;
+          inherit
+            black
+            red
+            green
+            yellow
+            blue
+            magenta
+            cyan
+            white
+            ;
         };
 
         bright = {

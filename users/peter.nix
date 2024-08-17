@@ -2,7 +2,10 @@
   users.users.peter = {
     uid = 1000;
     isNormalUser = true;
-    extraGroups = ["wheel" "transmission"];
+    extraGroups = [
+      "wheel"
+      "transmission"
+    ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILACfyJt7+ULfX1XFhBbztlTMNDZnRNQbKj5DV2S7uVo peter@grancel"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ9oTGdaddqjAM93FQP83XABhVxZo1jo8ljb62CtUoBq peter@ruan"

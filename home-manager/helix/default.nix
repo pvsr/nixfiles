@@ -1,7 +1,6 @@
+{ ... }:
 {
-  ...
-}: {
-  imports = [./srcery.nix];
+  imports = [ ./srcery.nix ];
 
   programs.helix = {
     enable = true;
@@ -11,7 +10,7 @@
       editor = {
         line-number = "relative";
         scrolloff = 2;
-        rulers = [80];
+        rulers = [ 80 ];
         color-modes = true;
         bufferline = "multiple";
         smart-tab.supersede-menu = true;
@@ -39,11 +38,16 @@
         {
           name = "python";
           auto-format = true;
-          language-servers = ["ruff-lsp" "pylsp"];
+          language-servers = [
+            "ruff-lsp"
+            "pylsp"
+          ];
         }
         {
           name = "nix";
-          formatter = {command = "alejandra";};
+          formatter = {
+            command = "alejandra";
+          };
           auto-format = true;
         }
       ];

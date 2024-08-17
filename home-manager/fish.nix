@@ -3,9 +3,13 @@
   pkgs,
   lib,
   ...
-}: let
-  zoxideFile = pkgs.runCommandLocal "zoxide.fish" {nativeBuildInputs = [pkgs.zoxide];} "zoxide init fish > $out";
-in {
+}:
+let
+  zoxideFile = pkgs.runCommandLocal "zoxide.fish" {
+    nativeBuildInputs = [ pkgs.zoxide ];
+  } "zoxide init fish > $out";
+in
+{
   home.shellAliases.fish = "SHELL=${pkgs.fish}/bin/fish command fish";
 
   programs.zoxide.enableFishIntegration = false;

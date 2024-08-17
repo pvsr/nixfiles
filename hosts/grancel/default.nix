@@ -1,8 +1,5 @@
+{ config, inputs, ... }:
 {
-  config,
-  inputs,
-  ...
-}: {
   imports = [
     inputs.impermanence.nixosModules.impermanence
     ./hardware-configuration.nix
@@ -16,7 +13,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "grancel";
-  networking.nameservers = ["1.1.1.1" "1.0.0.1"];
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
   networking.useDHCP = true;
 
   console.font = "Lat2-Terminus16";
@@ -35,7 +35,10 @@
 
   services = {
     openssh.enable = true;
-    openssh.ports = [22 23232];
+    openssh.ports = [
+      22
+      23232
+    ];
     btrbk = {
       instances.btrbk = {
         onCalendar = "daily";
@@ -48,10 +51,10 @@
           ssh_user = "btrbk";
           volume = {
             "/media/grancel" = {
-              target."ssh://ruan:24424/media/leiston/btrbk_backups/grancel/grancel" = {};
+              target."ssh://ruan:24424/media/leiston/btrbk_backups/grancel/grancel" = { };
               subvolume = {
-                home = {};
-                persist = {};
+                home = { };
+                persist = { };
               };
             };
           };
@@ -60,9 +63,7 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [
-    23232
-  ];
+  networking.firewall.allowedTCPPorts = [ 23232 ];
 
   system.stateVersion = "23.11";
 

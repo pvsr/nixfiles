@@ -7,13 +7,11 @@ let
     "tandoor-key.age"
   ];
 in
-  builtins.listToAttrs (
-    map
-    (
-      name: {
-        inherit name;
-        value = {publicKeys = [ruan];};
-      }
-    )
-    secrets
-  )
+builtins.listToAttrs (
+  map (name: {
+    inherit name;
+    value = {
+      publicKeys = [ ruan ];
+    };
+  }) secrets
+)

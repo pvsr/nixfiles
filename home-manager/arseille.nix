@@ -1,5 +1,6 @@
-{...}: {
-  imports = [./common.nix];
+{ ... }:
+{
+  imports = [ ./common.nix ];
   # TODO make this work for nix-on-droid app too
   home.file.".termux/colors.properties".text = ''
     # https://github.com/srcery-colors/srcery-terminal/

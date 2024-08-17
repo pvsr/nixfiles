@@ -1,14 +1,8 @@
+{ pkgs, ... }:
 {
-  pkgs,
-  ...
-}: {
-  imports = [
-    ./nixos.nix
-  ];
+  imports = [ ./nixos.nix ];
 
-  home.packages = with pkgs; [
-    nvtopPackages.amd
-  ];
+  home.packages = with pkgs; [ nvtopPackages.amd ];
 
   programs.beets.enable = true;
 }

@@ -1,6 +1,5 @@
+{ ... }:
 {
-  ...
-}: {
   programs.helix.themes.srcery = {
     inherits = "gruvbox";
     "ui.selection".bg = "bg2";
@@ -11,7 +10,7 @@
     "ui.cursor.match".bg = "bg3";
     "ui.virtual.jump-label" = {
       bg = "bg2";
-      modifiers = ["bold"];
+      modifiers = [ "bold" ];
     };
     "ui.bufferline.active".bg = "bg3";
     palette = {

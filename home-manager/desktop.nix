@@ -3,10 +3,9 @@
   pkgs,
   lib,
   ...
-}: {
-  imports = [
-    ./common.nix
-  ];
+}:
+{
+  imports = [ ./common.nix ];
 
   home.packages = with pkgs; [
     gitAndTools.git-annex
@@ -18,16 +17,14 @@
   ];
 
   # TODO only if steam command exists
-  home.shellAliases =
-    lib.mapAttrs (n: id: "steam steam://rungameid/${id}")
-    {
-      "hoi4" = "394360";
-      "eu4" = "236850";
-      "ck3" = "1158310";
-      "vic3" = "529340";
-      "bg3" = "1086940";
-      "p5r" = "1687950";
-    };
+  home.shellAliases = lib.mapAttrs (n: id: "steam steam://rungameid/${id}") {
+    "hoi4" = "394360";
+    "eu4" = "236850";
+    "ck3" = "1158310";
+    "vic3" = "529340";
+    "bg3" = "1086940";
+    "p5r" = "1687950";
+  };
 
   programs.man.generateCaches = true;
 
@@ -45,7 +42,7 @@
   programs.zoxide.enable = true;
 
   programs.mpv = {
-    bindings = {};
+    bindings = { };
     scripts = with pkgs.mpvScripts; [
       autocrop
       mpris

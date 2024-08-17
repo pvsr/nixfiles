@@ -1,11 +1,6 @@
+{ pkgs, inputs, ... }:
 {
-  pkgs,
-  inputs,
-  ...
-}: {
-  imports = [
-    ./common.nix
-  ];
+  imports = [ ./common.nix ];
 
   home = {
     username = "price";
@@ -34,5 +29,5 @@
   programs.alacritty.settings.font.size = 16.0;
   programs.tmux.terminal = "screen-256color";
 
-  nix.registry = builtins.mapAttrs (_: flake: {inherit flake;}) inputs;
+  nix.registry = builtins.mapAttrs (_: flake: { inherit flake; }) inputs;
 }

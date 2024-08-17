@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   system.stateVersion = "24.05";
   time.timeZone = "America/New_York";
   user.shell = "${pkgs.fish}/bin/fish";

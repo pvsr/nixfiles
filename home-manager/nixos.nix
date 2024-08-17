@@ -1,8 +1,5 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   imports = [
     ./desktop.nix
     ./niri
@@ -42,14 +39,27 @@
   programs.beets.settings = {
     directory = "~/music";
     library = "~/library.blb";
-    plugins = ["random" "scrub" "ftintitle" "fetchart" "chroma"];
+    plugins = [
+      "random"
+      "scrub"
+      "ftintitle"
+      "fetchart"
+      "chroma"
+    ];
     original_date = true;
     from_scratch = true;
     mpd.host = "localhost";
     mpd.port = 6600;
     match.preferred = {
-      countries = ["XW" "US" "JP"];
-      media = ["Digital Media|File" "CD"];
+      countries = [
+        "XW"
+        "US"
+        "JP"
+      ];
+      media = [
+        "Digital Media|File"
+        "CD"
+      ];
       original_year = true;
     };
     scrub.auto = true;

@@ -3,7 +3,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.nixos-hardware.nixosModules.common-pc-ssd
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
@@ -13,15 +14,25 @@
   hardware.enableRedistributableFirmware = true;
   # TODO remove when default catches up
   boot.kernelPackages = pkgs.linuxPackages_6_8;
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "usbhid"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/grancel";
     fsType = "btrfs";
-    options = ["subvol=tmp_root" "defaults" "compress=zstd"];
+    options = [
+      "subvol=tmp_root"
+      "defaults"
+      "compress=zstd"
+    ];
   };
 
   # TODO debug postDeviceCommands with systemd-initrd (change id: myz)
@@ -53,32 +64,43 @@
     device = "/dev/disk/by-label/grancel";
     neededForBoot = true;
     fsType = "btrfs";
-    options = ["defaults" "compress=zstd"];
+    options = [
+      "defaults"
+      "compress=zstd"
+    ];
   };
 
   fileSystems."/nix" = {
     device = "/dev/disk/by-label/grancel";
     fsType = "btrfs";
-    options = ["subvol=nix" "defaults" "compress=zstd"];
+    options = [
+      "subvol=nix"
+      "defaults"
+      "compress=zstd"
+    ];
   };
 
   fileSystems."/home" = {
     device = "/dev/disk/by-label/grancel";
     fsType = "btrfs";
-    options = ["subvol=home" "defaults" "compress=zstd"];
+    options = [
+      "subvol=home"
+      "defaults"
+      "compress=zstd"
+    ];
   };
 
   fileSystems."/var/lib/swap" = {
     device = "/dev/disk/by-label/grancel";
     fsType = "btrfs";
-    options = ["subvol=swap"];
+    options = [ "subvol=swap" ];
   };
 
-  swapDevices = [{device = "/var/lib/swap/swapfile";}];
+  swapDevices = [ { device = "/var/lib/swap/swapfile"; } ];
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/boot";
     fsType = "vfat";
-    options = ["defaults"];
+    options = [ "defaults" ];
   };
 }

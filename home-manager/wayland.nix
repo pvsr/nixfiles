@@ -1,13 +1,9 @@
-{
-  pkgs,
-  appFont,
-  ...
-}: let
+{ pkgs, appFont, ... }:
+let
   colors = import ./colors.nix;
-in {
-  imports = [
-    ./foot.nix
-  ];
+in
+{
+  imports = [ ./foot.nix ];
 
   home.packages = with pkgs; [
     xwayland

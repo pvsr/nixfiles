@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./bluetooth.nix
     ./niri.nix
@@ -40,8 +41,8 @@
       fantasque-sans-mono
     ];
     fontconfig.defaultFonts = {
-      monospace = ["DejaVu Sans Mono"];
-      sansSerif = ["DejaVu Sans"];
+      monospace = [ "DejaVu Sans Mono" ];
+      sansSerif = [ "DejaVu Sans" ];
     };
   };
 
@@ -51,9 +52,7 @@
       LESS = "-iFJMRWX -z-4 -x4";
     };
 
-    systemPackages = with pkgs; [
-      man-pages
-    ];
+    systemPackages = with pkgs; [ man-pages ];
   };
 
   documentation.dev.enable = true;

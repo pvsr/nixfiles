@@ -1,10 +1,9 @@
-{
-  config,
-  ...
-}: let
+{ config, ... }:
+let
   cfg = config.services.transmission;
-  # host = config.networking.hostName;
-in {
+in
+# host = config.networking.hostName;
+{
   age.secrets."transmission-credentials.json" = {
     file = ./secrets/transmission-credentials.json.age;
     owner = "transmission";
@@ -24,5 +23,8 @@ in {
     };
   };
 
-  networking.firewall.allowedTCPPorts = [9919 51555];
+  networking.firewall.allowedTCPPorts = [
+    9919
+    51555
+  ];
 }

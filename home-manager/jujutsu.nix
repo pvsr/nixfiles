@@ -1,7 +1,5 @@
+{ lib, ... }:
 {
-  lib,
-  ...
-}: {
   programs = {
     jujutsu = {
       enable = true;

@@ -1,11 +1,11 @@
+{ config, lib, ... }:
 {
-  config,
-  lib,
-  ...
-}: {
   config.programs.git = {
     enable = true;
-    ignores = [".envrc" ".direnv"];
+    ignores = [
+      ".envrc"
+      ".direnv"
+    ];
     userName = "Peter Rice";
     userEmail = lib.mkDefault "peterrice@fastmail.com";
     extraConfig = {
