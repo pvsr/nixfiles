@@ -4,7 +4,11 @@
   modulesPath,
   ...
 }:
-lib.mkMerge [
-  { xdg.portal.configPackages = [ pkgs.niri ]; }
-  (import "${modulesPath}/programs/wayland/wayland-session.nix" { inherit lib pkgs; })
-]
+let
+  waylandSession = import "${modulesPath}/programs/wayland/wayland-session.nix" { inherit lib pkgs; };
+in
+{
+  imports = [ waylandSession ];
+
+  xdg.portal.configPackages = [ pkgs.niri ];
+}
