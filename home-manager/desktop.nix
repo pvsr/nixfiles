@@ -5,7 +5,10 @@
   ...
 }:
 {
-  imports = [ ./common.nix ];
+  imports = [
+    ./common.nix
+    ./niri
+  ];
 
   home.packages = with pkgs; [
     gitAndTools.git-annex
@@ -14,6 +17,10 @@
     tig
     manix
     sd
+    diceware
+    qbpm
+    qutebrowser
+    transmission
   ];
 
   # TODO only if steam command exists
@@ -41,6 +48,16 @@
   programs.jq.enable = true;
   programs.zoxide.enable = true;
 
+  programs.gpg.enable = true;
+  programs.gpg.homedir = "${config.xdg.dataHome}/gnupg";
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 3 * 60 * 60;
+    maxCacheTtl = 8 * 60 * 60;
+    pinentryPackage = pkgs.pinentry-curses;
+  };
+
+  programs.mpv.enable = true;
   programs.mpv = {
     bindings = { };
     scripts = with pkgs.mpvScripts; [
@@ -56,17 +73,6 @@
       profile = "standard";
     };
     profiles = {
-      straming = {
-        profile = "standard";
-        save-position-on-quit = true;
-        keep-open = "always";
-        keep-open-pause = false;
-      };
-      podcast = {
-        profile = "standard";
-        save-position-on-quit = true;
-        input-ipc-server = "/run/user/1000/podcast.mpv-ipc";
-      };
       no-term = {
         profile = "standard";
         pause = true;
@@ -97,5 +103,13 @@
         script-opts-append = "autocrop-auto=no";
       };
     };
+  };
+
+  programs.yt-dlp.enable = true;
+  programs.yt-dlp.settings = {
+    embed-subs = true;
+    write-auto-subs = true;
+    embed-thumbnail = true;
+    sub-langs = "en*,ja*";
   };
 }

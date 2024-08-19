@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ./nixos.nix
+    ./desktop.nix
     ./tasks.nix
     ./firefox.nix
   ];

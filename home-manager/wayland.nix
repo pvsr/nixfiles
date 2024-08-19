@@ -18,6 +18,12 @@ in
     pulsemixer
   ];
 
+  home.pointerCursor = {
+    package = pkgs.vanilla-dmz;
+    name = "Vanilla-DMZ";
+    gtk.enable = true;
+  };
+
   programs = {
     mpv.profiles.standard.gpu-context = "wayland";
     fuzzel.enable = true;
