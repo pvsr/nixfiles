@@ -65,7 +65,7 @@
 
   networking.firewall.allowedTCPPorts = [ 23232 ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   users.mutableUsers = false;
   users.users.root.hashedPasswordFile = "/media/grancel/persist/passwords/root";

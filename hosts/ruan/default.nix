@@ -142,6 +142,6 @@ in
     47808 # dev
   ];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
   services.postgresql.package = pkgs.postgresql_15;
 }
