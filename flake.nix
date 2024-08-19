@@ -112,6 +112,14 @@
             modules = [ ./home-manager/macbook.nix ];
           };
 
+          packages.deploy = pkgs.writeScriptBin "deploy" ''
+            #!${pkgs.fish}/bin/fish
+            argparse -n deploy -X 1 'c/command=' -- $argv; or return
+            set command (printf $_flag_command; or printf switch)
+            set host (printf $argv; or hostname)
+            nixos-rebuild --fast --flake "/etc/nixos#$host" --target-host $host --use-remote-sudo $command
+          '';
+
           formatter = pkgs.nixfmt-rfc-style;
           checks = {
             pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
@@ -124,19 +132,10 @@
           };
           devShells.default = pkgs.mkShell {
             inherit (self'.checks.pre-commit-check) shellHook;
-            buildInputs =
-              let
-                deploy =
-                  host: user:
-                  (pkgs.writeScriptBin "deploy-${host}" ''
-                    nixos-rebuild --fast --flake .#${host} --target-host ${user}@${host} --use-remote-sudo switch
-                  '');
-              in
-              [
-                inputs'.agenix.packages.agenix
-                (deploy "ruan" "peter")
-                (deploy "crossbell" "root")
-              ];
+            buildInputs = [
+              self'.packages.deploy
+              inputs'.agenix.packages.agenix
+            ];
           };
         };
     };
