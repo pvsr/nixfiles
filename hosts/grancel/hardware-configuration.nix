@@ -12,8 +12,8 @@
   ];
 
   hardware.enableRedistributableFirmware = true;
-  # TODO remove when default catches up
-  boot.kernelPackages = pkgs.linuxPackages_6_8;
+  # TODO remove once linux_default is above 6.6
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.availableKernelModules = [
     "nvme"
     "xhci_pci"
