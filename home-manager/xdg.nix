@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   inherit (config.xdg)
     cacheHome
@@ -9,7 +9,7 @@ let
 in
 {
   xdg.userDirs = {
-    enable = true;
+    enable = pkgs.stdenv.hostPlatform.isLinux;
     desktop = "${config.home.homeDirectory}/desktop";
     documents = "${config.home.homeDirectory}/documents";
     download = "${config.home.homeDirectory}/downloads";
