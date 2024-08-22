@@ -20,6 +20,8 @@
 
   programs.ssh.startAgent = true;
 
+  networking.nftables.enable = true;
+
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
   systemd.network.wait-online.ignoredInterfaces = [ "tailscale0" ];
