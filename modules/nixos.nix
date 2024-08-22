@@ -34,4 +34,9 @@
 
   # override srvos, needed by btrbk only
   security.sudo.execWheelOnly = lib.mkForce false;
+
+  system.switch = {
+    enable = false;
+    enableNg = true;
+  };
 }
