@@ -124,7 +124,7 @@
           checks = {
             pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
               src = ./.;
-              hooks.nixfmt = {
+              hooks.nixfmt-rfc-style = {
                 enable = true;
                 stages = [ "pre-push" ];
               };
