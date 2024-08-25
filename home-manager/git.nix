@@ -5,6 +5,7 @@
     ignores = [
       ".envrc"
       ".direnv"
+      "result*"
     ];
     userName = "Peter Rice";
     userEmail = lib.mkDefault "peterrice@fastmail.com";
