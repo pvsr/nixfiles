@@ -21,7 +21,27 @@
     device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
     fsType = "btrfs";
     options = [
-      "subvol=root"
+      "subvol=tmp_root"
+      "defaults"
+      "compress=zstd"
+    ];
+  };
+
+  fileSystems."/media/nixos" = {
+    device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
+    neededForBoot = true;
+    fsType = "btrfs";
+    options = [
+      "defaults"
+      "compress=zstd"
+    ];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
+    fsType = "btrfs";
+    options = [
+      "subvol=nix"
       "defaults"
       "compress=zstd"
     ];
@@ -73,15 +93,6 @@
     fsType = "btrfs";
     options = [
       "subvol=steam"
-      "defaults"
-      "compress=zstd"
-    ];
-  };
-
-  fileSystems."/media/nixos" = {
-    device = "/dev/disk/by-uuid/2f1cf9d8-5b5f-4d0f-89dc-ef52a1d0d174";
-    fsType = "btrfs";
-    options = [
       "defaults"
       "compress=zstd"
     ];

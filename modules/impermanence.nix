@@ -16,6 +16,10 @@ in
     enable = lib.mkEnableOption { };
     device = lib.mkOption { };
     persist = lib.mkOption { };
+    directories = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -32,7 +36,7 @@ in
         "/var/lib/systemd"
         "/var/lib/tailscale"
         "/etc/nixos"
-      ];
+      ] ++ cfg.directories;
       files = [
         "/etc/machine-id"
         "/etc/ssh/ssh_host_ed25519_key"

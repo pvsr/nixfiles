@@ -19,6 +19,7 @@ in
     ./transmission.nix
     ../../modules/graphical.nix
     ../../modules/steam.nix
+    ../../modules/impermanence.nix
     inputs.srvos.nixosModules.desktop
     inputs.weather.nixosModules.default
     inputs.podcasts.nixosModules.default
@@ -144,4 +145,18 @@ in
 
   system.stateVersion = "24.05";
   services.postgresql.package = pkgs.postgresql_16;
+
+  impermanence = {
+    enable = true;
+    device = "/dev/disk/by-label/nixos";
+    persist = "/media/nixos/persist";
+    directories = [
+      "/var/lib/jellyfin"
+      "/var/lib/komga"
+      "/var/lib/postgresql"
+      "/var/lib/private/shiori"
+      "/var/lib/private/tandoor-recipes"
+      "/var/lib/private/radicale"
+    ];
+  };
 }
