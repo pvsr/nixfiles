@@ -35,31 +35,6 @@
     ];
   };
 
-  # TODO debug postDeviceCommands with systemd-initrd (change id: myz)
-  boot.initrd.systemd.enable = false;
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    mkdir /mnt
-    mount /dev/disk/by-label/grancel /mnt
-
-    delete_subvolume_recursively() {
-        IFS=$'\n'
-        for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-            delete_subvolume_recursively "/mnt/$i"
-        done
-        btrfs subvolume delete "$1"
-    }
-
-    if [[ -e /mnt/tmp_root ]]; then
-      if [[ -e /mnt/old_root ]]; then
-        btrfs subvolume delete /mnt/old_root
-      fi
-      btrfs subvolume snapshot -r /mnt/tmp_root /mnt/old_root
-      delete_subvolume_recursively /mnt/tmp_root
-    fi
-
-    btrfs subvolume create /mnt/tmp_root
-  '';
-
   fileSystems."/media/grancel" = {
     device = "/dev/disk/by-label/grancel";
     neededForBoot = true;

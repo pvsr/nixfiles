@@ -1,10 +1,10 @@
 { config, inputs, ... }:
 {
   imports = [
-    inputs.impermanence.nixosModules.impermanence
     ./hardware-configuration.nix
     ../../modules/graphical.nix
     ../../modules/steam.nix
+    ../../modules/impermanence.nix
     inputs.srvos.nixosModules.desktop
   ];
 
@@ -67,26 +67,9 @@
 
   system.stateVersion = "24.05";
 
-  users.mutableUsers = false;
-  users.users.root.hashedPasswordFile = "/media/grancel/persist/passwords/root";
-  users.users.peter.hashedPasswordFile = "/media/grancel/persist/passwords/peter";
-  environment.persistence."/media/grancel/persist" = {
-    hideMounts = true;
-    directories = [
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/var/lib/machines"
-      "/var/lib/nixos"
-      "/var/lib/systemd"
-      "/var/lib/tailscale"
-      "/etc/nixos"
-    ];
-    files = [
-      "/etc/machine-id"
-      "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_ed25519_key.pub"
-      "/etc/ssh/ssh_host_rsa_key"
-      "/etc/ssh/ssh_host_rsa_key.pub"
-    ];
+  impermanence = {
+    enable = true;
+    device = "/dev/disk/by-label/grancel";
+    persist = "/media/grancel/persist";
   };
 }
