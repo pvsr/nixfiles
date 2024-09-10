@@ -48,4 +48,6 @@
     enable = false;
     enableNg = true;
   };
+
+  services.dbus.implementation = "broker";
 }
