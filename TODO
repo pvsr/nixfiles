@@ -14,6 +14,4 @@ replace feh and any other x only stuff
 
 replace miniflux and remove postgres
 
-ruan: agenix decryption failing on startup
-
 crossbell: impermanence

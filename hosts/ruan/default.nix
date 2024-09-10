@@ -154,7 +154,6 @@ in
       "/var/lib/jellyfin"
       "/var/lib/komga"
       "/var/lib/postgresql"
-      "/var/lib/private/shiori"
       "/var/lib/private/tandoor-recipes"
       "/var/lib/private/radicale"
     ];

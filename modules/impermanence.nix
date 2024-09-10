@@ -26,6 +26,9 @@ in
     users.mutableUsers = false;
     users.users.root.hashedPasswordFile = "${cfg.persist}/passwords/root";
     users.users.peter.hashedPasswordFile = "${cfg.persist}/passwords/peter";
+
+    age.identityPaths = [ "${cfg.persist}/etc/ssh/ssh_host_ed25519_key" ];
+
     environment.persistence.${cfg.persist} = {
       hideMounts = true;
       directories = [
