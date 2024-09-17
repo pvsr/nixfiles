@@ -1,14 +1,12 @@
 {
   lib,
   pkgs,
-  modulesPath,
+  inputs,
   ...
 }:
-let
-  waylandSession = import "${modulesPath}/programs/wayland/wayland-session.nix" { inherit lib pkgs; };
-in
 {
-  imports = [ waylandSession ];
+  imports = [ inputs.niri.nixosModules.niri ];
 
-  xdg.portal.configPackages = [ pkgs.niri ];
+  programs.niri.enable = true;
+  programs.niri.package = pkgs.niri-unstable;
 }

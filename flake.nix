@@ -23,6 +23,9 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.home-manager.follows = "home-manager";
+    niri.url = "github:sodiboo/niri-flake";
+    niri.inputs.nixpkgs.follows = "unstable";
+    niri.inputs.nixpkgs-stable.follows = "nixpkgs";
     podcasts.url = "github:pvsr/podcasts";
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
     podcasts.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
@@ -45,7 +48,7 @@
   outputs =
     inputs:
     let
-      overlays = [ (import ./overlay.nix inputs) ];
+      overlays = [ (import ./overlay.nix inputs) inputs.niri.overlays.niri ];
       specialArgs.inputs = inputs;
       specialArgs.appFont = "Fantasque Sans Mono";
       extraSpecialArgs = specialArgs;
