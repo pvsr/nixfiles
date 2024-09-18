@@ -25,38 +25,4 @@
   ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/grancel";
-    fsType = "bcachefs";
-    options = [
-      "defaults"
-      "compress=zstd"
-    ];
-  };
-
-  fileSystems."/media/valleria" = {
-    device = "/dev/disk/by-label/valleria";
-    fsType = "bcachefs";
-    options = [
-      "defaults"
-      "compress=zstd"
-    ];
-  };
-
-  fileSystems."/media/gdata2" = {
-    device = "/dev/disk/by-label/gdata2";
-    fsType = "btrfs";
-    options = [
-      "defaults"
-      "compress=zstd"
-      "nofail"
-    ];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-partlabel/disk-grancel-ESP";
-    fsType = "vfat";
-    options = [ "defaults" ];
-  };
 }

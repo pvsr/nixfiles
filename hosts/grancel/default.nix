@@ -6,6 +6,7 @@
 }:
 {
   imports = [
+    ./disks.nix
     ./hardware-configuration.nix
     ../../modules/niri.nix
     ../../modules/steam.nix
