@@ -36,15 +36,15 @@
     headscale.settings = {
       ip_prefixes = [ "100.64.0.0/10" ];
       server_url = "https://tailscale.peterrice.xyz";
-      dns_config.base_domain = "ts.peterrice.xyz";
-      dns_config.magic_dns = true;
-      dns_config.nameservers = [
+      dns.base_domain = "ts.peterrice.xyz";
+      dns.magic_dns = true;
+      dns.nameservers.global = [
         "1.1.1.1"
         "1.0.0.1"
         "2606:4700:4700::1111"
         "2606:4700:4700::1001"
       ];
-      dns_config.override_local_dns = true;
+      dns.override_local_dns = true;
     };
 
     openssh.enable = true;

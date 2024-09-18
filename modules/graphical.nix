@@ -5,10 +5,7 @@
     ./niri.nix
   ];
 
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true;
-
+  hardware.graphics.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -33,7 +30,7 @@
     packages = with pkgs; [
       dejavu_fonts
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       libertinus
       sarasa-gothic
