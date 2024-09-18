@@ -15,22 +15,62 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "btrfs";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/ESP";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-    ];
-  };
-
   fileSystems."/media/host" = {
     device = "share";
     fsType = "virtiofs";
+  };
+  fileSystems."/media/nixos".neededForBoot = true;
+
+  disko.devices = {
+    disk.root = {
+      device = "/dev/vda";
+      type = "disk";
+      content = {
+        type = "gpt";
+        partitions = {
+          ESP = {
+            type = "EF00";
+            size = "512M";
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot";
+            };
+          };
+          root = {
+            size = "100%";
+            content = {
+              type = "btrfs";
+              subvolumes = {
+                "/" = {
+                  mountpoint = "/media/nixos";
+                  mountOptions = [ "compress=zstd" ];
+                };
+                "/tmp_root" = {
+                  mountpoint = "/";
+                  mountOptions = [ "compress=zstd" ];
+                };
+                "/home" = {
+                  mountpoint = "/home";
+                  mountOptions = [ "compress=zstd" ];
+                };
+                "/nix" = {
+                  mountpoint = "/nix";
+                  mountOptions = [
+                    "noatime"
+                    "compress=zstd"
+                  ];
+                };
+                "/swap" = {
+                  mountpoint = "/var/lib/swap";
+                  swap.swapfile.size = "8G";
+                };
+                "/persist" = { };
+              };
+            };
+          };
+        };
+      };
+    };
   };
 }

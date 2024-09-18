@@ -14,6 +14,8 @@
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "unstable";
     impermanence.url = "github:nix-community/impermanence";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.url = "github:nix-community/nix-on-droid";
     srvos.url = "github:nix-community/srvos";
     srvos.inputs.nixpkgs.follows = "nixpkgs";
@@ -63,6 +65,7 @@
             hostModule
             home-manager.nixosModules.home-manager
             inputs.agenix.nixosModules.age
+            inputs.disko.nixosModules.disko
             {
               nixpkgs = {
                 inherit overlays;
