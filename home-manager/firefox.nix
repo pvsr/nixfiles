@@ -5,6 +5,18 @@
     package = pkgs.firefox.override {
       cfg.speechSynthesisSupport = false;
     };
+    policies = {
+      DontCheckDefaultBrowser = true;
+      DisablePocket = true;
+      FirefoxHome = {
+        Pocket = false;
+        Snippets = false;
+      };
+      UserMessaging = {
+        ExtensionRecommendations = false;
+        SkipOnboarding = true;
+      };
+    };
     profiles.default = {
       name = "default";
       search = {
