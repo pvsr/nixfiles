@@ -107,6 +107,10 @@
         }:
         {
           _module.args.pkgs = import inputs.nixpkgs { inherit system overlays; };
+          legacyPackages.homeConfigurations.valleria = inputs.home-manager.lib.homeManagerConfiguration {
+            inherit pkgs extraSpecialArgs;
+            modules = [ ./home-manager/valleria.nix ];
+          };
           legacyPackages.homeConfigurations.jurai = inputs.home-manager.lib.homeManagerConfiguration {
             inherit pkgs extraSpecialArgs;
             modules = [ ./home-manager/macbook.nix ];
