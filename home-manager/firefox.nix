@@ -1,10 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox.override {
-      cfg.speechSynthesisSupport = false;
-    };
+    package = lib.mkDefault (pkgs.firefox.override { cfg.speechSynthesisSupport = false; });
     policies = {
       DontCheckDefaultBrowser = true;
       DisablePocket = true;

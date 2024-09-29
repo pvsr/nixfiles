@@ -5,10 +5,7 @@
   ...
 }:
 {
-  imports = [
-    ./common.nix
-    ./niri
-  ];
+  imports = [ ./common.nix ];
 
   home.packages = with pkgs; [
     gitAndTools.git-annex
@@ -19,7 +16,6 @@
     sd
     diceware
     qbpm
-    qutebrowser
     transmission
   ];
 
@@ -47,15 +43,6 @@
   programs.password-store.enable = true;
   programs.jq.enable = true;
   programs.zoxide.enable = true;
-
-  programs.gpg.enable = true;
-  programs.gpg.homedir = "${config.xdg.dataHome}/gnupg";
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 3 * 60 * 60;
-    maxCacheTtl = 8 * 60 * 60;
-    pinentryPackage = pkgs.pinentry-curses;
-  };
 
   programs.mpv.enable = true;
   programs.mpv = {

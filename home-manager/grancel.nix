@@ -1,15 +1,12 @@
 { pkgs, ... }:
 {
   imports = [
-    ./desktop.nix
+    ./nixos.nix
     ./tasks.nix
     ./firefox.nix
   ];
 
-  home.packages = with pkgs; [
-    nvtopPackages.amd
-    sptlrx
-  ];
+  home.packages = with pkgs; [ sptlrx ];
 
   services.spotifyd = {
     enable = true;
