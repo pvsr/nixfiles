@@ -13,6 +13,8 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
+  boot.loader.grub.devices = [ "/dev/vda" ];
+
   fileSystems."/" = {
     device = "/dev/disk/by-label/root";
     fsType = "btrfs";
