@@ -6,7 +6,7 @@
     unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager/release-24.05";
@@ -48,6 +48,7 @@
       extraSpecialArgs = specialArgs;
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ inputs.pre-commit-hooks.flakeModule ];
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -101,6 +102,7 @@
 
       perSystem =
         {
+          config,
           pkgs,
           unstablePkgs,
           system,
@@ -135,17 +137,14 @@
           '';
 
           formatter = pkgs.nixfmt-rfc-style;
-          checks = {
-            pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-              src = ./.;
-              hooks.nixfmt-rfc-style = {
-                enable = true;
-                stages = [ "pre-push" ];
-              };
+          pre-commit = {
+            settings.hooks.nixfmt-rfc-style = {
+              enable = true;
+              stages = [ "pre-push" ];
             };
           };
           devShells.default = pkgs.mkShell {
-            inherit (self'.checks.pre-commit-check) shellHook;
+            inputsFrom = [ config.pre-commit.devShell ];
             buildInputs = [
               self'.packages.deploy
               inputs'.agenix.packages.agenix
