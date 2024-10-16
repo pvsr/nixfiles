@@ -11,6 +11,8 @@
 
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager-unstable.url = "github:nix-community/home-manager";
+    home-manager-unstable.inputs.nixpkgs.follows = "unstable";
     impermanence.url = "github:nix-community/impermanence";
     nix-on-droid.url = "github:nix-community/nix-on-droid/release-24.05";
     srvos.url = "github:nix-community/srvos";
@@ -100,6 +102,7 @@
       perSystem =
         {
           pkgs,
+          unstablePkgs,
           system,
           self',
           inputs',
@@ -107,14 +110,21 @@
         }:
         {
           _module.args.pkgs = import inputs.nixpkgs { inherit system overlays; };
-          legacyPackages.homeConfigurations.valleria = inputs.home-manager.lib.homeManagerConfiguration {
-            inherit pkgs extraSpecialArgs;
-            modules = [ ./home-manager/valleria.nix ];
-          };
-          legacyPackages.homeConfigurations.jurai = inputs.home-manager.lib.homeManagerConfiguration {
-            inherit pkgs extraSpecialArgs;
-            modules = [ ./home-manager/macbook.nix ];
-          };
+          _module.args.unstablePkgs = import inputs.unstable { inherit system overlays; };
+          legacyPackages.homeConfigurations.valleria =
+            inputs.home-manager-unstable.lib.homeManagerConfiguration
+              {
+                inherit extraSpecialArgs;
+                pkgs = unstablePkgs;
+                modules = [ ./home-manager/valleria.nix ];
+              };
+          legacyPackages.homeConfigurations.jurai =
+            inputs.home-manager-unstable.lib.homeManagerConfiguration
+              {
+                inherit extraSpecialArgs;
+                pkgs = unstablePkgs;
+                modules = [ ./home-manager/macbook.nix ];
+              };
 
           packages.deploy = pkgs.writeScriptBin "deploy" ''
             #!${pkgs.fish}/bin/fish
