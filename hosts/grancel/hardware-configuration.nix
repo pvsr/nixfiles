@@ -27,54 +27,36 @@
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/grancel";
-    fsType = "btrfs";
-    options = [
-      "subvol=tmp_root"
-      "defaults"
-      "compress=zstd"
-    ];
-  };
-
-  fileSystems."/media/grancel" = {
-    device = "/dev/disk/by-label/grancel";
-    neededForBoot = true;
-    fsType = "btrfs";
+    fsType = "bcachefs";
     options = [
       "defaults"
       "compress=zstd"
     ];
   };
 
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-label/grancel";
-    fsType = "btrfs";
+  fileSystems."/media/valleria" = {
+    device = "/dev/disk/by-label/valleria";
+    fsType = "bcachefs";
     options = [
-      "subvol=nix"
       "defaults"
       "compress=zstd"
     ];
   };
 
-  fileSystems."/home" = {
-    device = "/dev/disk/by-label/grancel";
+  fileSystems."/media/gdata2" = {
+    device = "/dev/disk/by-label/valleria";
     fsType = "btrfs";
     options = [
-      "subvol=home"
       "defaults"
       "compress=zstd"
     ];
   };
 
-  fileSystems."/var/lib/swap" = {
-    device = "/dev/disk/by-label/grancel";
-    fsType = "btrfs";
-    options = [ "subvol=swap" ];
-  };
-
-  swapDevices = [ { device = "/var/lib/swap/swapfile"; } ];
+  # TODO swap
+  # swapDevices = [ { device = "/var/lib/swap/swapfile"; } ];
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
+    device = "/dev/disk/by-partlabel/disk-grancel-ESP";
     fsType = "vfat";
     options = [ "defaults" ];
   };
