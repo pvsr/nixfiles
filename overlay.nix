@@ -6,6 +6,8 @@ in
 {
   inherit (inputs.qbpm.packages.${system}) qbpm;
   inherit (inputs.agenix.packages.${system}) agenix;
+  inherit (inputs.jj.packages.${system}) jujutsu;
+  inherit (inputs.helix.packages.${system}) helix;
   transmission = prev.transmission_4;
   tmuxPlugins = prev.tmuxPlugins // {
     srcery = prev.tmuxPlugins.mkTmuxPlugin {
