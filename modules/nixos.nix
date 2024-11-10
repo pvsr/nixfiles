@@ -1,18 +1,24 @@
 { pkgs, lib, ... }:
 {
-  environment.systemPackages = with pkgs; [
-    binutils
-    coreutils
-    curl
-    dnsutils
-    dosfstools
-    file
-    iputils
-    lsof
-    psmisc
-    utillinux
-    foot.terminfo
-  ];
+  environment = {
+    sessionVariables = {
+      PAGER = "less";
+      LESS = "-iFMRWX -z-4 -x4";
+    };
+    systemPackages = with pkgs; [
+      binutils
+      coreutils
+      curl
+      dnsutils
+      dosfstools
+      file
+      iputils
+      lsof
+      psmisc
+      utillinux
+      foot.terminfo
+    ];
+  };
 
   programs.fish.enable = true;
   programs.fish.useBabelfish = true;

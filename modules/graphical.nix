@@ -44,14 +44,7 @@
     };
   };
 
-  environment = {
-    sessionVariables = {
-      PAGER = "less";
-      LESS = "-iFJMRWX -z-4 -x4";
-    };
-
-    systemPackages = with pkgs; [ man-pages ];
-  };
+  environment.systemPackages = with pkgs; [ man-pages ];
 
   documentation.dev.enable = true;
   nix.extraOptions = "keep-outputs = true";
