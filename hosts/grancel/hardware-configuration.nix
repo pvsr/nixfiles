@@ -44,16 +44,14 @@
   };
 
   fileSystems."/media/gdata2" = {
-    device = "/dev/disk/by-label/valleria";
+    device = "/dev/disk/by-label/gdata2";
     fsType = "btrfs";
     options = [
       "defaults"
       "compress=zstd"
+      "nofail"
     ];
   };
-
-  # TODO swap
-  # swapDevices = [ { device = "/var/lib/swap/swapfile"; } ];
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-partlabel/disk-grancel-ESP";
