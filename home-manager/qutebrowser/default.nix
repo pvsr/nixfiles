@@ -5,6 +5,8 @@
   ...
 }:
 {
+  imports = [ ../search.nix ];
+
   programs.qutebrowser = {
     enable = true;
     loadAutoconfig = true;
@@ -53,21 +55,6 @@
           "<Ctrl-w>" = "rl-rubout ' /'";
         };
       };
-
-    searchEngines = {
-      DEFAULT = "https://duckduckgo.com/?q={}";
-      ap = "https://archlinux.org/packages/?q={}";
-      aur = "https://aur.archlinux.org/packages.php?K={}";
-      a = "https://wiki.archlinux.org/?search={}";
-      d = "https://duckduckgo.com/?q={}";
-      gi = "https://github.com/search?q={}";
-      ho = "https://www.haskell.org/hoogle/?hoogle={}";
-      ji = "http://jisho.org/search/{}";
-      ra = "https://rateyourmusic.com/search?searchtype=a&searchterm={}";
-      wikt = "https://en.wiktionary.org/wiki/Special:Search?search={}";
-      w = "https://en.wikipedia.org/wiki/Special:Search?search={}";
-      y = "https://youtube.com/results?search_query={}";
-    };
 
     settings = {
       confirm_quit = [ "downloads" ];
