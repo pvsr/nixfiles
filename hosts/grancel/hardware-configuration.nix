@@ -12,7 +12,6 @@
   ];
 
   hardware.enableRedistributableFirmware = true;
-  # TODO remove once linux_default is above 6.6
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.availableKernelModules = [
     "nvme"
@@ -21,7 +20,7 @@
     "usbhid"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
