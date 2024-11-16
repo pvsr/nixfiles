@@ -23,6 +23,7 @@ in
   home.preferXdgDirectories = true;
   home.sessionVariables = {
     CARGO_HOME = "${dataHome}/cargo";
+    CARGO_INSTALL_ROOT = "${config.home.homeDirectory}/.local";
     HISTFILE = "${stateHome}/bash/history";
     LESSHISTFILE = "${stateHome}/less/history";
   };
