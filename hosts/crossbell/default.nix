@@ -50,19 +50,22 @@
     openssh.enable = true;
     openssh.ports = [ 18325 ];
 
-    caddy.enable = true;
-    caddy.virtualHosts = {
-      "peterrice.xyz".extraConfig = ''
-        root * /srv
-        file_server
-      '';
-      "rss.peterrice.xyz".extraConfig = "reverse_proxy ruan:8080";
-      "comics.peterrice.xyz".extraConfig = "reverse_proxy ruan:19191";
-      "weather.peterrice.xyz".extraConfig = "reverse_proxy ruan:15658";
-      "recipes.peterrice.xyz".extraConfig = "reverse_proxy ruan:36597";
-      "calendar.peterrice.xyz".extraConfig = "reverse_proxy ruan:52032";
-      "podcasts.peterrice.xyz".extraConfig = "reverse_proxy ruan:5999";
-      "tailscale.peterrice.xyz".extraConfig = "reverse_proxy localhost:9753";
+    caddy = {
+      enable = true;
+      enableReload = true;
+      virtualHosts = {
+        "peterrice.xyz".extraConfig = ''
+          root * /srv
+          file_server
+        '';
+        "rss.peterrice.xyz".extraConfig = "reverse_proxy ruan:8080";
+        "comics.peterrice.xyz".extraConfig = "reverse_proxy ruan:19191";
+        "weather.peterrice.xyz".extraConfig = "reverse_proxy ruan:15658";
+        "recipes.peterrice.xyz".extraConfig = "reverse_proxy ruan:36597";
+        "calendar.peterrice.xyz".extraConfig = "reverse_proxy ruan:52032";
+        "podcasts.peterrice.xyz".extraConfig = "reverse_proxy ruan:5999";
+        "tailscale.peterrice.xyz".extraConfig = "reverse_proxy localhost:9753";
+      };
     };
   };
 
