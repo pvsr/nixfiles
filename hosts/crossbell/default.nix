@@ -54,7 +54,7 @@
       enable = true;
       enableReload = true;
       virtualHosts = {
-        "peterrice.xyz".extraConfig = ''
+        "peterrice.xyz pvsr.dev".extraConfig = ''
           root * /srv
           file_server
         '';
