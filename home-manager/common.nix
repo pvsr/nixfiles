@@ -16,6 +16,7 @@
   home.packages = with pkgs; [
     fd
     ripgrep
+    moar
     nvd
     nix-output-monitor
     duf
@@ -25,6 +26,18 @@
       sixelPreviewSupport = false;
     })
   ];
+
+  home.sessionVariables = {
+    PAGER = "${pkgs.moar}/bin/moar";
+    MOAR = builtins.concatStringsSep " " [
+      "-quit-if-one-screen"
+      "-statusbar=bold"
+      "-no-statusbar"
+      "-no-linenumbers"
+      "-no-clear-on-exit"
+      "-terminal-fg"
+    ];
+  };
 
   home.language.base = "en-US.UTF-8";
 

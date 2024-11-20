@@ -4,6 +4,7 @@ let
   unstable = inputs.unstable.legacyPackages.${system};
 in
 {
+  inherit (unstable) moar;
   inherit (inputs.qbpm.packages.${system}) qbpm;
   inherit (inputs.agenix.packages.${system}) agenix;
   inherit (inputs.jj.packages.${system}) jujutsu;
