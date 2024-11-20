@@ -2,14 +2,14 @@
   description = "A system configuration.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/release-24.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-parts.url = "github:hercules-ci/flake-parts";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "unstable";
@@ -115,20 +115,14 @@
         {
           _module.args.pkgs = import inputs.nixpkgs { inherit system overlays; };
           _module.args.unstablePkgs = import inputs.unstable { inherit system overlays; };
-          legacyPackages.homeConfigurations.valleria =
-            inputs.home-manager-unstable.lib.homeManagerConfiguration
-              {
-                inherit extraSpecialArgs;
-                pkgs = unstablePkgs;
-                modules = [ ./home-manager/valleria.nix ];
-              };
-          legacyPackages.homeConfigurations.jurai =
-            inputs.home-manager-unstable.lib.homeManagerConfiguration
-              {
-                inherit extraSpecialArgs;
-                pkgs = unstablePkgs;
-                modules = [ ./home-manager/macbook.nix ];
-              };
+          legacyPackages.homeConfigurations.valleria = inputs.home-manager.lib.homeManagerConfiguration {
+            inherit pkgs extraSpecialArgs;
+            modules = [ ./home-manager/valleria.nix ];
+          };
+          legacyPackages.homeConfigurations.jurai = inputs.home-manager.lib.homeManagerConfiguration {
+            inherit pkgs extraSpecialArgs;
+            modules = [ ./home-manager/macbook.nix ];
+          };
 
           packages.deploy = pkgs.writeScriptBin "deploy" ''
             #!${pkgs.fish}/bin/fish
