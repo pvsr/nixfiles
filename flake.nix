@@ -32,6 +32,7 @@
     qbpm.url = "github:pvsr/qbpm";
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
     jj.url = "github:martinvonz/jj";
+    jj.inputs.nixpkgs.follows = "nixpkgs";
     helix.url = "github:helix-editor/helix";
 
     # sources
