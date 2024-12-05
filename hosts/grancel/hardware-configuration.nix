@@ -12,6 +12,7 @@
   ];
 
   hardware.enableRedistributableFirmware = true;
+  hardware.amdgpu.initrd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.availableKernelModules = [
     "nvme"
@@ -20,7 +21,6 @@
     "usbhid"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
