@@ -17,6 +17,7 @@
     fd
     ripgrep
     nvd
+    nix-output-monitor
     duf
     du-dust
     (ranger.override {

@@ -82,6 +82,10 @@ in
       ea = "eza -la";
       er = "eza -ls modified";
       et = "eza -T";
+      nn = {
+        position = "anywhere";
+        expansion = "--log-format internal-json -v 2&| nom --json";
+      };
     };
   };
 
