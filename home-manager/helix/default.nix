@@ -31,17 +31,10 @@
       keys.normal.minus = "file_picker_in_current_buffer_directory";
     };
     languages = {
-      language-server.ruff-lsp = {
-        command = "ruff-lsp";
-      };
       language = [
         {
           name = "python";
           auto-format = true;
-          language-servers = [
-            "ruff-lsp"
-            "pylsp"
-          ];
         }
         {
           name = "nix";
