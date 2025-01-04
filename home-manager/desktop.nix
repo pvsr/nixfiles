@@ -71,9 +71,8 @@
             interpolation = true;
             tscale = "oversample";
             demuxer-mkv-subtitle-preroll = true;
-            # TODO
             slang = "eng,en,enUS,en-US";
-            ytdl-raw-options = "sub-langs=\"en*,ja*\"";
+            ytdl-raw-options = "sub-langs=\"en*\",cookies-from-browser=firefox";
             # for thumbnail/youtube-quality
             osc = false;
             script-opts-append = "autocrop-auto=no";
