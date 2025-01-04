@@ -24,6 +24,8 @@
             lsp = {
               display-inlay-hints = true;
             };
+            end-of-line-diagnostics = "hint";
+            inline-diagnostics.cursor-line = "hint";
           };
           keys.insert = {
             C-p = "move_line_up";
