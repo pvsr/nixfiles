@@ -26,7 +26,19 @@
         };
       };
       keys.insert = {
-        "C-l" = "move_char_right";
+        C-p = "move_line_up";
+        C-n = "move_line_down";
+        C-f = "move_char_right";
+        C-b = "move_char_left";
+        C-a = "goto_first_nonwhitespace";
+        C-e = "goto_line_end_newline";
+        C-c = "toggle_comments";
+        C-t = "indent";
+        # TODO choose one
+        C-y = "unindent";
+        C-g = "unindent";
+        # TODO doesn't work
+        # C-backspace = "delete_word_backward";
       };
       keys.normal.minus = "file_picker_in_current_buffer_directory";
     };
