@@ -5,7 +5,10 @@
   ...
 }:
 {
-  imports = [ ./common.nix ];
+  imports = [
+    ./common.nix
+    ./ghostty.nix
+  ];
 
   home.packages = with pkgs; [
     gitAndTools.git-annex

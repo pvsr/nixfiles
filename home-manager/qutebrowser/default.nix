@@ -64,9 +64,9 @@
 
       window.hide_decoration = false;
 
-      # TODO footclient
       editor.command = [
-        "foot"
+        "ghostty"
+        "-e"
         "hx"
         "{file}:{line}:{column0}"
       ];
@@ -74,17 +74,20 @@
       fileselect = {
         handler = "external";
         single_file.command = [
-          "foot"
+          "ghostty"
+          "-e"
           "ranger"
           "--choosefile={}"
         ];
         multiple_files.command = [
-          "foot"
+          "ghostty"
+          "-e"
           "ranger"
           "--choosefiles={}"
         ];
         folder.command = [
-          "foot"
+          "ghostty"
+          "-e"
           "ranger"
           "--choosedir={}"
         ];

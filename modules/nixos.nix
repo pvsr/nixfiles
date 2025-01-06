@@ -12,7 +12,7 @@
       lsof
       psmisc
       utillinux
-      foot.terminfo
+      ghostty.terminfo
       (pkgs.writeScriptBin "deploy" (builtins.readFile ./deploy.fish))
     ];
   };

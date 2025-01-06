@@ -27,7 +27,6 @@
   programs.bash.enable = false;
   programs.git.userEmail = "price@hubspot.com";
   programs.jujutsu.settings.user.email = "price@hubspot.com";
-  programs.alacritty.settings.font.size = 16.0;
   programs.tmux.terminal = "screen-256color";
 
   nix.registry = builtins.mapAttrs (_: flake: { inherit flake; }) inputs;

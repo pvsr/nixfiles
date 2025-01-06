@@ -3,7 +3,7 @@ let
   colors = import ./colors.nix;
 in
 {
-  imports = [ ./foot.nix ];
+  imports = [ ];
 
   home.packages = with pkgs; [
     xwayland
@@ -30,7 +30,7 @@ in
     fuzzel.settings = {
       main = {
         font = "${appFont}:size=14";
-        terminal = "${pkgs.foot}/bin/footclient";
+        terminal = "${pkgs.ghostty}/bin/ghostty -e";
       };
       # colors = {};
     };
