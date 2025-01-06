@@ -11,5 +11,6 @@
       programs.niri.package = inputs.niri.packages.${pkgs.system}.niri-unstable;
       systemd.user.services.niri-flake-polkit.serviceConfig.ExecStart =
         lib.mkForce "${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
+      services.gnome.gnome-keyring.enable = lib.mkForce false;
     };
 }
