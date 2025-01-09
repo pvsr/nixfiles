@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [ ./srcery.nix ];
 
@@ -55,7 +55,15 @@
           };
           auto-format = true;
         }
+        {
+          name = "fish";
+          language-servers = [ "fish-lsp" ];
+        }
       ];
+      language-server.fish-lsp = {
+        command = "fish-lsp";
+        args = [ "start" ];
+      };
     };
   };
 }
