@@ -1,8 +1,7 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   cfg = config.services.transmission;
 in
-# host = config.networking.hostName;
 {
   age.secrets."transmission-credentials.json" = {
     file = ./secrets/transmission-credentials.json.age;
@@ -12,19 +11,18 @@ in
 
   services.transmission = {
     enable = true;
+    openPeerPorts = true;
+    openRPCPort = true;
     credentialsFile = config.age.secrets."transmission-credentials.json".path;
     settings = {
       download-dir = "${cfg.home}/downloads";
-      peer-port = 51555;
+      peer-port-random-on-start = true;
+      peer-port-random-low = 65150;
+      peer-port-random-high = 65160;
       rpc-port = 9919;
-      rpc-host-whitelist = "ruan";
-      rpc-bind-address = "0.0.0.0";
-      rpc-whitelist = "127.0.0.1,192.168.*.*,100.64.0.1,100.64.0.2";
+      rpc-host-whitelist = "ruan,ruan.peter.ts.peterrice.xyz";
+      rpc-bind-address = "100.64.0.3";
+      rpc-whitelist-enabled = false;
     };
   };
-
-  networking.firewall.allowedTCPPorts = [
-    9919
-    51555
-  ];
 }

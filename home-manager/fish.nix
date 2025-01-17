@@ -67,7 +67,7 @@ in
       jcf = "journalctl -xf";
       jcu = "journalctl -xeu";
       jcuf = "journalctl -xfu";
-      trr = "transmission-remote ruan:9919";
+      trr = "transmission-remote 100.64.0.3:9919";
       gcp = "git commit -p";
       "gcp!" = "git commit -p --amend";
       "gcpn!" = "git commit -p --no-edit --amend";
