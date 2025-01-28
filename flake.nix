@@ -72,7 +72,6 @@
             {
               nixpkgs = {
                 inherit overlays;
-                hostPlatform = "x86_64-linux";
               };
               home-manager = {
                 inherit extraSpecialArgs;

@@ -11,6 +11,8 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
   ];
 
+  nixpkgs.hostPlatform = "x86_64-linux";
+
   hardware.enableRedistributableFirmware = true;
   hardware.amdgpu.initrd.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
