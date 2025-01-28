@@ -4,10 +4,9 @@ let
   unstable = inputs.unstable.legacyPackages.${system};
 in
 {
-  inherit (unstable) moar fish;
+  inherit (unstable) moar fish jj;
   inherit (inputs.qbpm.packages.${system}) qbpm;
   inherit (inputs.agenix.packages.${system}) agenix;
-  inherit (inputs.jj.packages.${system}) jujutsu;
   inherit (inputs.helix.packages.${system}) helix;
   transmission = prev.transmission_4;
   tmuxPlugins = prev.tmuxPlugins // {
