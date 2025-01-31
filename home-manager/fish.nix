@@ -32,6 +32,35 @@ in
     functions = {
       yts = "mpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
       uts = "umpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
+      summarize = {
+        wraps = "jj show";
+        body = ''
+          set recent (jj log --no-graph \
+            -r 'ancestors(immutable_heads(), 8) & ~description("flake.lock")' \
+            -T 'separate("\n", separate(" ", \
+              format_timestamp(commit_timestamp(self)), \
+              format_short_commit_id(self.commit_id()) \
+            ), self.description())' \
+          | string collect)
+          PAGER= jj show $argv[1]
+          jj show $argv[1] | llm -s "Write a one-line commit message for \
+          these changes. It should be under 50 characters. If a terse \
+          description does not fit in 50 characters you may continue to write \
+          one or more paragraphs describing the changes, which should be \
+          wrapped at 80 characters. It should match the style of these recent \
+          commit messages in the same repository:
+          $recent
+
+          Include the commit message and nothing else, fenced in triple \
+          backticks like so:
+          ```
+          commit message, less than 50 characters
+
+          optional commit description
+          ```
+          "
+        '';
+      };
       session = ''
         if set -q argv[1]
           set -gx fish_history $argv[1]
