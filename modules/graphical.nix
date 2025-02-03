@@ -17,6 +17,8 @@
 
   services.openssh.settings.AcceptEnv = "TERMINFO COLORTERM";
 
+  services.displayManager.ly.enable = true;
+
   boot.tmp = {
     useTmpfs = true;
     tmpfsSize = "75%";
