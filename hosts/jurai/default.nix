@@ -7,7 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/graphical.nix
+    ../../modules/gnome.nix
     inputs.srvos.nixosModules.desktop
   ];
 
