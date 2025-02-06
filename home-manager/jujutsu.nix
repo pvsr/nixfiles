@@ -8,7 +8,7 @@
           name = "Peter Rice";
           email = lib.mkDefault "peterrice@fastmail.com";
         };
-        git.auto-local-branch = true;
+        git.auto-local-bookmark = true;
         ui.default-command = "log";
         ui.diff.format = "git";
         templates.draft_commit_description = ''
