@@ -55,22 +55,13 @@
       specialArgs.inputs = inputs;
       specialArgs.appFont = "Fantasque Sans Mono";
       extraSpecialArgs = specialArgs;
-    in
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ inputs.pre-commit-hooks.flakeModule ];
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "aarch64-darwin"
-      ];
-
-      flake.nixosConfigurations = builtins.mapAttrs (
-        hostName: hostModule:
-        inputs.nixpkgs.lib.nixosSystem {
+      nixosBuilder =
+        nixpkgs: home-manager: hostModule: hmModule:
+        nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           modules = [
             hostModule
-            inputs.home-manager.nixosModules.home-manager
+            home-manager.nixosModules.home-manager
             inputs.agenix.nixosModules.age
             {
               nixpkgs = {
@@ -80,32 +71,52 @@
                 inherit extraSpecialArgs;
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.peter = ./home-manager/${hostName}.nix;
+                users.peter = hmModule;
               };
             }
             ./modules/nix.nix
             ./modules/nixos.nix
             ./users/peter.nix
           ];
-        }
-      ) (import ./hosts);
-
-      flake.nixOnDroidConfigurations.default = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-        inherit extraSpecialArgs;
-        pkgs = import inputs.nixpkgs {
-          system = "aarch64-linux";
-          overlays = [ inputs.nix-on-droid.overlays.default ] ++ overlays;
         };
-        home-manager-path = inputs.home-manager.outPath;
-        modules = [
-          ./hosts/arseille
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = extraSpecialArgs;
-            home-manager.config = ./home-manager/arseille.nix;
-          }
-        ];
+      nixOnDroidBuilder =
+        nixpkgs: home-manager: hostModule: hmModule:
+        inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+          inherit extraSpecialArgs;
+          pkgs = import nixpkgs {
+            system = "aarch64-linux";
+            overlays = [ inputs.nix-on-droid.overlays.default ] ++ overlays;
+          };
+          home-manager-path = home-manager.outPath;
+          modules = [
+            hostModule
+            {
+              home-manager = {
+                inherit extraSpecialArgs;
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                config = hmModule;
+              };
+            }
+          ];
+        };
+      hosts = import ./hosts {
+        nixosStable = nixosBuilder inputs.nixpkgs inputs.home-manager;
+        nixosUnstable = nixosBuilder inputs.unstable inputs.home-manager-unstable;
+        nixOnDroidStable = nixOnDroidBuilder inputs.nixpkgs inputs.home-manager;
+        nixOnDroidUnstable = nixOnDroidBuilder inputs.unstable inputs.home-manager-unstable;
+      };
+    in
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ inputs.pre-commit-hooks.flakeModule ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
+
+      flake = {
+        inherit (hosts) nixosConfigurations nixOnDroidConfigurations;
       };
 
       perSystem =
@@ -118,17 +129,20 @@
           inputs',
           ...
         }:
+        let
+          homeManagerBuilder =
+            module:
+            inputs.home-manager.lib.homeManagerConfiguration {
+              inherit pkgs extraSpecialArgs;
+              modules = [ module ];
+            };
+        in
         {
           _module.args.pkgs = import inputs.nixpkgs { inherit system overlays; };
           _module.args.unstablePkgs = import inputs.unstable { inherit system overlays; };
-          legacyPackages.homeConfigurations.valleria = inputs.home-manager.lib.homeManagerConfiguration {
-            inherit pkgs extraSpecialArgs;
-            modules = [ ./home-manager/valleria.nix ];
-          };
-          legacyPackages.homeConfigurations.jurai = inputs.home-manager.lib.homeManagerConfiguration {
-            inherit pkgs extraSpecialArgs;
-            modules = [ ./home-manager/macbook.nix ];
-          };
+
+          legacyPackages.homeConfigurations.valleria = homeManagerBuilder ./home-manager/valleria.nix;
+          legacyPackages.homeConfigurations.jurai = homeManagerBuilder ./home-manager/macbook.nix;
 
           packages.deploy = pkgs.writeScriptBin "deploy" ''
             #!${pkgs.fish}/bin/fish
