@@ -9,9 +9,7 @@
     clock24 = true;
     escapeTime = 0;
     plugins = with pkgs; [
-      tmuxPlugins.resurrect
       tmuxPlugins.pain-control
-      tmuxPlugins.prefix-highlight
       tmuxPlugins.yank
       tmuxPlugins.srcery
     ];
@@ -23,8 +21,6 @@
 
       bind C-a send-prefix
       bind a last-window
-
-      set -g @resurrect-dir "$HOME/.local/state/tmux/resurrect"
     '';
   };
 }
