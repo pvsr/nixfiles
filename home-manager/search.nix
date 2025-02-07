@@ -101,7 +101,7 @@ in
   programs.qutebrowser.searchEngines = {
     DEFAULT = qbEngines.k;
     w = "https://en.wikipedia.org/wiki/Special:Search?search={}";
-    d = "https://duckduckgo.com/?q={}";   
+    d = "https://duckduckgo.com/?q={}";
     # TODO set these up in firefox too
     a = "https://wiki.archlinux.org/?search={}";
     ap = "https://archlinux.org/packages/?q={}";

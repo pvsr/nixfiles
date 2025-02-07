@@ -48,7 +48,10 @@
   outputs =
     inputs:
     let
-      overlays = [ (import ./overlay.nix inputs) inputs.niri.overlays.niri ];
+      overlays = [
+        (import ./overlay.nix inputs)
+        inputs.niri.overlays.niri
+      ];
       specialArgs.inputs = inputs;
       specialArgs.appFont = "Fantasque Sans Mono";
       extraSpecialArgs = specialArgs;
