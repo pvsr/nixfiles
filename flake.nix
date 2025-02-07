@@ -132,13 +132,13 @@
         let
           homeManagerBuilder =
             module:
-            inputs.home-manager.lib.homeManagerConfiguration {
+            inputs.home-manager-unstable.lib.homeManagerConfiguration {
               inherit pkgs extraSpecialArgs;
               modules = [ module ];
             };
         in
         {
-          _module.args.pkgs = import inputs.nixpkgs { inherit system overlays; };
+          _module.args.pkgs = import inputs.unstable { inherit system overlays; };
           _module.args.unstablePkgs = import inputs.unstable { inherit system overlays; };
 
           legacyPackages.homeConfigurations.valleria = homeManagerBuilder ./home-manager/valleria.nix;
