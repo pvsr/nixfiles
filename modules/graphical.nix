@@ -2,7 +2,6 @@
 {
   imports = [
     ./bluetooth.nix
-    ./niri.nix
   ];
 
   hardware.graphics.enable = true;

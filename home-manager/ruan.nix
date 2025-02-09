@@ -2,6 +2,7 @@
 {
   imports = [
     ./nixos.nix
+    ./niri
     ./beets.nix
   ];
 

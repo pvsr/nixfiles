@@ -5,7 +5,10 @@
   ...
 }:
 {
-  imports = [ inputs.niri.nixosModules.niri ];
+  imports = [
+    ./graphical.nix
+    inputs.niri.nixosModules.niri
+  ];
 
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;

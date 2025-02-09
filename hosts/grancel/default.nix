@@ -2,7 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/graphical.nix
+    ../../modules/niri.nix
     ../../modules/steam.nix
     inputs.srvos.nixosModules.desktop
   ];

@@ -17,7 +17,7 @@ in
     ./miniflux.nix
     ./podcasts.nix
     ./transmission.nix
-    ../../modules/graphical.nix
+    ../../modules/niri.nix
     ../../modules/steam.nix
     ../../modules/impermanence.nix
     inputs.srvos.nixosModules.desktop

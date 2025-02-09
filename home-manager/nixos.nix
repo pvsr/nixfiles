@@ -3,7 +3,6 @@
   imports = [
     ./desktop.nix
     ./qutebrowser
-    ./niri
   ];
 
   home.packages = with pkgs; [
