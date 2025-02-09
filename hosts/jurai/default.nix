@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/gnome.nix
+    ../../modules/impermanence.nix
     inputs.srvos.nixosModules.desktop
   ];
 
@@ -30,4 +31,11 @@
   networking.firewall.enable = false;
 
   system.stateVersion = "24.11";
+
+  impermanence = {
+    enable = true;
+    systemdInitrd = true;
+    device = "/dev/disk/by-partlabel/disk-root-root";
+    persist = "/media/nixos/persist";
+  };
 }
