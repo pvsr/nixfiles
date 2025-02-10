@@ -45,6 +45,25 @@
         "2606:4700:4700::1001"
       ];
       dns.override_local_dns = true;
+      policy.path = builtins.toFile "acl.json" (
+        builtins.toJSON {
+          acls = [
+            {
+              action = "accept";
+              src = [ "*" ];
+              dst = [ "*:*" ];
+            }
+          ];
+          ssh = [
+            {
+              action = "accept";
+              src = [ "*" ];
+              dst = [ "*" ];
+              users = [ "*" ];
+            }
+          ];
+        }
+      );
     };
 
     openssh.enable = true;
