@@ -54,10 +54,13 @@
       enable = true;
       enableReload = true;
       virtualHosts = {
-        "peterrice.xyz pvsr.dev".extraConfig = ''
-          root * /srv
-          file_server
-        '';
+        "peterrice.xyz" = {
+          serverAliases = [ "pvsr.dev" ];
+          extraConfig = ''
+            root * /srv
+            file_server
+          '';
+        };
         "rss.peterrice.xyz".extraConfig = "reverse_proxy ruan:8080";
         "comics.peterrice.xyz".extraConfig = "reverse_proxy ruan:19191";
         "weather.peterrice.xyz".extraConfig = "reverse_proxy ruan:15658";
