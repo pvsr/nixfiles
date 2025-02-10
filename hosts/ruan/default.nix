@@ -55,12 +55,6 @@ in
     file = ./secrets/tandoor-key.age;
   };
   services = {
-    openssh.enable = true;
-    openssh.ports = [
-      22
-      24424
-    ];
-
     radicale.enable = true;
     radicale.settings = {
       server.hosts = [ "${tailscaleAddress}:52032" ];
@@ -127,13 +121,11 @@ in
   systemd.services.tandoor-recipes = requireTailscale;
 
   networking.firewall.allowedTCPPorts = [
-    24424 # sshd
     15658 # weather
     36597 # tandoor
   ];
 
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
-    22
     52032 # radicale
     47808 # dev
   ];

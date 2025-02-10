@@ -26,15 +26,5 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  services = {
-    openssh.enable = true;
-    openssh.ports = [
-      22
-      23232
-    ];
-  };
-
-  networking.firewall.allowedTCPPorts = [ 23232 ];
-
   system.stateVersion = "24.05";
 }
