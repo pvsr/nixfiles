@@ -149,10 +149,19 @@
 
           packages.deploy = pkgs.writeScriptBin "deploy" ''
             #!${pkgs.fish}/bin/fish
-            argparse -n deploy -X 1 'c/command=' -- $argv; or return
-            set command (printf $_flag_command; or printf switch)
-            set host (printf $argv; or hostname)
-            nixos-rebuild --fast --flake "/etc/nixos#$host" --target-host $host --use-remote-sudo $command
+            argparse -n deploy -X 1 'c/command=' 'd/dir=' -- $argv; or return
+            set this (hostname)
+            set host (printf $argv; or printf $this)
+            set dir (printf $_flag_dir; or printf /etc/nixos)
+            set command nixos-rebuild
+            set args --flake $dir#$host (printf $_flag_command; or printf switch)
+            test $host != $this
+            and set -a args --fast --target-host $host --use-remote-sudo
+            or set -p command sudo
+
+            type -q nom
+            and $command $args --log-format internal-json --verbose &| nom --json
+            or $command $args
           '';
 
           formatter = pkgs.nixfmt-rfc-style;
