@@ -18,9 +18,13 @@
       set -ga update-environment "WAYLAND_DISPLAY NIRI_SOCKET COLORTERM"
       set-option -g default-shell "${pkgs.fish}/bin/fish"
       set-option -g renumber-windows on
+      set-option -g history-limit 50000
+      set-option -g focus-events on
 
       bind C-a send-prefix
       bind a last-window
+      bind C-p previous-window
+      bind C-n next-window
     '';
   };
 }
