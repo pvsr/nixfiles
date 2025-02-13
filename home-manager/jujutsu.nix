@@ -30,7 +30,7 @@
             if(conflict, label("conflict", "×")),
             if(empty, label("empty", "(empty)")),
             if(description,
-              description.first_line(),
+              concat("(", description.first_line(), ")"),
               if(!empty, description_placeholder),
             ),
           )
