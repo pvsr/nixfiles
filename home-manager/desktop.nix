@@ -10,7 +10,7 @@
   home.packages = with pkgs; [
     gitAndTools.git-annex
     moreutils
-    atool
+    ouch
     tig
     manix
     sd
