@@ -22,11 +22,33 @@
             )
           )
         '';
+        template-aliases.shell_prompt = ''
+          separate(" ",
+            format_short_change_id_with_hidden_and_divergent_info(self),
+            bookmarks,
+            tags,
+            if(conflict, label("conflict", "×")),
+            if(empty, label("empty", "(empty)")),
+            if(description,
+              description.first_line(),
+              if(!empty, description_placeholder),
+            ),
+          )
+        '';
       };
     };
     fish = {
       shellAbbrs.j = "jj";
       functions = {
+        # https://github.com/fish-shell/fish-shell/blob/master/share/functions/fish_jj_prompt.fish
+        fish_jj_prompt = ''
+          set -l info "$(jj log 2>/dev/null --no-graph \
+            --color=always --revisions @ --template shell_prompt)"
+          or return 1
+          if test -n "$info"
+            printf ' %s' $info
+          end
+        '';
         summarize = {
           wraps = "jj show";
           body = ''
