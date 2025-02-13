@@ -61,7 +61,7 @@
         }
       ];
       language-server.fish-lsp = {
-        command = "fish-lsp";
+        command = "${pkgs.fish-lsp}/bin/fish-lsp";
         args = [ "start" ];
       };
     };
