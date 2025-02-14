@@ -9,6 +9,7 @@
           email = lib.mkDefault "peterrice@fastmail.com";
         };
         git.auto-local-bookmark = true;
+        git.subprocess = true;
         ui.default-command = "log";
         ui.diff.format = "git";
         templates.draft_commit_description = ''
