@@ -10,6 +10,7 @@ let
   } "zoxide init fish > $out";
 in
 {
+  home.shell.enableBashIntegration = false;
   home.shellAliases.fish = "SHELL=${pkgs.fish}/bin/fish command fish";
 
   programs.zoxide.enableFishIntegration = false;
