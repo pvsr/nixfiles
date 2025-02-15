@@ -25,6 +25,12 @@
       imagePreviewSupport = false;
       sixelPreviewSupport = false;
     })
+    (symlinkJoin {
+      name = "timg-wrapped";
+      paths = [ timg ];
+      buildInputs = [ makeWrapper ];
+      postBuild = "wrapProgram $out/bin/timg --add-flags '-pk'";
+    })
   ];
 
   home.sessionVariables = {
