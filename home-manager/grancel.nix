@@ -17,6 +17,8 @@
         sptlrx
       ];
 
+      programs.niri.settings.outputs."HDMI-A-2".variable-refresh-rate = true;
+
       programs.password-store.enable = true;
       programs.gpg.enable = true;
       programs.gpg.homedir = "${config.xdg.dataHome}/gnupg";

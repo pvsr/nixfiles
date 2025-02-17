@@ -1,6 +1,7 @@
 { self, ... }:
 {
   flake.modules.homeManager.jurai.imports = [ self.modules.homeManager.desktop ];
+  flake.modules.homeManager.jurai.programs.niri.settings.outputs."winit".scale = 2.0;
 
   local.homeConfigurations.jurai = self.modules.homeManager.macbook;
   flake.modules.homeManager.macbook =
