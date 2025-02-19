@@ -176,6 +176,18 @@
               inputs'.agenix.packages.agenix
             ];
           };
+          devShells.python = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              uv
+              ruff
+              (python3.withPackages (
+                ps: with ps; [
+                  mypy
+                  pylsp-mypy
+                ]
+              ))
+            ];
+          };
         };
     };
 }
