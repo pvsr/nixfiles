@@ -20,6 +20,10 @@ in
       type = lib.types.listOf lib.types.str;
       default = [ ];
     };
+    systemdInitrd = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -49,29 +53,71 @@ in
       ];
     };
 
-    # TODO debug postDeviceCommands with systemd-initrd (change id: myz)
-    boot.initrd.systemd.enable = false;
-    boot.initrd.postDeviceCommands = lib.mkAfter ''
-      mkdir /mnt
-      mount ${cfg.device} /mnt
+    boot.initrd =
+      if cfg.systemdInitrd then
+        {
+          # TODO debug
+          systemd.services.init-root = {
+            wantedBy = [ "initrd.target" ];
+            # TODO
+            # requires = [
+            #   "dev-disk-by\\x2dlabel-grancel.device"
+            # ];
+            # after = [
+            #   "dev-disk-by\\x2dlabel-grancel.device"
+            # ];
+            before = [ "sysroot.mount" ];
+            unitConfig.defaultDependencies = "no";
+            serviceConfig.type = "oneshot";
+            script = ''
+              mount --mkdir ${cfg.device} /mnt
 
-      delete_subvolume_recursively() {
-          IFS=$'\n'
-          for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-              delete_subvolume_recursively "/mnt/$i"
-          done
-          btrfs subvolume delete "$1"
-      }
+              delete_subvolume_recursively() {
+                  IFS=$'\n'
+                  for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+                      delete_subvolume_recursively "/mnt/$i"
+                  done
+                  btrfs subvolume delete "$1"
+              }
 
-      if [[ -e /mnt/tmp_root ]]; then
-        if [[ -e /mnt/old_root ]]; then
-          btrfs subvolume delete /mnt/old_root
-        fi
-        btrfs subvolume snapshot -r /mnt/tmp_root /mnt/old_root
-        delete_subvolume_recursively /mnt/tmp_root
-      fi
+              if [[ -e /mnt/tmp_root ]]; then
+                if [[ -e /mnt/old_root ]]; then
+                  btrfs subvolume delete /mnt/old_root
+                fi
+                btrfs subvolume snapshot -r /mnt/tmp_root /mnt/old_root
+                delete_subvolume_recursively /mnt/tmp_root
+              fi
 
-      btrfs subvolume create /mnt/tmp_root
-    '';
+              btrfs subvolume create /mnt/tmp_root
+              umount /mnt
+            '';
+          };
+        }
+      else
+        {
+          systemd.enable = false;
+          postDeviceCommands = lib.mkAfter ''
+            mkdir /mnt
+            mount ${cfg.device} /mnt
+
+            delete_subvolume_recursively() {
+                IFS=$'\n'
+                for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+                    delete_subvolume_recursively "/mnt/$i"
+                done
+                btrfs subvolume delete "$1"
+            }
+
+            if [[ -e /mnt/tmp_root ]]; then
+              if [[ -e /mnt/old_root ]]; then
+                btrfs subvolume delete /mnt/old_root
+              fi
+              btrfs subvolume snapshot -r /mnt/tmp_root /mnt/old_root
+              delete_subvolume_recursively /mnt/tmp_root
+            fi
+
+            btrfs subvolume create /mnt/tmp_root
+          '';
+        };
   };
 }
