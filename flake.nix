@@ -126,7 +126,6 @@
         {
           config,
           pkgs,
-          unstablePkgs,
           system,
           self',
           inputs',
@@ -142,7 +141,6 @@
         in
         {
           _module.args.pkgs = import inputs.unstable { inherit system overlays; };
-          _module.args.unstablePkgs = import inputs.unstable { inherit system overlays; };
 
           legacyPackages.homeConfigurations.valleria = homeManagerBuilder ./home-manager/valleria.nix;
           legacyPackages.homeConfigurations.jurai = homeManagerBuilder ./home-manager/macbook.nix;
