@@ -17,6 +17,7 @@
     diceware
     qbpm
     transmission
+    timg
   ];
 
   # TODO only if steam command exists

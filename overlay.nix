@@ -24,4 +24,10 @@ in
       src = inputs.fish-prompt-pvsr;
     };
   };
+  timg = prev.symlinkJoin {
+    name = "timg-wrapped";
+    paths = [ prev.timg ];
+    buildInputs = [ prev.makeWrapper ];
+    postBuild = "wrapProgram $out/bin/timg --add-flags '-pk'";
+  };
 }

@@ -8,6 +8,7 @@
   };
 
   home.packages = with pkgs; [
+    timg
     sarasa-gothic
     fantasque-sans-mono
   ];
