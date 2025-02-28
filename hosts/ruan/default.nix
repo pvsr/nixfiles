@@ -87,11 +87,6 @@ in
       extraConfig.SECRET_KEY_FILE = config.age.secrets."tandoor-key".path;
     };
 
-    jellyfin.enable = true;
-    jellyfin.user = "peter";
-    jellyfin.group = "users";
-    jellyfin.openFirewall = true; # 8096 only
-
     btrbk = {
       sshAccess = [
         {
@@ -151,7 +146,6 @@ in
     device = "/dev/disk/by-label/nixos";
     persist = "/media/nixos/persist";
     directories = [
-      "/var/lib/jellyfin"
       "/var/lib/komga"
       "/var/lib/postgresql"
       "/var/lib/private/tandoor-recipes"
