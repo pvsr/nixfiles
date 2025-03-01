@@ -152,9 +152,9 @@
             set host (printf $argv; or printf $this)
             set dir (printf $_flag_dir; or printf /etc/nixos)
             set command nixos-rebuild
-            set args --flake $dir#$host (printf $_flag_command; or printf switch)
+            set args --fast --flake $dir#$host (printf $_flag_command; or printf switch)
             test $host != $this
-            and set -a args --fast --target-host $host --use-remote-sudo
+            and set -a args --target-host $host --use-remote-sudo
             or set -p command sudo
 
             type -q nom
