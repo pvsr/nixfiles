@@ -7,7 +7,14 @@
     ./firefox.nix
   ];
 
-  home.packages = with pkgs; [ sptlrx ];
+  home.packages = with pkgs; [
+    (prismlauncher.override {
+      jdks = [
+        jdk
+      ];
+    })
+    sptlrx
+  ];
 
   services.spotifyd = {
     enable = true;
