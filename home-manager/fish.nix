@@ -94,7 +94,6 @@ in
     pisces
     fzf-fish
     plugin-git
-    async-prompt
     fish-prompt-pvsr
   ];
 
