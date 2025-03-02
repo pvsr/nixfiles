@@ -25,7 +25,12 @@
         '';
         template-aliases.shell_prompt = ''
           separate(" ",
-            format_short_change_id_with_hidden_and_divergent_info(self),
+            concat("(",
+              self.parents().map(|parent| parent.change_id().shortest()).join("/"),
+              " -> ",
+              format_short_change_id_with_hidden_and_divergent_info(self),
+              ")",
+            ),
             bookmarks,
             tags,
             if(conflict, label("conflict", "×")),
