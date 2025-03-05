@@ -51,10 +51,6 @@ in
         bind \cc 'commandline ""'
       '';
       fish_mode_prompt = "";
-      fish_prompt_loading_indicator = ''
-        echo -n "$argv[1]" | sed -r 's/\x1B\[[0-9;]*[JKmsu]//g' | read -zl uncolored_last_prompt
-        echo -n (set_color brblack)"$uncolored_last_prompt"(set_color normal)
-      '';
     };
     shellAbbrs = {
       suod = "sudo";
