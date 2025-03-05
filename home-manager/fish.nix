@@ -23,6 +23,7 @@ in
     interactiveShellInit = ''
       ${lib.optionalString config.programs.zoxide.enable "source ${zoxideFile}"}
       set -g fish_key_bindings fish_hybrid_key_bindings
+      bind -M insert ctrl-n down-or-search
       set -g fish_cursor_default block
       set -g fish_cursor_insert line
       set -g fish_cursor_replace_one underscore
