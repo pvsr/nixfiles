@@ -86,21 +86,22 @@
 
           legacyPackages.homeConfigurations = import ./home-manager system inputs;
 
-          formatter = pkgs.nixfmt-rfc-style;
+          formatter = pkgs.nixfmt-tree;
           pre-commit = {
-            settings.hooks.nixfmt-rfc-style = {
+            settings.hooks.treefmt = {
               enable = true;
               stages = [ "pre-push" ];
             };
           };
           devShells.default = pkgs.mkShell {
             inputsFrom = [ config.pre-commit.devShell ];
-            buildInputs = [
+            packages = [
+              pkgs.nixfmt-tree
               inputs'.agenix.packages.agenix
             ];
           };
           devShells.python = pkgs.mkShell {
-            buildInputs = with pkgs; [
+            packages = with pkgs; [
               uv
               ruff
               (python3.withPackages (
