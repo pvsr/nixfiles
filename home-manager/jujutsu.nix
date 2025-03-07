@@ -48,8 +48,13 @@
       functions = {
         # https://github.com/fish-shell/fish-shell/blob/master/share/functions/fish_jj_prompt.fish
         fish_jj_prompt = ''
-          set -l info "$(jj log 2>/dev/null --no-graph \
-            --color=always --revisions @ --template shell_prompt)"
+          set -l info "$(jj log \
+            --ignore-working-copy \
+            --revisions @ \
+            --no-graph \
+            --color=always \
+            --template shell_prompt \
+            2>/dev/null)"
           or return 1
           if test -n "$info"
             printf ' %s' $info
