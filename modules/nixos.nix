@@ -13,6 +13,7 @@
       psmisc
       utillinux
       foot.terminfo
+      (pkgs.writeScriptBin "deploy" (builtins.readFile ./deploy.fish))
     ];
   };
 

@@ -145,23 +145,6 @@
           legacyPackages.homeConfigurations.valleria = homeManagerBuilder ./home-manager/valleria.nix;
           legacyPackages.homeConfigurations.jurai = homeManagerBuilder ./home-manager/macbook.nix;
 
-          packages.deploy = pkgs.writeScriptBin "deploy" ''
-            #!${pkgs.fish}/bin/fish
-            argparse -n deploy -X 1 'c/command=' 'd/dir=' -- $argv; or return
-            set this (hostname)
-            set host (printf $argv; or printf $this)
-            set dir (printf $_flag_dir; or printf /etc/nixos)
-            set command nixos-rebuild
-            set args --fast --flake $dir#$host (printf $_flag_command; or printf switch)
-            test $host != $this
-            and set -a args --target-host $host --use-remote-sudo
-            or set -p command sudo
-
-            type -q nom
-            and $command $args --log-format internal-json --verbose &| nom --json
-            or $command $args
-          '';
-
           formatter = pkgs.nixfmt-rfc-style;
           pre-commit = {
             settings.hooks.nixfmt-rfc-style = {
@@ -172,7 +155,6 @@
           devShells.default = pkgs.mkShell {
             inputsFrom = [ config.pre-commit.devShell ];
             buildInputs = [
-              self'.packages.deploy
               inputs'.agenix.packages.agenix
             ];
           };
