@@ -29,6 +29,12 @@
   services.spice-vdagentd.enable = true;
   networking.firewall.enable = false;
 
+  services.openssh = {
+    enable = true;
+    startWhenNeeded = true;
+    listenAddresses = [ { addr = "192.168.68.2"; } ];
+  };
+
   system.stateVersion = "24.11";
 
   impermanence = {
