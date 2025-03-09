@@ -37,6 +37,7 @@
     enableBashIntegration = false;
     nix-direnv.enable = true;
   };
+  services.lorri.enable = true;
 
   programs.nix-index.enable = true;
   programs.tealdeer.enable = true;
