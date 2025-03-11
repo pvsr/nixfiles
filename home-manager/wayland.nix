@@ -1,4 +1,4 @@
-{ pkgs, appFont, ... }:
+{ config, pkgs, ... }:
 let
   colors = import ./colors.nix;
 in
@@ -29,7 +29,7 @@ in
     fuzzel.enable = true;
     fuzzel.settings = {
       main = {
-        font = "${appFont}:size=14";
+        font = "${config.local.appFont}:size=14";
         terminal = "${pkgs.ghostty}/bin/ghostty -e";
       };
       # colors = {};
@@ -39,7 +39,7 @@ in
   services = {
     mako = with colors; {
       enable = true;
-      font = "${appFont} 14";
+      font = "${config.local.appFont} 14";
       backgroundColor = brightBlue;
       borderColor = blue;
       textColor = xgray1;

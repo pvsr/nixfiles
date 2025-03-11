@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   imports = [ ./common.nix ];
 
@@ -29,6 +29,4 @@
   programs.git.userEmail = "price@hubspot.com";
   programs.jujutsu.settings.user.email = "price@hubspot.com";
   programs.tmux.terminal = "screen-256color";
-
-  nix.registry = builtins.mapAttrs (_: flake: { inherit flake; }) inputs;
 }

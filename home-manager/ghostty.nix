@@ -1,7 +1,7 @@
 {
+  config,
   pkgs,
   lib,
-  appFont,
   ...
 }:
 let
@@ -14,7 +14,7 @@ in
     settings = {
       theme = "srcery";
       command = "fish";
-      font-family = appFont;
+      font-family = config.local.appFont;
       font-size = lib.mkDefault 15;
       scrollback-limit = 0;
       window-decoration = !pkgs.stdenv.isLinux;

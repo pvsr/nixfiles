@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./config.nix
     ./fish.nix
     ./tmux.nix
     ./helix

@@ -49,67 +49,6 @@
 
   outputs =
     inputs:
-    let
-      overlays = [
-        (import ./overlay.nix inputs)
-        inputs.niri.overlays.niri
-      ];
-      specialArgs.inputs = inputs;
-      specialArgs.appFont = "Fantasque Sans Mono";
-      extraSpecialArgs = specialArgs;
-      nixosBuilder =
-        nixpkgs: home-manager: hostModule: hmModule:
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          modules = [
-            hostModule
-            home-manager.nixosModules.home-manager
-            inputs.agenix.nixosModules.age
-            inputs.disko.nixosModules.disko
-            {
-              nixpkgs = {
-                inherit overlays;
-              };
-              home-manager = {
-                inherit extraSpecialArgs;
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.peter = hmModule;
-              };
-            }
-            ./modules/nix.nix
-            ./modules/nixos.nix
-            ./users/peter.nix
-          ];
-        };
-      nixOnDroidBuilder =
-        nixpkgs: home-manager: hostModule: hmModule:
-        inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-          inherit extraSpecialArgs;
-          pkgs = import nixpkgs {
-            system = "aarch64-linux";
-            overlays = [ inputs.nix-on-droid.overlays.default ] ++ overlays;
-          };
-          home-manager-path = home-manager.outPath;
-          modules = [
-            hostModule
-            {
-              home-manager = {
-                inherit extraSpecialArgs;
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                config = hmModule;
-              };
-            }
-          ];
-        };
-      hosts = import ./hosts {
-        nixosStable = nixosBuilder inputs.nixpkgs inputs.home-manager;
-        nixosUnstable = nixosBuilder inputs.unstable inputs.home-manager-unstable;
-        nixOnDroidStable = nixOnDroidBuilder inputs.nixpkgs inputs.home-manager;
-        nixOnDroidUnstable = nixOnDroidBuilder inputs.unstable inputs.home-manager-unstable;
-      };
-    in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ inputs.pre-commit-hooks.flakeModule ];
       systems = [
@@ -119,7 +58,7 @@
       ];
 
       flake = {
-        inherit (hosts) nixosConfigurations nixOnDroidConfigurations;
+        inherit (import ./hosts inputs) nixosConfigurations nixOnDroidConfigurations;
       };
 
       perSystem =
@@ -131,19 +70,10 @@
           inputs',
           ...
         }:
-        let
-          homeManagerBuilder =
-            module:
-            inputs.home-manager-unstable.lib.homeManagerConfiguration {
-              inherit pkgs extraSpecialArgs;
-              modules = [ module ];
-            };
-        in
         {
-          _module.args.pkgs = import inputs.unstable { inherit system overlays; };
+          _module.args.pkgs = import inputs.unstable { inherit system; };
 
-          legacyPackages.homeConfigurations.valleria = homeManagerBuilder ./home-manager/valleria.nix;
-          legacyPackages.homeConfigurations.jurai = homeManagerBuilder ./home-manager/macbook.nix;
+          legacyPackages.homeConfigurations = import ./home-manager system inputs;
 
           formatter = pkgs.nixfmt-rfc-style;
           pre-commit = {
