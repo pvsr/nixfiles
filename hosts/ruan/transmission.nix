@@ -10,7 +10,7 @@ in
   };
 
   services.transmission = {
-    enable = true;
+    enable = !config.boot.isContainer;
     openPeerPorts = true;
     openRPCPort = true;
     credentialsFile = config.age.secrets."transmission-credentials.json".path;

@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   environment = {
     systemPackages = with pkgs; [
@@ -25,7 +30,7 @@
 
   networking.nftables.enable = true;
 
-  services.tailscale.enable = true;
+  services.tailscale.enable = !config.boot.isContainer;
   networking.firewall.checkReversePath = "loose";
   systemd.network.wait-online.ignoredInterfaces = [ "tailscale0" ];
   networking.firewall.trustedInterfaces = [ "tailscale0" ];

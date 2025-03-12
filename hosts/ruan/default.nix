@@ -1,10 +1,12 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   ...
 }:
 let
+  tailscaleEnabled = config.services.tailscale.enable;
   tailscaleAddress = "100.64.0.3";
   requireTailscale = {
     after = [ "tailscaled.service" ];
@@ -34,7 +36,7 @@ in
     "1.1.1.1"
     "1.0.0.1"
   ];
-  networking.useDHCP = true;
+  networking.useDHCP = lib.mkDefault true;
 
   console.keyMap = "us";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -55,7 +57,7 @@ in
     file = ./secrets/tandoor-key.age;
   };
   services = {
-    radicale.enable = true;
+    radicale.enable = tailscaleEnabled;
     radicale.settings = {
       server.hosts = [ "${tailscaleAddress}:52032" ];
       auth = {
@@ -65,17 +67,17 @@ in
       };
     };
 
-    weather.enable = true;
+    weather.enable = tailscaleEnabled;
     weather.bind = "${tailscaleAddress}:15658";
 
     komga = {
-      enable = true;
+      enable = tailscaleEnabled;
       port = 19191;
       openFirewall = true;
     };
 
     tandoor-recipes = {
-      enable = true;
+      enable = tailscaleEnabled;
       address = tailscaleAddress;
       port = 36597;
       extraConfig.SECRET_KEY_FILE = config.age.secrets."tandoor-key".path;
@@ -133,7 +135,7 @@ in
   system.stateVersion = "24.05";
   services.postgresql.package = pkgs.postgresql_16;
 
-  impermanence = {
+  local.impermanence = {
     enable = true;
     device = "/dev/disk/by-label/nixos";
     persist = "/media/nixos/persist";

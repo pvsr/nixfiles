@@ -5,14 +5,14 @@
   ...
 }:
 let
-  cfg = config.impermanence;
+  cfg = config.local.impermanence;
 in
 {
   imports = [
     inputs.impermanence.nixosModules.impermanence
   ];
 
-  options.impermanence = {
+  options.local.impermanence = {
     enable = lib.mkEnableOption { };
     device = lib.mkOption { };
     persist = lib.mkOption { };
@@ -26,7 +26,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && !config.boot.isContainer) {
     users.mutableUsers = false;
     users.users.root.hashedPasswordFile = "${cfg.persist}/passwords/root";
     users.users.peter.hashedPasswordFile = "${cfg.persist}/passwords/peter";

@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 5999 ];
 
@@ -7,13 +7,13 @@
     podcastSubdir = "hosted-podcasts";
     dataDir = "/media/nixos/podcasts";
     fetch = {
-      enable = true;
+      enable = config.services.tailscale.enable;
       user = "peter";
       group = "users";
       startAt = "0,8,16:0";
     };
     serve = {
-      enable = true;
+      enable = config.services.tailscale.enable;
       bind = "100.64.0.3:5999";
       timeout = 120;
     };

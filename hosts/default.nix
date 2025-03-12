@@ -43,6 +43,10 @@ let
       hmModule = ../home-manager/nixos.nix;
     };
   };
+  machines = {
+    imports = [ (import ../modules/machines.nix baseModules) ];
+    local.machines.hosts = hosts;
+  };
   nixosSystem =
     _: host:
     let
@@ -63,6 +67,7 @@ let
       modules = baseModules ++ [
         hmModule
         host.module
+        machines
       ];
     };
 in

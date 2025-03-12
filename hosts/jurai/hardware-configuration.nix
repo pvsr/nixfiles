@@ -5,8 +5,11 @@
   modulesPath,
   ...
 }:
+let
+  onMacos = pkgs.stdenv.hostPlatform.system == "aarch64-linux";
+in
 {
-  nixpkgs.hostPlatform = "aarch64-linux";
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 
   imports = [ "${modulesPath}/profiles/qemu-guest.nix" ];
 
@@ -15,7 +18,7 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/media/host" = {
+  fileSystems."/media/host" = lib.mkIf onMacos {
     device = "share";
     fsType = "virtiofs";
   };

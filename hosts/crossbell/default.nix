@@ -30,7 +30,7 @@
     };
 
   services = {
-    headscale.enable = true;
+    headscale.enable = config.services.tailscale.enable;
     headscale.address = "127.0.0.1";
     headscale.port = 9753;
     headscale.settings = {

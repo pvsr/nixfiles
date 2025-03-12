@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ lib, inputs, ... }:
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-pc-ssd
@@ -6,7 +6,7 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
   ];
 
-  nixpkgs.hostPlatform = "x86_64-linux";
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
