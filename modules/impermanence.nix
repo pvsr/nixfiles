@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.local.impermanence;
+  userCfg = config.users.users.peter;
 in
 {
   imports = [
@@ -26,6 +27,16 @@ in
     users.mutableUsers = false;
     users.users.root.hashedPasswordFile = "${cfg.persist}/passwords/root";
     users.users.peter.hashedPasswordFile = "${cfg.persist}/passwords/peter";
+
+    virtualisation.vmVariantWithDisko = {
+      users.users.root.hashedPasswordFile = lib.mkForce null;
+      users.users.peter.hashedPasswordFile = lib.mkForce null;
+
+      # https://github.com/NixOS/nixpkgs/issues/6481
+      systemd.tmpfiles.rules = [
+        "d ${userCfg.home} ${userCfg.homeMode} ${userCfg.name} ${userCfg.group}"
+      ];
+    };
 
     age.identityPaths = [ "${cfg.persist}/etc/ssh/ssh_host_ed25519_key" ];
 

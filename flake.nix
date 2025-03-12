@@ -73,6 +73,19 @@
         {
           _module.args.pkgs = import inputs.unstable { inherit system; };
 
+          apps = pkgs.lib.mapAttrs' (host: nixosConfig: {
+            name = "${host}-vm";
+            value = {
+              type = "app";
+              program = pkgs.lib.getExe (
+                if nixosConfig.config.disko.devices.disk != { } then
+                  nixosConfig.config.system.build.vmWithDisko
+                else
+                  nixosConfig.config.system.build.vm
+              );
+            };
+          }) inputs.self.nixosConfigurations;
+
           legacyPackages.homeConfigurations = import ./home-manager system inputs;
 
           formatter = pkgs.nixfmt-rfc-style;

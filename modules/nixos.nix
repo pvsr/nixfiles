@@ -53,4 +53,22 @@
   security.sudo.execWheelOnly = lib.mkForce false;
 
   services.dbus.implementation = "broker";
+
+  virtualisation =
+    let
+      variant = {
+        nixpkgs.hostPlatform = "x86_64-linux";
+        disabledModules = [ ./tailscale.nix ];
+        users.users.peter.password = "";
+        virtualisation = {
+          cores = 3;
+          memorySize = 1024 * 3;
+          graphics = false;
+        };
+      };
+    in
+    {
+      vmVariant = variant;
+      vmVariantWithDisko = variant;
+    };
 }
