@@ -9,6 +9,7 @@
   imports = [
     ./nix.nix
     ./machines.nix
+    ./containers.nix
     ./tailscale.nix
     ./impermanence.nix
     ../users/peter.nix

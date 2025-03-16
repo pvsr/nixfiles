@@ -4,7 +4,12 @@ let
   unstable = inputs.unstable.legacyPackages.${system};
 in
 {
-  inherit (unstable) moar fish jj;
+  inherit (unstable)
+    moar
+    jj
+    fish
+    fishMinimal
+    ;
   inherit (inputs.qbpm.packages.${system}) qbpm;
   inherit (inputs.agenix.packages.${system}) agenix;
   inherit (inputs.helix.packages.${system}) helix;
