@@ -8,6 +8,7 @@
   };
 
   home.packages = with pkgs; [
+    uutils-coreutils-noprefix
     timg
     sarasa-gothic
     fantasque-sans-mono
