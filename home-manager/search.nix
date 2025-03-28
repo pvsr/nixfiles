@@ -1,7 +1,8 @@
 { lib, pkgs, ... }:
 let
   mkEngines = searchTerms: {
-    "Kagi" = {
+    kagi = {
+      name = "Kagi";
       urls = [
         { template = "https://kagi.com/search?q=${searchTerms}"; }
         {
@@ -9,73 +10,75 @@ let
           type = "application/x-suggestions+json";
         }
       ];
-      iconUpdateURL = "https://github.com/kagisearch/browser_extensions/blob/e65c723370a2ee3960120612d2d46f3c9bfb6d87/shared/icons/icon_32px.png?raw=true";
+      icon = "https://github.com/kagisearch/browser_extensions/blob/e65c723370a2ee3960120612d2d46f3c9bfb6d87/shared/icons/icon_32px.png?raw=true";
       definedAliases = [ "k" ];
     };
-    "YouTube" = {
+    youtube = {
       urls = [ { template = "https://www.youtube.com/results?search_query=${searchTerms}"; } ];
-      iconUpdateURL = "https://www.youtube.com/s/desktop/271dfaff/img/favicon_144x144.png";
+      icon = "https://www.youtube.com/s/desktop/271dfaff/img/favicon_144x144.png";
       definedAliases = [ "y" ];
     };
-    "GitHub" = {
+    github = {
       urls = [ { template = "https://github.com/search?type=repositories&q=${searchTerms}"; } ];
-      iconUpdateURL = "https://github.githubassets.com/favicons/favicon.svg";
+      icon = "https://github.githubassets.com/favicons/favicon.svg";
       definedAliases = [ "gi" ];
     };
-    "Wiktionary" = {
+    wiktionary = {
+      name = "Wiktionary";
       urls = [
         {
           template = "https://www.wiktionary.org/search-redirect.php?family=wiktionary&language=en&go=Go&search=${searchTerms}";
         }
       ];
-      iconUpdateURL = "https://en.wiktionary.org/static/favicon/wiktionary/en.ico";
+      icon = "https://en.wiktionary.org/static/favicon/wiktionary/en.ico";
       definedAliases = [ "wikt" ];
     };
-    "Jisho" = {
+    jisho = {
+      name = "Jisho";
       urls = [ { template = "https://jisho.org/search/${searchTerms}"; } ];
-      iconUpdateURL = "https://assets.jisho.org/assets/favicon-062c4a0240e1e6d72c38aa524742c2d558ee6234497d91dd6b75a182ea823d65.ico";
+      icon = "https://assets.jisho.org/assets/favicon-062c4a0240e1e6d72c38aa524742c2d558ee6234497d91dd6b75a182ea823d65.ico";
       definedAliases = [ "ji" ];
     };
-    "RateYourMusic" = {
+    rateyourmusic = {
+      name = "RateYourMusic";
       urls = [ { template = "https://rateyourmusic.com/search?searchtype=&searchterm=${searchTerms}"; } ];
-      iconUpdateURL = "https://e.snmc.io/3.0/img/logo/sonemic-32.png";
+      icon = "https://e.snmc.io/3.0/img/logo/sonemic-32.png";
       definedAliases = [ "ra" ];
     };
-    "Genius" = {
+    genius = {
+      name = "Genius";
       urls = [ { template = "https://genius.com/search?q=${searchTerms}"; } ];
-      iconUpdateURL = "https://genius.com/favicon.ico";
+      icon = "https://genius.com/favicon.ico";
       definedAliases = [ "@gen" ];
     };
-    "Nix Packages" = {
+    nix-packages = {
+      name = "Nix Packages";
       urls = [
         { template = "https://search.nixos.org/packages?channel=unstable&query=${searchTerms}"; }
       ];
       icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-      definedAliases = [
-        "@nxp"
-      ];
+      definedAliases = [ "@nxp" ];
     };
-    "NixOS Options" = {
+    nixos-options = {
+      name = "NixOS Options";
       urls = [ { template = "https://search.nixos.org/options?channel=unstable&query=${searchTerms}"; } ];
       icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-      definedAliases = [
-        "@nxo"
-      ];
+      definedAliases = [ "@nxo" ];
     };
-    "NixOS Wiki" = {
+    nixos-wiki = {
+      name = "NixOS Wiki";
       urls = [ { template = "https://wiki.nixos.org/index.php?search=${searchTerms}"; } ];
       icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-      definedAliases = [
-        "@nxw"
-      ];
+      definedAliases = [ "@nxw" ];
     };
-    "Python Documentation" = {
+    placeholder = {
+      name = "Python Documentation";
       urls = [
         {
           template = "https://docs.python.org/3/search.html?check_keywords=yes&area=default&q=${searchTerms}";
         }
       ];
-      iconUpdateURL = "https://docs.python.org/3/_static/py.svg";
+      icon = "https://docs.python.org/3/_static/py.svg";
       definedAliases = [ "pd" ];
     };
   };
@@ -88,14 +91,14 @@ in
 {
   programs.firefox.profiles.default.search = {
     force = true;
-    default = "Kagi";
+    default = "kagi";
     engines = {
-      "Bing".metaData.hidden = true;
-      "eBay".metaData.hidden = true;
-      "Amazon.com".metaData.hidden = true;
-      "Google".metaData.hidden = true;
-      "DuckDuckGo".metaData.hidden = true;
-      "Wikipedia (en)".metaData.alias = "w";
+      bing.metaData.hidden = true;
+      ebay.metaData.hidden = true;
+      amazondotcom-us.metaData.hidden = true;
+      google.metaData.hidden = true;
+      ddg.metaData.hidden = true;
+      wikipedia.metaData.alias = "w";
     } // builtins.mapAttrs (n: v: { inherit updateInterval; } // v) (mkEngines "{searchTerms}");
   };
   programs.qutebrowser.searchEngines = {
