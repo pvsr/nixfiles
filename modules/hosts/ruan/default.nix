@@ -109,23 +109,11 @@
       system.stateVersion = "24.05";
       services.postgresql.package = pkgs.postgresql_16;
 
-      local.persistence = {
-        enable = true;
-        rootDevice = "/dev/disk/by-label/nixos";
-      };
-      environment.persistence.nixos = {
-        hideMounts = true;
-        persistentStoragePath = "/run/media/persist";
-        directories = [
-          "/var/lib/komga"
-          "/var/lib/postgresql"
-          "/var/lib/private/radicale"
-        ];
-      };
-      environment.persistence.data = {
-        enable = config.local.persistence.enable;
-        hideMounts = true;
-        persistentStoragePath = "/run/media/data/persist";
-      };
+      environment.persistence.nixos.directories = [
+        "/var/lib/komga"
+        "/var/lib/postgresql"
+        "/var/lib/private/radicale"
+      ];
+      environment.persistence.data.enable = config.local.persistence.enable;
     };
 }
