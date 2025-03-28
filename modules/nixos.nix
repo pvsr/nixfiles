@@ -5,6 +5,8 @@
   ...
 }:
 {
+  imports = [ ./tailscale.nix ];
+
   environment = {
     systemPackages = with pkgs; [
       binutils
@@ -29,15 +31,6 @@
   programs.ssh.startAgent = true;
 
   networking.nftables.enable = true;
-
-  services.tailscale.enable = !config.boot.isContainer;
-  networking.firewall.checkReversePath = "loose";
-  systemd.network.wait-online.ignoredInterfaces = [ "tailscale0" ];
-  networking.firewall.trustedInterfaces = [ "tailscale0" ];
-  boot.kernel.sysctl = {
-    "net.ipv4.ip_forward" = true;
-    "net.ipv6.conf.all.forwarding" = true;
-  };
 
   services.fstrim.enable = true;
 
