@@ -65,12 +65,12 @@
           body = ''
             set recent (jj log --no-graph \
               -r 'ancestors(immutable_heads(), 8) & ~description("flake.lock")' \
-              -T 'separate("\n", separate(" ", \
-                format_timestamp(commit_timestamp(self)), \
-                format_short_commit_id(self.commit_id()) \
+              -T 'separate("\n", separate(" ",
+                format_timestamp(commit_timestamp(self)),
+                format_short_commit_id(self.commit_id())
               ), self.description())' \
             | string collect)
-            PAGER= jj show $argv[1]
+            PAGER=cat jj show $argv[1]
             jj show $argv[1] | llm -s "Write a one-line commit message for \
             these changes. It should be under 50 characters. If a terse \
             description does not fit in 50 characters you may continue to write \
