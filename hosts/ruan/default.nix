@@ -21,7 +21,6 @@ in
     ./transmission.nix
     ../../modules/niri.nix
     ../../modules/steam.nix
-    ../../modules/impermanence.nix
     inputs.srvos.nixosModules.desktop
     inputs.weather.nixosModules.default
     inputs.podcasts.nixosModules.default

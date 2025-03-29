@@ -10,9 +10,9 @@ let
 in
 {
   imports = [
+    ./disks.nix
     ./hardware-configuration.nix
     ../../modules/gnome.nix
-    ../../modules/impermanence.nix
     inputs.srvos.nixosModules.desktop
   ];
 
@@ -40,10 +40,4 @@ in
   };
 
   system.stateVersion = "24.11";
-
-  local.impermanence = {
-    enable = true;
-    device = "/dev/disk/by-partlabel/disk-root-root";
-    persist = "/media/nixos/persist";
-  };
 }

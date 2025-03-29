@@ -11,6 +11,7 @@ let
     inputs.disko.nixosModules.disko
     ../modules/nix.nix
     ../modules/nixos.nix
+    ../modules/impermanence.nix
     ../users/peter.nix
     {
       nixpkgs.overlays = overlays;
