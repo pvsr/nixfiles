@@ -56,17 +56,15 @@ in
     boot.initrd =
       if cfg.systemdInitrd then
         {
-          # TODO debug
           systemd.services.init-root = {
             wantedBy = [ "initrd.target" ];
-            # TODO
-            # requires = [
-            #   "dev-disk-by\\x2dlabel-grancel.device"
-            # ];
-            # after = [
-            #   "dev-disk-by\\x2dlabel-grancel.device"
-            # ];
-            before = [ "sysroot.mount" ];
+            after = [ "initrd-root-device.target" ];
+            requires = [ "initrd-root-device.target" ];
+            before = [
+              "sysroot.mount"
+              "create-needed-for-boot-dirs.service"
+            ];
+            description = "Create Fresh Root Subvolume";
             unitConfig.defaultDependencies = "no";
             serviceConfig.type = "oneshot";
             script = ''
