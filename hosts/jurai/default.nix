@@ -43,7 +43,6 @@ in
 
   local.impermanence = {
     enable = true;
-    systemdInitrd = true;
     device = "/dev/disk/by-partlabel/disk-root-root";
     persist = "/media/nixos/persist";
   };
