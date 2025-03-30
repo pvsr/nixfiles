@@ -27,4 +27,6 @@
       bind C-n next-window
     '';
   };
+
+  programs.ghostty.settings.scrollback-limit = 0;
 }
