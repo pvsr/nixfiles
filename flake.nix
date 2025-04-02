@@ -69,7 +69,12 @@
           ...
         }:
         {
-          _module.args.pkgs = import inputs.unstable { inherit system; };
+          _module.args.pkgs = import inputs.unstable {
+            inherit system;
+            overlays = [
+              (import ./overlay.nix inputs)
+            ];
+          };
 
           apps = pkgs.lib.mapAttrs' (host: nixosConfig: {
             name = "${host}-vm";
@@ -84,7 +89,7 @@
             };
           }) inputs.self.nixosConfigurations;
 
-          legacyPackages.homeConfigurations = import ./home-manager system inputs;
+          legacyPackages.homeConfigurations = import ./home-manager { inherit system inputs pkgs; };
 
           formatter = pkgs.nixfmt-tree;
           pre-commit = {

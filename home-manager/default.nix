@@ -1,10 +1,9 @@
-system: inputs:
+{
+  system,
+  inputs,
+  pkgs,
+}:
 let
-  overlays = [
-    (import ../overlay.nix inputs)
-    inputs.niri.overlays.niri
-  ];
-  pkgs = import inputs.unstable { inherit system overlays; };
   homeManagerConfiguration =
     module:
     inputs.home-manager-unstable.lib.homeManagerConfiguration {
