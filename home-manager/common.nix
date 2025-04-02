@@ -3,6 +3,7 @@
   imports = [
     ./config.nix
     ./fish.nix
+    ./ripgrep.nix
     ./tmux.nix
     ./helix
     ./git.nix
@@ -16,7 +17,6 @@
 
   home.packages = with pkgs; [
     fd
-    ripgrep
     moar
     nvd
     nix-output-monitor
