@@ -1,95 +1,73 @@
 inputs:
 let
   lib = inputs.nixpkgs.lib;
-  specialArgs.inputs = inputs;
-  overlays = [
-    (import ../overlay.nix inputs)
-    inputs.niri.overlays.niri
-  ];
-  baseModules = [
-    inputs.agenix.nixosModules.age
-    inputs.disko.nixosModules.disko
-    ../modules/nix.nix
-    ../modules/nixos.nix
-    ../modules/impermanence.nix
-    ../users/peter.nix
-    {
-      nixpkgs.overlays = overlays;
-    }
-  ];
   unstable = {
     nixpkgs = inputs.unstable;
     home-manager = inputs.home-manager-unstable;
+  };
+  mkHome = module: {
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      users.peter = module;
+    };
   };
   hosts = {
     grancel = {
       containerId = 1;
       inputs = inputs // unstable;
       module = ./grancel;
-      hmModule = ../home-manager/grancel.nix;
+      home = mkHome ../home-manager/grancel.nix;
     };
     ruan = {
       containerId = 2;
       module = ./ruan;
-      hmModule = ../home-manager/ruan.nix;
+      home = mkHome ../home-manager/ruan.nix;
     };
     crossbell = {
       containerId = 3;
       module = ./crossbell;
-      hmModule = ../home-manager/common.nix;
+      home = mkHome ../home-manager/common.nix;
     };
     jurai = {
       containerId = 4;
       module = ./jurai;
-      hmModule = ../home-manager/nixos.nix;
+      home = mkHome ../home-manager/nixos.nix;
     };
   };
-  machines = {
-    imports = [ (import ../modules/machines.nix baseModules) ];
-    local.machines.hosts = hosts;
-  };
-  nixosSystem =
-    _: host:
+  mkSystem =
+    host:
     let
-      hostInputs = host.inputs or inputs;
-      hmModule = {
-        imports = [
-          hostInputs.home-manager.nixosModules.home-manager
-        ];
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          users.peter = host.hmModule;
-        };
-      };
+      inherit (host.inputs or inputs) nixpkgs home-manager;
     in
-    hostInputs.nixpkgs.lib.nixosSystem {
-      inherit specialArgs;
-      modules = baseModules ++ [
-        hmModule
+    nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inputs = host.inputs or inputs;
+      };
+      modules = [
         host.module
-        machines
+        host.home
+        ../modules/nixos.nix
+        home-manager.nixosModules.home-manager
+        { local.machines = { inherit hosts; }; }
       ];
     };
 in
 {
-  nixosConfigurations = lib.mapAttrs nixosSystem hosts;
+  nixosConfigurations = lib.mapAttrs (_: mkSystem) hosts;
 
   nixOnDroidConfigurations.default = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
     pkgs = import inputs.unstable {
       system = "aarch64-linux";
-      overlays = [ inputs.nix-on-droid.overlays.default ] ++ overlays;
+      overlays = [
+        (import ../overlay.nix inputs)
+        inputs.nix-on-droid.overlays.default
+      ];
     };
     home-manager-path = inputs.home-manager-unstable.outPath;
     modules = [
       ./arseille
-      {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          config = ../home-manager/arseille.nix;
-        };
-      }
+      (mkHome ../home-manager/arseille.nix)
     ];
   };
 }

@@ -30,3 +30,4 @@ in
     postBuild = "wrapProgram $out/bin/timg --add-flags '-pk'";
   };
 }
+// (inputs.niri.overlays.niri final prev)

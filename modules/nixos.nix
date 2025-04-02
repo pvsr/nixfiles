@@ -2,10 +2,23 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 {
-  imports = [ ./tailscale.nix ];
+  imports = [
+    ./nix.nix
+    ./machines.nix
+    ./tailscale.nix
+    ./impermanence.nix
+    ../users/peter.nix
+    inputs.agenix.nixosModules.age
+    inputs.disko.nixosModules.disko
+  ];
+
+  nixpkgs.overlays = [
+    (import ../overlay.nix inputs)
+  ];
 
   environment = {
     systemPackages = with pkgs; [
