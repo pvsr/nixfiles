@@ -63,14 +63,14 @@ in
     boot.initrd.systemd.services.init-root = {
       wantedBy = [ "initrd.target" ];
       after = [ "initrd-root-device.target" ];
-      requires = [ "initrd-root-device.target" ];
-      before = [
-        "sysroot.mount"
-        "create-needed-for-boot-dirs.service"
-      ];
+      before = [ "create-needed-for-boot-dirs.service" ];
       description = "Create Fresh Root Subvolume";
-      unitConfig.defaultDependencies = "no";
-      serviceConfig.type = "oneshot";
+      unitConfig = {
+        DefaultDependencies = false;
+      };
+      serviceConfig = {
+        Type = "oneshot";
+      };
       script = ''
         mount --mkdir ${cfg.device} /mnt
 
