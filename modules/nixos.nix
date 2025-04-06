@@ -37,6 +37,8 @@
     ];
   };
 
+  security.sudo.wheelNeedsPassword = false;
+
   programs.fish.enable = true;
   programs.fish.useBabelfish = true;
   users.defaultUserShell = pkgs.fish;

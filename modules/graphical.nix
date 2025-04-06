@@ -23,8 +23,6 @@
     tmpfsSize = "75%";
   };
 
-  security.sudo.wheelNeedsPassword = false;
-
   xdg.icons.enable = true;
 
   fonts = {
