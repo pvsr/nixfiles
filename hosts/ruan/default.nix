@@ -6,9 +6,8 @@
   ...
 }:
 let
-  tailscaleEnabled = config.services.tailscale.enable;
-  tailscaleAddress = "100.64.0.3";
-  requireTailscale = {
+  serverAddress = if config.services.tailscale.enable then "100.64.0.3" else "0.0.0.0";
+  waitForTailscale = lib.mkIf config.services.tailscale.enable {
     after = [ "tailscaled.service" ];
     wants = [ "tailscaled.service" ];
   };
@@ -56,9 +55,9 @@ in
     file = ./secrets/tandoor-key.age;
   };
   services = {
-    radicale.enable = tailscaleEnabled;
+    radicale.enable = true;
     radicale.settings = {
-      server.hosts = [ "${tailscaleAddress}:52032" ];
+      server.hosts = [ "${serverAddress}:52032" ];
       auth = {
         type = "htpasswd";
         htpasswd_filename = config.age.secrets."radicale-users".path;
@@ -66,18 +65,18 @@ in
       };
     };
 
-    weather.enable = tailscaleEnabled;
-    weather.bind = "${tailscaleAddress}:15658";
+    weather.enable = true;
+    weather.bind = "${serverAddress}:15658";
 
     komga = {
-      enable = tailscaleEnabled;
+      enable = true;
       port = 19191;
       openFirewall = true;
     };
 
     tandoor-recipes = {
-      enable = tailscaleEnabled;
-      address = tailscaleAddress;
+      enable = true;
+      address = serverAddress;
       port = 36597;
       extraConfig.SECRET_KEY_FILE = config.age.secrets."tandoor-key".path;
     };
@@ -117,18 +116,15 @@ in
       };
     };
   };
-  systemd.services.radicale = requireTailscale;
-  systemd.services.weather = requireTailscale;
-  systemd.services.tandoor-recipes = requireTailscale;
+
+  systemd.services.radicale = waitForTailscale;
+  systemd.services.weather = waitForTailscale;
+  systemd.services.tandoor-recipes = waitForTailscale;
 
   networking.firewall.allowedTCPPorts = [
     15658 # weather
     36597 # tandoor
-  ];
-
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
     52032 # radicale
-    47808 # dev
   ];
 
   system.stateVersion = "24.05";
