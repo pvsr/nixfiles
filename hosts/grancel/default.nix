@@ -12,6 +12,7 @@
   local.machines = {
     enable = true;
     autoStart = false;
+    only = [ "grancel" ];
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
