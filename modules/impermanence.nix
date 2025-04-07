@@ -28,15 +28,23 @@ in
     users.users.root.hashedPasswordFile = "${cfg.persist}/passwords/root";
     users.users.peter.hashedPasswordFile = "${cfg.persist}/passwords/peter";
 
-    virtualisation.vmVariantWithDisko = {
-      users.users.root.hashedPasswordFile = lib.mkForce null;
-      users.users.peter.hashedPasswordFile = lib.mkForce null;
+    virtualisation =
+      let
+        variant = {
+          users.users.root.hashedPasswordFile = lib.mkForce null;
+          users.users.peter.hashedPasswordFile = lib.mkForce null;
 
-      # https://github.com/NixOS/nixpkgs/issues/6481
-      systemd.tmpfiles.rules = [
-        "d ${userCfg.home} ${userCfg.homeMode} ${userCfg.name} ${userCfg.group}"
-      ];
-    };
+          # https://github.com/NixOS/nixpkgs/issues/6481
+          systemd.tmpfiles.rules = [
+            "d ${userCfg.home} ${userCfg.homeMode} ${userCfg.name} ${userCfg.group}"
+          ];
+
+        };
+      in
+      {
+        vmVariant = variant;
+        vmVariantWithDisko = variant;
+      };
 
     age.identityPaths = [ "${cfg.persist}/etc/ssh/ssh_host_ed25519_key" ];
 
