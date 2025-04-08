@@ -20,6 +20,7 @@ in
   programs.fish = {
     enable = true;
     preferAbbrs = true;
+    generateCompletions = false;
     interactiveShellInit = ''
       ${lib.optionalString config.programs.zoxide.enable "source ${zoxideFile}"}
       set -g fish_key_bindings fish_hybrid_key_bindings
