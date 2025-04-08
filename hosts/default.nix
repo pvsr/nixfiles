@@ -47,7 +47,7 @@ let
       modules = [
         host.module
         host.home
-        ../modules/nixos.nix
+        ../modules
         home-manager.nixosModules.home-manager
         { local.machines = { inherit hosts; }; }
       ];

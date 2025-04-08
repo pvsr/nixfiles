@@ -1,42 +1,22 @@
 {
-  config,
   pkgs,
   lib,
-  inputs,
   ...
 }:
 {
-  imports = [
-    ./nix.nix
-    ./machines.nix
-    ./containers.nix
-    ./tailscale.nix
-    ./impermanence.nix
-    ../users/peter.nix
-    inputs.agenix.nixosModules.age
-    inputs.disko.nixosModules.disko
+  environment.systemPackages = with pkgs; [
+    binutils
+    coreutils
+    curl
+    dnsutils
+    dosfstools
+    file
+    iputils
+    lsof
+    psmisc
+    utillinux
+    ghostty.terminfo
   ];
-
-  nixpkgs.overlays = [
-    (import ../overlay.nix inputs)
-  ];
-
-  environment = {
-    systemPackages = with pkgs; [
-      binutils
-      coreutils
-      curl
-      dnsutils
-      dosfstools
-      file
-      iputils
-      lsof
-      psmisc
-      utillinux
-      ghostty.terminfo
-      (pkgs.writeScriptBin "deploy" (builtins.readFile ./deploy.fish))
-    ];
-  };
 
   security.sudo.wheelNeedsPassword = false;
 

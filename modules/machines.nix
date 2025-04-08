@@ -20,7 +20,7 @@ let
     localAddress6 = "fc00::${toString host.containerId}";
     config.imports = [
       host.module
-      ../modules/nixos.nix
+      ../modules
       {
         disabledModules = [
           ../modules/niri.nix
