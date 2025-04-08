@@ -26,6 +26,12 @@
       imagePreviewSupport = false;
       sixelPreviewSupport = false;
     })
+    (fzf.overrideAttrs (oldAttrs: {
+      postInstall = ''
+        ${oldAttrs.postInstall or ""}
+        rm -rf $out/share/fish
+      '';
+    }))
   ];
 
   home.sessionVariables = {
@@ -38,22 +44,16 @@
       "-no-clear-on-exit"
       "-terminal-fg"
     ];
-  };
-
-  home.language.base = "en-US.UTF-8";
-
-  home.shellAliases.bell = "echo \\a";
-
-  programs.fzf = {
-    enable = true;
-    enableFishIntegration = false;
-    defaultCommand = "fd --type f";
-    defaultOptions = [
+    FZF_DEFAULT_OPTIONS = builtins.concatStringsSep " " [
       "--bind=ctrl-j:accept,ctrl-k:kill-line"
       "--cycle"
       "--layout=reverse"
     ];
   };
+
+  home.language.base = "en-US.UTF-8";
+
+  home.shellAliases.bell = "echo \\a";
 
   programs.bottom.enable = true;
 }

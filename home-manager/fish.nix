@@ -47,11 +47,6 @@ in
           popd 2> /dev/null
         end
       '';
-      fzf_key_bindings = "";
-      # TODO remove when default changes in next major release
-      fish_user_key_bindings = ''
-        bind \cc 'commandline ""'
-      '';
       fish_mode_prompt = "";
     };
     shellAbbrs = {
