@@ -3,11 +3,11 @@
   imports = [
     ./nix.nix
     ./nixos.nix
+    ./user.nix
     ./machines.nix
     ./containers.nix
     ./tailscale.nix
     ./impermanence.nix
-    ../users/peter.nix
     inputs.agenix.nixosModules.age
     inputs.disko.nixosModules.disko
   ];

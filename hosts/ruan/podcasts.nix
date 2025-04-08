@@ -8,7 +8,7 @@
     dataDir = "/media/nixos/podcasts";
     fetch = {
       enable = config.services.tailscale.enable;
-      user = "peter";
+      user = config.local.user.name;
       group = "users";
       startAt = "0,8,16:0";
     };

@@ -9,6 +9,8 @@ in
     group = "transmission";
   };
 
+  local.user.extraGroups = [ "transmission" ];
+
   services.transmission = {
     enable = !config.boot.isContainer;
     openPeerPorts = true;
