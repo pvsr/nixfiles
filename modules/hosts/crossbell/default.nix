@@ -8,6 +8,18 @@ in
     {
       imports = [ inputs.srvos.nixosModules.hardware-vultr-vm ];
 
+      hardware.facter.reportPath = ./facter.json;
+
+      fileSystems."/" = {
+        device = "/dev/disk/by-label/root";
+        fsType = "btrfs";
+        options = [
+          "defaults"
+          "compress=zstd"
+        ];
+      };
+      swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
+
       time.timeZone = "America/New_York";
 
       users.users.root.openssh.authorizedKeys.keys = [

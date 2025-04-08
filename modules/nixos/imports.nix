@@ -36,5 +36,6 @@ in
       enable = false;
       defaultEditor = false;
     };
+    server.hardware.facter.detected.graphics.enable = false;
   };
 }

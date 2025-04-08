@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ inputs, ... }:
 {
   flake.modules.hjem.ruan.niri.extraConfig = ''output "HDMI-A-3" { scale 2.0; }'';
 
@@ -11,6 +11,8 @@
       ];
 
       programs.steam.enable = true;
+
+      hardware.facter.reportPath = ./facter.json;
 
       boot.loader.systemd-boot.enable = true;
       boot.loader.systemd-boot.editor = false;
