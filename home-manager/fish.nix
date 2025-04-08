@@ -33,8 +33,14 @@ in
       __git.init
     '';
     functions = {
-      yts = "mpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
-      uts = "umpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
+      yts = {
+        wraps = "mpv";
+        body = "mpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
+      };
+      uts = {
+        wraps = "mpv";
+        body = "umpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
+      };
       session = ''
         if set -q argv[1]
           set -gx fish_history $argv[1]
@@ -56,11 +62,12 @@ in
       sc = "systemctl";
       ssc = "sudo systemctl";
       scu = "systemctl --user";
-      jcl = "journalctl -xe";
-      jcb = "journalctl -xb";
-      jcf = "journalctl -xf";
-      jcu = "journalctl -xeu";
-      jcuf = "journalctl -xfu";
+      jc = "journalctl";
+      jce = "journalctl -e";
+      jcf = "journalctl -f";
+      jcu = "journalctl -u";
+      jcb = "journalctl -b";
+      jcm = "sudo journalctl -M";
       trr = "transmission-remote ruan.ts.peterrice.xyz:9919";
       gcp = "git commit -p";
       "gcp!" = "git commit -p --amend";

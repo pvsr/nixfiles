@@ -43,7 +43,10 @@
       };
     };
     fish = {
-      shellAbbrs.j = "jj";
+      shellAbbrs = {
+        j = "jj";
+        js = "jj show";
+      };
       functions = {
         # https://github.com/fish-shell/fish-shell/blob/master/share/functions/fish_jj_prompt.fish
         fish_jj_prompt = ''
