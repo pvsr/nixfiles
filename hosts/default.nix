@@ -67,7 +67,13 @@ in
     home-manager-path = inputs.home-manager-unstable.outPath;
     modules = [
       ./arseille
-      (mkHome ../home-manager/arseille.nix)
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          config = ../home-manager/arseille.nix;
+        };
+      }
     ];
   };
 }
