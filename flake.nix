@@ -48,16 +48,16 @@
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ inputs.pre-commit-hooks.flakeModule ];
+      imports = [
+        ./hosts
+        inputs.pre-commit-hooks.flakeModule
+      ];
+
       systems = [
         "x86_64-linux"
         "aarch64-linux"
         "aarch64-darwin"
       ];
-
-      flake = {
-        inherit (import ./hosts inputs) nixosConfigurations nixOnDroidConfigurations;
-      };
 
       perSystem =
         {

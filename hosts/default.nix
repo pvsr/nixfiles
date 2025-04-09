@@ -1,4 +1,4 @@
-inputs:
+{ inputs, ... }:
 let
   lib = inputs.nixpkgs.lib;
   unstable = {
@@ -54,9 +54,9 @@ let
     };
 in
 {
-  nixosConfigurations = lib.mapAttrs (_: mkSystem) hosts;
+  flake.nixosConfigurations = lib.mapAttrs (_: mkSystem) hosts;
 
-  nixOnDroidConfigurations.default = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+  flake.nixOnDroidConfigurations.default = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
     pkgs = import inputs.unstable {
       system = "aarch64-linux";
       overlays = [
