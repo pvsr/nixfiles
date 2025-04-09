@@ -1,38 +1,52 @@
-inputs: final: prev:
-let
-  system = prev.stdenv.hostPlatform.system;
-  unstable = inputs.unstable.legacyPackages.${system};
-in
+{ self, inputs, ... }:
 {
-  inherit (unstable)
-    moar
-    jj
-    fish
-    fishMinimal
-    ;
-  inherit (inputs.qbpm.packages.${system}) qbpm;
-  inherit (inputs.agenix.packages.${system}) agenix;
-  inherit (inputs.helix.packages.${system}) helix;
-  transmission = prev.transmission_4;
-  tmuxPlugins = prev.tmuxPlugins // {
-    srcery = prev.tmuxPlugins.mkTmuxPlugin {
-      pluginName = "srcery";
-      version = inputs.srcery-tmux.shortRev;
-      src = inputs.srcery-tmux;
+  imports = [ inputs.flake-parts.flakeModules.easyOverlay ];
+  perSystem =
+    {
+      system,
+      pkgs,
+      inputs',
+      ...
+    }:
+    {
+      _module.args.pkgs = import inputs.unstable {
+        inherit system;
+        overlays = [
+          self.overlays.default
+          inputs.niri.overlays.niri
+        ];
+      };
+
+      overlayAttrs = {
+        inherit (inputs'.unstable.legacyPackages)
+          moar
+          jj
+          fish
+          fishMinimal
+          ;
+        inherit (inputs'.qbpm.packages) qbpm;
+        inherit (inputs'.helix.packages) helix;
+        transmission = pkgs.transmission_4;
+        tmuxPlugins = pkgs.tmuxPlugins // {
+          srcery = pkgs.tmuxPlugins.mkTmuxPlugin {
+            pluginName = "srcery";
+            version = inputs.srcery-tmux.shortRev;
+            src = inputs.srcery-tmux;
+          };
+        };
+        fishPlugins = pkgs.fishPlugins // {
+          fish-prompt-pvsr = pkgs.fishPlugins.buildFishPlugin {
+            pname = "fish-prompt-pvsr";
+            version = inputs.fish-prompt-pvsr.shortRev;
+            src = inputs.fish-prompt-pvsr;
+          };
+        };
+        timg = pkgs.symlinkJoin {
+          name = "timg-wrapped";
+          paths = [ pkgs.timg ];
+          buildInputs = [ pkgs.makeWrapper ];
+          postBuild = "wrapProgram $out/bin/timg --add-flags '-pk'";
+        };
+      };
     };
-  };
-  fishPlugins = prev.fishPlugins // {
-    fish-prompt-pvsr = prev.fishPlugins.buildFishPlugin {
-      pname = "fish-prompt-pvsr";
-      version = inputs.fish-prompt-pvsr.shortRev;
-      src = inputs.fish-prompt-pvsr;
-    };
-  };
-  timg = prev.symlinkJoin {
-    name = "timg-wrapped";
-    paths = [ prev.timg ];
-    buildInputs = [ prev.makeWrapper ];
-    postBuild = "wrapProgram $out/bin/timg --add-flags '-pk'";
-  };
 }
-// (inputs.niri.overlays.niri final prev)

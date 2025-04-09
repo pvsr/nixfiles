@@ -43,8 +43,6 @@ in
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [ agenix ];
-
   age.secrets."radicale-users" = {
     file = ./secrets/radicale-users.age;
     owner = "radicale";

@@ -51,6 +51,7 @@
       imports = [
         ./hosts
         ./home-manager
+        ./overlay.nix
         inputs.pre-commit-hooks.flakeModule
       ];
 
@@ -70,13 +71,6 @@
           ...
         }:
         {
-          _module.args.pkgs = import inputs.unstable {
-            inherit system;
-            overlays = [
-              (import ./overlay.nix inputs)
-            ];
-          };
-
           apps = pkgs.lib.mapAttrs' (host: nixosConfig: {
             name = "${host}-vm";
             value = {
