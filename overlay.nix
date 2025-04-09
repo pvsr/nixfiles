@@ -17,14 +17,14 @@ in
   tmuxPlugins = prev.tmuxPlugins // {
     srcery = prev.tmuxPlugins.mkTmuxPlugin {
       pluginName = "srcery";
-      version = "git";
+      version = inputs.srcery-tmux.shortRev;
       src = inputs.srcery-tmux;
     };
   };
   fishPlugins = prev.fishPlugins // {
     fish-prompt-pvsr = prev.fishPlugins.buildFishPlugin {
       pname = "fish-prompt-pvsr";
-      version = "git";
+      version = inputs.fish-prompt-pvsr.shortRev;
       src = inputs.fish-prompt-pvsr;
     };
   };
