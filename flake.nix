@@ -50,6 +50,7 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./hosts
+        ./home-manager
         inputs.pre-commit-hooks.flakeModule
       ];
 
@@ -88,8 +89,6 @@
               );
             };
           }) inputs.self.nixosConfigurations;
-
-          legacyPackages.homeConfigurations = import ./home-manager { inherit system inputs pkgs; };
 
           formatter = pkgs.nixfmt-tree;
           pre-commit = {
