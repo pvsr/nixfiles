@@ -12,7 +12,5 @@
     inputs.disko.nixosModules.disko
   ];
 
-  nixpkgs.overlays = [ (import ../overlay.nix inputs) ];
-
   environment.systemPackages = [ (pkgs.writeScriptBin "deploy" (builtins.readFile ./deploy.fish)) ];
 }

@@ -42,6 +42,7 @@ in
   options.local.machines = {
     enable = lib.mkEnableOption { };
     autoStart = lib.mkOption { default = true; };
+    specialArgs = lib.mkOption { default = { }; };
     hosts = lib.mkOption { default = { }; };
     only = lib.mkOption { default = builtins.attrNames cfg.hosts; };
   };

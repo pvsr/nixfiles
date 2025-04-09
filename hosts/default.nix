@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, withSystem, ... }:
 let
   lib = inputs.nixpkgs.lib;
   unstable = {
@@ -14,22 +14,29 @@ let
   };
   hosts = {
     grancel = {
-      containerId = 1;
       inputs = inputs // unstable;
+      system = "x86_64-linux";
+      containerId = 1;
       module = ./grancel;
       home = mkHome ../home-manager/grancel.nix;
     };
     ruan = {
+      inherit inputs;
+      system = "x86_64-linux";
       containerId = 2;
       module = ./ruan;
       home = mkHome ../home-manager/ruan.nix;
     };
     crossbell = {
+      inherit inputs;
+      system = "x86_64-linux";
       containerId = 3;
       module = ./crossbell;
       home = mkHome ../home-manager/common.nix;
     };
     jurai = {
+      inherit inputs;
+      system = "aarch64-linux";
       containerId = 4;
       module = ./jurai;
       home = mkHome ../home-manager/nixos.nix;
@@ -37,43 +44,55 @@ let
   };
   mkSystem =
     host:
-    let
-      inherit (host.inputs or inputs) nixpkgs home-manager;
-    in
-    nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inputs = host.inputs or inputs;
-      };
-      modules = [
-        host.module
-        host.home
-        ../modules
-        home-manager.nixosModules.home-manager
-        { local.machines = { inherit hosts; }; }
-      ];
-    };
+    withSystem host.system (
+      { pkgs, ... }:
+      let
+        inputs = host.inputs;
+        inherit (inputs) nixpkgs home-manager;
+        specialArgs = { inherit inputs; };
+      in
+      nixpkgs.lib.nixosSystem {
+        inherit (host) system;
+        inherit specialArgs;
+        modules = [
+          host.module
+          host.home
+          ../modules
+          home-manager.nixosModules.home-manager
+          { nixpkgs.overlays = pkgs.overlays; }
+          {
+            local.machines = {
+              inherit specialArgs;
+              inherit hosts;
+            };
+          }
+        ];
+      }
+    );
 in
 {
   flake.nixosConfigurations = lib.mapAttrs (_: mkSystem) hosts;
 
-  flake.nixOnDroidConfigurations.default = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-    pkgs = import inputs.unstable {
-      system = "aarch64-linux";
-      overlays = [
-        (import ../overlay.nix inputs)
-        inputs.nix-on-droid.overlays.default
+  flake.nixOnDroidConfigurations.default = withSystem "aarch64-linux" (
+    { system, pkgs, ... }:
+    inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+      pkgs = import inputs.unstable {
+        inherit system;
+        overlays = pkgs.overlays ++ [
+          inputs.nix-on-droid.overlays.default
+        ];
+      };
+      home-manager-path = inputs.home-manager-unstable.outPath;
+      modules = [
+        ./arseille
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            config = ../home-manager/arseille.nix;
+          };
+        }
       ];
-    };
-    home-manager-path = inputs.home-manager-unstable.outPath;
-    modules = [
-      ./arseille
-      {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          config = ../home-manager/arseille.nix;
-        };
-      }
-    ];
-  };
+    }
+  );
 }
