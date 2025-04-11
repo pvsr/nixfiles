@@ -118,6 +118,10 @@ in
   systemd.services.weather = waitForTailscale;
   systemd.services.tandoor-recipes = waitForTailscale;
 
+  local.caddy-gateway = {
+    enable = true;
+  };
+
   networking.firewall.allowedTCPPorts = [
     15658 # weather
     36597 # tandoor

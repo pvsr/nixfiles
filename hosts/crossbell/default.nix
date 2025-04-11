@@ -29,6 +29,32 @@
       enable = false;
     };
 
+  local.caddy-gateway = {
+    enable = true;
+    virtualHosts = {
+      "pvsr.dev" = {
+        extraConfig = ''
+          root * /srv
+          file_server
+        '';
+      };
+      "peterrice.xyz".extraConfig = "redir https://pvsr.dev";
+      "podcasts.peterrice.xyz".extraConfig = ''
+        reverse_proxy ruan.ts.peterrice.xyz:5999 {
+          flush_interval -1
+        }
+      '';
+    };
+    reverseProxies = {
+      "rss.peterrice.xyz" = "ruan.ts.peterrice.xyz:8080";
+      "comics.peterrice.xyz" = "ruan.ts.peterrice.xyz:19191";
+      "weather.peterrice.xyz" = "ruan.ts.peterrice.xyz:15658";
+      "recipes.peterrice.xyz" = "ruan.ts.peterrice.xyz:36597";
+      "calendar.peterrice.xyz" = "ruan.ts.peterrice.xyz:52032";
+      "tailscale.peterrice.xyz" = "localhost:9753";
+    };
+  };
+
   services = {
     headscale.enable = config.services.tailscale.enable;
     headscale.address = "127.0.0.1";
@@ -68,38 +94,9 @@
 
     openssh.enable = true;
     openssh.ports = [ 18325 ];
-
-    caddy = {
-      enable = true;
-      enableReload = true;
-      virtualHosts = {
-        "peterrice.xyz" = {
-          serverAliases = [ "pvsr.dev" ];
-          extraConfig = ''
-            root * /srv
-            file_server
-          '';
-        };
-        "rss.peterrice.xyz".extraConfig = "reverse_proxy ruan:8080";
-        "comics.peterrice.xyz".extraConfig = "reverse_proxy ruan:19191";
-        "weather.peterrice.xyz".extraConfig = "reverse_proxy ruan:15658";
-        "recipes.peterrice.xyz".extraConfig = "reverse_proxy ruan:36597";
-        "calendar.peterrice.xyz".extraConfig = "reverse_proxy ruan:52032";
-        "tailscale.peterrice.xyz".extraConfig = "reverse_proxy localhost:9753";
-        "podcasts.peterrice.xyz".extraConfig = ''
-          reverse_proxy ruan:5999 {
-            flush_interval -1
-          }
-        '';
-      };
-    };
   };
 
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-    18325
-  ];
+  networking.firewall.allowedTCPPorts = [ 18325 ];
 
   virtualisation.vmVariant = {
     services.cloud-init.enable = false;

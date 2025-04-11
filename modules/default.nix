@@ -7,6 +7,7 @@
     ./hosts.nix
     ./machines.nix
     ./containers.nix
+    ./caddy.nix
     ./tailscale.nix
     ./impermanence.nix
     inputs.agenix.nixosModules.age
