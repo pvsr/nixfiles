@@ -15,17 +15,16 @@ and type -q jj
 and test (realpath "$flake") = "$(jj root 2>/dev/null)"
 and set commit (jj log -r 'heads(::@ ~ empty())' --no-graph -T commit_id)
 
-set this (hostname)
-set host (printf $argv; or printf $this)
-set command nixos-rebuild
-set args --fast --flake $flake#$host (printf $_flag_command; or printf switch)
-if test $host != $this
-    set -a args --target-host $host --use-remote-sudo
+if set -q argv[1]
+    set host $argv[1]
+    set args --target-host $host.ts.peterrice.xyz
 else
-    set -p command sudo
+    set host (hostname)
 end
+set -a args --no-reexec --sudo --flake $flake#$host
+set -a args (printf $_flag_command; or printf switch)
 
-$command $args --log-format internal-json --verbose &| nom --json
+nixos-rebuild $args --log-format internal-json --verbose &| nom --json
 
 test $pipestatus[1] = 0
 and set -q commit

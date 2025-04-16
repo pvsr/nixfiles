@@ -21,6 +21,8 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  system.rebuild.enableNg = true;
+
   programs.fish.enable = true;
   programs.fish.useBabelfish = true;
   users.defaultUserShell = pkgs.fish;
