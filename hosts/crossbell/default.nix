@@ -59,7 +59,7 @@
               action = "accept";
               src = [ "*" ];
               dst = [ "*" ];
-              users = [ "*" ];
+              users = [ config.local.user.name ];
             }
           ];
         }
