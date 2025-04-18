@@ -84,7 +84,6 @@ in
   };
 
   home.packages = with pkgs.fishPlugins; [
-    pisces
     fzf-fish
     plugin-git
     fish-prompt-pvsr
