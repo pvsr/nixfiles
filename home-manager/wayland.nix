@@ -16,6 +16,7 @@ in
     pamixer
     playerctl
     pulsemixer
+    rofimoji
   ];
 
   home.pointerCursor = {
