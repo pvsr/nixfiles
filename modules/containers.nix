@@ -3,7 +3,7 @@
   pkgs,
   lib,
   modulesPath,
-  inputs,
+  specialArgs,
   ...
 }:
 {
@@ -11,7 +11,7 @@
   config = lib.mkIf (config.local.containers != { }) {
     local.impermanence.directories = [ "/var/lib/nixos-containers" ];
     containers = builtins.mapAttrs (_: module: {
-      specialArgs.inputs = inputs;
+      inherit specialArgs;
       autoStart = true;
       config.imports = [
         module

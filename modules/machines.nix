@@ -3,6 +3,7 @@
   pkgs,
   lib,
   inputs,
+  specialArgs,
   ...
 }:
 let
@@ -11,7 +12,7 @@ let
     hostname: host: lib.elem hostname cfg.only && host ? containerId
   ) cfg.hosts;
   mkContainer = host: {
-    specialArgs.inputs = inputs;
+    inherit specialArgs;
     autoStart = host.autoStart or cfg.autoStart;
     privateNetwork = true;
     hostAddress = "192.168.100.100";
