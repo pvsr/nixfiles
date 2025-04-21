@@ -21,7 +21,6 @@ in
 
   virtualisation.rosetta.enable = onMacos;
 
-  networking.hostName = "jurai";
   networking.nameservers = [
     "1.1.1.1"
     "1.0.0.1"

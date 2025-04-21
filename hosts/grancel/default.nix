@@ -23,7 +23,6 @@
   boot.loader.systemd-boot.editor = false;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "grancel";
   networking.nameservers = [
     "1.1.1.1"
     "1.0.0.1"

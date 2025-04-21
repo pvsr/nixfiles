@@ -7,6 +7,13 @@
   ...
 }:
 let
+  options.local.machines = {
+    enable = lib.mkEnableOption { };
+    autoStart = lib.mkOption { default = true; };
+    specialArgs = lib.mkOption { default = { }; };
+    hosts = lib.mkOption { default = { }; };
+    only = lib.mkOption { default = builtins.attrNames cfg.hosts; };
+  };
   cfg = config.local.machines;
   enabledHosts = lib.filterAttrs (
     hostname: host: lib.elem hostname cfg.only && host ? containerId
@@ -19,11 +26,11 @@ let
     localAddress = "192.168.100.${toString host.containerId}";
     hostAddress6 = "fc00::100";
     localAddress6 = "fc00::${toString host.containerId}";
-    config.imports = [
-      host.module
-      ../modules
+    config.imports = host.modules ++ [
+      { inherit options; }
       {
         disabledModules = [
+          ./machines.nix
           ../modules/niri.nix
           ../modules/steam.nix
           ../modules/gnome.nix
@@ -39,13 +46,7 @@ let
   };
 in
 {
-  options.local.machines = {
-    enable = lib.mkEnableOption { };
-    autoStart = lib.mkOption { default = true; };
-    specialArgs = lib.mkOption { default = { }; };
-    hosts = lib.mkOption { default = { }; };
-    only = lib.mkOption { default = builtins.attrNames cfg.hosts; };
-  };
+  inherit options;
 
   config = lib.mkIf (cfg.enable && cfg.hosts != { }) {
     containers = builtins.mapAttrs (_: mkContainer) enabledHosts;

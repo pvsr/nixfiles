@@ -103,7 +103,6 @@
 
   virtualisation.vmVariant = {
     services.cloud-init.enable = false;
-    networking.hostName = "crossbell";
   };
 
   system.stateVersion = "24.05";
