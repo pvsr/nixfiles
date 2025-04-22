@@ -8,6 +8,7 @@
     ./machines.nix
     ./containers.nix
     ./caddy.nix
+    ./metrics.nix
     ./tailscale.nix
     ./impermanence.nix
     inputs.agenix.nixosModules.age

@@ -122,6 +122,8 @@ in
     enable = true;
   };
 
+  local.metrics.enable = true;
+
   networking.firewall.allowedTCPPorts = [
     15658 # weather
     36597 # tandoor
