@@ -120,6 +120,9 @@ in
 
   local.caddy-gateway = {
     enable = true;
+    reverseProxies = {
+      "grafana.peterrice.xyz:80" = "localhost:10508";
+    };
   };
 
   local.metrics.enable = true;

@@ -71,6 +71,13 @@
         "2606:4700:4700::1001"
       ];
       dns.override_local_dns = true;
+      dns.extra_records = [
+        {
+          name = "grafana.peterrice.xyz";
+          type = "A";
+          value = "100.64.0.3";
+        }
+      ];
       policy.path = builtins.toFile "acl.json" (
         builtins.toJSON {
           acls = [
