@@ -6,6 +6,11 @@ in
   flake.modules.nixos.core =
     { config, ... }:
     {
+      services.journald.upload = lib.mkIf config.services.tailscale.enable {
+        enable = true;
+        settings.Upload.URL = "http://ruan.ts.peterrice.xyz:9428/insert/journald";
+      };
+
       services.prometheus.exporters.node = {
         enable = lib.mkDefault true;
         port = 54247;
@@ -28,6 +33,7 @@ in
       environment.persistence.nixos.directories = [
         "/var/lib/grafana"
         "/var/lib/private/victoriametrics"
+        "/var/lib/private/victorialogs"
       ];
       services.victoriametrics = {
         enable = true;
@@ -48,10 +54,14 @@ in
           ];
         };
       };
+      services.victorialogs = {
+        enable = true;
+      };
       services.grafana = {
         enable = true;
         declarativePlugins = with pkgs.grafanaPlugins; [
           victoriametrics-metrics-datasource
+          victoriametrics-logs-datasource
         ];
         settings = {
           server = {
@@ -60,7 +70,7 @@ in
             enable_gzip = true;
           };
           analytics.reporting_enabled = false;
-          plugins.allow_loading_unsigned_plugins = "victoriametrics-metrics-datasource";
+          plugins.allow_loading_unsigned_plugins = "victoriametrics-metrics-datasource,victoriametrics-logs-datasource";
         };
         provision = {
           enable = true;
