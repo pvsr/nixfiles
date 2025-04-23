@@ -18,6 +18,12 @@ in
     services.caddy = {
       enable = true;
       enableReload = true;
+      globalConfig = ''
+        admin :40013
+        metrics {
+          per_host
+        }
+      '';
       virtualHosts =
         cfg.virtualHosts
         // builtins.mapAttrs (_: dest: { extraConfig = "reverse_proxy ${dest}"; }) cfg.reverseProxies;
@@ -27,5 +33,7 @@ in
       80
       443
     ];
+
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 40013 ];
   };
 }
