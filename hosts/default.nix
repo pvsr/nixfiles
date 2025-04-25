@@ -10,21 +10,21 @@ in
 
   local.flake.hosts = {
     grancel = {
+      id = 2;
       inputs = inputs // unstable;
-      containerId = 1;
       home = ../home-manager/grancel.nix;
     };
     ruan = {
-      containerId = 2;
+      id = 3;
       home = ../home-manager/ruan.nix;
     };
     crossbell = {
-      containerId = 3;
+      id = 1;
       home = ../home-manager/common.nix;
     };
     jurai = {
+      id = 5;
       system = "aarch64-linux";
-      containerId = 4;
       home = ../home-manager/nixos.nix;
     };
   };

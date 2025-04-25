@@ -15,17 +15,15 @@ let
     only = lib.mkOption { default = builtins.attrNames cfg.hosts; };
   };
   cfg = config.local.machines;
-  enabledHosts = lib.filterAttrs (
-    hostname: host: lib.elem hostname cfg.only && host ? containerId
-  ) cfg.hosts;
+  enabledHosts = lib.filterAttrs (hostname: host: lib.elem hostname cfg.only && host ? id) cfg.hosts;
   mkContainer = host: {
     inherit specialArgs;
     autoStart = host.autoStart or cfg.autoStart;
     privateNetwork = true;
     hostAddress = "192.168.100.100";
-    localAddress = "192.168.100.${toString host.containerId}";
+    localAddress = "192.168.100.${toString host.id}";
     hostAddress6 = "fc00::100";
-    localAddress6 = "fc00::${toString host.containerId}";
+    localAddress6 = "fc00::${toString host.id}";
     config.imports = host.modules ++ [
       { inherit options; }
       {

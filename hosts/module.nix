@@ -26,8 +26,8 @@ in
         { name, config, ... }:
         {
           options = {
+            id = lib.mkOption { type = lib.types.int; };
             system = lib.mkOption { default = "x86_64-linux"; };
-            containerId = lib.mkOption { type = lib.types.int; };
             inputs = lib.mkOption { default = inputs; };
             home = lib.mkOption { type = lib.types.nullOr lib.types.path; };
             modules = lib.mkOption {
