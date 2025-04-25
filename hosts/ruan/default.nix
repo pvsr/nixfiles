@@ -6,7 +6,7 @@
   ...
 }:
 let
-  serverAddress = if config.services.tailscale.enable then "100.64.0.3" else "0.0.0.0";
+  serverAddress = if config.services.tailscale.enable then config.local.tailscale.ip else "0.0.0.0";
   waitForTailscale = lib.mkIf config.services.tailscale.enable {
     after = [ "tailscaled.service" ];
     wants = [ "tailscaled.service" ];

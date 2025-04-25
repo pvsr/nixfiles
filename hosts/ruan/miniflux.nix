@@ -6,7 +6,7 @@
 
   services.miniflux = {
     enable = config.services.tailscale.enable;
-    config.LISTEN_ADDR = "100.64.0.3:8080";
+    config.LISTEN_ADDR = "${config.local.tailscale.ip}:8080";
     adminCredentialsFile = config.age.secrets."miniflux-credentials".path;
   };
   systemd.services.miniflux.after = [ "tailscaled.service" ];

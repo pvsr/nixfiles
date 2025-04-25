@@ -14,7 +14,7 @@
     };
     serve = {
       enable = config.services.tailscale.enable;
-      bind = "100.64.0.3:5999";
+      bind = "${config.local.tailscale.ip}:5999";
       timeout = 120;
     };
   };
