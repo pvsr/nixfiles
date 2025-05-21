@@ -22,7 +22,7 @@ in
       peer-port-random-low = 65150;
       peer-port-random-high = 65160;
       rpc-port = 9919;
-      rpc-host-whitelist = "ruan,ruan.peter.ts.peterrice.xyz";
+      rpc-host-whitelist = "ruan,ruan.ts.peterrice.xyz";
       rpc-bind-address = config.local.tailscale.ip;
       rpc-whitelist-enabled = false;
     };
