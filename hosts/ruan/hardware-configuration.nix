@@ -88,16 +88,6 @@
     ];
   };
 
-  fileSystems."/media/steam" = {
-    device = "/dev/disk/by-uuid/367ffdb7-bfaf-4409-9115-5ecbe4261bae";
-    fsType = "btrfs";
-    options = [
-      "subvol=steam"
-      "defaults"
-      "compress=zstd"
-    ];
-  };
-
   fileSystems."/media/leiston" = {
     device = "/dev/disk/by-uuid/c76abfad-5b5a-478f-a85e-dde18ffe202f";
     fsType = "btrfs";
