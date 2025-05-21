@@ -17,41 +17,39 @@ in
       "/var/lib/grafana"
       "/var/lib/private/victoriametrics"
     ];
-    # TODO enable on all systems
-    services.prometheus.exporters.node = {
-      enable = true;
-      port = 54247;
-      enabledCollectors = [
-        "systemd"
-        # "wireguard"
-      ];
-    };
     services.victoriametrics = {
       enable = true;
       prometheusConfig = {
-        scrape_configs = [
-          {
-            job_name = "caddy (crossbell)";
-            static_configs = [
-              { targets = [ "100.64.0.1:40013" ]; }
-            ];
-          }
-          {
-            job_name = "caddy (ruan)";
-            static_configs = [
-              { targets = [ "100.64.0.3:40013" ]; }
-            ];
-          }
-          {
-            job_name = "ruan";
-            static_configs = [
-              {
-                targets = [ "127.0.0.1:54247" ];
-                labels.type = "node";
-              }
-            ];
-          }
-        ];
+        scrape_configs =
+          [
+            {
+              job_name = "caddy (crossbell)";
+              static_configs = [
+                { targets = [ "100.64.0.1:40013" ]; }
+              ];
+            }
+            {
+              job_name = "caddy (ruan)";
+              static_configs = [
+                { targets = [ "100.64.0.3:40013" ]; }
+              ];
+            }
+          ]
+          ++ lib.mapAttrsToList
+            (name: host: {
+              job_name = "node (${name})";
+              static_configs = [
+                {
+                  targets = [ "100.64.0.${toString host.id}:54247" ];
+                  labels.type = "node";
+                }
+              ];
+            })
+            (
+              lib.filterAttrs (
+                _: host: host.nixosConfiguration.config.services.prometheus.exporters.node.enable
+              ) config.local.hosts
+            );
       };
     };
     services.grafana = {

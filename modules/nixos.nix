@@ -67,4 +67,11 @@
       vmVariant = variant;
       vmVariantWithDisko = variant;
     };
+
+  services.prometheus.exporters.node = {
+    enable = lib.mkDefault true;
+    port = 54247;
+    enabledCollectors = [ "systemd" ];
+  };
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 54247 ];
 }
