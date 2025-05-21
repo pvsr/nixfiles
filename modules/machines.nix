@@ -11,11 +11,12 @@ let
     enable = lib.mkEnableOption { };
     autoStart = lib.mkOption { default = true; };
     specialArgs = lib.mkOption { default = { }; };
-    hosts = lib.mkOption { default = { }; };
-    only = lib.mkOption { default = builtins.attrNames cfg.hosts; };
+    only = lib.mkOption { default = builtins.attrNames config.local.hosts; };
   };
   cfg = config.local.machines;
-  enabledHosts = lib.filterAttrs (hostname: host: lib.elem hostname cfg.only && host ? id) cfg.hosts;
+  enabledHosts = lib.filterAttrs (
+    hostname: host: lib.elem hostname cfg.only && host ? id
+  ) config.local.hosts;
   mkContainer = host: {
     inherit specialArgs;
     autoStart = host.autoStart or cfg.autoStart;
@@ -46,7 +47,7 @@ in
 {
   inherit options;
 
-  config = lib.mkIf (cfg.enable && cfg.hosts != { }) {
+  config = lib.mkIf (cfg.enable && enabledHosts != { }) {
     containers = builtins.mapAttrs (_: mkContainer) enabledHosts;
   };
 }

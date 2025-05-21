@@ -6,7 +6,6 @@
   ...
 }:
 let
-  hosts = config.local.flake.hosts;
   mkHome =
     homeModule:
     { inputs, ... }:
@@ -18,39 +17,29 @@ let
         users.peter = homeModule;
       };
     };
+  hostWithModules = lib.types.submodule (
+    { name, config, ... }:
+    {
+      options = {
+        modules = lib.mkOption {
+          readOnly = true;
+          default = [
+            ./${name}
+            ../modules
+            { networking.hostName = name; }
+            { nixpkgs.overlays = withSystem config.system ({ pkgs, ... }: pkgs.overlays); }
+            { local = { inherit hosts; }; }
+          ] ++ lib.optional (config.home != null) (mkHome config.home);
+        };
+      };
+    }
+  );
+  hosts = config.local.hosts;
 in
 {
-  options.local.flake.hosts = lib.mkOption {
-    type = lib.types.attrsOf (
-      lib.types.submodule (
-        { name, config, ... }:
-        {
-          options = {
-            id = lib.mkOption { type = lib.types.int; };
-            system = lib.mkOption { default = "x86_64-linux"; };
-            inputs = lib.mkOption { default = inputs; };
-            home = lib.mkOption { type = lib.types.nullOr lib.types.path; };
-            modules = lib.mkOption {
-              readOnly = true;
-              default = [
-                ./${name}
-                ../modules
-                { networking.hostName = name; }
-                { nixpkgs.overlays = withSystem config.system ({ pkgs, ... }: pkgs.overlays); }
-                { local.machines = { inherit hosts; }; }
-              ] ++ lib.optional (config.home != null) (mkHome config.home);
-            };
-          };
-        }
-      )
-    );
-  };
+  imports = [ ../modules/hosts.nix ];
 
-  config.flake.nixosConfigurations = builtins.mapAttrs (
-    _: host:
-    host.inputs.nixpkgs.lib.nixosSystem {
-      inherit (host) system modules;
-      specialArgs = { inherit (host) inputs; };
-    }
-  ) hosts;
+  options.local.hosts = lib.mkOption { type = lib.types.attrsOf hostWithModules; };
+
+  config.flake.nixosConfigurations = builtins.mapAttrs (_: host: host.nixosConfiguration) hosts;
 }

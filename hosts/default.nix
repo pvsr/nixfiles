@@ -8,7 +8,7 @@ in
 {
   imports = [ ./module.nix ];
 
-  local.flake.hosts = {
+  local.hosts = {
     grancel = {
       id = 2;
       inputs = inputs // unstable;

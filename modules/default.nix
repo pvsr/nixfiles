@@ -4,6 +4,7 @@
     ./nix.nix
     ./nixos.nix
     ./user.nix
+    ./hosts.nix
     ./machines.nix
     ./containers.nix
     ./tailscale.nix
