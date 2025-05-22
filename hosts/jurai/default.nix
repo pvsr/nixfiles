@@ -12,9 +12,10 @@ in
   imports = [
     ./disks.nix
     ./hardware-configuration.nix
-    ../../modules/gnome.nix
     inputs.srvos.nixosModules.desktop
   ];
+
+  local.gnome.enable = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

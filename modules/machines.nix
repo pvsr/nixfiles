@@ -30,9 +30,6 @@ let
       {
         disabledModules = [
           ./machines.nix
-          ../modules/niri.nix
-          ../modules/steam.nix
-          ../modules/gnome.nix
           ../modules/tailscale.nix
           inputs.srvos.nixosModules.hardware-vultr-vm
           inputs.nixos-hardware.nixosModules.common-gpu-amd

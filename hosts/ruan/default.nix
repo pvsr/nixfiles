@@ -18,12 +18,13 @@ in
     ./miniflux.nix
     ./podcasts.nix
     ./transmission.nix
-    ../../modules/niri.nix
-    ../../modules/steam.nix
     inputs.srvos.nixosModules.desktop
     inputs.weather.nixosModules.default
     inputs.podcasts.nixosModules.default
   ];
+
+  programs.steam.enable = true;
+  local.niri.enable = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
