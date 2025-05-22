@@ -75,7 +75,7 @@
         {
           name = "grafana.peterrice.xyz";
           type = "A";
-          value = "100.64.0.3";
+          value = config.local.hosts.ruan.nixosConfiguration.config.local.tailscale.ip;
         }
       ];
       policy.path = builtins.toFile "acl.json" (

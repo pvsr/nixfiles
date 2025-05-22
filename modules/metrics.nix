@@ -5,6 +5,16 @@
   ...
 }:
 let
+  hosts = builtins.mapAttrs (
+    name: host:
+    let
+      config = host.nixosConfiguration.config;
+    in
+    {
+      ip = config.local.tailscale.ip;
+      nodeExport = config.services.prometheus.exporters.node.enable;
+    }
+  ) config.local.hosts;
   cfg = config.local.metrics;
 in
 {
@@ -20,36 +30,25 @@ in
     services.victoriametrics = {
       enable = true;
       prometheusConfig = {
-        scrape_configs =
-          [
-            {
-              job_name = "caddy (crossbell)";
-              static_configs = [
-                { targets = [ "100.64.0.1:40013" ]; }
-              ];
-            }
-            {
-              job_name = "caddy (ruan)";
-              static_configs = [
-                { targets = [ "100.64.0.3:40013" ]; }
-              ];
-            }
-          ]
-          ++ lib.mapAttrsToList
-            (name: host: {
-              job_name = "node (${name})";
-              static_configs = [
-                {
-                  targets = [ "100.64.0.${toString host.id}:54247" ];
-                  labels.type = "node";
-                }
-              ];
-            })
-            (
-              lib.filterAttrs (
-                _: host: host.nixosConfiguration.config.services.prometheus.exporters.node.enable
-              ) config.local.hosts
-            );
+        scrape_configs = [
+          {
+            job_name = "caddy";
+            static_configs = [
+              { targets = [ "${hosts.ruan.ip}:40013" ]; }
+              { targets = [ "${hosts.crossbell.ip}:40013" ]; }
+            ];
+          }
+          {
+            job_name = "node";
+            static_configs = [
+              {
+                targets = lib.mapAttrsToList (name: _: "${hosts.${name}.ip}:54247") (
+                  lib.filterAttrs (name: _: hosts.${name}.nodeExport) hosts
+                );
+              }
+            ];
+          }
+        ];
       };
     };
     services.grafana = {
