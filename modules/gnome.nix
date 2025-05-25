@@ -36,6 +36,7 @@
       #
       baobab
       epiphany
+      decibels
       gnome-text-editor
       gnome-calculator
       gnome-calendar
