@@ -15,6 +15,6 @@
     enable = true;
     defaultCacheTtl = 3 * 60 * 60;
     maxCacheTtl = 8 * 60 * 60;
-    pinentryPackage = pkgs.pinentry-curses;
+    pinentry.package = pkgs.pinentry-curses;
   };
 }

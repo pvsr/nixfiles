@@ -68,8 +68,8 @@ in
 
     komga = {
       enable = true;
-      port = 19191;
       openFirewall = true;
+      settings.server.port = 19191;
     };
 
     tandoor-recipes = {

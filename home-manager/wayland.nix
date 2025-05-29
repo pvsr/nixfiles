@@ -40,10 +40,12 @@ in
   services = {
     mako = with colors; {
       enable = true;
-      font = "${config.local.appFont} 14";
-      backgroundColor = brightBlue;
-      borderColor = blue;
-      textColor = xgray1;
+      settings = {
+        font = "${config.local.appFont} 14";
+        background-color = brightBlue;
+        border-color = blue;
+        text-color = xgray1;
+      };
     };
 
     clipman.enable = true;
