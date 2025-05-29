@@ -127,6 +127,8 @@ in
   };
 
   local.metrics.enable = true;
+  local.metrics.grafana.address = "127.0.0.1";
+  local.metrics.grafana.port = 10508;
 
   networking.firewall.allowedTCPPorts = [
     15658 # weather

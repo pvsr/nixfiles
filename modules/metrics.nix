@@ -20,6 +20,10 @@ in
 {
   options.local.metrics = {
     enable = lib.mkEnableOption { };
+    grafana = {
+      address = lib.mkOption { type = lib.types.str; };
+      port = lib.mkOption { type = lib.types.int; };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -58,8 +62,8 @@ in
       ];
       settings = {
         server = {
-          http_addr = "100.64.0.3";
-          http_port = 10508;
+          http_addr = cfg.grafana.address;
+          http_port = cfg.grafana.port;
           enable_gzip = true;
         };
         analytics.reporting_enabled = false;
