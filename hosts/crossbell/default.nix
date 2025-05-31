@@ -90,7 +90,7 @@
           ssh = [
             {
               action = "accept";
-              src = [ "*" ];
+              src = [ "${config.local.user.name}@" ];
               dst = [ "*" ];
               users = [ config.local.user.name ];
             }
