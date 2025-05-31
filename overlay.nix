@@ -9,7 +9,7 @@
       ...
     }:
     {
-      _module.args.pkgs = import inputs.unstable {
+      _module.args.pkgs = import inputs.nixpkgs {
         inherit system;
         overlays = [
           self.overlays.default
@@ -18,12 +18,6 @@
       };
 
       overlayAttrs = {
-        inherit (inputs'.unstable.legacyPackages)
-          moar
-          jj
-          fish
-          fishMinimal
-          ;
         inherit (inputs'.qbpm.packages) qbpm;
         inherit (inputs'.helix.packages) helix;
         transmission = pkgs.transmission_4;

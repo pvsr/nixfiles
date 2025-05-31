@@ -5,7 +5,7 @@
     let
       homeManagerConfiguration =
         module:
-        inputs.home-manager-unstable.lib.homeManagerConfiguration {
+        inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs.inputs = inputs;
           modules = [
