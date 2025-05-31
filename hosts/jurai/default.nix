@@ -33,11 +33,7 @@ in
   services.spice-vdagentd.enable = true;
   networking.firewall.enable = false;
 
-  services.openssh = lib.mkIf onMacos {
-    enable = true;
-    startWhenNeeded = true;
-    listenAddresses = [ { addr = "192.168.68.2"; } ];
-  };
+  services.openssh.listenAddresses = lib.optionals onMacos [ { addr = "192.168.68.2"; } ];
 
   system.stateVersion = "24.11";
 }

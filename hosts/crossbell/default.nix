@@ -99,8 +99,12 @@
       );
     };
 
-    openssh.enable = true;
-    openssh.ports = [ 18325 ];
+    openssh.listenAddresses = [
+      {
+        addr = "0.0.0.0";
+        port = 18325;
+      }
+    ];
   };
 
   networking.firewall.allowedTCPPorts = [ 18325 ];

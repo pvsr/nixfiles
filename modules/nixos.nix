@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -67,6 +68,12 @@
       vmVariant = variant;
       vmVariantWithDisko = variant;
     };
+
+  services.openssh = {
+    enable = true;
+    startWhenNeeded = true;
+    listenAddresses = [ { addr = "[::1]"; } ];
+  };
 
   services.prometheus.exporters.node = {
     enable = lib.mkDefault true;
