@@ -17,7 +17,7 @@ let
   enabledHosts = lib.filterAttrs (
     hostname: host: lib.elem hostname cfg.only && host ? id
   ) config.local.hosts;
-  mkContainer = host: {
+  mkContainer = hostname: host: {
     inherit specialArgs;
     autoStart = host.autoStart or cfg.autoStart;
     privateNetwork = true;
@@ -34,6 +34,7 @@ let
           inputs.srvos.nixosModules.hardware-vultr-vm
           inputs.nixos-hardware.nixosModules.common-gpu-amd
         ];
+        networking.hostName = lib.mkForce "${hostname}-c";
         networking.useHostResolvConf = false;
         # TODO get agenix working in containers for real?
         age.identityPaths = lib.mkDefault [ "/etc/ssh/ssh_host_ed25519_key" ];
@@ -45,6 +46,6 @@ in
   inherit options;
 
   config = lib.mkIf (cfg.enable && enabledHosts != { }) {
-    containers = builtins.mapAttrs (_: mkContainer) enabledHosts;
+    containers = builtins.mapAttrs mkContainer enabledHosts;
   };
 }
