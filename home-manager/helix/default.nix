@@ -47,6 +47,11 @@
         {
           name = "python";
           auto-format = true;
+          language-servers = [
+            "ruff"
+            "pylsp"
+            "ty"
+          ];
         }
         {
           name = "nix";
@@ -63,6 +68,10 @@
       language-server.fish-lsp = {
         command = "${pkgs.fish-lsp}/bin/fish-lsp";
         args = [ "start" ];
+      };
+      language-server.ty = {
+        command = "ty";
+        args = [ "server" ];
       };
     };
   };
