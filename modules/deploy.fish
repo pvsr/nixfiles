@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
-argparse -n deploy -X 1 'c/command=' 'f/flake=' -- $argv
+argparse -n deploy -X 1 'c/command=' 'f/flake=' r/remote -- $argv
 or return
 
 if test -e ./flake.nix
@@ -18,6 +18,9 @@ and set commit (jj log -r 'heads(::@ ~ empty())' --no-graph -T commit_id)
 if set -q argv[1]
     set host $argv[1]
     set args --target-host $host.ts.peterrice.xyz
+    if set -q _flag_remote
+        set -a args --build-host $host.ts.peterrice.xyz
+    end
 else
     set host (hostname)
 end
