@@ -60,7 +60,10 @@
     headscale.address = "127.0.0.1";
     headscale.port = 9753;
     headscale.settings = {
-      ip_prefixes = [ "100.64.0.0/10" ];
+      ip_prefixes = [
+        "100.64.0.0/10"
+        "fd28:b7:d8::/48"
+      ];
       server_url = "https://tailscale.peterrice.xyz";
       dns.base_domain = "ts.peterrice.xyz";
       dns.magic_dns = true;
