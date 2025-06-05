@@ -8,7 +8,7 @@ let
   hosts = builtins.mapAttrs (
     name: host:
     let
-      config = host.nixosConfiguration.config;
+      inherit (host.nixos) config;
     in
     {
       ip = config.local.tailscale.ip;

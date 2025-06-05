@@ -11,7 +11,7 @@
             inputs = lib.mkOption { default = inputs; };
             home = lib.mkOption { type = lib.types.nullOr lib.types.path; };
             modules = lib.mkOption { type = lib.types.listOf lib.types.deferredModule; };
-            nixosConfiguration = lib.mkOption {
+            nixos = lib.mkOption {
               default = config.inputs.nixpkgs.lib.nixosSystem {
                 inherit (config) system modules;
                 specialArgs = { inherit (config) inputs; };

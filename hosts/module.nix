@@ -41,5 +41,5 @@ in
 
   options.local.hosts = lib.mkOption { type = lib.types.attrsOf hostWithModules; };
 
-  config.flake.nixosConfigurations = builtins.mapAttrs (_: host: host.nixosConfiguration) hosts;
+  config.flake.nixosConfigurations = builtins.mapAttrs (_: host: host.nixos) hosts;
 }
