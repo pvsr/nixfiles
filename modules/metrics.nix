@@ -5,17 +5,12 @@
   ...
 }:
 let
-  hosts = builtins.mapAttrs (
-    name: host:
-    let
-      inherit (host.nixos) config;
-    in
-    {
-      ip = config.local.tailscale.ip;
-      nodeExport = config.services.prometheus.exporters.node.enable;
-    }
-  ) config.local.hosts;
   cfg = config.local.metrics;
+  mkTargets =
+    enabled: port:
+    lib.mapAttrsToList (_: host: "${host.nixos.config.networking.hostName}:${port}") (
+      lib.filterAttrs (_: enabled) config.local.hosts
+    );
 in
 {
   options.local.metrics = {
@@ -38,18 +33,13 @@ in
           {
             job_name = "caddy";
             static_configs = [
-              { targets = [ "${hosts.ruan.ip}:40013" ]; }
-              { targets = [ "${hosts.crossbell.ip}:40013" ]; }
+              { targets = mkTargets (host: host.nixos.config.local.caddy-gateway.enable) "40013"; }
             ];
           }
           {
             job_name = "node";
             static_configs = [
-              {
-                targets = lib.mapAttrsToList (name: _: "${hosts.${name}.ip}:54247") (
-                  lib.filterAttrs (name: _: hosts.${name}.nodeExport) hosts
-                );
-              }
+              { targets = mkTargets (host: host.nixos.config.services.prometheus.exporters.node.enable) "54247"; }
             ];
           }
         ];
