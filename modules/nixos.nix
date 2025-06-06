@@ -58,6 +58,7 @@
       variant = {
         nixpkgs.hostPlatform = "x86_64-linux";
         services.tailscale.enable = false;
+        local.machines.enable = lib.mkForce false;
         users.users.peter.password = "";
         virtualisation = {
           cores = 3;
