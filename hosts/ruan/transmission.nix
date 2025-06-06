@@ -12,12 +12,11 @@ in
   local.user.extraGroups = [ "transmission" ];
 
   services.transmission = {
-    enable = !config.boot.isContainer;
+    enable = true;
     openPeerPorts = true;
     openRPCPort = true;
     credentialsFile = config.age.secrets."transmission-credentials.json".path;
     settings = {
-      download-dir = "${cfg.home}/downloads";
       peer-port-random-on-start = true;
       peer-port-random-low = 65150;
       peer-port-random-high = 65160;

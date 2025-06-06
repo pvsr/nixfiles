@@ -57,7 +57,7 @@
     let
       variant = {
         nixpkgs.hostPlatform = "x86_64-linux";
-        disabledModules = [ ./tailscale.nix ];
+        services.tailscale.enable = false;
         users.users.peter.password = "";
         virtualisation = {
           cores = 3;

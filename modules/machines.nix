@@ -30,12 +30,12 @@ let
       {
         disabledModules = [
           ./machines.nix
-          ../modules/tailscale.nix
           inputs.srvos.nixosModules.hardware-vultr-vm
           inputs.nixos-hardware.nixosModules.common-gpu-amd
         ];
         networking.hostName = lib.mkForce "${hostname}-c";
         networking.useHostResolvConf = false;
+        services.tailscale.enable = false;
         # TODO get agenix working in containers for real?
         age.identityPaths = lib.mkDefault [ "/etc/ssh/ssh_host_ed25519_key" ];
       }

@@ -5,7 +5,7 @@
   };
 
   services.miniflux = {
-    enable = config.services.tailscale.enable;
+    enable = true;
     config.LISTEN_ADDR = "${config.local.tailscale.ip}:8080";
     adminCredentialsFile = config.age.secrets."miniflux-credentials".path;
   };

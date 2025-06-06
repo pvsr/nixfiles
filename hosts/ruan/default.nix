@@ -6,7 +6,6 @@
   ...
 }:
 let
-  serverAddress = if config.services.tailscale.enable then config.local.tailscale.ip else "0.0.0.0";
   waitForTailscale = lib.mkIf config.services.tailscale.enable {
     after = [ "tailscaled.service" ];
     wants = [ "tailscaled.service" ];
@@ -58,7 +57,7 @@ in
   services = {
     radicale.enable = true;
     radicale.settings = {
-      server.hosts = [ "${serverAddress}:52032" ];
+      server.hosts = [ "${config.local.tailscale.ip}:52032" ];
       auth = {
         type = "htpasswd";
         htpasswd_filename = config.age.secrets."radicale-users".path;
@@ -67,7 +66,7 @@ in
     };
 
     weather.enable = true;
-    weather.bind = "${serverAddress}:15658";
+    weather.bind = "${config.local.tailscale.ip}:15658";
 
     komga = {
       enable = true;
@@ -77,7 +76,7 @@ in
 
     tandoor-recipes = {
       enable = true;
-      address = serverAddress;
+      address = config.local.tailscale.ip;
       port = 36597;
       extraConfig.SECRET_KEY_FILE = config.age.secrets."tandoor-key".path;
     };

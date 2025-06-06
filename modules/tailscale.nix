@@ -7,11 +7,15 @@
 {
   options.local.tailscale.ip = lib.mkOption {
     readOnly = true;
-    default = "100.64.0.${toString config.local.hosts.${config.networking.hostName}.id}";
+    default =
+      if config.services.tailscale.enable then
+        "100.64.0.${toString config.local.hosts.${config.networking.hostName}.id}"
+      else
+        "127.0.0.1";
   };
 
   config = {
-    services.tailscale.enable = true;
+    services.tailscale.enable = lib.mkDefault true;
     networking.firewall.checkReversePath = "loose";
     systemd.network.wait-online.ignoredInterfaces = [ "tailscale0" ];
     networking.firewall.trustedInterfaces = [ "tailscale0" ];

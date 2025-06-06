@@ -7,13 +7,13 @@
     podcastSubdir = "hosted-podcasts";
     dataDir = "/media/nixos/podcasts";
     fetch = {
-      enable = config.services.tailscale.enable;
+      enable = true;
       user = config.local.user.name;
       group = "users";
       startAt = "0,8,16:0";
     };
     serve = {
-      enable = config.services.tailscale.enable;
+      enable = true;
       bind = "${config.local.tailscale.ip}:5999";
       timeout = 120;
     };
