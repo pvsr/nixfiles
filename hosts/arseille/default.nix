@@ -1,29 +1,16 @@
-{ pkgs, ... }:
+{ inputs, withSystem, ... }:
 {
-  system.stateVersion = "24.05";
-  time.timeZone = "America/New_York";
-  user.shell = "${pkgs.fish}/bin/fish";
-
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-
-  environment.packages = with pkgs; [
-    binutils
-    coreutils
-    curl
-    dnsutils
-    dosfstools
-    file
-    iputils
-    lsof
-    psmisc
-    utillinux
-
-    openssh
-    which
-    gnused
-    gawk
-    rsync
-  ];
+  flake.nixOnDroidConfigurations.default = withSystem "aarch64-linux" (
+    { system, pkgs, ... }:
+    inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        overlays = pkgs.overlays ++ [
+          inputs.nix-on-droid.overlays.default
+        ];
+      };
+      home-manager-path = inputs.home-manager.outPath;
+      modules = [ ./system.nix ];
+    }
+  );
 }
