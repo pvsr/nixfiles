@@ -17,29 +17,35 @@ let
         users.peter = homeModule;
       };
     };
-  hostWithModules = lib.types.submodule (
-    { name, config, ... }:
-    {
-      options = {
-        modules = lib.mkOption {
-          readOnly = true;
-          default = [
-            ./${name}
-            ../modules
-            { networking.hostName = name; }
-            { nixpkgs.overlays = withSystem config.system ({ pkgs, ... }: pkgs.overlays); }
-            { local = { inherit hosts; }; }
-          ] ++ lib.optional (config.home != null) (mkHome config.home);
-        };
-      };
-    }
-  );
-  hosts = config.local.hosts;
+  hosts = builtins.mapAttrs (name: host: rec {
+    modules = [
+      ./${name}
+      ../modules
+      {
+        local.id = host.id;
+        networking.hostName = name;
+        nixpkgs.system = host.system;
+        nixpkgs.overlays = withSystem host.system ({ pkgs, ... }: pkgs.overlays);
+      }
+    ] ++ lib.optional (host.home != null) (mkHome host.home);
+    nixos = inputs.nixpkgs.lib.nixosSystem {
+      inherit modules;
+      specialArgs = { inherit inputs hosts; };
+    };
+  }) config.local.hosts;
 in
 {
-  imports = [ ../modules/hosts.nix ];
+  options.local.hosts = lib.mkOption {
+    type = lib.types.attrsOf (
+      lib.types.submodule {
+        options = {
+          id = lib.mkOption { type = lib.types.ints.u8; };
+          system = lib.mkOption { default = "x86_64-linux"; };
+          home = lib.mkOption { type = lib.types.nullOr lib.types.path; };
+        };
+      }
+    );
+  };
 
-  options.local.hosts = lib.mkOption { type = lib.types.attrsOf hostWithModules; };
-
-  config.flake.nixosConfigurations = builtins.mapAttrs (_: host: host.nixos) hosts;
+  config.flake.nixosConfigurations = builtins.mapAttrs (_: builtins.getAttr "nixos") hosts;
 }

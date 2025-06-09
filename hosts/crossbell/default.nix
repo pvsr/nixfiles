@@ -2,6 +2,7 @@
   config,
   lib,
   inputs,
+  hosts,
   ...
 }:
 {
@@ -76,7 +77,7 @@
         {
           name = "grafana.peterrice.xyz";
           type = "A";
-          value = config.local.hosts.ruan.nixos.config.local.tailscale.ip;
+          value = hosts.ruan.nixos.config.local.tailscale.ip;
         }
       ];
       policy.path = builtins.toFile "acl.json" (

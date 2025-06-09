@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  hosts,
   ...
 }:
 let
@@ -9,7 +10,7 @@ let
   mkTargets =
     enabled: port:
     lib.mapAttrsToList (_: host: "${host.nixos.config.networking.hostName}:${port}") (
-      lib.filterAttrs (_: enabled) config.local.hosts
+      lib.filterAttrs (_: enabled) hosts
     );
 in
 {

@@ -3,6 +3,7 @@
   pkgs,
   lib,
   inputs,
+  hosts,
   specialArgs,
   ...
 }:
@@ -10,21 +11,18 @@ let
   options.local.machines = {
     enable = lib.mkEnableOption { };
     autoStart = lib.mkOption { default = true; };
-    specialArgs = lib.mkOption { default = { }; };
-    only = lib.mkOption { default = builtins.attrNames config.local.hosts; };
+    only = lib.mkOption { default = builtins.attrNames hosts; };
   };
   cfg = config.local.machines;
-  enabledHosts = lib.filterAttrs (
-    hostname: host: lib.elem hostname cfg.only && host ? id
-  ) config.local.hosts;
+  enabledHosts = lib.filterAttrs (hostname: host: lib.elem hostname cfg.only) hosts;
   mkContainer = hostname: host: {
     inherit specialArgs;
     autoStart = host.autoStart or cfg.autoStart;
     privateNetwork = true;
     hostAddress = "192.168.100.100";
-    localAddress = "192.168.100.${toString host.id}";
+    localAddress = "192.168.100.${toString host.nixos.config.local.id}";
     hostAddress6 = "fc00::100";
-    localAddress6 = "fc00::${toString host.id}";
+    localAddress6 = "fc00::${toString host.nixos.config.local.id}";
     config.imports = host.modules ++ [
       { inherit options; }
       {

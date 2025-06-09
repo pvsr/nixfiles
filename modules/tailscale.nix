@@ -4,14 +4,13 @@
   lib,
   ...
 }:
+let
+  id = toString config.local.id;
+in
 {
   options.local.tailscale.ip = lib.mkOption {
     readOnly = true;
-    default =
-      if config.services.tailscale.enable then
-        "100.64.0.${toString config.local.hosts.${config.networking.hostName}.id}"
-      else
-        "127.0.0.1";
+    default = if config.services.tailscale.enable then "100.64.0.${id}" else "127.0.0.1";
   };
 
   config = {
