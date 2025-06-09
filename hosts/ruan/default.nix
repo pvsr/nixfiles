@@ -52,6 +52,9 @@ in
   age.secrets."tandoor-key" = {
     file = ./secrets/tandoor-key.age;
   };
+  age.secrets."dns-token" = {
+    file = ./secrets/dns-token.age;
+  };
   services = {
     radicale.enable = true;
     radicale.settings = {
@@ -121,10 +124,12 @@ in
 
   local.caddy-gateway = {
     enable = true;
-    reverseProxies = {
-      "grafana.peterrice.xyz:80" = "localhost:10508";
+    internalProxies = {
+      "grafana.peterrice.xyz" = "localhost:10508";
     };
   };
+
+  systemd.services.caddy.serviceConfig.EnvironmentFile = config.age.secrets."dns-token".path;
 
   local.metrics.enable = true;
   local.metrics.grafana.address = "127.0.0.1";

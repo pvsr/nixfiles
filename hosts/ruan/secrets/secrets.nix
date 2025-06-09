@@ -5,6 +5,7 @@ let
     "transmission-credentials.json.age"
     "miniflux-credentials.age"
     "tandoor-key.age"
+    "dns-token.age"
   ];
 in
 builtins.listToAttrs (
