@@ -1,11 +1,6 @@
 { config, pkgs, ... }:
 let
-  inherit (config.xdg)
-    cacheHome
-    configHome
-    dataHome
-    stateHome
-    ;
+  inherit (config.xdg) dataHome stateHome;
 in
 {
   xdg.userDirs = {

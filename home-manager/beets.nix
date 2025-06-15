@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 {
   programs.beets.enable = true;
   programs.beets.settings = {

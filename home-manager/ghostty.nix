@@ -1,13 +1,9 @@
 {
   config,
-  pkgs,
   lib,
+  pkgs,
   ...
 }:
-let
-  inherit (pkgs.stdenv) isLinux;
-  colors = import ./colors.nix;
-in
 {
   programs.ghostty = {
     enable = true;

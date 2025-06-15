@@ -1,7 +1,4 @@
-{ config, pkgs, ... }:
-let
-  cfg = config.services.transmission;
-in
+{ config, ... }:
 {
   age.secrets."transmission-credentials.json" = {
     file = ./secrets/transmission-credentials.json.age;

@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  inputs,
-  ...
-}:
+{ lib, inputs, ... }:
 {
   imports = [
     ./disks.nix

@@ -1,4 +1,3 @@
-{ ... }:
 {
   fileSystems."/media/nixos".neededForBoot = true;
 

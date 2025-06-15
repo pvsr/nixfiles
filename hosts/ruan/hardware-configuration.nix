@@ -1,4 +1,4 @@
-{ lib, inputs, ... }:
+{ inputs, ... }:
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-pc-ssd
@@ -66,7 +66,10 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/AB78-74B8";
     fsType = "vfat";
-    options = [ "defaults" "umask=0077" ];
+    options = [
+      "defaults"
+      "umask=0077"
+    ];
   };
 
   fileSystems."/media/data" = {

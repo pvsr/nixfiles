@@ -1,10 +1,4 @@
 {
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-{
   imports = [ ../search.nix ];
 
   programs.qutebrowser = {

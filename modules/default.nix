@@ -5,7 +5,7 @@
   ...
 }:
 let
-  isModule = (f: lib.hasSuffix ".nix" f && f != ./default.nix);
+  isModule = f: lib.hasSuffix ".nix" f && f != ./default.nix;
 in
 {
   options.local.id = lib.mkOption { type = lib.types.ints.u8; };

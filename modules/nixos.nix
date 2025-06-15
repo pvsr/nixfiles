@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ lib, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     binutils

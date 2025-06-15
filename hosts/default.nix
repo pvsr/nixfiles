@@ -1,4 +1,3 @@
-{ inputs, withSystem, ... }:
 {
   imports = [
     ./module.nix

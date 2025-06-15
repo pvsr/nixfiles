@@ -1,4 +1,3 @@
-{ ... }:
 {
   fileSystems."/media/valleria" = {
     device = "/dev/disk/by-label/valleria";

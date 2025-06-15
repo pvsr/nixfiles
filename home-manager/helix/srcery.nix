@@ -1,4 +1,3 @@
-{ ... }:
 {
   programs.helix.themes.srcery = {
     inherits = "gruvbox";
