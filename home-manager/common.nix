@@ -19,6 +19,7 @@
     fd
     moar
     nvd
+    nil
     nix-output-monitor
     duf
     du-dust
