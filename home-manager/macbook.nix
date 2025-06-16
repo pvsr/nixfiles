@@ -2,7 +2,6 @@
 {
   imports = [
     ./common.nix
-    ./firefox.nix
   ];
 
   home = {
@@ -15,8 +14,6 @@
     sarasa-gothic
     fantasque-sans-mono
   ];
-
-  programs.firefox.package = null;
 
   programs.git.userEmail = "price@hubspot.com";
   programs.jujutsu.settings.user.email = "price@hubspot.com";
