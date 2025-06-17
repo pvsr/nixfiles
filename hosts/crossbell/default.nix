@@ -48,7 +48,6 @@
       "rss.peterrice.xyz" = "ruan.ts.peterrice.xyz:8080";
       "comics.peterrice.xyz" = "ruan.ts.peterrice.xyz:19191";
       "weather.peterrice.xyz" = "ruan.ts.peterrice.xyz:15658";
-      "recipes.peterrice.xyz" = "ruan.ts.peterrice.xyz:36597";
       "calendar.peterrice.xyz" = "ruan.ts.peterrice.xyz:52032";
       "tailscale.peterrice.xyz" = "localhost:9753";
     };

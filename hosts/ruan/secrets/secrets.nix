@@ -4,7 +4,6 @@ let
     "radicale-users.age"
     "transmission-credentials.json.age"
     "miniflux-credentials.age"
-    "tandoor-key.age"
     "dns-token.age"
   ];
 in

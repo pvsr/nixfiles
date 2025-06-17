@@ -48,9 +48,6 @@ in
     owner = "radicale";
     group = "radicale";
   };
-  age.secrets."tandoor-key" = {
-    file = ./secrets/tandoor-key.age;
-  };
   age.secrets."dns-token" = {
     file = ./secrets/dns-token.age;
   };
@@ -72,13 +69,6 @@ in
       enable = true;
       openFirewall = true;
       settings.server.port = 19191;
-    };
-
-    tandoor-recipes = {
-      enable = true;
-      address = config.local.tailscale.ip;
-      port = 36597;
-      extraConfig.SECRET_KEY_FILE = config.age.secrets."tandoor-key".path;
     };
 
     btrbk = {
@@ -119,7 +109,6 @@ in
 
   systemd.services.radicale = waitForTailscale;
   systemd.services.weather = waitForTailscale;
-  systemd.services.tandoor-recipes = waitForTailscale;
 
   local.caddy-gateway = {
     enable = true;
@@ -136,7 +125,6 @@ in
 
   networking.firewall.allowedTCPPorts = [
     15658 # weather
-    36597 # tandoor
     52032 # radicale
   ];
 
@@ -150,7 +138,6 @@ in
     directories = [
       "/var/lib/komga"
       "/var/lib/postgresql"
-      "/var/lib/private/tandoor-recipes"
       "/var/lib/private/radicale"
     ];
   };
