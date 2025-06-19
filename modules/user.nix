@@ -10,6 +10,10 @@
           default = "peter";
           readOnly = true;
         };
+        uid = lib.mkOption {
+          default = 1000;
+          readOnly = true;
+        };
         extraGroups = lib.mkOption {
           type = with lib.types; listOf str;
           default = [ ];
@@ -18,9 +22,8 @@
       };
 
       config.users.users.${cfg.name} = {
-        uid = 1000;
+        inherit (cfg) uid extraGroups;
         isNormalUser = true;
-        inherit (cfg) extraGroups;
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILACfyJt7+ULfX1XFhBbztlTMNDZnRNQbKj5DV2S7uVo peter@grancel"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ9oTGdaddqjAM93FQP83XABhVxZo1jo8ljb62CtUoBq peter@ruan"

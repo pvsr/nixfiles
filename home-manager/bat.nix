@@ -9,7 +9,7 @@
       ];
 
       programs.bat.enable = true;
-      programs.bat.config.theme = "srcery";
+      programs.bat.config.theme-dark = "srcery";
       xdg.configFile."bat/themes/srcery.tmTheme".source = "${inputs.srcery-textmate}/srcery.tmTheme";
       home.sessionVariables.MANPAGER = pkgs.writeShellScript "batman" ''
         awk '{ gsub(/\x1B\[[0-9;]*m/, "", $0); gsub(/.\x08/, "", $0); print }' \

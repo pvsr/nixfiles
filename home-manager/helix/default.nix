@@ -6,7 +6,8 @@
         enable = true;
         defaultEditor = true;
         settings = {
-          theme = "srcery";
+          theme.dark = "srcery";
+          theme.light = "rose_pine_dawn";
           editor = {
             line-number = "relative";
             scrolloff = 2;

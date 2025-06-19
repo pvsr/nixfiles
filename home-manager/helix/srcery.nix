@@ -1,5 +1,4 @@
 {
-  flake.modules.homeManager.core.programs.helix.settings.theme = "srcery";
   flake.modules.homeManager.core.programs.helix.themes.srcery = {
     inherits = "gruvbox";
     "ui.virtual.jump-label" = {
