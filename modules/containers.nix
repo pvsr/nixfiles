@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.core =
     {
@@ -16,6 +17,7 @@
           autoStart = true;
           config.imports = [
             module
+            self.modules.nixos.tsnsrv
             "${modulesPath}/profiles/minimal.nix"
             {
               system.stateVersion = config.system.stateVersion;
