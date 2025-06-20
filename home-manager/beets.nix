@@ -1,6 +1,6 @@
 {
-  programs.beets.enable = true;
-  programs.beets.settings = {
+  flake.modules.homeManager.ruan.programs.beets.enable = true;
+  flake.modules.homeManager.ruan.programs.beets.settings = {
     directory = "~/music";
     library = "~/.local/state/beets/library.db";
     plugins = [

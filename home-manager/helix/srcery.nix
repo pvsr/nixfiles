@@ -1,5 +1,6 @@
 {
-  programs.helix.themes.srcery = {
+  flake.modules.homeManager.core.programs.helix.settings.theme = "srcery";
+  flake.modules.homeManager.core.programs.helix.themes.srcery = {
     inherits = "gruvbox";
     "ui.selection".bg = "bg2";
     "ui.cursor.primary" = {
@@ -44,6 +45,4 @@
       orange1 = "#ff8700";
     };
   };
-
-  programs.helix.settings.theme = "srcery";
 }

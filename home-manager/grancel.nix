@@ -1,30 +1,32 @@
-{ pkgs, ... }:
+{ self, ... }:
 {
-  imports = [
-    ./nixos.nix
-    ./niri
-    ./tasks.nix
-    ./firefox.nix
-  ];
-
-  home.packages = with pkgs; [
-    (prismlauncher.override {
-      jdks = [
-        jdk
+  flake.modules.homeManager.grancel =
+    { pkgs, ... }:
+    {
+      imports = [
+        self.modules.homeManager.nixos
+        self.modules.homeManager.firefox
       ];
-    })
-    sptlrx
-  ];
 
-  services.spotifyd = {
-    enable = true;
-    package = pkgs.spotifyd.override { withMpris = true; };
-    settings.global = {
-      backend = "pulseaudio";
-      bitrate = 160;
-      initial_volume = "100";
+      home.packages = with pkgs; [
+        (prismlauncher.override {
+          jdks = [
+            jdk
+          ];
+        })
+        sptlrx
+      ];
+
+      services.spotifyd = {
+        enable = true;
+        package = pkgs.spotifyd.override { withMpris = true; };
+        settings.global = {
+          backend = "pulseaudio";
+          bitrate = 160;
+          initial_volume = "100";
+        };
+      };
+
+      services.mpris-proxy.enable = true;
     };
-  };
-
-  services.mpris-proxy.enable = true;
 }

@@ -1,6 +1,6 @@
-{ lib, pkgs, ... }:
+{ lib, ... }:
 let
-  mkEngines = searchTerms: {
+  mkEngines = pkgs: searchTerms: {
     kagi = {
       name = "Kagi";
       urls = [
@@ -84,30 +84,44 @@ let
   };
   updateInterval = 7 * 24 * 60 * 60 * 1000;
   toQbEngine = n: v: lib.nameValuePair (lib.removePrefix "@" n) v;
-  qbEngines = lib.mapAttrs' (
-    n: v: toQbEngine (builtins.elemAt v.definedAliases 0) (builtins.elemAt v.urls 0).template
-  ) (mkEngines "{}");
+  mkQbEngines =
+    pkgs:
+    lib.mapAttrs' (
+      n: v: toQbEngine (builtins.elemAt v.definedAliases 0) (builtins.elemAt v.urls 0).template
+    ) (mkEngines pkgs "{}");
 in
 {
-  programs.firefox.profiles.default.search = {
-    force = true;
-    default = "kagi";
-    engines = {
-      bing.metaData.hidden = true;
-      ebay.metaData.hidden = true;
-      amazondotcom-us.metaData.hidden = true;
-      google.metaData.hidden = true;
-      ddg.metaData.hidden = true;
-      wikipedia.metaData.alias = "w";
-    } // builtins.mapAttrs (n: v: { inherit updateInterval; } // v) (mkEngines "{searchTerms}");
-  };
-  programs.qutebrowser.searchEngines = {
-    DEFAULT = qbEngines.k;
-    w = "https://en.wikipedia.org/wiki/Special:Search?search={}";
-    d = "https://duckduckgo.com/?q={}";
-    # TODO set these up in firefox too
-    a = "https://wiki.archlinux.org/?search={}";
-    ap = "https://archlinux.org/packages/?q={}";
-    aur = "https://aur.archlinux.org/packages.php?K={}";
-  } // qbEngines;
+  flake.modules.homeManager.firefox =
+    { pkgs, ... }:
+    {
+      programs.firefox.profiles.default.search = {
+        force = true;
+        default = "kagi";
+        engines = {
+          bing.metaData.hidden = true;
+          ebay.metaData.hidden = true;
+          amazondotcom-us.metaData.hidden = true;
+          google.metaData.hidden = true;
+          ddg.metaData.hidden = true;
+          wikipedia.metaData.alias = "w";
+        } // builtins.mapAttrs (n: v: { inherit updateInterval; } // v) (mkEngines pkgs "{searchTerms}");
+      };
+    };
+
+  flake.modules.homeManager.desktop =
+    { pkgs, ... }:
+    let
+      qbEngines = mkQbEngines pkgs;
+    in
+    {
+      programs.qutebrowser.searchEngines = {
+        DEFAULT = qbEngines.k;
+        w = "https://en.wikipedia.org/wiki/Special:Search?search={}";
+        d = "https://duckduckgo.com/?q={}";
+        # TODO set these up in firefox too
+        a = "https://wiki.archlinux.org/?search={}";
+        ap = "https://archlinux.org/packages/?q={}";
+        aur = "https://aur.archlinux.org/packages.php?K={}";
+      } // qbEngines;
+    };
 }

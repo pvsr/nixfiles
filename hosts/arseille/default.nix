@@ -10,7 +10,10 @@
         ];
       };
       home-manager-path = inputs.home-manager.outPath;
-      modules = [ ./system.nix ];
+      modules = [
+        ./_system.nix
+        { home-manager.config = inputs.self.modules.homeManager.arseille; }
+      ];
     }
   );
 }

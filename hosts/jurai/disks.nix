@@ -1,13 +1,13 @@
 {
-  fileSystems."/media/nixos".neededForBoot = true;
+  flake.modules.nixos.jurai.fileSystems."/media/nixos".neededForBoot = true;
 
-  local.impermanence = {
+  flake.modules.nixos.jurai.local.impermanence = {
     enable = true;
     device = "/dev/disk/by-partlabel/disk-root-root";
     persist = "/media/nixos/persist";
   };
 
-  disko.devices.disk.root = {
+  flake.modules.nixos.jurai.disko.devices.disk.root = {
     device = "/dev/vda";
     type = "disk";
     content = {

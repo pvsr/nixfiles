@@ -1,92 +1,90 @@
-{ pkgs, ... }:
 {
-  imports = [
-    ./common.nix
-    ./ghostty.nix
-  ];
+  flake.modules.homeManager.desktop =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        gitAndTools.git-annex
+        moreutils
+        ouch
+        tig
+        manix
+        sd
+        diceware
+        qbpm
+        transmission
+        timg
+      ];
 
-  home.packages = with pkgs; [
-    gitAndTools.git-annex
-    moreutils
-    ouch
-    tig
-    manix
-    sd
-    diceware
-    qbpm
-    transmission
-    timg
-  ];
+      programs.man.generateCaches = true;
 
-  programs.man.generateCaches = true;
+      programs.direnv = {
+        enable = true;
+        enableBashIntegration = false;
+        nix-direnv.enable = true;
+      };
+      services.lorri.enable = true;
 
-  programs.direnv = {
-    enable = true;
-    enableBashIntegration = false;
-    nix-direnv.enable = true;
-  };
-  services.lorri.enable = true;
+      programs.nix-index.enable = true;
+      programs.tealdeer.enable = true;
+      programs.bat.enable = true;
+      programs.password-store.enable = true;
+      programs.jq.enable = true;
+      programs.zoxide.enable = true;
 
-  programs.nix-index.enable = true;
-  programs.tealdeer.enable = true;
-  programs.bat.enable = true;
-  programs.password-store.enable = true;
-  programs.jq.enable = true;
-  programs.zoxide.enable = true;
+      programs.mpv.enable = true;
+      programs.mpv = {
+        bindings = { };
+        scripts = with pkgs.mpvScripts; [
+          autocrop
+          mpris
+          sponsorblock
 
-  programs.mpv.enable = true;
-  programs.mpv = {
-    bindings = { };
-    scripts = with pkgs.mpvScripts; [
-      autocrop
-      mpris
-      sponsorblock
+          # mutually exclusive osc replacements
+          thumbnail
+          # youtube-quality
+        ];
+        config = {
+          profile = "standard";
+        };
+        profiles = {
+          no-term = {
+            profile = "standard";
+            pause = true;
+            force-window = "immediate";
+            terminal = false;
+          };
+          "protocol.https" = {
+            force-window = "immediate";
+            keep-open = true;
+          };
+          "protocol.http" = {
+            profile = "protocol.https";
+          };
+          standard = {
+            cache = true;
+            audio-display = false;
+            write-filename-in-watch-later-config = true;
+            profile = "gpu-hq";
+            video-sync = "display-resample";
+            interpolation = true;
+            tscale = "oversample";
+            demuxer-mkv-subtitle-preroll = true;
+            # TODO
+            slang = "eng,en,enUS,en-US";
+            ytdl-raw-options = "sub-langs=\"en*,ja*\"";
+            # for thumbnail/youtube-quality
+            osc = false;
+            script-opts-append = "autocrop-auto=no";
+          };
+        };
+      };
 
-      # mutually exclusive osc replacements
-      thumbnail
-      # youtube-quality
-    ];
-    config = {
-      profile = "standard";
+      programs.yt-dlp.enable = true;
+      programs.yt-dlp.settings = {
+        embed-subs = true;
+        write-auto-subs = true;
+        embed-thumbnail = true;
+        sub-langs = "en*,ja*";
+      };
     };
-    profiles = {
-      no-term = {
-        profile = "standard";
-        pause = true;
-        force-window = "immediate";
-        terminal = false;
-      };
-      "protocol.https" = {
-        force-window = "immediate";
-        keep-open = true;
-      };
-      "protocol.http" = {
-        profile = "protocol.https";
-      };
-      standard = {
-        cache = true;
-        audio-display = false;
-        write-filename-in-watch-later-config = true;
-        profile = "gpu-hq";
-        video-sync = "display-resample";
-        interpolation = true;
-        tscale = "oversample";
-        demuxer-mkv-subtitle-preroll = true;
-        # TODO
-        slang = "eng,en,enUS,en-US";
-        ytdl-raw-options = "sub-langs=\"en*,ja*\"";
-        # for thumbnail/youtube-quality
-        osc = false;
-        script-opts-append = "autocrop-auto=no";
-      };
-    };
-  };
-
-  programs.yt-dlp.enable = true;
-  programs.yt-dlp.settings = {
-    embed-subs = true;
-    write-auto-subs = true;
-    embed-thumbnail = true;
-    sub-langs = "en*,ja*";
-  };
 }

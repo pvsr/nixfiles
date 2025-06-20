@@ -1,0 +1,36 @@
+{ config, ... }:
+let
+  username = config.local.user.name;
+in
+{
+  flake.modules.nixos.ruan =
+    { config, ... }:
+    {
+      age.secrets."transmission-credentials.json" = {
+        file = ../hosts/ruan/secrets/transmission-credentials.json.age;
+        owner = "transmission";
+        group = "transmission";
+      };
+
+      users.users.${username}.extraGroups = [ "transmission" ];
+
+      services.transmission = {
+        enable = true;
+        openPeerPorts = true;
+        openRPCPort = true;
+        credentialsFile = config.age.secrets."transmission-credentials.json".path;
+        settings = {
+          peer-port-random-on-start = true;
+          peer-port-random-low = 65150;
+          peer-port-random-high = 65160;
+          rpc-port = 9919;
+          rpc-host-whitelist = "ruan,ruan.ts.peterrice.xyz";
+          rpc-bind-address = config.local.tailscale.ip;
+          rpc-whitelist-enabled = false;
+        };
+      };
+    };
+
+  flake.modules.homeManager.desktop.programs.fish.shellAbbrs.trr =
+    "transmission-remote ruan.ts.peterrice.xyz:9919";
+}

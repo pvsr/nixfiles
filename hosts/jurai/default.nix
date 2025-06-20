@@ -1,38 +1,41 @@
+{ inputs, ... }:
 {
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
-let
-  onMacos = pkgs.stdenv.hostPlatform.system == "aarch64-linux";
-in
-{
-  imports = [
-    ./disks.nix
-    ./hardware-configuration.nix
-    inputs.srvos.nixosModules.desktop
-  ];
+  local.hosts.jurai = {
+    system = "aarch64-linux";
+  };
 
-  local.gnome.enable = true;
+  flake.modules.homeManager.jurai.imports = [ inputs.self.modules.homeManager.nixos ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  flake.modules.nixos.jurai =
+    { lib, pkgs, ... }:
+    let
+      onMacos = pkgs.stdenv.hostPlatform.system == "aarch64-linux";
+    in
+    {
+      imports = [
+        inputs.self.modules.nixos.desktop
+      ];
 
-  virtualisation.rosetta.enable = onMacos;
+      services.desktopManager.gnome.enable = true;
 
-  networking.nameservers = [
-    "1.1.1.1"
-    "1.0.0.1"
-  ];
+      boot.loader.systemd-boot.enable = true;
+      boot.loader.efi.canTouchEfiVariables = true;
 
-  time.timeZone = "America/New_York";
-  i18n.defaultLocale = "en_US.UTF-8";
+      virtualisation.rosetta.enable = onMacos;
 
-  services.spice-vdagentd.enable = true;
-  networking.firewall.enable = false;
+      networking.nameservers = [
+        "1.1.1.1"
+        "1.0.0.1"
+      ];
 
-  services.openssh.listenAddresses = lib.optionals onMacos [ { addr = "192.168.68.2"; } ];
+      time.timeZone = "America/New_York";
+      i18n.defaultLocale = "en_US.UTF-8";
 
-  system.stateVersion = "24.11";
+      services.spice-vdagentd.enable = true;
+      networking.firewall.enable = false;
+
+      services.openssh.listenAddresses = lib.optionals onMacos [ { addr = "192.168.68.2"; } ];
+
+      system.stateVersion = "24.11";
+    };
 }

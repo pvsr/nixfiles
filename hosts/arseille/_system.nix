@@ -30,6 +30,5 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    config = ../../home-manager/arseille.nix;
   };
 }

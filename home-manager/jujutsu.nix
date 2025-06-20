@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  programs = {
+  flake.modules.homeManager.core.programs = {
     jujutsu = {
       enable = true;
       settings = {

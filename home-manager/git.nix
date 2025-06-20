@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  config.programs.git = {
+  flake.modules.homeManager.core.config.programs.git = {
     enable = true;
     ignores = [
       ".envrc"

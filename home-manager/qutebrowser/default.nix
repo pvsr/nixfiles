@@ -1,7 +1,5 @@
 {
-  imports = [ ../search.nix ];
-
-  programs.qutebrowser = {
+  flake.modules.homeManager.desktop.programs.qutebrowser = {
     enable = true;
     loadAutoconfig = true;
     aliases = {
