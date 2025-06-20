@@ -74,6 +74,11 @@ in
           dns.override_local_dns = true;
           dns.extra_records = [
             {
+              name = "code.pvsr.dev";
+              type = "A";
+              value = hosts.ruan.config.local.tailscale.ip;
+            }
+            {
               name = "grafana.peterrice.xyz";
               type = "A";
               value = hosts.ruan.config.local.tailscale.ip;
