@@ -3,6 +3,19 @@ let
   hosts = config.flake.nixosConfigurations;
 in
 {
+  flake.modules.nixos.machine =
+    { config, lib, ... }:
+    {
+      disabledModules = [
+        inputs.srvos.nixosModules.hardware-vultr-vm
+        inputs.nixos-hardware.nixosModules.common-gpu-amd
+      ];
+      networking.useHostResolvConf = false;
+      services.tailscale.enable = false;
+      # TODO get agenix working in containers for real?
+      age.identityPaths = lib.mkDefault [ "/etc/ssh/ssh_host_ed25519_key" ];
+    };
+
   flake.modules.nixos.machines =
     { config, lib, ... }:
     let
@@ -21,19 +34,12 @@ in
         hostAddress6 = "fc00::100";
         localAddress6 = "fc00::${toString host.config.local.id}";
         config.imports = [
+          inputs.self.modules.nixos.machine
           inputs.self.modules.nixos.${hostname}
           { inherit options; }
           {
-            disabledModules = [
-              { inherit key; }
-              inputs.srvos.nixosModules.hardware-vultr-vm
-              inputs.nixos-hardware.nixosModules.common-gpu-amd
-            ];
+            disabledModules = [ { inherit key; } ];
             networking.hostName = lib.mkForce "${hostname}-c";
-            networking.useHostResolvConf = false;
-            services.tailscale.enable = false;
-            # TODO get agenix working in containers for real?
-            age.identityPaths = lib.mkDefault [ "/etc/ssh/ssh_host_ed25519_key" ];
           }
         ];
       };
