@@ -15,8 +15,6 @@
         timg
       ];
 
-      programs.man.generateCaches = true;
-
       programs.direnv = {
         enable = true;
         enableBashIntegration = false;

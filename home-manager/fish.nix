@@ -20,9 +20,6 @@
       programs.eza.enable = true;
       programs.eza.git = true;
 
-      # hm enables generateCaches by default for fish
-      programs.man.generateCaches = lib.mkOverride 500 false;
-
       programs.fish = {
         enable = true;
         preferAbbrs = true;
