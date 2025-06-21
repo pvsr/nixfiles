@@ -39,6 +39,7 @@
             "alt+8=unbind"
             "alt+9=unbind"
             "alt+0=unbind"
+            "ctrl+[=text:\\x1b"
           ];
         };
       };
