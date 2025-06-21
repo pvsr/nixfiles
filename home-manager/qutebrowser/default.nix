@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   flake.modules.homeManager.desktop.programs.qutebrowser = {
     enable = true;
@@ -122,7 +123,7 @@
 
       fonts = {
         default_family = [
-          "Fantasque Sans Mono"
+          config.local.appFont
           "monospace"
         ];
         default_size = "14pt";

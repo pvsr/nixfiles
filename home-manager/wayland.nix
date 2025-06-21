@@ -1,12 +1,8 @@
+{ config, ... }:
 {
   flake.modules.homeManager.desktop =
-    { config, pkgs, ... }:
-    let
-      colors = import ./_colors.nix;
-    in
+    { pkgs, ... }:
     {
-      imports = [ ];
-
       home.packages = with pkgs; [
         xwayland
         imv
@@ -40,7 +36,7 @@
       };
 
       services = {
-        mako = with colors; {
+        mako = with config.local.colors; {
           enable = true;
           settings = {
             font = "${config.local.appFont} 14";
