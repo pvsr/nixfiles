@@ -2,15 +2,13 @@
 {
   flake.modules.homeManager.jurai.imports = [ self.modules.homeManager.nixos ];
 
+  local.homeConfigurations.jurai = self.modules.homeManager.macbook;
   flake.modules.homeManager.macbook =
     { pkgs, ... }:
     {
-      imports = [ self.modules.homeManager.core ];
-
       home = {
         username = "price";
         homeDirectory = "/Users/price";
-        stateVersion = "24.05";
       };
 
       home.packages = with pkgs; [

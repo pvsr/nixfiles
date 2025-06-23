@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.homeManager.arseille.imports = [ self.modules.homeManager.core ];
+  flake.modules.homeManager.arseille.imports = [ self.modules.homeManager.standalone ];
   # TODO make this work for nix-on-droid app too
   flake.modules.homeManager.arseille.home.file.".termux/colors.properties".text = ''
     # https://github.com/srcery-colors/srcery-terminal/

@@ -1,5 +1,7 @@
 { self, ... }:
 {
+  local.homeConfigurations.valleria = self.modules.homeManager.valleria;
+
   flake.modules.homeManager.valleria =
     { pkgs, ... }:
     {
@@ -10,7 +12,6 @@
 
       home.username = "peter";
       home.homeDirectory = "/home/peter";
-      home.stateVersion = "25.05";
 
       home.packages = with pkgs; [
         nvtopPackages.amd

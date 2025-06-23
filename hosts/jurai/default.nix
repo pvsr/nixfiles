@@ -4,8 +4,6 @@
     system = "aarch64-linux";
   };
 
-  flake.modules.homeManager.jurai.imports = [ inputs.self.modules.homeManager.nixos ];
-
   flake.modules.nixos.jurai =
     { lib, pkgs, ... }:
     let
