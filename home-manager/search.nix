@@ -67,7 +67,7 @@ let
     };
     nixos-wiki = {
       name = "NixOS Wiki";
-      urls = [ { template = "https://wiki.nixos.org/index.php?search=${searchTerms}"; } ];
+      urls = [ { template = "https://wiki.nixos.org/w/index.php?search=${searchTerms}"; } ];
       icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
       definedAliases = [ "@nxw" ];
     };
