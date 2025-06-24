@@ -1,11 +1,16 @@
-{ inputs, config, ... }:
+{ inputs, ... }:
 {
   imports = [
     inputs.flake-parts.flakeModules.modules
     inputs.pre-commit-hooks.flakeModule
   ];
   perSystem =
-    { pkgs, inputs', ... }:
+    {
+      config,
+      pkgs,
+      inputs',
+      ...
+    }:
     {
       formatter = pkgs.nixfmt-tree;
       pre-commit = {
