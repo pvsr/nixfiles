@@ -7,10 +7,6 @@
         self.modules.homeManager.desktop
       ];
 
-      home.packages = with pkgs; [
-        nvtopPackages.amd
-      ];
-
       programs.gpg.enable = true;
       programs.gpg.homedir = "${config.xdg.dataHome}/gnupg";
       services.gpg-agent = {

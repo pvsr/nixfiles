@@ -13,6 +13,7 @@
         qbpm
         transmission
         timg
+        nvtopPackages.amd
       ];
 
       programs.direnv = {
