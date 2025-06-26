@@ -11,7 +11,7 @@
       };
       home-manager-path = inputs.home-manager.outPath;
       modules = [
-        ./_system.nix
+        inputs.self.modules.nixOnDroid.arseille
         { home-manager.config = inputs.self.modules.homeManager.arseille; }
       ];
     }
