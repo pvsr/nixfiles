@@ -10,7 +10,7 @@
         };
         git.auto-local-bookmark = true;
         ui.default-command = "log";
-        ui.diff.format = "git";
+        ui.diff-formatter = ":git";
         templates.draft_commit_description = ''
           concat(
             description,
