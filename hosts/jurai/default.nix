@@ -10,11 +10,10 @@
       onMacos = pkgs.stdenv.hostPlatform.system == "aarch64-linux";
     in
     {
-      imports = [
-        inputs.self.modules.nixos.desktop
+      imports = with inputs.self.modules.nixos; [
+        desktop
+        kde
       ];
-
-      services.desktopManager.gnome.enable = true;
 
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
@@ -32,7 +31,7 @@
       services.spice-vdagentd.enable = true;
       networking.firewall.enable = false;
 
-      services.openssh.listenAddresses = lib.optionals onMacos [ { addr = "192.168.68.2"; } ];
+      services.openssh.listenAddresses = [ { addr = "0.0.0.0"; } ];
 
       system.stateVersion = "24.11";
     };
