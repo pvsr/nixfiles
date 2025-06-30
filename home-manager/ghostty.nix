@@ -11,7 +11,7 @@
           command = "fish";
           font-family = config.local.appFont;
           font-size = lib.mkDefault 15;
-          # TODO also enable for gnome
+          # TODO only on niri
           window-decoration = !pkgs.stdenv.isLinux;
           cursor-style-blink = false;
           shell-integration-features = "no-cursor";
@@ -25,6 +25,8 @@
           confirm-close-surface = false;
           quit-after-last-window-closed = true;
           keybind = [
+            "ctrl+enter=unbind"
+            "alt+f4=unbind"
             "alt+1=unbind"
             "alt+2=unbind"
             "alt+3=unbind"
