@@ -13,6 +13,7 @@
             rulers = [ 80 ];
             color-modes = true;
             bufferline = "multiple";
+            soft-wrap.enable = true;
             smart-tab.supersede-menu = true;
             whitespace.render.tab = "all";
             whitespace.render.newline = "all";
