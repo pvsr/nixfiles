@@ -1,7 +1,3 @@
-{ config, ... }:
-let
-  username = config.local.user.name;
-in
 {
   flake.modules.nixos.ruan =
     { config, pkgs, ... }:
@@ -12,7 +8,7 @@ in
         group = "transmission";
       };
 
-      users.users.${username}.extraGroups = [ "transmission" ];
+      local.user.extraGroups = [ "transmission" ];
 
       services.transmission = {
         enable = true;

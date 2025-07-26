@@ -20,7 +20,7 @@
     networking.hostName = name;
     nixpkgs.system = config.system;
     nixpkgs.overlays = withSystem config.system ({ pkgs, ... }: pkgs.overlays);
-    home-manager.users.peter.imports = [
+    local.home.imports = [
       (self.modules.homeManager.${name} or { })
     ];
   }) config.local.hosts;

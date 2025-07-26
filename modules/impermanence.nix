@@ -4,7 +4,8 @@
     { config, lib, ... }:
     let
       cfg = config.local.impermanence;
-      userCfg = config.users.users.peter;
+      username = config.local.user.name;
+      userCfg = config.users.users.${username};
     in
     {
       imports = [
@@ -24,13 +25,13 @@
       config = lib.mkIf (cfg.enable && !config.boot.isContainer) {
         users.mutableUsers = false;
         users.users.root.hashedPasswordFile = "${cfg.persist}/passwords/root";
-        users.users.peter.hashedPasswordFile = "${cfg.persist}/passwords/peter";
+        users.users.${username}.hashedPasswordFile = "${cfg.persist}/passwords/${username}";
 
         virtualisation =
           let
             variant = {
               users.users.root.hashedPasswordFile = lib.mkForce null;
-              users.users.peter.hashedPasswordFile = lib.mkForce null;
+              users.users.${username}.hashedPasswordFile = lib.mkForce null;
 
               # https://github.com/NixOS/nixpkgs/issues/6481
               systemd.tmpfiles.rules = [

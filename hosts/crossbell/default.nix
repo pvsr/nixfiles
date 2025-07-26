@@ -1,7 +1,6 @@
 { inputs, config, ... }:
 let
   hosts = config.flake.nixosConfigurations;
-  username = config.local.user.name;
 in
 {
   local.hosts.crossbell = { };
@@ -92,9 +91,9 @@ in
               ssh = [
                 {
                   action = "accept";
-                  src = [ "${username}@" ];
+                  src = [ "${config.local.user.name}@" ];
                   dst = [ "*" ];
-                  users = [ username ];
+                  users = [ config.local.user.name ];
                 }
               ];
             }

@@ -1,7 +1,3 @@
-{ config, ... }:
-let
-  username = config.local.user.name;
-in
 {
   flake.modules.nixos.ruan =
     { config, ... }:
@@ -14,7 +10,7 @@ in
         dataDir = "/media/nixos/podcasts";
         fetch = {
           enable = true;
-          user = username;
+          user = config.local.user.name;
           group = "users";
           startAt = "0,8,16:0";
         };

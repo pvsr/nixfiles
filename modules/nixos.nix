@@ -1,6 +1,11 @@
 {
   flake.modules.nixos.core =
-    { lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       environment.systemPackages = with pkgs; [
         binutils
@@ -55,7 +60,7 @@
           variant = {
             nixpkgs.hostPlatform = "x86_64-linux";
             services.tailscale.enable = false;
-            users.users.peter.password = "";
+            users.users.${config.local.user.name}.password = "";
             virtualisation = {
               cores = 3;
               memorySize = 1024 * 3;

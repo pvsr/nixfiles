@@ -1,14 +1,21 @@
-{ self, inputs, ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.core =
-    { config, ... }:
+    { config, lib, ... }:
     {
       imports = [ inputs.home-manager.nixosModules.home-manager ];
-      home-manager = {
+      options.local.home.imports = lib.mkOption {
+        type = lib.types.listOf lib.types.deferredModule;
+        default = [ ];
+        apply = modules: [ inputs.self.modules.homeManager.core ] ++ modules;
+      };
+      config.home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
-        users.peter.home.stateVersion = config.system.stateVersion;
-        users.peter.imports = [ self.modules.homeManager.core ];
+        users.${config.local.user.name} = {
+          inherit (config.local.home) imports;
+          home.stateVersion = config.system.stateVersion;
+        };
       };
     };
 }
