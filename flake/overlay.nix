@@ -20,6 +20,7 @@
       overlayAttrs = {
         inherit (inputs'.qbpm.packages) qbpm;
         transmission = pkgs.transmission_4;
+        transmission_3 = pkgs.transmission_4;
         tmuxPlugins = pkgs.tmuxPlugins // {
           srcery = pkgs.tmuxPlugins.mkTmuxPlugin {
             pluginName = "srcery";
