@@ -19,7 +19,6 @@
 
       overlayAttrs = {
         inherit (inputs'.qbpm.packages) qbpm;
-        inherit (inputs'.helix.packages) helix;
         transmission = pkgs.transmission_4;
         tmuxPlugins = pkgs.tmuxPlugins // {
           srcery = pkgs.tmuxPlugins.mkTmuxPlugin {
