@@ -37,11 +37,8 @@
             C-e = "goto_line_end_newline";
             C-c = "toggle_comments";
             C-t = "indent";
-            # TODO choose one
-            C-y = "unindent";
             C-g = "unindent";
-            # TODO doesn't work
-            # C-backspace = "delete_word_backward";
+            C-backspace = "delete_word_backward";
           };
           keys.normal.minus = "file_picker_in_current_buffer_directory";
         };
