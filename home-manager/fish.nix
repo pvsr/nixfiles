@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake.modules.homeManager.core =
     {
@@ -95,7 +96,11 @@
       home.packages = with pkgs.fishPlugins; [
         fzf-fish
         plugin-git
-        fish-prompt-pvsr
+        (pkgs.fishPlugins.buildFishPlugin {
+          pname = "fish-prompt-pvsr";
+          version = inputs.fish-prompt-pvsr.shortRev;
+          src = inputs.fish-prompt-pvsr;
+        })
       ];
 
       # prefer fzf-fish plugin

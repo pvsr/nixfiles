@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake.modules.homeManager.desktop =
     { pkgs, ... }:
@@ -10,10 +11,15 @@
         manix
         sd
         diceware
-        qbpm
-        transmission
-        timg
+        transmission_4
         nvtopPackages.amd
+        (pkgs.symlinkJoin {
+          name = "timg-wrapped";
+          paths = [ pkgs.timg ];
+          buildInputs = [ pkgs.makeWrapper ];
+          postBuild = "wrapProgram $out/bin/timg --add-flags '-pk'";
+        })
+        inputs.qbpm.packages.${pkgs.system}.qbpm
       ];
 
       programs.direnv = {

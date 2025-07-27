@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake.modules.homeManager.core =
     { lib, pkgs, ... }:
@@ -13,7 +14,11 @@
         plugins = with pkgs; [
           tmuxPlugins.pain-control
           tmuxPlugins.yank
-          tmuxPlugins.srcery
+          (pkgs.tmuxPlugins.mkTmuxPlugin {
+            pluginName = "srcery";
+            version = inputs.srcery-tmux.shortRev;
+            src = inputs.srcery-tmux;
+          })
         ];
         extraConfig = ''
           set -g mouse on

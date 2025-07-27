@@ -4,7 +4,7 @@ let
 in
 {
   flake.modules.nixos.ruan =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
       age.secrets."transmission-credentials.json" = {
         file = ../hosts/ruan/secrets/transmission-credentials.json.age;
@@ -16,6 +16,7 @@ in
 
       services.transmission = {
         enable = true;
+        package = pkgs.transmission_4;
         openPeerPorts = true;
         openRPCPort = true;
         credentialsFile = config.age.secrets."transmission-credentials.json".path;
