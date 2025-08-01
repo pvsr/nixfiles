@@ -25,8 +25,10 @@
           confirm-close-surface = false;
           quit-after-last-window-closed = true;
           keybind = [
-            "ctrl+enter=unbind"
+            "ctrl+[=text:\\x1b"
             "alt+f4=unbind"
+            "ctrl+shift+q=unbind"
+            "ctrl+enter=unbind"
             "alt+1=unbind"
             "alt+2=unbind"
             "alt+3=unbind"
@@ -37,7 +39,6 @@
             "alt+8=unbind"
             "alt+9=unbind"
             "alt+0=unbind"
-            "ctrl+[=text:\\x1b"
           ];
         };
       };
