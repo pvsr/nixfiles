@@ -12,6 +12,7 @@
             scrolloff = 2;
             rulers = [ 80 ];
             color-modes = true;
+            rainbow-brackets = true;
             bufferline = "multiple";
             soft-wrap.enable = true;
             smart-tab.supersede-menu = true;
