@@ -41,7 +41,7 @@
             C-g = "unindent";
             C-backspace = "delete_word_backward";
           };
-          keys.normal.minus = "file_picker_in_current_buffer_directory";
+          keys.normal.minus = "file_explorer_in_current_buffer_directory";
         };
       };
     };
