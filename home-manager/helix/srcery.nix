@@ -2,12 +2,6 @@
   flake.modules.homeManager.core.programs.helix.settings.theme = "srcery";
   flake.modules.homeManager.core.programs.helix.themes.srcery = {
     inherits = "gruvbox";
-    "ui.selection".bg = "bg2";
-    "ui.cursor.primary" = {
-      bg = "fg4";
-      fg = "bg1";
-    };
-    "ui.cursor.match".bg = "bg3";
     "ui.virtual.jump-label" = {
       bg = "bg2";
       modifiers = [ "bold" ];
