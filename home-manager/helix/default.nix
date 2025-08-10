@@ -42,38 +42,6 @@
           };
           keys.normal.minus = "file_picker_in_current_buffer_directory";
         };
-        languages = {
-          language = [
-            {
-              name = "python";
-              auto-format = true;
-              language-servers = [
-                "ruff"
-                "pylsp"
-                "ty"
-              ];
-            }
-            {
-              name = "nix";
-              formatter = {
-                command = "nixfmt";
-              };
-              auto-format = true;
-            }
-            {
-              name = "fish";
-              language-servers = [ "fish-lsp" ];
-            }
-          ];
-          language-server.fish-lsp = {
-            command = "${pkgs.fish-lsp}/bin/fish-lsp";
-            args = [ "start" ];
-          };
-          language-server.ty = {
-            command = "ty";
-            args = [ "server" ];
-          };
-        };
       };
     };
 }
