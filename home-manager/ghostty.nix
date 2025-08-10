@@ -26,6 +26,8 @@
           quit-after-last-window-closed = true;
           keybind = [
             "ctrl+[=text:\\x1b"
+            "ctrl+j=text:\\r"
+            "ctrl+m=text:\\r"
             "alt+f4=unbind"
             "ctrl+shift+q=unbind"
             "ctrl+enter=unbind"
