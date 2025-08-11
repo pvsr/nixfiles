@@ -31,7 +31,6 @@
 
       programs.nix-index.enable = true;
       programs.tealdeer.enable = true;
-      programs.bat.enable = true;
       programs.password-store.enable = true;
       programs.jq.enable = true;
       programs.zoxide.enable = true;
