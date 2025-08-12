@@ -38,6 +38,8 @@
 
     srcery-tmux.url = "github:srcery-colors/srcery-tmux";
     srcery-tmux.flake = false;
+    srcery-textmate.url = "github:srcery-colors/srcery-textmate";
+    srcery-textmate.flake = false;
     fish-prompt-pvsr.url = "github:pvsr/fish-prompt-pvsr";
     fish-prompt-pvsr.flake = false;
   };

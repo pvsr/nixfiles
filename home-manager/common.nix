@@ -24,14 +24,7 @@
         }))
       ];
 
-      programs.bat.enable = true;
-      programs.bat.config.theme = "ansi";
-
       home.sessionVariables = {
-        MANPAGER = pkgs.writeShellScript "batman" ''
-          awk '{ gsub(/\x1B\[[0-9;]*m/, "", $0); gsub(/.\x08/, "", $0); print }' \
-          | bat --plain --language man
-        '';
         PAGER = "${pkgs.moar}/bin/moar";
         MOAR = builtins.concatStringsSep " " [
           "-quit-if-one-screen"

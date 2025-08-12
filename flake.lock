@@ -558,6 +558,7 @@
         "podcasts": "podcasts",
         "pre-commit-hooks": "pre-commit-hooks",
         "qbpm": "qbpm",
+        "srcery-textmate": "srcery-textmate",
         "srcery-tmux": "srcery-tmux",
         "srvos": "srvos",
         "weather": "weather"
@@ -576,6 +577,22 @@
       "original": {
         "owner": "andreymatin",
         "repo": "scss-reset",
+        "type": "github"
+      }
+    },
+    "srcery-textmate": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746286527,
+        "narHash": "sha256-WjaJAc3Ty5ZSGkbSf4j107f5b7pizr4W6hKWBL21luA=",
+        "owner": "srcery-colors",
+        "repo": "srcery-textmate",
+        "rev": "738197f9d42c677d866c6d98fd348f6bb5b308fc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srcery-colors",
+        "repo": "srcery-textmate",
         "type": "github"
       }
     },
