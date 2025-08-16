@@ -40,6 +40,9 @@
     srcery-tmux.flake = false;
     srcery-textmate.url = "github:srcery-colors/srcery-textmate";
     srcery-textmate.flake = false;
+
+    fzf-fish.url = "github:pvsr/fzf.fish";
+    fzf-fish.flake = false;
     fish-prompt-pvsr.url = "github:pvsr/fish-prompt-pvsr";
     fish-prompt-pvsr.flake = false;
   };

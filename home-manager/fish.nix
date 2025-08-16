@@ -94,12 +94,16 @@
       };
 
       home.packages = with pkgs.fishPlugins; [
-        fzf-fish
         plugin-git
-        (pkgs.fishPlugins.buildFishPlugin {
+        (buildFishPlugin {
+          pname = "fzf-fish";
+          src = inputs.fzf-fish;
+          version = inputs.fzf-fish.shortRev;
+        })
+        (buildFishPlugin {
           pname = "fish-prompt-pvsr";
-          version = inputs.fish-prompt-pvsr.shortRev;
           src = inputs.fish-prompt-pvsr;
+          version = inputs.fish-prompt-pvsr.shortRev;
         })
       ];
 

@@ -153,6 +153,22 @@
         "type": "github"
       }
     },
+    "fzf-fish": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755364814,
+        "narHash": "sha256-hTItdUUGynrTfdyV7gENAqy/mXVVaTXnceeMyCDeoGU=",
+        "owner": "pvsr",
+        "repo": "fzf.fish",
+        "rev": "c04ed298e4ff2aec1dc8bd6547200403bd08ad39",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pvsr",
+        "repo": "fzf.fish",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -548,6 +564,7 @@
         "disko": "disko",
         "fish-prompt-pvsr": "fish-prompt-pvsr",
         "flake-parts": "flake-parts",
+        "fzf-fish": "fzf-fish",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "import-tree": "import-tree",
