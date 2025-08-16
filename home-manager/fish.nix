@@ -60,7 +60,6 @@
           fish_mode_prompt = "";
         };
         shellAbbrs = {
-          suod = "sudo";
           # TODO only enable when commands are present
           sc = "systemctl";
           ssc = "sudo systemctl";
