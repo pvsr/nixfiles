@@ -1,6 +1,7 @@
 { config, ... }:
 let
   hosts = config.flake.nixosConfigurations;
+  guest = "10.81.157.53";
   forward12262 = dest: port: ''
     chain prerouting {
         type nat hook prerouting priority dstnat
@@ -24,10 +25,10 @@ in
   };
 
   flake.modules.nixos.ruan = {
-    local.caddy-gateway.reverseProxies.":12548" = "10.90.38.37";
+    local.caddy-gateway.reverseProxies.":12548" = guest;
     networking.nftables.tables.griffin = {
       family = "ip";
-      content = forward12262 "10.90.38.37" 22;
+      content = forward12262 guest 22;
     };
     networking.firewall.allowedTCPPorts = [
       12262

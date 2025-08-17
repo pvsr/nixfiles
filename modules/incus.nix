@@ -12,5 +12,7 @@
       53
       67
     ];
+
+    local.impermanence.directories = [ "/var/lib/incus" ];
   };
 }
