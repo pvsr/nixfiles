@@ -4,9 +4,12 @@
       config,
       lib,
       pkgs,
+      modulesPath,
       ...
     }:
     {
+      imports = [ "${modulesPath}/profiles/minimal.nix" ];
+
       environment.systemPackages = with pkgs; [
         binutils
         coreutils
@@ -17,6 +20,7 @@
         iputils
         lsof
         psmisc
+        rsync
         utillinux
         ghostty.terminfo
       ];

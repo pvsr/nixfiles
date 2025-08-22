@@ -7,6 +7,10 @@
 
     services.openssh.settings.AcceptEnv = "TERMINFO COLORTERM";
 
+    xdg.icons.enable = true;
+    xdg.mime.enable = true;
+    xdg.sounds.enable = true;
+
     console.colors =
       with config.local.colors;
       map (builtins.substring 1 (-1)) [

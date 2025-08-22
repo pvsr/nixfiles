@@ -8,6 +8,11 @@
     nixos.desktop =
       { pkgs, ... }:
       {
+        documentation.enable = true;
+        documentation.doc.enable = true;
+        documentation.nixos.enable = true;
+
+        documentation.man.enable = true;
         documentation.man.generateCaches = true;
         environment.systemPackages = [ pkgs.man-pages ];
       };

@@ -48,6 +48,7 @@ in
       inherit key options;
 
       config = lib.mkIf (enabledHosts != { }) {
+        boot.enableContainers = true;
         containers = builtins.mapAttrs mkContainer enabledHosts;
       };
     };
