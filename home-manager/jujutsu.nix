@@ -48,6 +48,7 @@
         js = "jj show";
       };
       functions = {
+        fish_vcs_prompt = "fish_jj_prompt $argv; or fish_git_prompt $argv; or fish_hg_prompt $argv";
         # https://github.com/fish-shell/fish-shell/blob/master/share/functions/fish_jj_prompt.fish
         fish_jj_prompt = ''
           set -l info "$(jj log \
