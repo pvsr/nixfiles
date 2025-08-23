@@ -89,6 +89,11 @@
             position = "anywhere";
             expansion = "--log-format internal-json -v 2&| nom --json";
           };
+          ".c/" = {
+            position = "anywhere";
+            setCursor = true;
+            expansion = "$XDG_CONFIG_HOME/%";
+          };
         };
       };
 
