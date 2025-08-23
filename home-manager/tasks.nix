@@ -19,7 +19,7 @@
 
         [storage local]
         type = "filesystem"
-        path = "~/.calendars/"
+        path = "~/.local/share/calendars/"
         fileext = ".ics"
 
         [storage peterrice_xyz]
@@ -30,7 +30,7 @@
       '';
 
       xdg.configFile."todoman/config.py".text = ''
-        path = "~/.calendars/*"
+        path = "~/.local/share/calendars/*"
         default_list = "work"
         default_due = 0
         humanize = True
