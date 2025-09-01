@@ -113,10 +113,6 @@
         mode_on_change = "restore";
         show = "multiple";
         indicator.width = 0;
-        "padding['bottom']" = 4;
-        "padding['left']" = 3;
-        "padding['right']" = 3;
-        "padding['top']" = 4;
       };
 
       url.open_base_url = true;
@@ -133,7 +129,9 @@
       };
     };
 
-    # TODO move to nix
-    extraConfig = builtins.readFile ./colors.py;
+    extraConfig =
+      ''c.tabs.padding = { "bottom": 4, "left": 3, "right": 3, "top": 4 }''
+      # TODO move to nix
+      + builtins.readFile ./colors.py;
   };
 }
