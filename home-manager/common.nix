@@ -35,7 +35,18 @@
           "-terminal-fg"
         ];
         FZF_DEFAULT_OPTIONS = builtins.concatStringsSep " " [
-          "--bind=ctrl-j:accept,ctrl-k:kill-line"
+          "--bind=${
+            builtins.concatStringsSep "," [
+              "ctrl-j:accept"
+              "ctrl-k:kill-line"
+              "alt-j:preview-down"
+              "alt-k:preview-up"
+              "ctrl-f:preview-page-down"
+              "ctrl-b:preview-page-up"
+              "ctrl-d:preview-half-page-down"
+              "ctrl-u:preview-half-page-up"
+            ]
+          }"
           "--cycle"
           "--layout=reverse"
         ];
