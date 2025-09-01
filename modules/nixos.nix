@@ -67,10 +67,18 @@
 
       virtualisation =
         let
+          username = config.local.user.name;
+          userCfg = config.users.users.${username};
           variant = {
             nixpkgs.hostPlatform = "x86_64-linux";
             services.tailscale.enable = false;
-            users.users.${config.local.user.name}.password = "";
+            users.users.root.hashedPasswordFile = lib.mkForce null;
+            users.users.${username}.password = "";
+            users.users.${username}.hashedPasswordFile = lib.mkForce null;
+            # https://github.com/NixOS/nixpkgs/issues/6481
+            systemd.tmpfiles.rules = [
+              "d ${userCfg.home} ${userCfg.homeMode} ${userCfg.name} ${userCfg.group}"
+            ];
             virtualisation = {
               cores = 3;
               memorySize = 1024 * 3;

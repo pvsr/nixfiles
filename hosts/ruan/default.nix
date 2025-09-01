@@ -87,7 +87,9 @@
                   target = "/media/leiston/btrbk_backups/ruan/nixos";
                   subvolume = {
                     home = { };
-                    root = { };
+                    persist = { };
+                    nix = { };
+                    tmp_root = { };
                   };
                 };
               };
@@ -109,19 +111,22 @@
       system.stateVersion = "24.05";
       services.postgresql.package = pkgs.postgresql_16;
 
-      local.impermanence = {
+      local.persistence = {
         enable = true;
-        device = "/dev/disk/by-label/nixos";
-        persist = "/media/nixos/persist";
+        rootDevice = "/dev/disk/by-label/nixos";
+      };
+      environment.persistence.nixos = {
+        hideMounts = true;
+        persistentStoragePath = "/media/nixos/persist";
         directories = [
           "/var/lib/komga"
           "/var/lib/postgresql"
           "/var/lib/private/radicale"
         ];
       };
-      environment.persistence."/media/data/persist" = {
+      environment.persistence.data = {
         hideMounts = true;
-        directories = [ "/var/lib/transmission" ];
+        persistentStoragePath = "/media/data/persist";
       };
     };
 }

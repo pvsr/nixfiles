@@ -1,10 +1,13 @@
 {
   flake.modules.nixos.jurai.fileSystems."/media/nixos".neededForBoot = true;
 
-  flake.modules.nixos.jurai.local.impermanence = {
+  flake.modules.nixos.jurai.local.persistence = {
     enable = true;
-    device = "/dev/disk/by-partlabel/disk-root-root";
-    persist = "/media/nixos/persist";
+    rootDevice = "/dev/disk/by-partlabel/disk-root-root";
+  };
+  flake.modules.nixos.jurai.environment.persistence.nixos = {
+    hideMounts = true;
+    persistentStoragePath = "/media/nixos/persist";
   };
 
   flake.modules.nixos.jurai.disko.devices.disk.root = {

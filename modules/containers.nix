@@ -11,7 +11,7 @@
       options.local.containers = lib.mkOption { default = { }; };
       config = lib.mkIf (config.local.containers != { }) {
         boot.enableContainers = true;
-        local.impermanence.directories = [ "/var/lib/nixos-containers" ];
+        environment.persistence.nixos.directories = [ "/var/lib/nixos-containers" ];
         containers = builtins.mapAttrs (_: module: {
           autoStart = true;
           config.imports = [

@@ -35,6 +35,8 @@
           rpc-whitelist-enabled = false;
         };
       };
+
+      environment.persistence.data.directories = [ "/var/lib/transmission" ];
     };
 
   flake.modules.homeManager.desktop.programs.fish.shellAbbrs.trr =

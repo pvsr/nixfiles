@@ -25,7 +25,7 @@ in
     in
     {
       local.caddy-gateway.internalProxies."grafana.peterrice.xyz" = "localhost:10508";
-      local.impermanence.directories = [
+      environment.persistence.nixos.directories = [
         "/var/lib/grafana"
         "/var/lib/private/victoriametrics"
       ];

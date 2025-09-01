@@ -3,61 +3,39 @@
   flake.modules.nixos.core =
     { config, lib, ... }:
     let
-      cfg = config.local.impermanence;
+      cfg = config.local.persistence;
       username = config.local.user.name;
-      userCfg = config.users.users.${username};
+      enable = cfg.enable && !config.boot.isContainer;
+      persistCfg = config.environment.persistence;
+      persistDir = persistCfg.nixos.persistentStoragePath;
     in
     {
       imports = [
         inputs.impermanence.nixosModules.impermanence
       ];
 
-      options.local.impermanence = {
+      options.local.persistence = {
         enable = lib.mkEnableOption { };
-        device = lib.mkOption { };
-        persist = lib.mkOption { };
-        directories = lib.mkOption {
-          type = lib.types.listOf lib.types.str;
-          default = [ ];
+        rootDevice = lib.mkOption {
+          type = lib.types.path;
         };
       };
 
-      config = lib.mkIf (cfg.enable && !config.boot.isContainer) {
-        users.mutableUsers = false;
-        users.users.root.hashedPasswordFile = "${cfg.persist}/passwords/root";
-        users.users.${username}.hashedPasswordFile = "${cfg.persist}/passwords/${username}";
+      config = {
+        users = lib.mkIf enable {
+          mutableUsers = false;
+          users.root.hashedPasswordFile = "${persistDir}/passwords/root";
+          users.${username}.hashedPasswordFile = "${persistDir}/passwords/${username}";
+        };
 
-        virtualisation =
-          let
-            variant = {
-              users.users.root.hashedPasswordFile = lib.mkForce null;
-              users.users.${username}.hashedPasswordFile = lib.mkForce null;
-
-              # https://github.com/NixOS/nixpkgs/issues/6481
-              systemd.tmpfiles.rules = [
-                "d ${userCfg.home} ${userCfg.homeMode} ${userCfg.name} ${userCfg.group}"
-              ];
-
-            };
-          in
-          {
-            vmVariant = variant;
-            vmVariantWithDisko = variant;
-          };
-
-        age.identityPaths = [ "${cfg.persist}/etc/ssh/ssh_host_ed25519_key" ];
-
-        environment.persistence.${cfg.persist} = {
-          hideMounts = true;
+        environment.persistence.nixos = {
+          inherit enable;
           directories = [
+            "/etc/nixos"
             "/var/log"
-            "/var/lib/bluetooth"
-            "/var/lib/machines"
             "/var/lib/nixos"
             "/var/lib/systemd"
-            "/var/lib/tailscale"
-            "/etc/nixos"
-          ] ++ cfg.directories;
+          ];
           files = [
             "/etc/machine-id"
             "/etc/ssh/ssh_host_ed25519_key"
@@ -67,7 +45,7 @@
           ];
         };
 
-        boot.initrd.systemd.services.init-root = {
+        boot.initrd.systemd.services.init-root = lib.mkIf enable {
           wantedBy = [ "initrd.target" ];
           after = [ "initrd-root-device.target" ];
           before = [ "create-needed-for-boot-dirs.service" ];
@@ -79,7 +57,7 @@
             Type = "oneshot";
           };
           script = ''
-            mount --mkdir ${cfg.device} /mnt
+            mount --mkdir ${cfg.rootDevice} /mnt
 
             delete_subvolume_recursively() {
                 IFS=$'\n'

@@ -13,6 +13,6 @@
       67
     ];
 
-    local.impermanence.directories = [ "/var/lib/incus" ];
+    environment.persistence.nixos.directories = [ "/var/lib/incus" ];
   };
 }
