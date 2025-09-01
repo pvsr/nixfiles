@@ -29,17 +29,6 @@
       boot.loader.systemd-boot.editor = false;
       boot.loader.efi.canTouchEfiVariables = true;
 
-      networking.nameservers = [
-        "1.1.1.1"
-        "1.0.0.1"
-      ];
-      networking.useDHCP = lib.mkDefault true;
-
-      console.keyMap = "us";
-      i18n.defaultLocale = "en_US.UTF-8";
-
-      time.timeZone = "America/New_York";
-
       hardware.enableRedistributableFirmware = true;
       nixpkgs.config.allowUnfree = true;
 

@@ -20,14 +20,6 @@
 
       virtualisation.rosetta.enable = onMacos;
 
-      networking.nameservers = [
-        "1.1.1.1"
-        "1.0.0.1"
-      ];
-
-      time.timeZone = "America/New_York";
-      i18n.defaultLocale = "en_US.UTF-8";
-
       services.spice-vdagentd.enable = true;
       networking.firewall.enable = false;
 

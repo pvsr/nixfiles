@@ -25,6 +25,12 @@
         ghostty.terminfo
       ];
 
+      time.timeZone = lib.mkDefault "America/New_York";
+      networking.nameservers = [
+        "1.1.1.1"
+        "1.0.0.1"
+      ];
+
       security.sudo.wheelNeedsPassword = false;
 
       system.rebuild.enableNg = true;
