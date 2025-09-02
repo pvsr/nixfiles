@@ -119,5 +119,9 @@
           "/var/lib/private/radicale"
         ];
       };
+      environment.persistence."/media/data/persist" = {
+        hideMounts = true;
+        directories = [ "/var/lib/transmission" ];
+      };
     };
 }
