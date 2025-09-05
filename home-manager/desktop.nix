@@ -33,7 +33,6 @@
       programs.tealdeer.enable = true;
       programs.password-store.enable = true;
       programs.jq.enable = true;
-      programs.zoxide.enable = true;
 
       programs.mpv.enable = true;
       programs.mpv = {

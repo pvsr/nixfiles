@@ -57,5 +57,6 @@
       home.shellAliases.bell = "echo \\a";
 
       programs.bottom.enable = true;
+      programs.zoxide.enable = true;
     };
 }
