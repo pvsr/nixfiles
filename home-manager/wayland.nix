@@ -21,6 +21,7 @@
         package = pkgs.vanilla-dmz;
         name = "Vanilla-DMZ";
         gtk.enable = true;
+        dotIcons.enable = false;
       };
 
       programs = {
