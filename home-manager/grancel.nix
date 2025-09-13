@@ -1,10 +1,10 @@
 { self, ... }:
 {
   flake.modules.homeManager.grancel =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       imports = [
-        self.modules.homeManager.nixos
+        self.modules.homeManager.desktop
         self.modules.homeManager.firefox
       ];
 
@@ -16,6 +16,16 @@
         })
         sptlrx
       ];
+
+      programs.password-store.enable = true;
+      programs.gpg.enable = true;
+      programs.gpg.homedir = "${config.xdg.dataHome}/gnupg";
+      services.gpg-agent = {
+        enable = true;
+        defaultCacheTtl = 3 * 60 * 60;
+        maxCacheTtl = 8 * 60 * 60;
+        pinentry.package = pkgs.pinentry-curses;
+      };
 
       services.spotifyd = {
         enable = true;

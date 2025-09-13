@@ -4,7 +4,7 @@
     { pkgs, ... }:
     {
       imports = [
-        self.modules.homeManager.nixos
+        self.modules.homeManager.desktop
         self.modules.homeManager.firefox
       ];
     };

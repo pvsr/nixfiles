@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.homeManager.jurai.imports = [ self.modules.homeManager.nixos ];
+  flake.modules.homeManager.jurai.imports = [ self.modules.homeManager.desktop ];
 
   local.homeConfigurations.jurai = self.modules.homeManager.macbook;
   flake.modules.homeManager.macbook =
