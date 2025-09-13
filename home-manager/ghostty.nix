@@ -30,6 +30,7 @@
             "ctrl+m=text:\\r"
             "alt+f4=unbind"
             "ctrl+shift+q=unbind"
+            "ctrl+shift+w=unbind"
             "ctrl+enter=unbind"
             "alt+1=unbind"
             "alt+2=unbind"
