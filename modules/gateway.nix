@@ -12,6 +12,8 @@
         internalProxies = lib.mkOption { default = { }; };
       };
 
+      config.environment.persistence.nixos.directories = [ "/var/lib/caddy" ];
+
       config.services.caddy = {
         enable = true;
         package = pkgs.caddy.withPlugins {
