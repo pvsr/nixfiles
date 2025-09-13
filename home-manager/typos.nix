@@ -11,5 +11,6 @@
         hsow = "show";
         conifg = "config";
         eanble = "enable";
+        udpate = "update";
       };
 }
