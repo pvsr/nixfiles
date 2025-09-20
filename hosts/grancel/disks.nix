@@ -27,6 +27,24 @@
               mountOptions = [ "umask=0077" ];
             };
           };
+          data = {
+            size = "300G";
+            content = {
+              type = "btrfs";
+              mountpoint = "/run/media/data";
+              mountOptions = [
+                "defaults"
+                "compress=zstd"
+              ];
+              subvolumes = {
+                "/swap" = {
+                  mountpoint = "/var/lib/swap";
+                  swap.swapfile.size = "64G";
+                };
+                "/steam" = { };
+              };
+            };
+          };
           nix = {
             size = "100%";
             content = {
