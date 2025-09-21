@@ -76,7 +76,6 @@ in
             };
             repository = {
               PREFERRED_LICENSES = "MIT,GPL-3.0-or-later,AGPL-3.0-or-later";
-              DISABLE_HTTP_GIT = true;
               ENABLE_PUSH_CREATE_USER = true;
               DEFAULT_PUSH_CREATE_PRIVATE = false;
               DISABLED_REPO_UNITS = "repo.issues,repo.ext_issues,repo.pulls,repo.wiki,repo.ext_wiki,repo.projects,repo.packages,repo.actions";
