@@ -11,8 +11,6 @@
           command = "fish";
           font-family = config.local.appFont;
           font-size = lib.mkDefault 15;
-          # TODO only on niri
-          window-decoration = !pkgs.stdenv.isLinux;
           cursor-style-blink = false;
           shell-integration-features = "no-cursor";
           mouse-hide-while-typing = true;
