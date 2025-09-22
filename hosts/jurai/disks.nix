@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.jurai.fileSystems."/media/nixos".neededForBoot = true;
+  flake.modules.nixos.jurai.fileSystems."/run/media/persist".neededForBoot = true;
 
   flake.modules.nixos.jurai.local.persistence = {
     enable = true;
@@ -7,7 +7,7 @@
   };
   flake.modules.nixos.jurai.environment.persistence.nixos = {
     hideMounts = true;
-    persistentStoragePath = "/media/nixos/persist";
+    persistentStoragePath = "/run/media/persist";
   };
 
   flake.modules.nixos.jurai.disko.devices.disk.root = {
@@ -31,17 +31,19 @@
           content = {
             type = "btrfs";
             subvolumes = {
-              "/" = {
-                mountpoint = "/media/nixos";
-                mountOptions = [ "compress=zstd" ];
-              };
               "/tmp_root" = {
                 mountpoint = "/";
-                mountOptions = [ "compress=zstd" ];
+                mountOptions = [
+                  "defaults"
+                  "compress=zstd"
+                ];
               };
               "/home" = {
                 mountpoint = "/home";
-                mountOptions = [ "compress=zstd" ];
+                mountOptions = [
+                  "defaults"
+                  "compress=zstd"
+                ];
               };
               "/nix" = {
                 mountpoint = "/nix";
@@ -54,7 +56,13 @@
                 mountpoint = "/var/lib/swap";
                 swap.swapfile.size = "8G";
               };
-              "/persist" = { };
+              "/persist" = {
+                mountpoint = "/run/media/persist";
+                mountOptions = [
+                  "defaults"
+                  "compress=zstd"
+                ];
+              };
             };
           };
         };

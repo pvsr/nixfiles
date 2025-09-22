@@ -17,7 +17,7 @@
       boot.kernelModules = [ ];
       boot.extraModulePackages = [ ];
 
-      fileSystems."/media/host" = lib.mkIf onMacos {
+      fileSystems."/run/media/host" = lib.mkIf onMacos {
         device = "share";
         fsType = "virtiofs";
       };

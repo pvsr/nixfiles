@@ -83,8 +83,8 @@
               target_preserve = "7d 3w";
               snapshot_dir = "btrbk_snapshots";
               volume = {
-                "/media/nixos" = {
-                  target = "/media/leiston/btrbk_backups/ruan/nixos";
+                "/run/media/nixos" = {
+                  target = "/run/media/leiston/btrbk_backups/ruan/nixos";
                   subvolume = {
                     home = { };
                     persist = { };
@@ -117,7 +117,7 @@
       };
       environment.persistence.nixos = {
         hideMounts = true;
-        persistentStoragePath = "/media/nixos/persist";
+        persistentStoragePath = "/run/media/persist";
         directories = [
           "/var/lib/komga"
           "/var/lib/postgresql"
@@ -126,7 +126,7 @@
       };
       environment.persistence.data = {
         hideMounts = true;
-        persistentStoragePath = "/media/data/persist";
+        persistentStoragePath = "/run/media/data/persist";
       };
     };
 }

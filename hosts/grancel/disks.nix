@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.grancel.fileSystems."/media/valleria" = {
+  flake.modules.nixos.grancel.fileSystems."/run/media/valleria" = {
     device = "/dev/disk/by-label/valleria";
     fsType = "bcachefs";
     options = [
@@ -72,7 +72,7 @@
             size = "100%";
             content = {
               type = "btrfs";
-              mountpoint = "/media/gdata2";
+              mountpoint = "/run/media/gdata2";
               mountOptions = [
                 "nofail"
                 "defaults"
