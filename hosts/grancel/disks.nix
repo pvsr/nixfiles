@@ -31,17 +31,18 @@
             size = "300G";
             content = {
               type = "btrfs";
-              mountpoint = "/run/media/data";
-              mountOptions = [
-                "defaults"
-                "compress=zstd"
-              ];
               subvolumes = {
                 "/swap" = {
                   mountpoint = "/var/lib/swap";
                   swap.swapfile.size = "64G";
                 };
-                "/steam" = { };
+                "/steam" = {
+                  mountpoint = "/run/media/grancel-steam";
+                  mountOptions = [
+                    "defaults"
+                    "compress=zstd"
+                  ];
+                };
               };
             };
           };
