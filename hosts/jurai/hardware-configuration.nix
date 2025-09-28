@@ -12,6 +12,8 @@
     {
       imports = [ "${modulesPath}/profiles/qemu-guest.nix" ];
 
+      nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
+
       boot.initrd.availableKernelModules = [ "xhci_pci" ];
       boot.initrd.kernelModules = [ ];
       boot.kernelModules = [ ];

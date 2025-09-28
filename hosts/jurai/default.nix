@@ -1,8 +1,6 @@
 { inputs, ... }:
 {
-  local.hosts.jurai = {
-    system = "aarch64-linux";
-  };
+  local.hosts.jurai = { };
 
   flake.modules.nixos.jurai =
     { lib, pkgs, ... }:

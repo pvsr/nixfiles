@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ lib, inputs, ... }:
 {
   flake.modules.nixos.ruan = {
     imports = [
@@ -6,6 +6,8 @@
       inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
       inputs.nixos-hardware.nixosModules.common-gpu-amd
     ];
+
+    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
     boot.initrd.availableKernelModules = [
       "xhci_pci"

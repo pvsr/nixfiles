@@ -1,6 +1,6 @@
 { inputs, config, ... }:
 let
-  hosts = config.flake.nixosConfigurations;
+  hosts = config.local.hosts;
 in
 {
   flake.modules.nixos.machine =
@@ -30,12 +30,11 @@ in
         inherit (cfg) autoStart;
         privateNetwork = true;
         hostAddress = "192.168.100.100";
-        localAddress = "192.168.100.${toString host.config.local.id}";
+        localAddress = "192.168.100.${toString host.nixos.config.local.id}";
         hostAddress6 = "fc00::100";
-        localAddress6 = "fc00::${toString host.config.local.id}";
-        config.imports = [
+        localAddress6 = "fc00::${toString host.nixos.config.local.id}";
+        config.imports = host.modules ++ [
           inputs.self.modules.nixos.machine
-          inputs.self.modules.nixos.${hostname}
           { inherit options; }
           {
             disabledModules = [ { inherit key; } ];

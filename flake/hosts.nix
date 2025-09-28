@@ -1,31 +1,22 @@
+{ inputs, config, ... }:
+let
+  inherit (inputs.nixpkgs) lib;
+  hostOptions = lib.types.submodule (
+    { name, config, ... }:
+    {
+      options.modules = lib.mkOption {
+        default = [
+          { networking.hostName = name; }
+          inputs.self.modules.nixos.core
+          inputs.self.modules.nixos.${name}
+          { local.home.imports = [ inputs.self.modules.homeManager.${name} or { } ]; }
+        ];
+      };
+      options.nixos = lib.mkOption { default = lib.nixosSystem { inherit (config) modules; }; };
+    }
+  );
+in
 {
-  self,
-  inputs,
-  config,
-  lib,
-  withSystem,
-  ...
-}:
-{
-  options.local.hosts = lib.mkOption {
-    type = lib.types.attrsOf (
-      lib.types.submodule {
-        options.system = lib.mkOption { default = "x86_64-linux"; };
-      }
-    );
-  };
-
-  config.flake.modules.nixos = builtins.mapAttrs (name: config: {
-    imports = [ self.modules.nixos.core ];
-    networking.hostName = name;
-    nixpkgs.system = config.system;
-    nixpkgs.overlays = withSystem config.system ({ pkgs, ... }: pkgs.overlays);
-    local.home.imports = [
-      (self.modules.homeManager.${name} or { })
-    ];
-  }) config.local.hosts;
-
-  config.flake.nixosConfigurations = builtins.mapAttrs (
-    name: _: inputs.nixpkgs.lib.nixosSystem { modules = [ self.modules.nixos.${name} ]; }
-  ) config.local.hosts;
+  options.local.hosts = lib.mkOption { type = lib.types.attrsOf hostOptions; };
+  config.flake.nixosConfigurations = builtins.mapAttrs (_: host: host.nixos) config.local.hosts;
 }

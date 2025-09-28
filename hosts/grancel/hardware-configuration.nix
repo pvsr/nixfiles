@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ lib, inputs, ... }:
 {
   flake.modules.nixos.grancel =
     { pkgs, ... }:
@@ -8,6 +8,8 @@
         inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
         inputs.nixos-hardware.nixosModules.common-gpu-amd
       ];
+
+      nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
       hardware.enableRedistributableFirmware = true;
       hardware.amdgpu.initrd.enable = true;
