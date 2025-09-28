@@ -5,7 +5,6 @@
     let
       cfg = config.local.persistence;
       username = config.local.user.name;
-      enable = cfg.enable && !config.boot.isContainer;
       persistCfg = config.environment.persistence;
       persistDir = persistCfg.nixos.persistentStoragePath;
     in
@@ -22,14 +21,14 @@
       };
 
       config = {
-        users = lib.mkIf enable {
+        users = lib.mkIf cfg.enable {
           mutableUsers = false;
           users.root.hashedPasswordFile = "${persistDir}/passwords/root";
           users.${username}.hashedPasswordFile = "${persistDir}/passwords/${username}";
         };
 
         environment.persistence.nixos = {
-          inherit enable;
+          inherit (cfg) enable;
           directories = [
             "/etc/nixos"
             "/var/log"
@@ -45,7 +44,7 @@
           ];
         };
 
-        boot.initrd.systemd.services.init-root = lib.mkIf enable {
+        boot.initrd.systemd.services.init-root = lib.mkIf cfg.enable {
           wantedBy = [ "initrd.target" ];
           after = [ "initrd-root-device.target" ];
           before = [ "create-needed-for-boot-dirs.service" ];
