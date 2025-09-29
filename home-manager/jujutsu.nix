@@ -40,6 +40,13 @@
             ),
           )
         '';
+        template-aliases."in_branch(commit)" = "commit.contained_in(\"immutable_heads()..bookmarks()\")";
+        templates.log_node = ''
+          if(self && !current_working_copy && !immutable && !conflict && in_branch(self),
+            "◇",
+            builtin_log_node
+          )
+        '';
       };
     };
     fish = {
