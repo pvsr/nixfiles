@@ -28,7 +28,7 @@
             };
           };
           data = {
-            size = "300G";
+            size = "1G";
             content = {
               type = "btrfs";
               subvolumes = {
