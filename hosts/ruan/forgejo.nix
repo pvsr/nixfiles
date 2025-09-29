@@ -3,6 +3,10 @@ let
   hosts = config.flake.nixosConfigurations;
 in
 {
+  flake.modules.nixos.core.networking.hosts.${hosts.ruan.config.local.tailscale.ip} = [
+    "code.pvsr.dev"
+  ];
+
   flake.modules.nixos.ruan =
     {
       config,
