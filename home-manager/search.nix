@@ -104,7 +104,8 @@ in
           google.metaData.hidden = true;
           ddg.metaData.hidden = true;
           wikipedia.metaData.alias = "w";
-        } // builtins.mapAttrs (n: v: { inherit updateInterval; } // v) (mkEngines pkgs "{searchTerms}");
+        }
+        // builtins.mapAttrs (n: v: { inherit updateInterval; } // v) (mkEngines pkgs "{searchTerms}");
       };
     };
 
@@ -122,6 +123,7 @@ in
         a = "https://wiki.archlinux.org/?search={}";
         ap = "https://archlinux.org/packages/?q={}";
         aur = "https://aur.archlinux.org/packages.php?K={}";
-      } // qbEngines;
+      }
+      // qbEngines;
     };
 }

@@ -21,13 +21,12 @@ in
       environment.systemPackages = [ config.services.headscale.package ];
 
       # override setting from srvos
-      programs.vim =
-        {
-          defaultEditor = false;
-        }
-        // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.11") {
-          enable = false;
-        };
+      programs.vim = {
+        defaultEditor = false;
+      }
+      // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.11") {
+        enable = false;
+      };
 
       local.caddy-gateway = {
         virtualHosts = {
