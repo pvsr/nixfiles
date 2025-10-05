@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   hosts = config.flake.nixosConfigurations;
 in
@@ -8,42 +8,25 @@ in
   ];
 
   flake.modules.nixos.ruan =
+    { config, pkgs, ... }:
     {
-      config,
-      pkgs,
-      lib,
-      ...
-    }:
-    let
-      waitForTailscale = lib.mkIf config.services.tailscale.enable {
+      systemd.services."container@forgejo" = lib.mkIf config.services.tailscale.enable {
         after = [ "tailscaled.service" ];
         wants = [ "tailscaled.service" ];
       };
-    in
-    {
-      networking.firewall.allowedTCPPorts = [
-        40091
-        32230
-      ];
 
-      local.caddy-gateway.internalProxies."code.pvsr.dev" = "code.ts.peterrice.xyz";
+      local.containers.forgejo.bindMounts."/run/forgejo" = {
+        hostPath = "/run/forgejo";
+        isReadOnly = false;
+      };
+      local.caddy-gateway.internalProxies."code.pvsr.dev" = "unix//run/forgejo/forgejo.sock";
 
-      systemd.services."container@forgejo" = waitForTailscale;
+      networking.firewall.allowedTCPPorts = [ 32230 ];
 
-      local.containers.forgejo = {
+      local.containers.forgejo.config = {
         environment = {
           systemPackages = [ pkgs.forgejo ];
           sessionVariables.FORGEJO_WORK_DIR = "/var/lib/forgejo";
-        };
-
-        services.tsnsrv = {
-          enable = true;
-          services.code = {
-            upstreamUnixAddr = "/run/forgejo/forgejo.sock";
-            toURL = "http://code.pvsr.dev";
-            plaintext = true;
-            listenAddr = ":80";
-          };
         };
 
         services.forgejo = {
@@ -55,7 +38,6 @@ in
               HTTP_ADDR = "/run/forgejo/forgejo.sock";
               DOMAIN = "code.pvsr.dev";
               ROOT_URL = "https://code.pvsr.dev";
-              HTTP_PORT = 80;
               START_SSH_SERVER = true;
               SSH_DOMAIN = "ruan.ts.peterrice.xyz";
               SSH_PORT = 32230;
@@ -94,7 +76,6 @@ in
             oauth2.ENABLED = false;
             security = {
               INSTALL_LOCK = true;
-              REVERSE_PROXY_TRUSTED_PROXIES = builtins.concatStringsSep "," hosts.crossbell.config.services.headscale.settings.ip_prefixes;
               LOGIN_REMEMBER_DAYS = 365;
             };
             api.ENABLE_SWAGGER = false;
