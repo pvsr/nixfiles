@@ -27,8 +27,7 @@
 
       time.timeZone = lib.mkDefault "America/New_York";
       networking.nameservers = [
-        "1.1.1.1"
-        "1.0.0.1"
+        "185.71.138.138"
       ];
 
       security.sudo.wheelNeedsPassword = false;

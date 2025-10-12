@@ -35,7 +35,7 @@
               reverse_proxy ${dest}
               tls {
                 dns cloudflare {env.DNS_API_TOKEN}
-                resolvers 1.1.1.1 1.0.0.1
+                resolvers 185.71.138.138
               }
             '';
           }) cfg.internalProxies;

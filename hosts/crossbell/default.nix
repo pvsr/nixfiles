@@ -65,10 +65,8 @@ in
           dns.base_domain = "ts.peterrice.xyz";
           dns.magic_dns = true;
           dns.nameservers.global = [
-            "1.1.1.1"
-            "1.0.0.1"
-            "2606:4700:4700::1111"
-            "2606:4700:4700::1001"
+            "185.71.138.138"
+            "2001:67c:930::1"
           ];
           dns.override_local_dns = true;
           dns.extra_records = [
