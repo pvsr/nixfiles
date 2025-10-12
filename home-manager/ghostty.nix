@@ -7,7 +7,7 @@
         enable = true;
         enableFishIntegration = false;
         settings = {
-          theme = "srcery";
+          theme = "Srcery";
           command = "fish";
           font-family = config.local.appFont;
           font-size = lib.mkDefault 15;
