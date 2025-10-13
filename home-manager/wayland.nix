@@ -4,14 +4,12 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        xwayland
         imv
         xdg-utils
         wl-clipboard
         libnotify
         dmenu-wayland
         swaylock
-        pamixer
         playerctl
         pulsemixer
         rofimoji
