@@ -4,7 +4,7 @@
     { config, pkgs, ... }:
     {
       age.secrets."transmission-credentials.json" = {
-        file = ../modules/hosts/ruan/secrets/transmission-credentials.json.age;
+        file = ../hosts/ruan/secrets/transmission-credentials.json.age;
         owner = "transmission";
         group = "transmission";
       };

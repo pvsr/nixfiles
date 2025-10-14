@@ -5,7 +5,7 @@
       local.endpoints.rss.public = "rss.peterrice.xyz";
 
       age.secrets."miniflux-credentials" = {
-        file = ../modules/hosts/ruan/secrets/miniflux-credentials.age;
+        file = ../hosts/ruan/secrets/miniflux-credentials.age;
       };
 
       services.miniflux = {
