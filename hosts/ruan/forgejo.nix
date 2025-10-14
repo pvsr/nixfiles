@@ -15,6 +15,7 @@ in
         wants = [ "tailscaled.service" ];
       };
 
+      systemd.tmpfiles.rules = [ "d /run/forgejo 0755 root root -" ];
       local.containers.forgejo.bindMounts."/run/forgejo" = {
         hostPath = "/run/forgejo";
         isReadOnly = false;
