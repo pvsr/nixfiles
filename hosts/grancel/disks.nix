@@ -5,8 +5,6 @@
     options = [
       "nofail"
       "defaults"
-      "compression=lz4"
-      "background=compression=lz4"
     ];
   };
 
@@ -52,11 +50,6 @@
               type = "filesystem";
               format = "bcachefs";
               mountpoint = "/";
-              mountOptions = [
-                "defaults"
-                "compression=lz4"
-                "background=compression=lz4"
-              ];
             };
           };
         };
