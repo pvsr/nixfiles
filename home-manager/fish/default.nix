@@ -105,5 +105,7 @@
           version = inputs.fish-prompt-pvsr.shortRev;
         })
       ];
+
+      xdg.configFile."fish/themes/magenta.theme".source = ./magenta.theme;
     };
 }
