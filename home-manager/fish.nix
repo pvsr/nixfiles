@@ -100,18 +100,10 @@
       home.packages = with pkgs.fishPlugins; [
         plugin-git
         (buildFishPlugin {
-          pname = "fzf-fish";
-          src = inputs.fzf-fish;
-          version = inputs.fzf-fish.shortRev;
-        })
-        (buildFishPlugin {
           pname = "fish-prompt-pvsr";
           src = inputs.fish-prompt-pvsr;
           version = inputs.fish-prompt-pvsr.shortRev;
         })
       ];
-
-      # prefer fzf-fish plugin
-      programs.fzf.enableFishIntegration = false;
     };
 }
