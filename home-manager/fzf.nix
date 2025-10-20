@@ -31,6 +31,7 @@
           ]
         }"
         "--cycle"
+        "--color=16"
         "--layout=reverse"
       ];
     };
