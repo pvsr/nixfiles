@@ -73,29 +73,27 @@
           wraps = "jj show";
           body = ''
             set recent (jj log --no-graph \
-              -r 'ancestors(immutable_heads(), 8) & ~description("flake.lock")' \
-              -T 'separate("\n", separate(" ",
-                format_timestamp(commit_timestamp(self)),
-                format_short_commit_id(self.commit_id())
-              ), self.description())' \
+              -r 'ancestors(immutable_heads(), 12) & ~description("flake.lock")' \
+              -T 'separate("\n",
+               format_short_commit_id(self.commit_id()),
+               self.description())' \
             | string collect)
-            PAGER=cat jj show $argv[1]
-            jj show $argv[1] | llm -s "Write a one-line commit message for \
-            these changes. It should be under 50 characters. If a terse \
-            description does not fit in 50 characters you may continue to write \
+            jj show --no-pager --context 12 $argv[1] >&2
+            jj show --no-pager --context 12 $argv[1] |\
+            llm -s "Write a one-line commit message for these changes. It \
+            should be under 50 characters. If 50 characters is not enough to \
+            express the main point of the changes you may continue to write \
             one or more paragraphs describing the changes, which should be \
-            wrapped at 80 characters. It should match the style of these recent \
-            commit messages in the same repository:
+            wrapped at 80 characters.
+
+            It should match the style of these recent commit messages in the \
+            same repository, which are each prefixed by a hexadecimal commit \
+            id and a newline:
             $recent
 
-            Include the commit message and nothing else, fenced in triple \
-            backticks like so:
-            ```
-            commit message, less than 50 characters
-
-            optional commit description
-            ```
-            "
+            Write the commit message with no commentary, as if the output \
+            were going straight into the commit
+            " | tee /dev/tty | jj desc --stdin --editor $argv[1]
           '';
         };
       };
