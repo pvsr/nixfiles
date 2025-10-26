@@ -32,7 +32,7 @@ in
         virtualHosts = {
           "pvsr.dev" = {
             extraConfig = ''
-              root * /srv
+              root * /srv/pvsr.dev
               file_server
             '';
           };
