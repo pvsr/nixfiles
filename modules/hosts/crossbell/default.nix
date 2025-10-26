@@ -37,6 +37,7 @@
           '';
         };
         reverseProxies = {
+          "knot.pvsr.dev" = "localhost:5555";
           "rss.peterrice.xyz" = "ruan.ygg.pvsr.dev:21304";
           "comics.peterrice.xyz" = "ruan.ygg.pvsr.dev:19191";
           "weather.peterrice.xyz" = "ruan.ygg.pvsr.dev:15658";
