@@ -10,39 +10,43 @@
         source = "${pkgs.restic.out}/bin/restic";
         owner = "restic";
         group = "users";
-        permissions = "u=rwx,g=,o=";
+        permissions = "u=rx,g=rx,o=";
         capabilities = "cap_dac_read_search=+ep";
       };
 
       services.restic.backups = {
         system = {
-          passwordFile = "/run/media/restic/password";
-          repository = "/run/media/restic";
           user = "restic";
           package = pkgs.writeShellScriptBin "restic" ''
             exec /run/wrappers/bin/restic "$@"
           '';
+          createWrapper = true;
           initialize = true;
+          repository = "/run/media/restic";
+          passwordFile = "/run/media/restic/password";
           paths = [
+            "/home/peter"
             "/var/lib"
-            "/home/peter/src"
-            "/home/peter/notes"
-            "/home/peter/games"
-            "/home/peter/.local"
-            "/home/peter/.mozilla"
+          ];
+          extraBackupArgs = [
+            "--one-file-system"
+            "--exclude-caches=true"
           ];
           exclude = [
-            "/var/log"
-            "/var/lib/nixos-containers"
-            "/home/*/.local/share/cargo"
+            "/var/lib/systemd/coredump"
+            "/var/lib/nixos-containers/*/var/log"
+            "/home/*/.local/cache"
             "/home/*/.local/share/doc"
-            "/home/*/.local/share/uv"
           ];
           timerConfig = {
             Persistent = true;
-            OnCalendar = "daily";
-            FixedRandomDelay = true;
+            OnCalendar = "07:00";
           };
+          pruneOpts = [
+            "--keep-daily 5"
+            "--keep-weekly 3"
+            "--keep-monthly 2"
+          ];
         };
       };
     };

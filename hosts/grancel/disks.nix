@@ -34,6 +34,13 @@
                   mountpoint = "/var/lib/swap";
                   swap.swapfile.size = "64G";
                 };
+                "/restic" = {
+                  mountpoint = "/run/media/restic";
+                  mountOptions = [
+                    "defaults"
+                    "compress=zstd"
+                  ];
+                };
                 "/steam" = {
                   mountpoint = "/run/media/grancel-steam";
                   mountOptions = [
