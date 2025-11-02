@@ -36,14 +36,6 @@
           __git.init
         '';
         functions = {
-          yts = {
-            wraps = "mpv";
-            body = "mpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
-          };
-          uts = {
-            wraps = "mpv";
-            body = "umpv 'ytdl://ytsearch1:'$argv[1] $argv[2..-1]";
-          };
           session = ''
             if set -q argv[1]
               set -gx fish_history $argv[1]
@@ -75,8 +67,6 @@
           "gcpn!" = "git commit -p --no-edit --amend";
           gcpm = "git commit -p -m";
           gan = "git annex";
-          mshuf = "mpv --no-video --shuffle ~/annex/music";
-          pmpv = "umpv (wl-paste)";
           ls = "eza";
           l = "eza -l";
           ll = "eza -l";
