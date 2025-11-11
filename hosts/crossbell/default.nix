@@ -30,13 +30,8 @@ in
 
       local.caddy-gateway = {
         virtualHosts = {
-          "pvsr.dev" = {
-            extraConfig = ''
-              root * /srv/pvsr.dev
-              file_server
-            '';
-          };
-          "peterrice.xyz".extraConfig = "redir https://pvsr.dev";
+          "www.peterrice.xyz".extraConfig = "redir https://pvsr.dev";
+          "www.pvsr.dev".extraConfig = "redir https://pvsr.dev";
           "podcasts.peterrice.xyz".extraConfig = ''
             reverse_proxy ruan.ts.peterrice.xyz:5999 {
               flush_interval -1
