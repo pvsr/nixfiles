@@ -19,7 +19,7 @@
           buildInputs = [ pkgs.makeWrapper ];
           postBuild = "wrapProgram $out/bin/timg --add-flags '-pk'";
         })
-        inputs.qbpm.packages.${pkgs.system}.qbpm
+        inputs.qbpm.packages.${pkgs.stdenv.hostPlatform.system}.qbpm
       ];
 
       programs.direnv = {
