@@ -6,12 +6,12 @@
 
       home.packages = with pkgs; [
         fd
-        moar
+        moor
         nvd
         nil
         nix-output-monitor
         duf
-        du-dust
+        dust
         (ranger.override {
           imagePreviewSupport = false;
           sixelPreviewSupport = false;
@@ -19,8 +19,8 @@
       ];
 
       home.sessionVariables = {
-        PAGER = "${pkgs.moar}/bin/moar";
-        MOAR = builtins.concatStringsSep " " [
+        PAGER = "${pkgs.moor}/bin/moor";
+        MOOR = builtins.concatStringsSep " " [
           "-quit-if-one-screen"
           "-statusbar=bold"
           "-no-statusbar"

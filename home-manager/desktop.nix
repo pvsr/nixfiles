@@ -4,7 +4,7 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        gitAndTools.git-annex
+        git-annex
         moreutils
         ouch
         tig

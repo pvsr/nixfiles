@@ -7,7 +7,7 @@
         dejavu_fonts
         noto-fonts
         noto-fonts-cjk-sans
-        noto-fonts-emoji
+        noto-fonts-color-emoji
         libertinus
         sarasa-gothic
         font-awesome

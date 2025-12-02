@@ -7,9 +7,9 @@
       ".direnv"
       "result*"
     ];
-    userName = "Peter Rice";
-    userEmail = lib.mkDefault "peterrice@fastmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "Peter Rice";
+      user.email = lib.mkDefault "peterrice@fastmail.com";
       init.defaultBranch = "main";
       commit.verbose = true;
       interactive.singleKey = true;

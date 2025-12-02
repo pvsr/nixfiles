@@ -20,7 +20,7 @@
         iputils
         lsof
         psmisc
-        utillinux
+        util-linux
 
         openssh
         which
