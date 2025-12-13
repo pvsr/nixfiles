@@ -39,6 +39,7 @@ in
           {
             disabledModules = [ { inherit key; } ];
             networking.hostName = lib.mkForce "${hostname}-c";
+            local.ip = "::";
           }
         ];
       };

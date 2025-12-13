@@ -1,7 +1,4 @@
-{ inputs, config, ... }:
-let
-  hosts = config.flake.nixosConfigurations;
-in
+{ inputs, ... }:
 {
   local.hosts.crossbell = { };
 
@@ -9,6 +6,7 @@ in
     { config, lib, ... }:
     {
       imports = [
+        inputs.self.modules.nixos.gateway
         inputs.srvos.nixosModules.server
         inputs.srvos.nixosModules.hardware-vultr-vm
       ];

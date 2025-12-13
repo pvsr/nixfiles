@@ -93,7 +93,7 @@
       services.openssh = {
         enable = true;
         startWhenNeeded = true;
-        listenAddresses = [ { addr = "[::1]"; } ];
+        listenAddresses = [ { addr = "[${config.local.ip}]"; } ];
       };
     };
 }
