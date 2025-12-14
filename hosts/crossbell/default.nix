@@ -9,7 +9,7 @@ in
     { config, lib, ... }:
     {
       imports = [
-        inputs.self.modules.nixos.server
+        inputs.srvos.nixosModules.server
         inputs.srvos.nixosModules.hardware-vultr-vm
       ];
 
@@ -28,7 +28,7 @@ in
         enable = false;
       };
 
-      local.caddy-gateway = {
+      local.caddy = {
         virtualHosts = {
           "www.peterrice.xyz".extraConfig = "redir https://pvsr.dev";
           "www.pvsr.dev".extraConfig = "redir https://pvsr.dev";

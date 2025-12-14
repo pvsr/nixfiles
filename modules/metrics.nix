@@ -29,7 +29,7 @@ in
         );
     in
     {
-      local.caddy-gateway.internalProxies."grafana.peterrice.xyz" = "localhost:10508";
+      local.caddy.internalProxies."grafana.peterrice.xyz" = "localhost:10508";
       environment.persistence.nixos.directories = [
         "/var/lib/grafana"
         "/var/lib/private/victoriametrics"
@@ -42,7 +42,7 @@ in
             {
               job_name = "caddy";
               static_configs = [
-                { targets = mkTargets (host: host.config.local ? caddy-gateway) "40013"; }
+                { targets = mkTargets (host: host.config.local ? caddy) "40013"; }
               ];
             }
             {

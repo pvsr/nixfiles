@@ -20,7 +20,7 @@ in
         hostPath = "/run/forgejo";
         isReadOnly = false;
       };
-      local.caddy-gateway.internalProxies."code.pvsr.dev" = "unix//run/forgejo/forgejo.sock";
+      local.caddy.internalProxies."code.pvsr.dev" = "unix//run/forgejo/forgejo.sock";
 
       networking.firewall.allowedTCPPorts = [ 32230 ];
 

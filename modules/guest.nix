@@ -16,7 +16,7 @@ let
 in
 {
   flake.modules.nixos.crossbell = {
-    local.caddy-gateway.reverseProxies."griffin.pvsr.dev" = "ruan.ts.peterrice.xyz:12548";
+    local.caddy.reverseProxies."griffin.pvsr.dev" = "ruan.ts.peterrice.xyz:12548";
     networking.nftables.tables.griffin = {
       family = "ip";
       content = forward12262 hosts.ruan.config.local.tailscale.ip 12262;
@@ -25,7 +25,7 @@ in
   };
 
   flake.modules.nixos.ruan = {
-    local.caddy-gateway.reverseProxies.":12548" = guest;
+    local.caddy.reverseProxies.":12548" = guest;
     networking.nftables.tables.griffin = {
       family = "ip";
       content = forward12262 guest 22;

@@ -18,7 +18,6 @@
     {
       imports = [
         inputs.self.modules.nixos.desktop
-        inputs.self.modules.nixos.gateway
         inputs.weather.nixosModules.default
         inputs.podcasts.nixosModules.default
       ];
