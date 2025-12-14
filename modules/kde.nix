@@ -16,8 +16,6 @@
         khelpcenter
         baloo-widgets
         krdp
-        xwaylandvideobridge
       ];
-
     };
 }
