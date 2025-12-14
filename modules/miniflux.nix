@@ -8,11 +8,9 @@
 
       services.miniflux = {
         enable = true;
-        config.LISTEN_ADDR = "${config.local.tailscale.ip}:8080";
+        config.LISTEN_ADDR = "[::]:21304";
         adminCredentialsFile = config.age.secrets."miniflux-credentials".path;
       };
-      systemd.services.miniflux.after = [ "tailscaled.service" ];
-      systemd.services.miniflux.wants = [ "tailscaled.service" ];
-      networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 8080 ];
+      networking.firewall.interfaces.ygg0.allowedTCPPorts = [ 21304 ];
     };
 }

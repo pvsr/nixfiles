@@ -48,7 +48,7 @@
           80
           443
         ];
-        networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 40013 ];
+        networking.firewall.interfaces.ygg0.allowedTCPPorts = [ 40013 ];
       };
     };
 }

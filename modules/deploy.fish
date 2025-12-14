@@ -18,9 +18,9 @@ end
 
 if set -q argv[1]
     set host $argv[1]
-    set args --target-host $host.ts.peterrice.xyz
+    set args --target-host $host.ygg.pvsr.dev
     if set -q _flag_remote
-        set -a args --build-host $host.ts.peterrice.xyz
+        set -a args --build-host $host.ygg.pvsr.dev
     end
 else
     set host (hostname)

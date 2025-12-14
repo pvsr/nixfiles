@@ -9,12 +9,6 @@
       pkgs,
       ...
     }:
-    let
-      waitForTailscale = lib.mkIf config.services.tailscale.enable {
-        after = [ "tailscaled.service" ];
-        wants = [ "tailscaled.service" ];
-      };
-    in
     {
       imports = [
         inputs.self.modules.nixos.desktop
@@ -42,7 +36,7 @@
       services = {
         radicale.enable = true;
         radicale.settings = {
-          server.hosts = [ "${config.local.tailscale.ip}:52032" ];
+          server.hosts = [ "[::]:52032" ];
           auth = {
             type = "htpasswd";
             htpasswd_filename = config.age.secrets."radicale-users".path;
@@ -51,13 +45,10 @@
         };
 
         weather.enable = true;
-        weather.bind = "${config.local.tailscale.ip}:15658";
+        weather.bind = "[::]:15658";
 
-        komga = {
-          enable = true;
-          openFirewall = true;
-          settings.server.port = 19191;
-        };
+        komga.enable = true;
+        komga.settings.server.port = 19191;
 
         btrbk = {
           sshAccess = [
@@ -97,13 +88,11 @@
         };
       };
 
-      systemd.services.radicale = waitForTailscale;
-      systemd.services.weather = waitForTailscale;
-
       systemd.services.caddy.serviceConfig.EnvironmentFile = config.age.secrets."dns-token".path;
 
-      networking.firewall.allowedTCPPorts = [
+      networking.firewall.interfaces.ygg0.allowedTCPPorts = [
         15658 # weather
+        19191 # komga
         52032 # radicale
       ];
 

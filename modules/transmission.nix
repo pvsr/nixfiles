@@ -30,8 +30,8 @@
           peer-port-random-low = 65150;
           peer-port-random-high = 65160;
           rpc-port = 9919;
-          rpc-host-whitelist = "ruan,ruan.ts.peterrice.xyz";
-          rpc-bind-address = config.local.tailscale.ip;
+          rpc-host-whitelist = "ruan,ruan.ygg.pvsr.dev";
+          rpc-bind-address = config.local.ip;
           rpc-whitelist-enabled = false;
         };
       };
@@ -40,5 +40,5 @@
     };
 
   flake.modules.homeManager.desktop.programs.fish.shellAbbrs.trr =
-    "transmission-remote ruan.ts.peterrice.xyz:9919";
+    "transmission-remote ruan.ygg.pvsr.dev:9919";
 }

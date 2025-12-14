@@ -31,16 +31,16 @@
           "www.peterrice.xyz".extraConfig = "redir https://pvsr.dev";
           "www.pvsr.dev".extraConfig = "redir https://pvsr.dev";
           "podcasts.peterrice.xyz".extraConfig = ''
-            reverse_proxy ruan.ts.peterrice.xyz:5999 {
+            reverse_proxy ruan.ygg.pvsr.dev:5999 {
               flush_interval -1
             }
           '';
         };
         reverseProxies = {
-          "rss.peterrice.xyz" = "ruan.ts.peterrice.xyz:8080";
-          "comics.peterrice.xyz" = "ruan.ts.peterrice.xyz:19191";
-          "weather.peterrice.xyz" = "ruan.ts.peterrice.xyz:15658";
-          "calendar.peterrice.xyz" = "ruan.ts.peterrice.xyz:52032";
+          "rss.peterrice.xyz" = "ruan.ygg.pvsr.dev:21304";
+          "comics.peterrice.xyz" = "ruan.ygg.pvsr.dev:19191";
+          "weather.peterrice.xyz" = "ruan.ygg.pvsr.dev:15658";
+          "calendar.peterrice.xyz" = "ruan.ygg.pvsr.dev:52032";
           "tailscale.peterrice.xyz" = "localhost:9753";
         };
       };

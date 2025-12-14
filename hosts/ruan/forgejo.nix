@@ -1,20 +1,15 @@
-{ config, lib, ... }:
+{ config, ... }:
 let
   hosts = config.flake.nixosConfigurations;
 in
 {
-  flake.modules.nixos.core.networking.hosts.${hosts.ruan.config.local.tailscale.ip} = [
+  flake.modules.nixos.core.networking.hosts.${hosts.ruan.config.local.ip} = [
     "code.pvsr.dev"
   ];
 
   flake.modules.nixos.ruan =
     { config, pkgs, ... }:
     {
-      systemd.services."container@forgejo" = lib.mkIf config.services.tailscale.enable {
-        after = [ "tailscaled.service" ];
-        wants = [ "tailscaled.service" ];
-      };
-
       systemd.tmpfiles.rules = [ "d /run/forgejo 0755 root root -" ];
       local.containers.forgejo.bindMounts."/run/forgejo" = {
         hostPath = "/run/forgejo";
@@ -40,9 +35,9 @@ in
               DOMAIN = "code.pvsr.dev";
               ROOT_URL = "https://code.pvsr.dev";
               START_SSH_SERVER = true;
-              SSH_DOMAIN = "ruan.ts.peterrice.xyz";
+              SSH_DOMAIN = "ruan.ygg.pvsr.dev";
               SSH_PORT = 32230;
-              SSH_LISTEN_HOST = config.local.tailscale.ip;
+              SSH_LISTEN_HOST = config.local.ip;
               SSH_LISTEN_PORT = 32230;
               BUILTIN_SSH_SERVER_USER = "git";
             };
