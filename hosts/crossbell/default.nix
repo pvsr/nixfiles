@@ -64,13 +64,6 @@ in
             "2001:67c:930::1"
           ];
           dns.override_local_dns = true;
-          dns.extra_records = [
-            {
-              name = "grafana.peterrice.xyz";
-              type = "A";
-              value = hosts.ruan.config.local.tailscale.ip;
-            }
-          ];
           policy.path = builtins.toFile "acl.json" (
             builtins.toJSON {
               acls = [
