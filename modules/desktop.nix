@@ -4,6 +4,7 @@
     { pkgs, ... }:
     {
       imports = [
+        inputs.self.modules.nixos.yggdrasil-client
         inputs.srvos.nixosModules.desktop
       ];
 

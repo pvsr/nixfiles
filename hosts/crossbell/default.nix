@@ -6,7 +6,7 @@
     { config, lib, ... }:
     {
       imports = [
-        inputs.self.modules.nixos.gateway
+        inputs.self.modules.nixos.yggdrasil-gateway
         inputs.srvos.nixosModules.server
         inputs.srvos.nixosModules.hardware-vultr-vm
       ];
