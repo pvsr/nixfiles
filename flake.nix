@@ -26,9 +26,6 @@
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
     niri.inputs.nixpkgs-stable.follows = "nixpkgs";
-    tsnsrv.url = "github:boinkor-net/tsnsrv";
-    tsnsrv.inputs.nixpkgs.follows = "nixpkgs";
-    tsnsrv.inputs.flake-parts.follows = "flake-parts";
 
     qbpm.url = "github:pvsr/qbpm";
     qbpm.inputs.nixpkgs.follows = "nixpkgs";

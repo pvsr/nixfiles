@@ -11,7 +11,6 @@ in
         inputs.nixos-hardware.nixosModules.common-gpu-amd
       ];
       networking.useHostResolvConf = false;
-      services.tailscale.enable = false;
       # TODO get agenix working in containers for real?
       age.identityPaths = lib.mkDefault [ "/etc/ssh/ssh_host_ed25519_key" ];
     };

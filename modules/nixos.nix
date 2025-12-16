@@ -68,7 +68,6 @@
           userCfg = config.users.users.${username};
           variant = {
             nixpkgs.hostPlatform = "x86_64-linux";
-            services.tailscale.enable = false;
             users.users.root.hashedPasswordFile = lib.mkForce null;
             users.users.${username} = {
               password = "";

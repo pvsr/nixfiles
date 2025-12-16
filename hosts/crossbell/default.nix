@@ -41,55 +41,15 @@
           "comics.peterrice.xyz" = "ruan.ygg.pvsr.dev:19191";
           "weather.peterrice.xyz" = "ruan.ygg.pvsr.dev:15658";
           "calendar.peterrice.xyz" = "ruan.ygg.pvsr.dev:52032";
-          "tailscale.peterrice.xyz" = "localhost:9753";
         };
       };
 
-      services = {
-        headscale.enable = config.services.tailscale.enable;
-        headscale.address = "127.0.0.1";
-        headscale.port = 9753;
-        headscale.settings = {
-          ip_prefixes = [
-            "100.64.0.0/10"
-            "fd28:b7:d8::/48"
-          ];
-          server_url = "https://tailscale.peterrice.xyz";
-          dns.base_domain = "ts.peterrice.xyz";
-          dns.magic_dns = true;
-          dns.nameservers.global = [
-            "185.71.138.138"
-            "2001:67c:930::1"
-          ];
-          dns.override_local_dns = true;
-          policy.path = builtins.toFile "acl.json" (
-            builtins.toJSON {
-              acls = [
-                {
-                  action = "accept";
-                  src = [ "*" ];
-                  dst = [ "*:*" ];
-                }
-              ];
-              ssh = [
-                {
-                  action = "accept";
-                  src = [ "${config.local.user.name}@" ];
-                  dst = [ "*" ];
-                  users = [ config.local.user.name ];
-                }
-              ];
-            }
-          );
-        };
-
-        openssh.listenAddresses = [
-          {
-            addr = "0.0.0.0";
-            port = 18325;
-          }
-        ];
-      };
+      services.openssh.listenAddresses = [
+        {
+          addr = "0.0.0.0";
+          port = 18325;
+        }
+      ];
 
       networking.firewall.allowedTCPPorts = [ 18325 ];
 

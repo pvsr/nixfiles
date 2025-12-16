@@ -559,7 +559,6 @@
         "srcery-textmate": "srcery-textmate",
         "srcery-tmux": "srcery-tmux",
         "srvos": "srvos",
-        "tsnsrv": "tsnsrv",
         "weather": "weather"
       }
     },
@@ -673,29 +672,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "tsnsrv": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1759265704,
-        "narHash": "sha256-b0d0lfERd3+N/K0oq4YsX2pSMGh5HX5D6ocehEoJjeU=",
-        "owner": "boinkor-net",
-        "repo": "tsnsrv",
-        "rev": "a4e47c178e0bdd4da72fad6f0dd2dea6b89d2d25",
-        "type": "github"
-      },
-      "original": {
-        "owner": "boinkor-net",
-        "repo": "tsnsrv",
         "type": "github"
       }
     },
