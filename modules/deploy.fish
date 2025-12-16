@@ -4,7 +4,7 @@ or return
 
 if test -e ./flake.nix
     set flake .
-else if test -e /etc/nixos
+else if test -e /etc/nixos/flake.nix
     set flake /etc/nixos
 else
     set flake git+ssh://grancel:/etc/nixos/
