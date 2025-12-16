@@ -23,8 +23,13 @@ in
   flake.modules.nixos.core =
     { config, ... }:
     {
-      options.local.ip = lib.mkOption {
-        default = hosts."${config.networking.hostName}".address;
+      options.local = {
+        ip = lib.mkOption {
+          default = hosts."${config.networking.hostName}".address;
+        };
+        prefix = lib.mkOption {
+          default = "3${builtins.substring 1 17 hosts."${config.networking.hostName}".address}";
+        };
       };
 
       config.networking = {
