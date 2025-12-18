@@ -14,6 +14,7 @@ in
       };
 
       environment.persistence.nixos.files = [ keyPath ];
+      networking.firewall.interfaces.ygg0.allowedTCPPorts = [ 22 ];
     };
 
   flake.modules.nixos.yggdrasil-client = {

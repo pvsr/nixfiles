@@ -31,18 +31,6 @@ in
           default = "3${builtins.substring 1 17 hosts."${config.networking.hostName}".address}";
         };
       };
-
-      config.networking = {
-        hosts = lib.mapAttrs' (
-          hostname:
-          { address, ... }:
-          {
-            name = address;
-            value = [ "${hostname}.ygg.pvsr.dev" ];
-          }
-        ) hosts;
-        firewall.interfaces.ygg0.allowedTCPPorts = [ 22 ];
-      };
     };
 
   flake.modules.nixos.yggdrasil-gateway.services.yggdrasil.settings.AllowedPublicKeys =
