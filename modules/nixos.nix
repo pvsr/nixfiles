@@ -91,8 +91,11 @@
 
       services.openssh = {
         enable = true;
+        openFirewall = false;
         startWhenNeeded = true;
-        listenAddresses = [ { addr = "[${config.local.ip}]"; } ];
+        listenAddresses = [ { addr = "[::]"; } ];
       };
+      networking.firewall.interfaces.enp8s0.allowedTCPPorts = [ 22 ];
+      networking.firewall.interfaces.enp37s0.allowedTCPPorts = [ 22 ];
     };
 }

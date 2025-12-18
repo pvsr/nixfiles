@@ -21,8 +21,6 @@
       services.spice-vdagentd.enable = true;
       networking.firewall.enable = false;
 
-      services.openssh.listenAddresses = [ { addr = "0.0.0.0"; } ];
-
       system.stateVersion = "24.11";
     };
 }
