@@ -2,6 +2,8 @@
 {
   local.hosts.ruan = { };
 
+  flake.modules.hjem.ruan.niri.extraConfig = ''output "HDMI-A-3" { scale 2.0; }'';
+
   flake.modules.nixos.ruan =
     {
       config,
@@ -14,6 +16,11 @@
         inputs.self.modules.nixos.desktop
         inputs.weather.nixosModules.default
         inputs.podcasts.nixosModules.default
+      ];
+
+      hjem.extraModules = [
+        inputs.self.modules.hjem.desktop
+        inputs.self.modules.hjem.firefox
       ];
 
       programs.steam.enable = true;

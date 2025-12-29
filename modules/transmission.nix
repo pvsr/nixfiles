@@ -39,6 +39,7 @@
       environment.persistence.data.directories = [ "/var/lib/transmission" ];
     };
 
-  flake.modules.homeManager.desktop.programs.fish.shellAbbrs.trr =
-    "transmission-remote ruan.ygg.pvsr.dev:9919";
+  flake.modules.hjem.desktop.fish.interactiveShellInit = ''
+    abbr -a trr 'transmission-remote ruan.ygg.pvsr.dev:9919'
+  '';
 }

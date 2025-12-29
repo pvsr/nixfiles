@@ -3,13 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    hjem.url = "github:feel-co/hjem";
+    hjem.inputs.nixpkgs.follows = "nixpkgs";
+    hjem.inputs.nix-darwin.follows = "nix-darwin";
     impermanence.url = "github:nix-community/impermanence";
     impermanence.inputs.nixpkgs.follows = "nixpkgs";
-    impermanence.inputs.home-manager.follows = "home-manager";
+    impermanence.inputs.home-manager.follows = "";
     nixos-hardware.url = "github:nixos/nixos-hardware";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -17,13 +18,13 @@
     srvos.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.url = "github:nix-community/nix-on-droid";
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
-    nix-on-droid.inputs.home-manager.follows = "home-manager";
+    nix-on-droid.inputs.home-manager.follows = "";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
-    agenix.inputs.home-manager.follows = "home-manager";
+    agenix.inputs.home-manager.follows = "";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
     pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -54,7 +55,6 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = map import-tree [
         ./flake
-        ./home-manager
         ./hosts
         ./modules
       ];

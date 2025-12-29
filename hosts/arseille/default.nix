@@ -9,11 +9,7 @@
           inputs.nix-on-droid.overlays.default
         ];
       };
-      home-manager-path = inputs.home-manager.outPath;
-      modules = [
-        inputs.self.modules.nixOnDroid.arseille
-        { home-manager.config = inputs.self.modules.homeManager.arseille; }
-      ];
+      modules = [ inputs.self.modules.nixOnDroid.arseille ];
     }
   );
 }

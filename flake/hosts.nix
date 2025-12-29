@@ -9,7 +9,7 @@ let
           { networking.hostName = name; }
           inputs.self.modules.nixos.core
           inputs.self.modules.nixos.${name}
-          { local.home.imports = [ inputs.self.modules.homeManager.${name} or { } ]; }
+          { hjem.extraModules = [ inputs.self.modules.hjem.${name} or { } ]; }
         ];
       };
       options.nixos = lib.mkOption { default = lib.nixosSystem { inherit (config) modules; }; };
