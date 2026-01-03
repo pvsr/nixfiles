@@ -36,8 +36,6 @@
     weather.inputs.nixpkgs.follows = "nixpkgs";
     weather.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
 
-    srcery-tmux.url = "github:srcery-colors/srcery-tmux";
-    srcery-tmux.flake = false;
     srcery-textmate.url = "github:srcery-colors/srcery-textmate";
     srcery-textmate.flake = false;
 

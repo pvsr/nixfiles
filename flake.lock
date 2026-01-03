@@ -557,7 +557,6 @@
         "pre-commit-hooks": "pre-commit-hooks",
         "qbpm": "qbpm",
         "srcery-textmate": "srcery-textmate",
-        "srcery-tmux": "srcery-tmux",
         "srvos": "srvos",
         "weather": "weather"
       }
@@ -591,22 +590,6 @@
       "original": {
         "owner": "srcery-colors",
         "repo": "srcery-textmate",
-        "type": "github"
-      }
-    },
-    "srcery-tmux": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1601134224,
-        "narHash": "sha256-1umBoB8pv/N6QZlS7uQedTwuCWab/JGKHcEyNrPpPEE=",
-        "owner": "srcery-colors",
-        "repo": "srcery-tmux",
-        "rev": "531b4f9a260826b0a99ebd038a0d275ad0275e64",
-        "type": "github"
-      },
-      "original": {
-        "owner": "srcery-colors",
-        "repo": "srcery-tmux",
         "type": "github"
       }
     },
