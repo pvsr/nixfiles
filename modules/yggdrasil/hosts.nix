@@ -6,12 +6,12 @@ let
       publicKey = "57b537da177b2e04b83d0cc66e48b30dba54bbcd6d5f3188c84d7728700045c1";
     };
     ruan = {
-      address = "200:dd90:24b:7a11:4a77:edd9:b7f0:747";
+      address = "200:dd90:024b:7a11:4a77:edd9:b7f0:0747";
       publicKey = "9137feda42f75ac409132407fc5c01cca29daaa843db1a28d05c8cd07f357d46";
     };
     crossbell = {
-      address = "200:b270:40a1:984:2710:a9c7:b346:4b83";
-      publicKey = "a6c7dfaf7b3dec77ab1c265cda3e05410db6375fb7bc1ef89d6c6008ce5ef493";
+      address = "200:e0f5:cdcb:2377:b79c:951c:0047:71cd";
+      publicKey = "8f85191a6e442431b571ffdc4719200f94206246521835c3399f3cb2c09636e9";
     };
     jurai = {
       address = "202:7e31:de1a:ebed:efc:c07c:f6f2:abc3";
