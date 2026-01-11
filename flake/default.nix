@@ -22,8 +22,8 @@
       devShells.default = pkgs.mkShell {
         inputsFrom = [ config.pre-commit.devShell ];
         packages = [
+          pkgs.nixfmt
           pkgs.nixfmt-tree
-          pkgs.nixfmt-rfc-style
           inputs'.agenix.packages.agenix
         ];
       };

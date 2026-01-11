@@ -47,7 +47,7 @@
         boot.initrd.systemd.services.init-root = lib.mkIf cfg.enable {
           wantedBy = [ "initrd.target" ];
           after = [ "initrd-root-device.target" ];
-          before = [ "create-needed-for-boot-dirs.service" ];
+          before = [ "sysroot.mount" ];
           description = "Create Fresh Root Subvolume";
           unitConfig = {
             DefaultDependencies = false;
