@@ -1,23 +1,18 @@
 let
   peerPort = 33933;
   multicastPort = 48147;
+  keyPath = "/etc/yggdrasil/private.pem";
 in
 {
   flake.modules.nixos.core =
     { config, lib, ... }:
     {
       services.yggdrasil = {
-        settings = {
-          IfName = "ygg0";
-          PrivateKeyPath = "/private-key";
-        };
+        settings.IfName = "ygg0";
+        settings.PrivateKeyPath = keyPath;
       };
 
-      environment.persistence.nixos.files = [ "/etc/yggdrasil/private.key" ];
-      systemd.services.yggdrasil.serviceConfig = lib.mkIf config.services.yggdrasil.enable {
-        LoadCredential = "private-key:/etc/yggdrasil/private.key";
-        BindReadOnlyPaths = "%d/private-key:/private-key";
-      };
+      environment.persistence.nixos.files = [ keyPath ];
     };
 
   flake.modules.nixos.yggdrasil-client = {
