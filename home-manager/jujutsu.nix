@@ -8,7 +8,6 @@
           name = "Peter Rice";
           email = lib.mkDefault "peterrice@fastmail.com";
         };
-        git.auto-local-bookmark = true;
         ui.default-command = "log";
         ui.diff-formatter = ":git";
         templates.draft_commit_description = ''
@@ -27,7 +26,7 @@
             concat("(",
               self.parents().map(|parent| parent.change_id().shortest()).join("/"),
               " -> ",
-              format_short_change_id_with_hidden_and_divergent_info(self),
+              format_short_change_id_with_change_offset(self),
               ")",
             ),
             bookmarks,
