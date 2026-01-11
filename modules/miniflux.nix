@@ -3,7 +3,7 @@
     { config, ... }:
     {
       age.secrets."miniflux-credentials" = {
-        file = ../hosts/ruan/secrets/miniflux-credentials.age;
+        file = ../modules/hosts/ruan/secrets/miniflux-credentials.age;
       };
 
       services.miniflux = {
