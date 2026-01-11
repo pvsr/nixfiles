@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   flake.modules.nixos.desktop = {
     services.displayManager.ly.enable = true;
@@ -10,6 +10,7 @@
     xdg.icons.enable = true;
     xdg.mime.enable = true;
     xdg.sounds.enable = true;
+    xdg.autostart.enable = lib.mkForce false;
 
     console.colors =
       with config.local.colors;
