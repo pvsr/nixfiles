@@ -18,6 +18,14 @@ let
         )
       )
     '';
+    aliases.tug = [
+      "bookmark"
+      "move"
+      "--from"
+      "heads(::@- & bookmarks())"
+      "--to"
+      "heads(::@ ~ empty())"
+    ];
     template-aliases.shell_prompt = ''
       separate(" ",
         concat("(",
