@@ -8,6 +8,7 @@ in
     { config, lib, ... }:
     {
       services.yggdrasil = {
+        enable = !config.boot.isContainer;
         settings.IfName = "ygg0";
         settings.PrivateKeyPath = keyPath;
       };
@@ -17,7 +18,6 @@ in
 
   flake.modules.nixos.yggdrasil-client = {
     services.yggdrasil = {
-      enable = true;
       openMulticastPort = true;
       settings = {
         Peers = [ "tls://internal.pvsr.dev:${toString peerPort}" ];
@@ -33,7 +33,6 @@ in
   };
 
   flake.modules.nixos.yggdrasil-gateway = {
-    services.yggdrasil.enable = true;
     services.yggdrasil.settings.Listen = [ "tls://[::]:${toString peerPort}" ];
     networking.firewall.allowedTCPPorts = [ peerPort ];
   };
