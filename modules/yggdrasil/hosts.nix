@@ -17,6 +17,7 @@ let
       address = "202:7e31:de1a:ebed:efc:c07c:f6f2:abc3";
       publicKey = "3039c43ca2825e2067f06121aa878fa25d5c0e3a1a7f74ed56afec67e4798e55";
     };
+    arseille.publicKey = "9e01e6718db245dfe61d8afdff062a9fd4bd06dbee16cbeb0803610c1b53bba0";
   };
 in
 {
