@@ -36,6 +36,8 @@ in
           .envrc
           .direnv
           result*
+          *.qcow2
+          *.fd
         '';
       };
 
