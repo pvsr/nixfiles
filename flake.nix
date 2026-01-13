@@ -25,8 +25,6 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.home-manager.follows = "";
-    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
-    pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
 
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
@@ -36,10 +34,10 @@
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
     podcasts.url = "github:pvsr/podcasts";
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
-    podcasts.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
+    podcasts.inputs.pre-commit-hooks.follows = "";
     weather.url = "github:pvsr/weather";
     weather.inputs.nixpkgs.follows = "nixpkgs";
-    weather.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
+    weather.inputs.pre-commit-hooks.follows = "";
 
     srcery-textmate.url = "github:srcery-colors/srcery-textmate";
     srcery-textmate.flake = false;
