@@ -8,9 +8,10 @@
       virtualisation.incus.enable = true;
       virtualisation.incus.package = pkgs.incus;
 
-      # TODO declarative setup including:
+      # TODO declarative setup for incus should include:
       # ipv6.address = "${config.local.prefix}/64";
-      # dns.domain = "incus.ygg.pvsr.dev"";"
+      # dns.domain = config.networking.hostName;
+      # raw.dnsmasq = "domain=${config.networking.hostName}.ygg.pvsr.dev";
 
       local.user.extraGroups = [ "incus-admin" ];
 
@@ -36,7 +37,7 @@
         };
         script = ''
           ${pkgs.systemd}/bin/resolvectl dns incusbr0 ${config.local.prefix}::1
-          ${pkgs.systemd}/bin/resolvectl domain incusbr0 '~incus.ygg.pvsr.dev'
+          ${pkgs.systemd}/bin/resolvectl domain incusbr0 '~${config.networking.hostName}.ygg.pvsr.dev'
         '';
         postStop = "${pkgs.systemd}/bin/resolvectl revert incusbr0";
       };

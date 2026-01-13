@@ -22,9 +22,10 @@ end
 
 if set -q argv[1]
     set host $argv[1]
-    set args --target-host $host.ygg.pvsr.dev
+    set host_url (string replace incus (hostname) $host).ygg.pvsr.dev
+    set args --target-host $host_url
     if set -q _flag_remote
-        set -a args --build-host $host.ygg.pvsr.dev
+        set -a args --build-host $host_url
     end
 else
     set host (hostname)

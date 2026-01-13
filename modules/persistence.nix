@@ -4,6 +4,7 @@
     { config, lib, ... }:
     let
       cfg = config.local.persistence;
+      enable = cfg.enable && !config.boot.isContainer;
       username = config.local.user.name;
       persistCfg = config.environment.persistence;
       persistDir = persistCfg.nixos.persistentStoragePath;
@@ -22,19 +23,19 @@
       };
 
       config = {
-        users = lib.mkIf cfg.enable {
+        users = lib.mkIf enable {
           mutableUsers = false;
           users.root.hashedPasswordFile = "${persistDir}/passwords/root";
           users.${username}.hashedPasswordFile = "${persistDir}/passwords/${username}";
         };
 
-        age.identityPaths = lib.mkIf cfg.enable [
+        age.identityPaths = lib.mkIf enable [
           "${sshPath}/ssh_host_rsa_key"
           "${sshPath}/ssh_host_ed25519_key"
         ];
 
         environment.persistence.nixos = {
-          inherit (cfg) enable;
+          inherit enable;
           directories = [
             "/etc/nixos"
             "/var/log"
@@ -50,7 +51,7 @@
           ];
         };
 
-        boot.initrd.systemd.services.init-root = lib.mkIf cfg.enable {
+        boot.initrd.systemd.services.init-root = lib.mkIf enable {
           wantedBy = [ "initrd.target" ];
           after = [ "initrd-root-device.target" ];
           before = [ "sysroot.mount" ];
