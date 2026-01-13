@@ -1,4 +1,3 @@
-#!/usr/bin/env fish
 argparse -n deploy -X 1 c/command= r/revision= R/remote -- $argv
 or return
 
