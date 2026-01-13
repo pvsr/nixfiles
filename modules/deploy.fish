@@ -29,7 +29,7 @@ set -a args --no-reexec --sudo --flake $flake#$host
 set -a args (printf $_flag_command; or printf switch)
 
 if not set -q _flag_remote; and test -d ~/.local/share/nix/gcroots
-    set result (nix build $flake#nixosConfigurations.$host.config.system.build.toplevel \
+    set result (nix build $flake#nixosConfigurations.\"$host\".config.system.build.toplevel \
         --print-out-paths --log-format internal-json --verbose 2>| nom --json)
     test $pipestatus[1] = 0; or return
     nix-store --realise $result --add-root ~/.local/share/nix/gcroots/$host

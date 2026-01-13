@@ -5,7 +5,7 @@ in
 {
   flake.nixosConfigurations = lib.mapAttrs' (
     name: host:
-    lib.nameValuePair "${name}-container" (
+    lib.nameValuePair "${name}.incus" (
       lib.nixosSystem {
         modules = host.modules ++ [
           "${inputs.nixpkgs}/nixos/modules/virtualisation/lxc-container.nix"
