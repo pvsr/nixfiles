@@ -7,6 +7,7 @@ let
     };
     ui.default-command = "log";
     ui.diff-formatter = ":git";
+    ui.diff-editor = ":builtin";
     templates.draft_commit_description = ''
       concat(
         description,
