@@ -16,6 +16,7 @@ in
             fileSystems = lib.mkForce { };
             networking.useHostResolvConf = false;
             networking.firewall.allowedTCPPorts = [ 22 ];
+            local.persistence.enable = lib.mkForce false;
             boot.loader.systemd-boot.enable = lib.mkForce false;
             services.displayManager.ly.enable = lib.mkForce false;
           }

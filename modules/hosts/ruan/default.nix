@@ -120,6 +120,7 @@
         ];
       };
       environment.persistence.data = {
+        enable = config.local.persistence.enable;
         hideMounts = true;
         persistentStoragePath = "/run/media/data/persist";
       };
