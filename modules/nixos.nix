@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake.modules.nixos.core =
     {
@@ -8,7 +9,11 @@
       ...
     }:
     {
-      imports = [ "${modulesPath}/profiles/minimal.nix" ];
+      imports = [
+        "${modulesPath}/profiles/minimal.nix"
+        inputs.agenix.nixosModules.age
+        inputs.disko.nixosModules.disko
+      ];
 
       environment.systemPackages = with pkgs; [
         binutils
@@ -26,15 +31,10 @@
       ];
 
       time.timeZone = lib.mkDefault "America/New_York";
-      networking.nameservers = [
-        "185.71.138.138"
-      ];
 
       security.sudo.wheelNeedsPassword = false;
 
       programs.ssh.startAgent = true;
-
-      networking.nftables.enable = true;
 
       services.fstrim.enable = true;
 
@@ -57,41 +57,5 @@
       security.sudo.execWheelOnly = lib.mkForce false;
 
       services.dbus.implementation = "broker";
-
-      virtualisation =
-        let
-          username = config.local.user.name;
-          userCfg = config.users.users.${username};
-          variant = {
-            nixpkgs.hostPlatform = "x86_64-linux";
-            users.users.root.hashedPasswordFile = lib.mkForce null;
-            users.users.${username} = {
-              password = "";
-              hashedPasswordFile = lib.mkForce null;
-            };
-            # https://github.com/NixOS/nixpkgs/issues/6481
-            systemd.tmpfiles.rules = [
-              "d ${userCfg.home} ${userCfg.homeMode} ${userCfg.name} ${userCfg.group}"
-            ];
-            virtualisation = {
-              cores = 3;
-              memorySize = 1024 * 3;
-              graphics = false;
-            };
-          };
-        in
-        {
-          vmVariant = variant;
-          vmVariantWithDisko = variant;
-        };
-
-      services.openssh = {
-        enable = true;
-        openFirewall = false;
-        startWhenNeeded = true;
-        listenAddresses = [ { addr = "[::]"; } ];
-      };
-      networking.firewall.interfaces.enp8s0.allowedTCPPorts = [ 22 ];
-      networking.firewall.interfaces.enp37s0.allowedTCPPorts = [ 22 ];
     };
 }
