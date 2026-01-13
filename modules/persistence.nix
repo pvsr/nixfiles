@@ -7,6 +7,7 @@
       username = config.local.user.name;
       persistCfg = config.environment.persistence;
       persistDir = persistCfg.nixos.persistentStoragePath;
+      sshPath = config.environment.persistence.nixos.persistentStoragePath + "/etc/ssh";
     in
     {
       imports = [
@@ -26,6 +27,11 @@
           users.root.hashedPasswordFile = "${persistDir}/passwords/root";
           users.${username}.hashedPasswordFile = "${persistDir}/passwords/${username}";
         };
+
+        age.identityPaths = lib.mkIf cfg.enable [
+          "${sshPath}/ssh_host_rsa_key"
+          "${sshPath}/ssh_host_ed25519_key"
+        ];
 
         environment.persistence.nixos = {
           inherit (cfg) enable;
