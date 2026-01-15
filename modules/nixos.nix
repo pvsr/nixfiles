@@ -27,7 +27,6 @@
         psmisc
         rsync
         util-linux
-        ghostty.terminfo
       ];
 
       time.timeZone = lib.mkDefault "America/New_York";

@@ -39,4 +39,10 @@
         keybind = alt+0=unbind
       '';
     };
+
+  flake.modules.nixos.core =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = [ pkgs.ghostty.terminfo ];
+    };
 }
