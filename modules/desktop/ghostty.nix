@@ -45,4 +45,9 @@
     {
       environment.systemPackages = [ pkgs.ghostty.terminfo ];
     };
+  flake.modules.nixos.container =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = [ pkgs.ghostty.terminfo ];
+    };
 }
