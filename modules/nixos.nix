@@ -11,6 +11,7 @@
     {
       imports = [
         "${modulesPath}/profiles/minimal.nix"
+        inputs.self.modules.nixos.base
         inputs.agenix.nixosModules.age
         inputs.disko.nixosModules.disko
       ];

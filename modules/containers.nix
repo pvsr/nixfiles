@@ -4,6 +4,7 @@
     { pkgs, modulesPath, ... }:
     {
       imports = [
+        inputs.self.modules.nixos.base
         inputs.self.modules.nixos.user
         "${modulesPath}/profiles/minimal.nix"
         "${modulesPath}/virtualisation/lxc-container.nix"
@@ -14,9 +15,7 @@
 
       users.defaultUserShell = pkgs.fishMinimal;
       security.sudo.wheelNeedsPassword = false;
-
-      networking.firewall.enable = true;
-      networking.nftables.enable = true;
+      networking.firewall.allowedTCPPorts = [ 22 ];
     };
 
   flake.modules.nixos.host-container =

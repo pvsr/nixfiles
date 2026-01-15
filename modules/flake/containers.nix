@@ -24,6 +24,7 @@ in
         modules = [
           module
           container
+          { networking.hostName = lib.head (lib.splitString "." name); }
         ];
       }
     ) config.local.containers);
