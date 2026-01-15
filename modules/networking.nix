@@ -6,7 +6,6 @@
 
     services.openssh = {
       openFirewall = false;
-      startWhenNeeded = true;
       settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = false;
@@ -19,8 +18,6 @@
     networking.nameservers = [ "94.140.14.14" ];
 
     services.openssh.enable = true;
-    services.openssh.listenAddresses = [ { addr = "[::]"; } ];
-
     networking.firewall.interfaces.enp8s0.allowedTCPPorts = [ 22 ];
     networking.firewall.interfaces.enp37s0.allowedTCPPorts = [ 22 ];
   };

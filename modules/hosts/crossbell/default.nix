@@ -46,8 +46,16 @@
 
       services.openssh.listenAddresses = [
         {
+          addr = "0.0.0.0";
+          port = 18325;
+        }
+        {
           addr = "[::]";
           port = 18325;
+        }
+        {
+          addr = "[${config.local.ip}]";
+          port = 22;
         }
       ];
 
