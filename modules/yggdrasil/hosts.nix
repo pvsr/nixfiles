@@ -26,7 +26,7 @@ in
     {
       options.local = {
         ip = lib.mkOption {
-          default = hosts."${config.networking.hostName}".address;
+          default = hosts.${config.networking.hostName}.address;
         };
         prefix = lib.mkOption {
           default = "3${builtins.substring 1 17 hosts."${config.networking.hostName}".address}";

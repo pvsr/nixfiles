@@ -2,7 +2,7 @@
   flake.modules.nixos.core = {
     networking.nftables.enable = true;
 
-    networking.nameservers = [ "185.71.138.138" ];
+    networking.nameservers = [ "94.140.14.14" ];
 
     services.openssh = {
       enable = true;
