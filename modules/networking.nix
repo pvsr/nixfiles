@@ -9,6 +9,11 @@
       openFirewall = false;
       startWhenNeeded = true;
       listenAddresses = [ { addr = "[::]"; } ];
+      settings = {
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+        AuthenticationMethods = "publickey";
+      };
     };
     networking.firewall.interfaces.enp8s0.allowedTCPPorts = [ 22 ];
     networking.firewall.interfaces.enp37s0.allowedTCPPorts = [ 22 ];
