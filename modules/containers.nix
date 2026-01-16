@@ -3,12 +3,7 @@
   flake.modules.nixos.container =
     { pkgs, modulesPath, ... }:
     {
-      imports = [
-        inputs.self.modules.nixos.base
-        inputs.self.modules.nixos.user
-        "${modulesPath}/profiles/minimal.nix"
-        "${modulesPath}/virtualisation/lxc-container.nix"
-      ];
+      imports = [ "${modulesPath}/virtualisation/lxc-container.nix" ];
 
       nixpkgs.hostPlatform = "x86_64-linux";
       system.stateVersion = "26.05";
@@ -18,7 +13,7 @@
       networking.firewall.allowedTCPPorts = [ 22 ];
     };
 
-  flake.modules.nixos.host-container =
+  flake.modules.nixos.hostContainer =
     { pkgs, modulesPath, ... }:
     {
       imports = [ "${modulesPath}/virtualisation/lxc-container.nix" ];

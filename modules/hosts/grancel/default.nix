@@ -1,12 +1,5 @@
-{ inputs, ... }:
 {
-  local.hosts.grancel = { };
-
-  flake.modules.nixos.grancel = {
-    imports = [
-      inputs.self.modules.nixos.desktop
-    ];
-
+  local.desktops.grancel = {
     programs.steam.enable = true;
 
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

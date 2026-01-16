@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.grancel =
+  local.desktops.grancel =
     { pkgs, ... }:
     {
       programs.gnupg.agent.enable = true;

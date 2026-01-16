@@ -1,7 +1,7 @@
 { self, ... }:
 {
-  flake.modules.nixos.grancel.imports = [ self.modules.nixos.incus ];
-  flake.modules.nixos.ruan.imports = [ self.modules.nixos.incus ];
+  local.desktops.grancel.imports = [ self.modules.nixos.incus ];
+  local.desktops.ruan.imports = [ self.modules.nixos.incus ];
   flake.modules.nixos.incus =
     { config, pkgs, ... }:
     {

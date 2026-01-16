@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.ruan =
+  local.desktops.ruan =
     { config, ... }:
     {
       age.secrets."miniflux-credentials" = {

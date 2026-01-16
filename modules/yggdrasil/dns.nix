@@ -10,7 +10,7 @@ in
     networking.nameservers = lib.mkForce [ hosts.ruan.config.local.ip ];
   };
 
-  flake.modules.nixos.ruan = {
+  local.desktops.ruan = {
     networking.firewall.interfaces.ygg0 = {
       allowedTCPPorts = [ 53 ];
       allowedUDPPorts = [ 53 ];

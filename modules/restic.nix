@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.grancel =
+  local.desktops.grancel =
     { pkgs, ... }:
     {
       users.users.restic = {

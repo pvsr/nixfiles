@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.ruan =
+  local.desktops.ruan =
     { config, ... }:
     {
       networking.firewall.interfaces.ygg0.allowedTCPPorts = [ 5999 ];

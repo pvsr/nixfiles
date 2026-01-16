@@ -1,10 +1,8 @@
 { inputs, ... }:
 {
-  local.hosts.ruan = { };
-
   flake.modules.hjem.ruan.niri.extraConfig = ''output "HDMI-A-3" { scale 2.0; }'';
 
-  flake.modules.nixos.ruan =
+  local.desktops.ruan =
     {
       config,
       lib,
@@ -13,7 +11,6 @@
     }:
     {
       imports = [
-        inputs.self.modules.nixos.desktop
         inputs.weather.nixosModules.default
         inputs.podcasts.nixosModules.default
       ];

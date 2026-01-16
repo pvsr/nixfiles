@@ -1,6 +1,6 @@
 { lib, inputs, ... }:
 {
-  flake.modules.nixos.crossbell = {
+  local.servers.crossbell = {
     imports = [ inputs.nixos-hardware.nixosModules.common-pc-ssd ];
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

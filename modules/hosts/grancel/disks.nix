@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.grancel.fileSystems."/run/media/valleria" = {
+  local.desktops.grancel.fileSystems."/run/media/valleria" = {
     device = "/dev/disk/by-label/valleria";
     fsType = "bcachefs";
     options = [
@@ -8,7 +8,7 @@
     ];
   };
 
-  flake.modules.nixos.grancel.disko.devices.disk = {
+  local.desktops.grancel.disko.devices.disk = {
     grancel = {
       device = "/dev/nvme0n1";
       type = "disk";

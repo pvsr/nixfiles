@@ -1,6 +1,6 @@
 { lib, inputs, ... }:
 {
-  flake.modules.nixos.grancel =
+  local.desktops.grancel =
     { pkgs, ... }:
     {
       imports = [

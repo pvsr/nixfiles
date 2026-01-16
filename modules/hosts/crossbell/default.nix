@@ -1,15 +1,9 @@
 { inputs, ... }:
 {
-  local.hosts.crossbell = { };
-
-  flake.modules.nixos.crossbell =
+  local.servers.crossbell =
     { config, lib, ... }:
     {
-      imports = [
-        inputs.self.modules.nixos.yggdrasil-gateway
-        inputs.srvos.nixosModules.server
-        inputs.srvos.nixosModules.hardware-vultr-vm
-      ];
+      imports = [ inputs.srvos.nixosModules.hardware-vultr-vm ];
 
       time.timeZone = "America/New_York";
 

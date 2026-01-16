@@ -1,21 +1,7 @@
-{ inputs, ... }:
 {
   flake.modules.nixos.core =
+    { lib, pkgs, ... }:
     {
-      config,
-      lib,
-      pkgs,
-      modulesPath,
-      ...
-    }:
-    {
-      imports = [
-        "${modulesPath}/profiles/minimal.nix"
-        inputs.self.modules.nixos.base
-        inputs.agenix.nixosModules.age
-        inputs.disko.nixosModules.disko
-      ];
-
       environment.systemPackages = with pkgs; [
         binutils
         coreutils

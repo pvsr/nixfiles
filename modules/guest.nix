@@ -2,7 +2,7 @@ let
   guest = "griff.ruan.ygg.pvsr.dev";
 in
 {
-  flake.modules.nixos.crossbell =
+  local.servers.crossbell =
     { pkgs, ... }:
     {
       local.caddy.reverseProxies."griffin.pvsr.dev" = guest;

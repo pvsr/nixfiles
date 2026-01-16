@@ -1,16 +1,16 @@
 {
-  flake.modules.nixos.jurai.fileSystems."/run/media/persist".neededForBoot = true;
+  local.desktops.jurai.fileSystems."/run/media/persist".neededForBoot = true;
 
-  flake.modules.nixos.jurai.local.persistence = {
+  local.desktops.jurai.local.persistence = {
     enable = true;
     rootDevice = "/dev/disk/by-partlabel/disk-root-root";
   };
-  flake.modules.nixos.jurai.environment.persistence.nixos = {
+  local.desktops.jurai.environment.persistence.nixos = {
     hideMounts = true;
     persistentStoragePath = "/run/media/persist";
   };
 
-  flake.modules.nixos.jurai.disko.devices.disk.root = {
+  local.desktops.jurai.disko.devices.disk.root = {
     device = "/dev/vda";
     type = "disk";
     content = {

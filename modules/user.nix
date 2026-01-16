@@ -1,4 +1,4 @@
-{ self, lib, ... }:
+{ lib, ... }:
 let
   options.name = lib.mkOption {
     type = lib.types.str;
@@ -13,7 +13,6 @@ let
   ];
 in
 {
-  config.flake.modules.nixos.core.imports = [ self.modules.nixos.user ];
   config.flake.modules.nixos.user =
     { config, ... }:
     let

@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.jurai =
+  local.desktops.jurai =
     {
       lib,
       pkgs,

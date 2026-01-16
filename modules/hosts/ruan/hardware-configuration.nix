@@ -1,6 +1,6 @@
 { lib, inputs, ... }:
 {
-  flake.modules.nixos.ruan = {
+  local.desktops.ruan = {
     imports = [
       inputs.nixos-hardware.nixosModules.common-pc-ssd
       inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower

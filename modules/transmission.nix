@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.ruan =
+  local.desktops.ruan =
     { config, pkgs, ... }:
     {
       age.secrets."transmission-credentials.json" = {

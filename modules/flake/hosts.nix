@@ -1,22 +1,37 @@
 { inputs, config, ... }:
 let
   inherit (inputs.nixpkgs) lib;
-  hostOptions = lib.types.submodule (
-    { name, config, ... }:
-    {
-      options.modules = lib.mkOption {
-        default = [
-          { networking.hostName = name; }
-          inputs.self.modules.nixos.core
-          inputs.self.modules.nixos.${name}
-          { hjem.extraModules = [ inputs.self.modules.hjem.${name} or { } ]; }
-        ];
-      };
-      options.nixos = lib.mkOption { default = lib.nixosSystem { inherit (config) modules; }; };
-    }
-  );
+  inherit (inputs.self.modules.nixos) desktop server;
+  cfg = config.local;
+  mkHost = sharedModule: name: hostModule: {
+    imports = [
+      sharedModule
+      hostModule
+    ];
+    networking.hostName = name;
+    hjem.extraModules = [ inputs.self.modules.hjem.${name} or { } ];
+  };
+  mkHosts = sharedModule: builtins.mapAttrs (mkHost sharedModule);
 in
 {
-  options.local.hosts = lib.mkOption { type = lib.types.attrsOf hostOptions; };
-  config.flake.nixosConfigurations = builtins.mapAttrs (_: host: host.nixos) config.local.hosts;
+  options.local = {
+    desktops = lib.mkOption {
+      type = lib.types.attrsOf lib.types.deferredModule;
+      default = { };
+    };
+    servers = lib.mkOption {
+      type = lib.types.attrsOf lib.types.deferredModule;
+      default = { };
+    };
+    hosts = lib.mkOption {
+      type = lib.types.attrsOf lib.types.deferredModule;
+      default = { };
+    };
+  };
+
+  config.local.hosts = mkHosts desktop cfg.desktops // mkHosts server cfg.servers;
+
+  config.flake.nixosConfigurations = builtins.mapAttrs (
+    name: module: lib.nixosSystem { modules = [ module ]; }
+  ) cfg.hosts;
 }

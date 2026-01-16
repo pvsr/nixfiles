@@ -1,11 +1,6 @@
 { inputs, ... }:
 {
   flake.modules.nixos.desktop = {
-    imports = [
-      inputs.self.modules.nixos.yggdrasil-client
-      inputs.srvos.nixosModules.desktop
-    ];
-
     nix.extraOptions = "keep-outputs = true";
     boot.tmp = {
       useTmpfs = true;

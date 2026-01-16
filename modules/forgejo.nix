@@ -5,10 +5,8 @@ let
   domains.internal = "code.ruan.ygg.pvsr.dev";
 in
 {
-  flake.modules.nixos = {
-    core.networking.hosts.${hosts.ruan.config.local.ip} = [ domains.external ];
-    ruan.local.caddy.internalProxies.${domains.external} = "${domains.internal}:3000";
-  };
+  flake.modules.nixos.core.networking.hosts.${hosts.ruan.config.local.ip} = [ domains.external ];
+  local.desktops.ruan.local.caddy.internalProxies.${domains.external} = "${domains.internal}:3000";
 
   local.containers."code.ruan" =
     { config, pkgs, ... }:
