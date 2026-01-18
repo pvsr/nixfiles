@@ -22,6 +22,7 @@
         sandbox = true;
         allowed-users = [ "@wheel" ];
         use-xdg-base-directories = true;
+        experimental-features = [ "pipe-operator" ];
       };
     };
   };
