@@ -32,30 +32,12 @@
       hardware.enableRedistributableFirmware = true;
       nixpkgs.config.allowUnfree = true;
 
-      local.endpoints = {
-        calendar.public = "calendar.peterrice.xyz";
-        weather.public = "weather.peterrice.xyz";
-      };
+      local.endpoints.weather.public = "weather.peterrice.xyz";
 
-      age.secrets."radicale-users" = {
-        file = ./secrets/radicale-users.age;
-        owner = "radicale";
-        group = "radicale";
-      };
       age.secrets."dns-token" = {
         file = ./secrets/dns-token.age;
       };
       services = {
-        radicale.enable = true;
-        radicale.settings = {
-          server.hosts = [ "[${endpoints.calendar.address}]:2808" ];
-          auth = {
-            type = "htpasswd";
-            htpasswd_filename = config.age.secrets."radicale-users".path;
-            htpasswd_encryption = "bcrypt";
-          };
-        };
-
         weather.enable = true;
         weather.bind = "[${endpoints.weather.address}]:2808";
 
@@ -112,7 +94,6 @@
       environment.persistence.nixos.directories = [
         "/var/lib/komga"
         "/var/lib/postgresql"
-        "/var/lib/private/radicale"
       ];
       environment.persistence.data.enable = config.local.persistence.enable;
     };

@@ -10,7 +10,6 @@ builtins.listToAttrs (
       ];
     })
     [
-      "radicale-users.age"
       "transmission-credentials.json.age"
       "miniflux-credentials.age"
       "dns-token.age"
