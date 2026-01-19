@@ -9,6 +9,9 @@
       pkgs,
       ...
     }:
+    let
+      inherit (config.local) endpoints;
+    in
     {
       imports = [
         inputs.weather.nixosModules.default
@@ -29,6 +32,11 @@
       hardware.enableRedistributableFirmware = true;
       nixpkgs.config.allowUnfree = true;
 
+      local.endpoints = {
+        calendar.public = "calendar.peterrice.xyz";
+        weather.public = "weather.peterrice.xyz";
+      };
+
       age.secrets."radicale-users" = {
         file = ./secrets/radicale-users.age;
         owner = "radicale";
@@ -40,7 +48,7 @@
       services = {
         radicale.enable = true;
         radicale.settings = {
-          server.hosts = [ "[::]:52032" ];
+          server.hosts = [ "[${endpoints.calendar.address}]:2808" ];
           auth = {
             type = "htpasswd";
             htpasswd_filename = config.age.secrets."radicale-users".path;
@@ -49,7 +57,7 @@
         };
 
         weather.enable = true;
-        weather.bind = "[::]:15658";
+        weather.bind = "[${endpoints.weather.address}]:2808";
 
         komga.enable = true;
         komga.settings.server.port = 19191;
@@ -95,9 +103,7 @@
       systemd.services.caddy.serviceConfig.EnvironmentFile = config.age.secrets."dns-token".path;
 
       networking.firewall.interfaces.ygg0.allowedTCPPorts = [
-        15658 # weather
         19191 # komga
-        52032 # radicale
       ];
 
       system.stateVersion = "24.05";
