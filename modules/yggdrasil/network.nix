@@ -17,7 +17,7 @@ in
       networking.firewall.interfaces.ygg0.allowedTCPPorts = [ 22 ];
     };
 
-  flake.modules.nixos.yggdrasil-client = {
+  flake.modules.nixos.yggdrasilClient = {
     services.yggdrasil = {
       openMulticastPort = true;
       settings = {
@@ -33,7 +33,7 @@ in
     networking.firewall.allowedTCPPorts = [ multicastPort ];
   };
 
-  flake.modules.nixos.yggdrasil-gateway = {
+  flake.modules.nixos.yggdrasilGateway = {
     services.yggdrasil.settings.Listen = [ "tls://[::]:${toString peerPort}" ];
     networking.firewall.allowedTCPPorts = [ peerPort ];
   };

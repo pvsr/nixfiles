@@ -21,13 +21,13 @@ in
 
     server.imports = [
       core
-      yggdrasil-gateway
+      yggdrasilGateway
       inputs.srvos.nixosModules.server
     ];
 
     desktop.imports = [
       core
-      yggdrasil-client
+      yggdrasilClient
       inputs.srvos.nixosModules.desktop
     ];
   };

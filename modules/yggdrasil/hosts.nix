@@ -34,6 +34,6 @@ in
       };
     };
 
-  flake.modules.nixos.yggdrasil-gateway.services.yggdrasil.settings.AllowedPublicKeys =
+  flake.modules.nixos.yggdrasilGateway.services.yggdrasil.settings.AllowedPublicKeys =
     map (builtins.getAttr "publicKey") (builtins.attrValues hosts);
 }

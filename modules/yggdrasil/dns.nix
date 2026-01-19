@@ -1,7 +1,7 @@
-{ config, lib, ... }:
+{ self, lib, ... }:
 let
   domain = "ygg.pvsr.dev";
-  hosts = lib.filterAttrs (_: host: !host.config.boot.isContainer) config.flake.nixosConfigurations;
+  hosts = lib.filterAttrs (_: host: !host.config.boot.isContainer) self.nixosConfigurations;
   incusHosts = lib.filterAttrs (_: host: host.config.virtualisation.incus.enable) hosts;
 in
 {
@@ -10,7 +10,8 @@ in
     networking.nameservers = lib.mkForce [ hosts.ruan.config.local.ip ];
   };
 
-  local.desktops.ruan = {
+  local.desktops.ruan.imports = [ self.modules.nixos.yggdrasilNameServer ];
+  flake.modules.nixos.yggdrasilNameServer = {
     networking.firewall.interfaces.ygg0 = {
       allowedTCPPorts = [ 53 ];
       allowedUDPPorts = [ 53 ];
