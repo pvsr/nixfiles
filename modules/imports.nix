@@ -19,16 +19,22 @@ in
       base
     ];
 
+    desktop.imports = [
+      core
+      yggdrasilClient
+      inputs.srvos.nixosModules.desktop
+    ];
+
     server.imports = [
       core
       yggdrasilGateway
       inputs.srvos.nixosModules.server
     ];
 
-    desktop.imports = [
-      core
-      yggdrasilClient
-      inputs.srvos.nixosModules.desktop
-    ];
+    # override srvos
+    server.programs.vim = {
+      enable = false;
+      defaultEditor = false;
+    };
   };
 }
