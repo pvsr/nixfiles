@@ -1,4 +1,7 @@
 { inputs, ... }:
+let
+  ruan = inputs.self.nixosConfigurations.ruan.config.networking.fqdn;
+in
 {
   local.servers.crossbell =
     { config, lib, ... }:
@@ -17,13 +20,13 @@
           "www.peterrice.xyz".extraConfig = "redir https://pvsr.dev";
           "www.pvsr.dev".extraConfig = "redir https://pvsr.dev";
           "podcasts.peterrice.xyz".extraConfig = ''
-            reverse_proxy ruan.ygg.pvsr.dev:5999 {
+            reverse_proxy ${ruan}:5999 {
               flush_interval -1
             }
           '';
         };
         reverseProxies = {
-          "comics.peterrice.xyz" = "ruan.ygg.pvsr.dev:19191";
+          "comics.peterrice.xyz" = "${ruan}:19191";
         };
       };
 

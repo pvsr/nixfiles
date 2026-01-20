@@ -1,8 +1,8 @@
-{ config, ... }:
+{ self, ... }:
 let
-  hosts = config.flake.nixosConfigurations;
+  hosts = self.nixosConfigurations;
+  domains.internal = "code.${hosts.ruan.config.networking.fqdn}";
   domains.external = "code.pvsr.dev";
-  domains.internal = "code.ruan.ygg.pvsr.dev";
 in
 {
   flake.modules.nixos.core.networking.hosts.${hosts.ruan.config.local.ip} = [ domains.external ];

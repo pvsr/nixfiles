@@ -50,7 +50,7 @@ in
     hostname: host:
     host.config.local.endpoints
     |> lib.mapAttrs' (
-      name: vhost: lib.nameValuePair vhost.address [ "${name}.${hostname}.ygg.pvsr.dev" ]
+      name: vhost: lib.nameValuePair vhost.address [ "${name}.${host.config.networking.fqdn}" ]
     )
   ) hosts;
 
@@ -59,7 +59,7 @@ in
     host.config.local.endpoints
     |> lib.filterAttrs (_: vhost: vhost.public != null)
     |> lib.mapAttrs' (
-      name: vhost: lib.nameValuePair vhost.public "${name}.${hostname}.ygg.pvsr.dev:2808"
+      name: vhost: lib.nameValuePair vhost.public "${name}.${host.config.networking.fqdn}:2808"
     )
   ) hosts;
 

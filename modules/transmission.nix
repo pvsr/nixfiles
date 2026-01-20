@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   local.desktops.ruan =
     { config, pkgs, ... }:
@@ -30,7 +31,7 @@
           peer-port-random-low = 65150;
           peer-port-random-high = 65160;
           rpc-port = 9919;
-          rpc-host-whitelist = "ruan,ruan.ygg.pvsr.dev";
+          rpc-host-whitelist = with config.networking; "${hostName},${fqdn}";
           rpc-bind-address = config.local.ip;
           rpc-whitelist-enabled = false;
         };
@@ -40,6 +41,6 @@
     };
 
   flake.modules.hjem.desktop.fish.interactiveShellInit = ''
-    abbr -a trr 'transmission-remote ruan.ygg.pvsr.dev:9919'
+    abbr -a trr 'transmission-remote ${self.nixosConfigurations.ruan.config.networking.fqdn}:9919'
   '';
 }

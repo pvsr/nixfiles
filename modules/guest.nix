@@ -1,5 +1,7 @@
+{ self, ... }:
 let
-  guest = "griff.ruan.ygg.pvsr.dev";
+  host = self.nixosConfigurations.ruan.config.networking.fqdn;
+  guest = "griff.${host}";
 in
 {
   local.servers.crossbell =

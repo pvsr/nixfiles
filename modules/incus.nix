@@ -11,7 +11,7 @@
       # TODO declarative setup for incus should include:
       # ipv6.address = "${config.local.prefix}/64";
       # dns.domain = config.networking.hostName;
-      # raw.dnsmasq = "domain=${config.networking.hostName}.ygg.pvsr.dev";
+      # raw.dnsmasq = "domain=${config.networking.fqdn}";
 
       local.user.extraGroups = [ "incus-admin" ];
 

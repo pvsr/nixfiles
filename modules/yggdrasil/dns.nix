@@ -5,9 +5,9 @@ let
   incusHosts = lib.filterAttrs (_: host: host.config.virtualisation.incus.enable) hosts;
 in
 {
-  flake.modules.nixos.core = {
-    services.resolved.domains = [ domain ];
-    networking.nameservers = lib.mkForce [ hosts.ruan.config.local.ip ];
+  flake.modules.nixos.core.networking = {
+    inherit domain;
+    nameservers = lib.mkForce [ hosts.ruan.config.local.ip ];
   };
 
   local.desktops.ruan.imports = [ self.modules.nixos.yggdrasilNameServer ];
@@ -18,7 +18,7 @@ in
     };
 
     networking.hosts = lib.mapAttrs' (
-      name: host: lib.nameValuePair host.config.local.ip [ "${name}.${domain}" ]
+      _: host: lib.nameValuePair host.config.local.ip [ host.config.networking.fqdn ]
     ) hosts;
 
     services.dnsmasq.enable = true;
@@ -33,7 +33,7 @@ in
         "94.140.14.14"
       ]
       ++ (lib.mapAttrsToList (
-        name: host: "/*.${name}.${domain}/${host.config.local.prefix}::1"
+        _: host: "/*.${host.config.networking.fqdn}/${host.config.local.prefix}::1"
       ) incusHosts);
     };
   };
@@ -57,7 +57,7 @@ in
         };
         script = ''
           ${pkgs.systemd}/bin/resolvectl dns incusbr0 ${config.local.prefix}::1
-          ${pkgs.systemd}/bin/resolvectl domain incusbr0 '~${config.networking.hostName}.${domain}'
+          ${pkgs.systemd}/bin/resolvectl domain incusbr0 '~${config.networking.fqdn}'
         '';
         postStop = "${pkgs.systemd}/bin/resolvectl revert incusbr0";
       };
