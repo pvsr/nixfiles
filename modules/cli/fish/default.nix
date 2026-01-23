@@ -67,7 +67,7 @@
 
       config.xdg.config.files = {
         "fish/conf.d/env.fish".text = lib.concatMapAttrsStringSep "\n" (
-          name: value: "set -gx ${lib.escapeShellArg name} ${lib.escapeShellArg (toString value)}"
+          name: value: "set -gx ${lib.escapeShellArg name} ${toString value}"
         ) config.environment.sessionVariables;
         "fish/conf.d/zoxide.fish".source = pkgs.runCommandLocal "zoxide.fish" { } ''
           echo 'status is-interactive; or exit' > $out
