@@ -1,7 +1,10 @@
+{ inputs, ... }:
 {
   local.desktops.ruan =
     { config, ... }:
     {
+      imports = [ inputs.podcasts.nixosModules.default ];
+
       networking.firewall.interfaces.ygg0.allowedTCPPorts = [ 5999 ];
 
       services.podcasts = {
