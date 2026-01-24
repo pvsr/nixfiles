@@ -35,6 +35,8 @@
           exclude = [
             "/var/lib/systemd/coredump"
             "/var/lib/nixos-containers/*/var/log"
+            "/var/lib/incus/images"
+            "/var/lib/incus/storage-pools"
             "/home/*/.local/cache"
             "/home/*/.local/share/doc"
           ];
