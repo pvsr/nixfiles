@@ -9,7 +9,9 @@
       system.stateVersion = "26.05";
 
       security.sudo.wheelNeedsPassword = false;
+
       networking.firewall.allowedTCPPorts = [ 22 ];
+      boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 80;
     };
 
   flake.modules.nixos.hostContainer =

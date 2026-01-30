@@ -6,7 +6,7 @@ let
 in
 {
   flake.modules.nixos.core.networking.hosts.${hosts.ruan.config.local.ip} = [ domains.external ];
-  local.desktops.ruan.local.caddy.internalProxies.${domains.external} = "${domains.internal}:3000";
+  local.desktops.ruan.local.caddy.internalProxies.${domains.external} = "${domains.internal}";
 
   local.containers."code.ruan" =
     { config, pkgs, ... }:
@@ -15,7 +15,7 @@ in
       environment.sessionVariables.FORGEJO_WORK_DIR = "/var/lib/forgejo";
 
       networking.firewall.allowedTCPPorts = [
-        3000
+        80
         2222
       ];
 
@@ -26,7 +26,7 @@ in
           server = {
             PROTOCOL = "http";
             HTTP_ADDR = "::";
-            HTTP_PORT = 3000;
+            HTTP_PORT = 80;
             DOMAIN = "${domains.external}";
             ROOT_URL = "https://${domains.external}";
             START_SSH_SERVER = true;
