@@ -16,9 +16,12 @@
 
   flake.modules.nixos.core = {
     networking.nameservers = [ "94.140.14.14" ];
-
     services.openssh.enable = true;
-    networking.firewall.interfaces.enp8s0.allowedTCPPorts = [ 22 ];
-    networking.firewall.interfaces.enp37s0.allowedTCPPorts = [ 22 ];
   };
+
+  flake.modules.nixos.desktop =
+    { config, ... }:
+    {
+      networking.firewall.interfaces.${config.local.ethernetInterface}.allowedTCPPorts = [ 22 ];
+    };
 }

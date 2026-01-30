@@ -38,12 +38,14 @@ in
         default = { };
       };
 
-      config.systemd.network.networks."40-extra-yggdrasil-ips" = {
-        matchConfig.Name = "enp*";
-        DHCP = "yes";
-        networkConfig.IPv6PrivacyExtensions = "kernel";
-        address = lib.mapAttrsToList (name: { address, ... }: "${address}/64") endpoints;
-      };
+      config.environment.etc."systemd/network/40-${config.local.ethernetInterface}.network.d/extra-yggdrasil-ips.conf" =
+        lib.mkIf (endpoints != { }) {
+          text =
+            "[Network]\n"
+            + lib.concatMapStringsSep "\n" (endpoint: "Address=${endpoint.address}/64") (
+              lib.attrValues endpoints
+            );
+        };
     };
 
   flake.modules.nixos.yggdrasilNameServer.networking.hosts = lib.concatMapAttrs (
