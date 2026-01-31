@@ -11,7 +11,6 @@ in
     nameservers = lib.mkForce [ hosts.ruan.config.local.ip ];
   };
 
-  local.desktops.ruan.imports = [ self.modules.nixos.yggdrasilNameServer ];
   flake.modules.nixos.yggdrasilNameServer = {
     networking.firewall.interfaces.ygg0 = {
       allowedTCPPorts = [ 53 ];
@@ -43,6 +42,18 @@ in
       ) incusHosts);
     };
   };
+
+  local.desktops.ruan =
+    { config, pkgs, ... }:
+    {
+      imports = [ self.modules.nixos.yggdrasilNameServer ];
+      local.testScript = ''
+        machine.wait_for_unit("dnsmasq.service")
+        address = machine.succeed("yggdrasilctl -json getself | ${pkgs.jq}/bin/jq -r .address").strip()
+        t.assertIn(address, machine.succeed(f"dig @{address} ${config.networking.fqdn} AAAA"))
+        machine.succeed(f"dig @{address} ${hosts.grancel.config.networking.fqdn} AAAA")
+      '';
+    };
 
   flake.modules.nixos.incus =
     { config, pkgs, ... }:

@@ -39,6 +39,14 @@ in
         };
       };
 
+      local.testScript = ''
+        machine.wait_for_open_port(80)
+        machine.wait_for_open_port(443)
+        format = "'%{response_code}->%{redirect_url}'"
+        result = machine.succeed(f"curl -f -H 'host: pvsr.dev' http://localhost -w {format}")
+        t.assertEqual("308->https://pvsr.dev/", result)
+      '';
+
       services.openssh.listenAddresses = [
         {
           addr = "0.0.0.0";
@@ -62,4 +70,6 @@ in
 
       system.stateVersion = "24.05";
     };
+
+  flake.modules.nixos.test.services.cloud-init.enable = false;
 }

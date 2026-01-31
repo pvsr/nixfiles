@@ -1,3 +1,4 @@
+{ lib, ... }:
 let
   peerPort = 33933;
   multicastPort = 48147;
@@ -5,7 +6,7 @@ let
 in
 {
   flake.modules.nixos.core =
-    { config, lib, ... }:
+    { config, ... }:
     {
       services.yggdrasil = {
         enable = !config.boot.isContainer;
@@ -16,6 +17,8 @@ in
       environment.persistence.nixos.files = [ keyPath ];
       networking.firewall.interfaces.ygg0.allowedTCPPorts = [ 22 ];
       networking.firewall.allowedTCPPorts = [ 2808 ];
+
+      local.testScript = "machine.wait_for_unit('yggdrasil.service')";
     };
 
   flake.modules.nixos.yggdrasilClient = {
@@ -25,7 +28,7 @@ in
         Peers = [ "tls://internal.pvsr.dev:${toString peerPort}" ];
         MulticastInterfaces = [
           {
-            Regex = "en.*";
+            Regex = "e(n|th).*";
             Port = multicastPort;
           }
         ];
@@ -38,4 +41,18 @@ in
     services.yggdrasil.settings.Listen = [ "tls://[::]:${toString peerPort}" ];
     networking.firewall.allowedTCPPorts = [ peerPort ];
   };
+
+  flake.modules.nixos.test =
+    { pkgs, ... }:
+    let
+      ygg = lib.getExe pkgs.yggdrasil;
+    in
+    {
+      services.yggdrasil.settings = {
+        Peers = lib.mkForce [ ];
+        PrivateKeyPath = lib.mkForce (
+          pkgs.runCommandLocal "export-test-key" { } "${ygg} -genconf | ${ygg} -useconf -exportkey > $out"
+        );
+      };
+    };
 }

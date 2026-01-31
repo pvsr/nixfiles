@@ -38,6 +38,7 @@ in
           result*
           *.qcow2
           *.fd
+          .nixos-test-history
         '';
       };
 
