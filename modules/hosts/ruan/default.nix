@@ -17,7 +17,6 @@
       boot.loader.efi.canTouchEfiVariables = true;
 
       hardware.enableRedistributableFirmware = true;
-      nixpkgs.config.allowUnfree = true;
 
       services.btrbk.sshAccess = [
         {
