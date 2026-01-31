@@ -34,7 +34,6 @@
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
     podcasts.url = "github:pvsr/podcasts";
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
-    podcasts.inputs.pre-commit-hooks.follows = "";
     weather.url = "github:pvsr/weather";
     weather.inputs.nixpkgs.follows = "nixpkgs";
     weather.inputs.pre-commit-hooks.follows = "";
