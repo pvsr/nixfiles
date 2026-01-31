@@ -13,7 +13,6 @@ in
       users.users.root.openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwIv6+ZEHCVNmIS1vfUO+bqIP2y3hv3h/AzzmvTQ3HI"
       ];
-      environment.systemPackages = [ config.services.headscale.package ];
 
       local.caddy = {
         virtualHosts = {
