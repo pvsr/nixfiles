@@ -7,6 +7,7 @@ in
 {
   flake.modules.nixos.core.networking = {
     inherit domain;
+    search = [ domain ];
     nameservers = lib.mkForce [ hosts.ruan.config.local.ip ];
   };
 
