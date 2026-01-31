@@ -1,5 +1,5 @@
 {
-  flake.modules.hjem.core =
+  flake.modules.hjem.desktop =
     { pkgs, ... }:
     {
       helix.languages = {
