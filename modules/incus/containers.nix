@@ -8,7 +8,6 @@
       nixpkgs.hostPlatform = "x86_64-linux";
       system.stateVersion = "26.05";
 
-      users.defaultUserShell = pkgs.fishMinimal;
       security.sudo.wheelNeedsPassword = false;
       networking.firewall.allowedTCPPorts = [ 22 ];
     };

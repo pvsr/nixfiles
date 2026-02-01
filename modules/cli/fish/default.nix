@@ -1,11 +1,24 @@
 { inputs, lib, ... }:
 {
-  flake.modules.nixos.core =
+  flake.modules.nixos.base =
     { pkgs, ... }:
     {
       programs.fish.enable = true;
       programs.fish.useBabelfish = true;
-      users.defaultUserShell = pkgs.fish;
+      users.defaultUserShell = pkgs.fishMinimal;
+      environment.systemPackages = [
+        (pkgs.fishPlugins.buildFishPlugin {
+          pname = "fish-prompt-pvsr";
+          src = inputs.fish-prompt-pvsr;
+          version = inputs.fish-prompt-pvsr.shortRev;
+        })
+      ];
+    };
+
+  flake.modules.nixos.core =
+    { pkgs, ... }:
+    {
+      users.defaultUserShell = lib.mkForce pkgs.fish;
     };
 
   flake.modules.hjem.core =
@@ -56,14 +69,7 @@
         };
       };
 
-      config.packages = with pkgs; [
-        fish
-        (fishPlugins.buildFishPlugin {
-          pname = "fish-prompt-pvsr";
-          src = inputs.fish-prompt-pvsr;
-          version = inputs.fish-prompt-pvsr.shortRev;
-        })
-      ];
+      config.packages = [ pkgs.fish ];
 
       config.xdg.config.files = {
         "fish/conf.d/env.fish".text = lib.concatMapAttrsStringSep "\n" (
