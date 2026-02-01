@@ -68,11 +68,11 @@
     "fish-prompt-pvsr": {
       "flake": false,
       "locked": {
-        "lastModified": 1754965199,
-        "narHash": "sha256-ejX0vDtGaoRwFsXYRDCGVUAKbsuh8QUgzq0SWQda6Zc=",
+        "lastModified": 1769985809,
+        "narHash": "sha256-N/hy3asih4ZJz0uLKHHKkKU9pFO4SWYbx1u1FiPqMV0=",
         "owner": "pvsr",
         "repo": "fish-prompt-pvsr",
-        "rev": "5773eb7be8f95cc34af6995cf2e819798cff898f",
+        "rev": "dc9db7b43083257c6916c923d50bc9c338d78fdf",
         "type": "github"
       },
       "original": {
