@@ -56,7 +56,7 @@ in
     )
   ) hosts;
 
-  local.hosts.crossbell.local.caddy.reverseProxies = lib.concatMapAttrs (
+  local.servers.crossbell.local.caddy.reverseProxies = lib.concatMapAttrs (
     hostname: host:
     host.config.local.endpoints
     |> lib.filterAttrs (_: vhost: vhost.public != null)

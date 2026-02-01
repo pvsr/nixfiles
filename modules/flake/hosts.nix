@@ -24,12 +24,10 @@ in
       default = { };
     };
     hosts = lib.mkOption {
-      type = lib.types.attrsOf lib.types.deferredModule;
-      default = { };
+      readOnly = true;
+      default = mkHosts desktop cfg.desktops // mkHosts server cfg.servers;
     };
   };
-
-  config.local.hosts = mkHosts desktop cfg.desktops // mkHosts server cfg.servers;
 
   config.flake.nixosConfigurations = builtins.mapAttrs (
     name: module: lib.nixosSystem { modules = [ module ]; }
