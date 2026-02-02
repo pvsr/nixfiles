@@ -38,6 +38,7 @@
             size = "100%";
             content = {
               type = "btrfs";
+              mountpoint = "/run/media/nixos";
               subvolumes = {
                 "/tmp_root" = {
                   mountpoint = "/";
