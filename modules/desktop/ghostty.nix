@@ -8,7 +8,7 @@
         theme = light:Rose Pine Dawn,dark:Srcery
         command = fish
         font-family = ${config.local.appFont}
-        font-size = 15
+        font-size = 16
         cursor-style-blink = false
         shell-integration-features = no-cursor
         mouse-hide-while-typing = true
