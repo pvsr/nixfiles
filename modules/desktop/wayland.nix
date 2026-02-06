@@ -1,12 +1,5 @@
 { config, ... }:
 let
-  cursor =
-    { pkgs, ... }:
-    {
-      packages = [ pkgs.vanilla-dmz ];
-      environment.sessionVariables.XCURSOR_THEME = "Vanilla-DMZ";
-      environment.sessionVariables.XCURSOR_SIZE = 32;
-    };
   services =
     { pkgs, ... }:
     {
@@ -65,10 +58,7 @@ in
   flake.modules.hjem.desktop =
     { pkgs, ... }:
     {
-      imports = [
-        cursor
-        services
-      ];
+      imports = [ services ];
 
       mpv.defaultProfile = "wayland";
 
