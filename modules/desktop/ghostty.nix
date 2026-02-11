@@ -5,7 +5,7 @@
     {
       packages = [ pkgs.ghostty ];
       xdg.config.files."ghostty/config".text = ''
-        theme = light:Rose Pine Dawn,dark:Srcery
+        theme = light:Flexoki Light,dark:Srcery
         command = fish
         font-family = ${config.local.appFont}
         font-size = 16

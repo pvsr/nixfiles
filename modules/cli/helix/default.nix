@@ -2,7 +2,7 @@
 let
   settings = {
     theme.dark = "srcery";
-    theme.light = "rose_pine_dawn";
+    theme.light = "flexoki_light";
     editor = {
       line-number = "relative";
       scrolloff = 2;
