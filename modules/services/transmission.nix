@@ -13,16 +13,7 @@
 
       services.transmission = {
         enable = true;
-        package = pkgs.transmission_4.overrideAttrs {
-          version = "4.0.5";
-          src = pkgs.fetchFromGitHub {
-            owner = "transmission";
-            repo = "transmission";
-            rev = "4.0.5";
-            hash = "sha256-gd1LGAhMuSyC/19wxkoE2mqVozjGPfupIPGojKY0Hn4=";
-            fetchSubmodules = true;
-          };
-        };
+        package = pkgs.transmission_4;
         openPeerPorts = true;
         openRPCPort = true;
         credentialsFile = config.age.secrets."transmission-credentials.json".path;
