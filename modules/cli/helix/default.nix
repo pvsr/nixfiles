@@ -89,14 +89,20 @@ in
       };
     in
     {
+      options.helix.settings = lib.mkOption {
+        type = toml.type;
+        default = { };
+      };
       options.helix.languages = lib.mkOption {
         type = toml.type;
         default = { };
       };
 
+      config.helix.settings = settings;
+
       config.packages = [ pkgs.helix ];
       config.xdg.config.files = builtins.mapAttrs mkToml ({
-        "helix/config.toml" = settings;
+        "helix/config.toml" = cfg.settings;
         "helix/languages.toml" = cfg.languages;
         "helix/themes/srcery.toml" = srcery;
       });
