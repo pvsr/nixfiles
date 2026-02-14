@@ -23,6 +23,8 @@
         allowed-users = [ "@wheel" ];
         use-xdg-base-directories = true;
         experimental-features = [ "pipe-operator" ];
+        substituters = [ "https://cache.garnix.io" ];
+        trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
       };
     };
   };
