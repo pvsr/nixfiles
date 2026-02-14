@@ -10,7 +10,7 @@
         inputs.niri.nixosModules.niri
       ];
 
-      options.local.niri.enable = lib.mkEnableOption { default = true; };
+      options.local.niri.enable = lib.mkOption { default = true; };
 
       config = lib.mkIf config.local.niri.enable {
 
