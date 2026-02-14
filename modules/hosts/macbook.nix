@@ -15,10 +15,7 @@
       system.startup.chime = false;
       system.stateVersion = 6;
       nixpkgs.hostPlatform = "aarch64-darwin";
-      hjem.extraModules = [
-        self.modules.hjem.core
-        self.modules.hjem.macbook
-      ];
+      hjem.extraModules = [ self.modules.hjem.macbook ];
     };
 
   flake.modules.hjem.macbook =
