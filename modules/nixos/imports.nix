@@ -15,27 +15,14 @@ in
       inputs.disko.nixosModules.disko
     ];
 
-    container.imports = [
-      base
-    ];
-
     desktop.imports = [
-      core
       yggdrasilClient
       inputs.srvos.nixosModules.desktop
     ];
 
-    server.imports = [
-      core
-      yggdrasilGateway
-      inputs.srvos.nixosModules.server
+    container.imports = [
+      base
+      server
     ];
-
-    # override srvos
-    server.programs.vim = {
-      enable = false;
-      defaultEditor = false;
-    };
-    server.hardware.facter.detected.graphics.enable = false;
   };
 }

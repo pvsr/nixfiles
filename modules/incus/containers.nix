@@ -10,6 +10,7 @@
 
       security.sudo.wheelNeedsPassword = false;
 
+      networking.useHostResolvConf = false;
       networking.firewall.allowedTCPPorts = [ 22 ];
       boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 80;
     };

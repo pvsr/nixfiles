@@ -1,4 +1,8 @@
 {
+  flake.modules.nixos.base = {
+    time.timeZone = "America/New_York";
+  };
+
   flake.modules.nixos.core =
     { lib, pkgs, ... }:
     {
@@ -15,8 +19,6 @@
         rsync
         util-linux
       ];
-
-      time.timeZone = lib.mkDefault "America/New_York";
 
       security.sudo.wheelNeedsPassword = false;
 

@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ self, lib, ... }:
 let
   hosts = {
     grancel = {
@@ -36,4 +36,6 @@ in
 
   flake.modules.nixos.yggdrasilGateway.services.yggdrasil.settings.AllowedPublicKeys =
     map (builtins.getAttr "publicKey") (builtins.attrValues hosts);
+
+  local.servers.crossbell.imports = [ self.modules.nixos.yggdrasilGateway ];
 }

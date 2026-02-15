@@ -1,10 +1,11 @@
 { inputs, config, ... }:
 let
   inherit (inputs.nixpkgs) lib;
-  inherit (inputs.self.modules.nixos) desktop server;
+  inherit (inputs.self.modules.nixos) core desktop server;
   cfg = config.local;
   mkHost = sharedModule: name: hostModule: {
     imports = [
+      core
       sharedModule
       hostModule
     ];
