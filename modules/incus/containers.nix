@@ -1,8 +1,13 @@
 { inputs, lib, ... }:
+let
+  lxcKey = ./.;
+in
 {
   flake.modules.nixos.lxc =
     { pkgs, modulesPath, ... }:
     {
+      key = lxcKey;
+
       imports = [ "${modulesPath}/virtualisation/lxc-container.nix" ];
 
       nixpkgs.hostPlatform = "x86_64-linux";
@@ -10,6 +15,8 @@
       networking.useHostResolvConf = false;
       networking.firewall.allowedTCPPorts = [ 22 ];
     };
+
+  flake.modules.nixos.test.disabledModules = [ lxcKey ];
 
   flake.modules.nixos.container = {
     imports = [ inputs.self.modules.nixos.lxc ];

@@ -14,25 +14,30 @@ let
       networking.domain = host.config.networking.fqdn;
     };
   mkHost = sharedModule: name: hostModule: {
-    modules = [
+    imports = [
       hostModule
       sharedModule
       (mkHostname name)
     ];
   };
   mkHosts = sharedModule: builtins.mapAttrs (mkHost sharedModule);
-  containers = mkHosts container cfg.containers;
   hostContainers = mkHosts hostContainer (
     lib.mapAttrs' (name: lib.nameValuePair "${name}.grancel") cfg.hosts
   );
 in
 {
-  options.local.containers = lib.mkOption {
-    type = lib.types.attrsOf lib.types.deferredModule;
-    default = { };
+  options.local = {
+    containers = lib.mkOption {
+      type = lib.types.attrsOf lib.types.deferredModule;
+      default = { };
+    };
+    resolvedContainers = lib.mkOption {
+      readOnly = true;
+      default = mkHosts container cfg.containers;
+    };
   };
 
-  config.flake.nixosConfigurations = builtins.mapAttrs (_: lib.nixosSystem) (
-    containers // hostContainers
-  );
+  config.flake.nixosConfigurations = builtins.mapAttrs (
+    _: module: lib.nixosSystem { modules = [ module ]; }
+  ) (cfg.resolvedContainers // hostContainers);
 }

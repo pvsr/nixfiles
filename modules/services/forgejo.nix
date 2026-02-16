@@ -19,6 +19,12 @@ in
         2222
       ];
 
+      local.testScript = ''
+        machine.wait_for_unit("forgejo.service")
+        machine.wait_for_open_port(80)
+        machine.wait_for_open_port(2222)
+      '';
+
       services.forgejo = {
         enable = true;
         package = pkgs.forgejo;

@@ -1,6 +1,6 @@
 { self, config, ... }:
 {
-  flake.modules.nixos.core =
+  flake.modules.nixos.base =
     { lib, ... }:
     {
       options.local.testScript = lib.mkOption {
@@ -26,6 +26,6 @@
           };
           inherit (self.nixosConfigurations.${name}.config.local) testScript;
         }
-      ) config.local.hosts;
+      ) (config.local.hosts // config.local.resolvedContainers);
     };
 }
