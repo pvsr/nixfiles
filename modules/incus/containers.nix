@@ -1,34 +1,32 @@
 { inputs, lib, ... }:
 {
-  flake.modules.nixos.container =
+  flake.modules.nixos.lxc =
     { pkgs, modulesPath, ... }:
     {
       imports = [ "${modulesPath}/virtualisation/lxc-container.nix" ];
 
       nixpkgs.hostPlatform = "x86_64-linux";
-      system.stateVersion = "26.05";
-
-      security.sudo.wheelNeedsPassword = false;
 
       networking.useHostResolvConf = false;
       networking.firewall.allowedTCPPorts = [ 22 ];
-      boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 80;
     };
 
-  flake.modules.nixos.hostContainer =
-    { pkgs, modulesPath, ... }:
-    {
-      imports = [ "${modulesPath}/virtualisation/lxc-container.nix" ];
-      disabledModules = [ inputs.srvos.nixosModules.hardware-vultr-vm ];
+  flake.modules.nixos.container = {
+    imports = [ inputs.self.modules.nixos.lxc ];
 
-      nixpkgs.hostPlatform = "x86_64-linux";
-      fileSystems = lib.mkForce { };
-      local.persistence.enable = lib.mkForce false;
-      boot.loader.systemd-boot.enable = lib.mkForce false;
+    system.stateVersion = "26.05";
 
-      networking.useHostResolvConf = false;
-      networking.firewall.allowedTCPPorts = [ 22 ];
+    security.sudo.wheelNeedsPassword = false;
+    boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 80;
+  };
 
-      services.displayManager.ly.enable = lib.mkForce false;
-    };
+  flake.modules.nixos.hostContainer = {
+    imports = [ inputs.self.modules.nixos.lxc ];
+
+    disabledModules = [ inputs.srvos.nixosModules.hardware-vultr-vm ];
+    fileSystems = lib.mkForce { };
+    local.persistence.enable = lib.mkForce false;
+    boot.loader.systemd-boot.enable = lib.mkForce false;
+    services.displayManager.ly.enable = lib.mkForce false;
+  };
 }
