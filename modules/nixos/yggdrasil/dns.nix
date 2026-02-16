@@ -18,9 +18,13 @@ in
       allowedUDPPorts = [ 53 ];
     };
 
-    networking.hosts = lib.mapAttrs' (
-      _: host: lib.nameValuePair host.config.local.ip [ host.config.networking.fqdn ]
-    ) hosts;
+    networking.hosts =
+      lib.mapAttrs' (
+        _: host: lib.nameValuePair host.config.local.ip [ host.config.networking.fqdn ]
+      ) hosts
+      // {
+        "127.0.0.2" = lib.mkForce [ ];
+      };
 
     services.dnsmasq.enable = true;
     services.dnsmasq.resolveLocalQueries = false;
@@ -30,6 +34,7 @@ in
       domain-needed = true;
       cache-size = 10000;
       local = [ "/${domain}/" ];
+      no-resolv = true;
       server = [
         "94.140.14.14"
       ]
