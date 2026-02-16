@@ -21,7 +21,7 @@ let
   };
 in
 {
-  flake.modules.nixos.core =
+  flake.modules.nixos.base =
     { config, ... }:
     {
       options.local = {
@@ -29,7 +29,7 @@ in
           default = hosts.${config.networking.hostName}.address;
         };
         prefix = lib.mkOption {
-          default = "3${builtins.substring 1 17 hosts."${config.networking.hostName}".address}";
+          default = "3${builtins.substring 1 17 config.local.ip}";
         };
       };
     };

@@ -45,14 +45,24 @@ in
   flake.modules.nixos.test =
     { pkgs, ... }:
     let
-      ygg = lib.getExe pkgs.yggdrasil;
+      yggdrasil = lib.getExe pkgs.yggdrasil;
+      config = pkgs.runCommandLocal "ygg-test-config" { } ''
+        ${yggdrasil} -genconf > $out
+      '';
+      key = pkgs.runCommandLocal "ygg-test-key" { } ''
+        cat ${config} | ${yggdrasil} -useconf -exportkey > $out
+      '';
+      address = pkgs.runCommandLocal "ygg-test-address-module" { } ''
+        mkdir $out
+        address=$(cat ${config} | ${yggdrasil} -useconf -address)
+        printf '"%s"' $address > $out/default.nix
+      '';
     in
     {
+      local.ip = import "${address}";
       services.yggdrasil.settings = {
         Peers = lib.mkForce [ ];
-        PrivateKeyPath = lib.mkForce (
-          pkgs.runCommandLocal "export-test-key" { } "${ygg} -genconf | ${ygg} -useconf -exportkey > $out"
-        );
+        PrivateKeyPath = lib.mkForce key;
       };
     };
 }
