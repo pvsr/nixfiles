@@ -4,23 +4,23 @@ let
 in
 {
   flake.modules.nixos.core =
-    { config, ... }:
+    { config, pkgs, ... }:
     let
-      inherit (config.local) prefix endpoints;
-      # from https://wiki.nixos.org/wiki/Yggdrasil#Virtual-hosts
-      toIpv6Address =
-        seed:
-        let
-          digest = builtins.hashString "sha256" seed;
-          hextets = builtins.genList (i: builtins.substring (4 * i) 4 digest) 4;
-        in
-        builtins.concatStringsSep ":" ([ prefix ] ++ hextets);
+      cfg = config.local;
     in
     {
       options.local.endpoints = lib.mkOption {
         type = lib.types.attrsOf (
           lib.types.submodule (
             { name, ... }:
+            let
+              # from https://wiki.nixos.org/wiki/Yggdrasil#Virtual-hosts
+              digest = builtins.hashString "sha256" name;
+              hextets = builtins.genList (i: builtins.substring (4 * i) 4 digest) 4;
+              minPort = 18000;
+              maxPort = 18999;
+              inherit (builtins.fromTOML "rand = 0x${builtins.substring 0 8 digest}") rand;
+            in
             {
               options = {
                 public = lib.mkOption {
@@ -29,7 +29,11 @@ in
                 };
                 address = lib.mkOption {
                   type = lib.types.str;
-                  default = toIpv6Address name;
+                  default = builtins.concatStringsSep ":" ([ cfg.prefix ] ++ hextets);
+                };
+                port = lib.mkOption {
+                  type = lib.types.port;
+                  default = minPort + lib.mod rand (maxPort - minPort);
                 };
               };
             }
@@ -38,14 +42,35 @@ in
         default = { };
       };
 
-      config.environment.etc."systemd/network/40-${config.local.ethernetInterface}.network.d/extra-yggdrasil-ips.conf" =
-        lib.mkIf (endpoints != { }) {
-          text =
-            "[Network]\n"
-            + lib.concatMapStringsSep "\n" (endpoint: "Address=${endpoint.address}/64") (
-              lib.attrValues endpoints
-            );
-        };
+      config = lib.mkIf (cfg.endpoints != { }) {
+        networking.firewall.interfaces.${cfg.ethernetInterface}.allowedTCPPorts =
+          cfg.endpoints |> builtins.attrValues |> map (builtins.getAttr "port");
+
+        networking.interfaces.${cfg.ethernetInterface}.ipv6.addresses =
+          cfg.endpoints
+          |> builtins.attrValues
+          |> map (
+            { address, ... }:
+            {
+              inherit address;
+              prefixLength = 64;
+            }
+          );
+
+        local.testScript = ''
+          interface = machine.succeed(
+            "networkctl status --json short | " \
+            "${pkgs.jq}/bin/jq -r '.Interfaces[].Name' | " \
+            "grep -E '^e(n|th)' | head -1"
+          ).strip()
+          endpoints = ${cfg.endpoints |> builtins.attrValues |> builtins.length |> toString}
+          machine.wait_until_succeeds(
+            f"networkctl status {interface} --json short | " \
+            f"${pkgs.jq}/bin/jq '.Addresses | length' | grep {endpoints + 1}",
+            timeout=30
+          )
+        '';
+      };
     };
 
   flake.modules.nixos.yggdrasilNameServer.networking.hosts = lib.concatMapAttrs (
@@ -61,7 +86,8 @@ in
     host.config.local.endpoints
     |> lib.filterAttrs (_: vhost: vhost.public != null)
     |> lib.mapAttrs' (
-      name: vhost: lib.nameValuePair vhost.public "${name}.${host.config.networking.fqdn}:2808"
+      name: vhost:
+      lib.nameValuePair vhost.public "${name}.${host.config.networking.fqdn}:${toString vhost.port}"
     )
   ) hosts;
 

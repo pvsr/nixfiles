@@ -1,6 +1,10 @@
+{ lib, ... }:
 {
   local.desktops.ruan =
     { config, pkgs, ... }:
+    let
+      endpoint = config.local.endpoints.rss;
+    in
     {
       local.endpoints.rss.public = "rss.peterrice.xyz";
 
@@ -10,11 +14,13 @@
 
       services.miniflux = {
         enable = true;
-        config.LISTEN_ADDR = "[${config.local.endpoints.rss.address}]:2808";
+        config.LISTEN_ADDR = "[${endpoint.address}]:${toString endpoint.port}";
         adminCredentialsFile = config.age.secrets."miniflux-credentials".path;
       };
 
       services.postgresql.package = pkgs.postgresql_16;
       environment.persistence.nixos.directories = [ "/var/lib/postgresql" ];
     };
+
+  flake.modules.nixos.test.services.miniflux.enable = lib.mkForce false;
 }

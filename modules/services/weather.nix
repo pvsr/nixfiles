@@ -2,6 +2,9 @@
 {
   local.desktops.ruan =
     { config, ... }:
+    let
+      endpoint = config.local.endpoints.rss;
+    in
     {
       imports = [ inputs.weather.nixosModules.default ];
 
@@ -9,7 +12,7 @@
 
       services = {
         weather.enable = true;
-        weather.bind = "[${config.local.endpoints.weather.address}]:2808";
+        weather.bind = "[${endpoint.address}]:${toString endpoint.port}";
       };
     };
 }

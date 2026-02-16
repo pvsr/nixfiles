@@ -16,7 +16,6 @@ in
 
       environment.persistence.nixos.files = [ keyPath ];
       networking.firewall.interfaces.ygg0.allowedTCPPorts = [ 22 ];
-      networking.firewall.allowedTCPPorts = [ 2808 ];
 
       local.testScript = "machine.wait_for_unit('yggdrasil.service')";
     };
