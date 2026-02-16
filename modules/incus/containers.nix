@@ -26,8 +26,6 @@
     disabledModules = [ inputs.srvos.nixosModules.hardware-vultr-vm ];
 
     hardware.facter.report = { };
-    local.ethernetInterface = "eth0";
-
     fileSystems = lib.mkForce { };
     local.persistence.enable = lib.mkForce false;
     boot.loader.systemd-boot.enable = lib.mkForce false;

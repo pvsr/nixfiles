@@ -6,10 +6,11 @@
     {
       options.local.ethernetInterface = lib.mkOption {
         default =
-          config.networking.interfaces
-          |> builtins.attrNames
-          |> builtins.filter (lib.hasPrefix "enp")
-          |> builtins.head;
+          let
+            interfaces =
+              config.networking.interfaces |> builtins.attrNames |> builtins.filter (lib.hasPrefix "enp");
+          in
+          if interfaces == [ ] then "eth0" else builtins.head interfaces;
       };
     };
 }
