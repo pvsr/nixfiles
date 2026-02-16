@@ -15,13 +15,11 @@
 
       local.user.extraGroups = [ "incus-admin" ];
 
-      networking.firewall.interfaces.incusbr0.allowedTCPPorts = [
-        53
-        67
-      ];
+      networking.firewall.interfaces.incusbr0.allowedTCPPorts = [ 53 ];
       networking.firewall.interfaces.incusbr0.allowedUDPPorts = [
         53
         67
+        547
       ];
 
       environment.persistence.nixos.directories = [ "/var/lib/incus" ];
