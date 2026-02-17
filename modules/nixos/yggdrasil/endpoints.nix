@@ -31,6 +31,10 @@ in
                   type = lib.types.str;
                   default = builtins.concatStringsSep ":" ([ cfg.prefix ] ++ hextets);
                 };
+                fqdn = lib.mkOption {
+                  type = lib.types.str;
+                  default = "${name}.${config.networking.domain}";
+                };
                 port = lib.mkOption {
                   type = lib.types.port;
                   default = minPort + lib.mod rand (maxPort - minPort);
@@ -57,6 +61,14 @@ in
             }
           );
 
+        local.caddy.internalProxies =
+          (lib.mapAttrs' (
+            name: vhost: lib.nameValuePair vhost.fqdn "[${vhost.address}]:${toString vhost.port}"
+          ) cfg.endpoints)
+          // (lib.mapAttrs' (
+            name: vhost: lib.nameValuePair "http://${vhost.fqdn}" "[${vhost.address}]:${toString vhost.port}"
+          ) cfg.endpoints);
+
         local.testScript = ''
           interface = machine.succeed(
             "networkctl status --json short | " \
@@ -76,9 +88,7 @@ in
   flake.modules.nixos.yggdrasilNameServer.networking.hosts = lib.concatMapAttrs (
     hostname: host:
     host.config.local.endpoints
-    |> lib.mapAttrs' (
-      name: vhost: lib.nameValuePair vhost.address [ "${name}.${host.config.networking.fqdn}" ]
-    )
+    |> lib.mapAttrs' (name: vhost: lib.nameValuePair vhost.address [ vhost.fqdn ])
   ) hosts;
 
   local.servers.crossbell.local.caddy.reverseProxies = lib.concatMapAttrs (
@@ -86,8 +96,7 @@ in
     host.config.local.endpoints
     |> lib.filterAttrs (_: vhost: vhost.public != null)
     |> lib.mapAttrs' (
-      name: vhost:
-      lib.nameValuePair vhost.public "${name}.${host.config.networking.fqdn}:${toString vhost.port}"
+      name: vhost: lib.nameValuePair vhost.public "${vhost.fqdn}:${toString vhost.port}"
     )
   ) hosts;
 
