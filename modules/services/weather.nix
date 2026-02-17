@@ -3,7 +3,7 @@
   local.desktops.ruan =
     { config, ... }:
     let
-      endpoint = config.local.endpoints.rss;
+      endpoint = config.local.endpoints.weather;
     in
     {
       imports = [ inputs.weather.nixosModules.default ];
