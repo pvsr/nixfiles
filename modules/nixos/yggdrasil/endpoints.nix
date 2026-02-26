@@ -43,7 +43,7 @@ in
       };
 
       config = lib.mkIf (cfg.endpoints != { }) {
-        networking.firewall.interfaces.${cfg.ethernetInterface}.allowedTCPPorts =
+        networking.firewall.interfaces.ygg0.allowedTCPPorts =
           cfg.endpoints |> builtins.attrValues |> map (builtins.getAttr "port");
 
         networking.interfaces.${cfg.ethernetInterface}.ipv6.addresses =
