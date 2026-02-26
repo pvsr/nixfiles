@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   flake.modules.nixos = {
-    core.documentation.man.generateCaches = lib.mkOverride 500 false;
+    core.documentation.man.cache.enable = lib.mkOverride 500 false;
     desktop =
       { pkgs, ... }:
       {
@@ -10,7 +10,7 @@
         documentation.nixos.enable = true;
 
         documentation.man.enable = true;
-        documentation.man.generateCaches = true;
+        documentation.man.cache.enable = true;
         environment.systemPackages = [ pkgs.man-pages ];
       };
     test = {
