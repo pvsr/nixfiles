@@ -10,9 +10,10 @@
             pkgs.git
             pkgs.openssh
           ];
-          systemd.services.update-flake.serviceConfig = {
-            Type = "oneshot";
-            ExecStart = pkgs.writers.writeFish "update-flake" ''
+          systemd.services.update-flake = {
+            environment.SSH_AUTH_SOCK = "%t/ssh-agent";
+            serviceConfig.Type = "oneshot";
+            serviceConfig.ExecStart = pkgs.writers.writeFish "update-flake" ''
               test -d /etc/nixos; or exit 0
               cd /etc/nixos
               jj root; or exit 0
