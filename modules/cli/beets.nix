@@ -2,7 +2,7 @@
   flake.modules.hjem.ruan =
     { pkgs, ... }:
     {
-      packages = [ pkgs.beets ];
+      # packages = [ pkgs.beets ];
       xdg.config.files."beets/config.yaml".text = ''
         directory: "~/music"
         library: "~/.local/state/beets/library.db"
