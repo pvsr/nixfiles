@@ -8,25 +8,8 @@ let
     ui.default-command = "log";
     ui.diff-formatter = ":git";
     ui.diff-editor = ":builtin";
-    templates.draft_commit_description = ''
-      concat(
-        description,
-        separate("\n",
-          "\nJJ: This commit contains the following changes:",
-          indent("JJ:     ", diff.summary()),
-          "JJ: ignore-rest",
-          diff.git(),
-        )
-      )
-    '';
-    aliases.tug = [
-      "bookmark"
-      "move"
-      "--from"
-      "heads(::@- & bookmarks())"
-      "--to"
-      "heads(::@ ~ empty())"
-    ];
+    templates.draft_commit_description = "builtin_draft_commit_description_with_diff";
+    revsets.bookmark-advance-to = "heads(::@ ~ empty())";
     template-aliases.shell_prompt = ''
       separate(" ",
         concat("(",
