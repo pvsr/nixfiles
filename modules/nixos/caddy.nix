@@ -19,7 +19,7 @@
           package = pkgs.caddy.withPlugins {
             # TODO replace with DNS-PERSIST once supported https://github.com/caddyserver/caddy/issues/7495
             plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" ];
-            hash = "sha256-hZKTEzevrabjgZCCcoRKlqUfdDIUr89KEFJ84kyFxeg=";
+            hash = "sha256-B5xXld1+IRUAQHm8zkHFqvRp8cqnervVL6XEos5VNkc=";
           };
           enableReload = true;
           globalConfig = ''
