@@ -38,7 +38,6 @@
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
     weather.url = "github:pvsr/weather";
     weather.inputs.nixpkgs.follows = "nixpkgs";
-    weather.inputs.pre-commit-hooks.follows = "";
 
     srcery-textmate.url = "github:srcery-colors/srcery-textmate";
     srcery-textmate.flake = false;
