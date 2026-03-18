@@ -50,8 +50,17 @@ in
 
       fish.interactiveShellInit = # fish
         ''
-          abbr -a j  'jj'
-          abbr -a js 'jj show'
+          abbr -a j   'jj'
+          abbr -a js  'jj show'
+          abbr -a jn  'jj new'
+          abbr -a jd  'jj desc'
+          abbr -a jsq 'jj squash'
+          abbr -a jr  'jj rebase'
+          abbr -a ju  'jj undo'
+          abbr -a jrs 'jj restore -i --changes-in'
+          abbr -a jb  'jj bookmark'
+          abbr -a jg  'jj git'
+          abbr -a jgp 'jj git push'
         '';
       fish.functions.fish_vcs_prompt = # fish
         ''

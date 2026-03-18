@@ -97,7 +97,6 @@
           abbr -a sc  'systemctl'
           abbr -a ssc 'sudo systemctl'
           abbr -a scu 'systemctl --user'
-          abbr -a jc  'journalctl'
           abbr -a jce 'journalctl -e'
           abbr -a jcf 'journalctl -f'
           abbr -a jcu 'journalctl -u'
