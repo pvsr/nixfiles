@@ -5,7 +5,8 @@
       packages = with pkgs; [
         fd
         moor
-        nvd
+        nh
+        dix
         nil
         nix-output-monitor
         duf

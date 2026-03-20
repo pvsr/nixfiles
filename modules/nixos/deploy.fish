@@ -22,31 +22,28 @@ end
 function _deploy_one -a host
     set host (string replace .$domain '' $host)
     set host_url $host.$domain
-    set args --target-host $host_url
+    set args -e passwordless --diff never $flake
+    set -a args --hostname $host --target-host $host_url
     if set -q _flag_remote
         set -a args --build-host $host_url
     end
 
-    set -a args --no-reexec --sudo --flake $flake#$host
-
-    set -a args (printf $_flag_command; or printf switch)
-
+    set root ~/.local/share/nix/gcroots/$host
     if not set -q _flag_remote; and test -d ~/.local/share/nix/gcroots
-        set result (nix build \
-            $flake#nixosConfigurations.\"$host\".config.system.build.toplevel \
-            --print-out-paths --log-format internal-json --verbose 2>| nom --json)
-        test $pipestatus[1] = 0; or return
+        set -a args --out-link $root
+        test -e $root; and set old_root (realpath $root)
     end
 
-    nixos-rebuild $args --log-format internal-json --verbose 2>| nom --json
-    test $pipestatus[1] = 0; or return
+    set command (printf $_flag_command; or printf switch)
+    nh os $command $args
+    or return
 
     set -q commit
     and jj --color=always bookmark set $host -B -r $commit &>/dev/null
 
-    set -q result
-    and nix-store --realise $result \
-        --add-root ~/.local/share/nix/gcroots/$host &>/dev/null
+    if set -q old_root
+        dix $old_root $root
+    end
 
     set highlight (set_color -o brmagenta)
     set reset (set_color normal)
