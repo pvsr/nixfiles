@@ -1,4 +1,13 @@
 { inputs, lib, ... }:
+let
+  fishPrompt =
+    pkgs:
+    pkgs.fishPlugins.buildFishPlugin {
+      pname = "fish-prompt-pvsr";
+      src = inputs.fish-prompt-pvsr;
+      version = inputs.fish-prompt-pvsr.shortRev;
+    };
+in
 {
   flake.modules.nixos.base =
     { pkgs, ... }:
@@ -6,13 +15,15 @@
       programs.fish.enable = true;
       programs.fish.useBabelfish = true;
       users.defaultUserShell = pkgs.fishMinimal;
-      environment.systemPackages = [
-        (pkgs.fishPlugins.buildFishPlugin {
-          pname = "fish-prompt-pvsr";
-          src = inputs.fish-prompt-pvsr;
-          version = inputs.fish-prompt-pvsr.shortRev;
-        })
-      ];
+      environment.systemPackages = [ (fishPrompt pkgs) ];
+    };
+
+  flake.modules.darwin.default =
+    { pkgs, ... }:
+    {
+      programs.fish.enable = true;
+      programs.fish.useBabelfish = true;
+      environment.systemPackages = [ (fishPrompt pkgs) ];
     };
 
   flake.modules.nixos.core =
