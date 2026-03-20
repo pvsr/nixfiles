@@ -48,7 +48,7 @@ in
         libnotify
         dmenu-wayland
         swaylock
-        pulsemixer
+        wiremix
         rofimoji
       ];
 
