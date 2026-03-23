@@ -40,12 +40,7 @@
       '';
     };
 
-  flake.modules.nixos.core =
-    { pkgs, ... }:
-    {
-      environment.systemPackages = [ pkgs.ghostty.terminfo ];
-    };
-  flake.modules.nixos.container =
+  flake.modules.nixos.base =
     { pkgs, ... }:
     {
       environment.systemPackages = [ pkgs.ghostty.terminfo ];
