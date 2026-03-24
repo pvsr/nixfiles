@@ -1,13 +1,10 @@
 { lib, ... }:
-let
-  appFontPackage = "fantasque-sans-mono";
-in
 {
   options.local = {
     appFont = lib.mkOption {
       type = lib.types.str;
       readOnly = true;
-      default = "Fantasque Sans Mono";
+      default = "Maple Mono";
     };
   };
 
@@ -23,7 +20,7 @@ in
         libertinus
         sarasa-gothic
         font-awesome
-        pkgs."${appFontPackage}"
+        maple-mono.opentype
       ];
       fonts.fontconfig.defaultFonts = {
         monospace = [ "DejaVu Sans Mono" ];
@@ -34,6 +31,6 @@ in
   config.flake.modules.hjem.macbook =
     { pkgs, ... }:
     {
-      packages = [ pkgs."${appFontPackage}" ];
+      packages = [ pkgs.maple-mono.opentype ];
     };
 }

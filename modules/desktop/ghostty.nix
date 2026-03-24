@@ -8,7 +8,7 @@
         theme = light:Flexoki Light,dark:Srcery
         command = fish
         font-family = ${config.local.appFont}
-        font-size = 16
+        font-size = 14
         cursor-style-blink = false
         shell-integration-features = no-cursor
         mouse-hide-while-typing = true

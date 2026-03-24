@@ -53,7 +53,7 @@ in
 
       xdg.config.files."fuzzel/fuzzel.ini".text = ''
         [main]
-        font="${config.local.appFont}:size=14"
+        font="${config.local.appFont}:size=13"
         terminal="${pkgs.ghostty}/bin/ghostty -e"
       '';
     };

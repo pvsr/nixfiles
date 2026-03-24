@@ -52,10 +52,6 @@ c.tabs.padding = { "bottom": 4, "left": 3, "right": 3, "top": 4 }
 
 c.url.open_base_url = True
 
-c.fonts.default_size = "14pt"
-c.fonts.hints = "bold 13pt default_family"
-c.fonts.prompts = "13pt sans_serif"
-
 config.bind("<Ctrl-w>", "rl-rubout ' /'", mode="command")
 config.bind("<Ctrl-w>", "rl-rubout ' /'", mode="prompt")
 
