@@ -29,17 +29,12 @@
       systemd.oomd.enableRootSlice = true;
       systemd.oomd.enableUserSlices = true;
 
-      zramSwap = {
-        enable = true;
-        algorithm = "zstd";
-      };
-      # https://wiki.archlinux.org/title/Zram#Optimizing_swap_on_zram
-      boot.kernel.sysctl = {
-        "vm.swappiness" = 180;
-        "vm.watermark_boost_factor" = 0;
-        "vm.watermark_scale_factor" = 125;
-        "vm.page-cluster" = 0;
-      };
+      boot.kernelParams = [
+        "zswap.enabled=1"
+        "zswap.compressor=lz4"
+        "zswap.max_pool_percent=20"
+        "zswap.shrinker_enabled=1"
+      ];
 
       # override srvos, needed by btrbk only
       security.sudo.execWheelOnly = lib.mkForce false;
