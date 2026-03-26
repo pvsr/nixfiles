@@ -18,6 +18,7 @@ in
           + builtins.readFile ./deploy.fish
         ))
       ];
+      srvos.update-diff.command = "${pkgs.dix}/bin/dix --color always";
     };
 
   flake.modules.hjem.core.fish.interactiveShellInit = # fish

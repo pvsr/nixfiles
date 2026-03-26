@@ -31,7 +31,6 @@ function _deploy_one -a host
     set root ~/.local/share/nix/gcroots/$host
     if not set -q _flag_remote; and test -d ~/.local/share/nix/gcroots
         set -a args --out-link $root
-        test -e $root; and set old_root (realpath $root)
     end
 
     set command (printf $_flag_command; or printf switch)
@@ -40,10 +39,6 @@ function _deploy_one -a host
 
     set -q commit
     and jj --color=always bookmark set $host -B -r $commit &>/dev/null
-
-    if set -q old_root
-        dix $old_root $root
-    end
 
     set highlight (set_color -o brmagenta)
     set reset (set_color normal)
