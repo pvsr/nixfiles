@@ -25,8 +25,6 @@
 
       packages = with pkgs; [
         uutils-coreutils-noprefix
-        sarasa-gothic
-        fantasque-sans-mono
       ];
 
       xdg.config.files."git/config".value.user.email = "price@hubspot.com";
