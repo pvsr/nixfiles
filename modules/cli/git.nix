@@ -35,6 +35,7 @@ in
         "git/ignore".text = ''
           .envrc
           .direnv
+          .ignore
           result*
           *.qcow2
           *.fd
