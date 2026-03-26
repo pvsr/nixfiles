@@ -96,6 +96,8 @@ in
           set -g fish_greeting
           set -g fish_key_bindings fish_hybrid_key_bindings
           bind -M insert ctrl-n down-or-search
+          bind -M insert ctrl-q push-line
+          bind -M default -m insert ctrl-q push-line
           set -g fish_cursor_default block
           set -g fish_cursor_insert line
           set -g fish_cursor_replace_one underscore
@@ -117,6 +119,15 @@ in
         '';
       }
       // lib.mapAttrs' mkFunction {
+        push-line = # fish
+          ''
+            set -g __fish_pushed_line (commandline)                                                           
+            commandline ""                                                                                    
+            function after-next-prompt --on-event fish_postexec                                               
+              commandline $__fish_pushed_line                                                                 
+              functions --erase after-next-prompt                                                             
+            end                                                                                               
+          '';
         session = # fish
           ''
               if set -q argv[1]
