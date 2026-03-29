@@ -9,7 +9,7 @@
       ];
 
       packages = with pkgs; [
-        (prismlauncher.override { jdks = [ jdk ]; })
+        (prismlauncher.override { jdks = [ jdk25 ]; })
         (spotifyd.override { withMpris = true; })
         sptlrx
       ];
