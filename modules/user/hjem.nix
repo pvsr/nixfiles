@@ -13,6 +13,7 @@ in
       hjemModule
       inputs.hjem.nixosModules.hjem
     ];
+    environment.persistence.nixos.directories = [ "/var/lib/hjem" ];
   };
   flake.modules.darwin.default = {
     imports = [
