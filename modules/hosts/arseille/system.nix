@@ -7,7 +7,7 @@
       user.shell = "${pkgs.fish}/bin/fish";
 
       nix.extraOptions = ''
-        experimental-features = nix-command flakes
+        experimental-features = nix-command flakes pipe-operators
       '';
 
       environment.packages = with pkgs; [
