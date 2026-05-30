@@ -130,7 +130,7 @@ in
           '';
         session = # fish
           ''
-              if set -q argv[1]
+            if set -q argv[1]
               set -gx fish_history $argv[1]
               set data_dir "$HOME/.local/share/zoxide/sessions/$argv[1]"
               mkdir -p $data_dir
@@ -138,7 +138,7 @@ in
               pushd (zoxide query 2> /dev/null; or echo .)
             else
               set -ge fish_history
-              set -ge _ZO_DATA
+              set -ge _ZO_DATA_DIR
               popd 2> /dev/null
             end
           '';

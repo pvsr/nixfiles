@@ -38,7 +38,5 @@
 
       # override srvos, needed by btrbk only
       security.sudo.execWheelOnly = lib.mkForce false;
-
-      services.dbus.implementation = "broker";
     };
 }
