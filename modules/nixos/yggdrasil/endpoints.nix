@@ -61,13 +61,9 @@ in
             }
           );
 
-        local.caddy.internalProxies =
-          (lib.mapAttrs' (
-            name: vhost: lib.nameValuePair vhost.fqdn "[${vhost.address}]:${toString vhost.port}"
-          ) cfg.endpoints)
-          // (lib.mapAttrs' (
-            name: vhost: lib.nameValuePair "http://${vhost.fqdn}" "[${vhost.address}]:${toString vhost.port}"
-          ) cfg.endpoints);
+        local.caddy.reverseProxies = lib.mapAttrs' (
+          name: vhost: lib.nameValuePair "http://${vhost.fqdn}" "[${vhost.address}]:${toString vhost.port}"
+        ) cfg.endpoints;
 
         local.testScript = ''
           interface = machine.succeed(

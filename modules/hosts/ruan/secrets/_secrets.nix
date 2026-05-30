@@ -12,6 +12,5 @@ builtins.listToAttrs (
     [
       "transmission-credentials.json.age"
       "miniflux-credentials.age"
-      "dns-token.age"
     ]
 )

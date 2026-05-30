@@ -55,11 +55,6 @@
         };
       };
 
-      age.secrets."dns-token" = {
-        file = ./secrets/dns-token.age;
-      };
-      systemd.services.caddy.serviceConfig.EnvironmentFile = config.age.secrets."dns-token".path;
-
       environment.persistence.data.enable = config.local.persistence.enable;
 
       services.komga.enable = true;

@@ -5,8 +5,7 @@ let
   domains.external = "code.pvsr.dev";
 in
 {
-  flake.modules.nixos.core.networking.hosts.${hosts.ruan.config.local.ip} = [ domains.external ];
-  local.desktops.ruan.local.caddy.internalProxies.${domains.external} = "${domains.internal}";
+  local.servers.crossbell.local.caddy.reverseProxies.${domains.external} = domains.internal;
 
   local.containers."code.ruan" =
     { config, pkgs, ... }:
