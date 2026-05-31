@@ -31,25 +31,24 @@ let
 
 in
 {
-  config.flake.modules.nixos.user =
-    { config, ... }:
-    {
-      imports = [
-        { inherit options; }
-        aliasModule
-      ];
-      local.user = {
-        isNormalUser = true;
-        extraGroups = [ "wheel" ];
-        inherit openssh;
-      };
-    };
-
-  config.flake.modules.darwin.default = {
+  config.flake.modules.nixos.user = {
     imports = [
       { inherit options; }
       aliasModule
     ];
+    local.user = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      inherit openssh;
+    };
+  };
+
+  config.flake.modules.darwin.default = { config, ... }: {
+    imports = [
+      { inherit options; }
+      aliasModule
+    ];
+    system.primaryUser = config.local.username;
     local.user = { inherit openssh; };
   };
 }
