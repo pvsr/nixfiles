@@ -15,11 +15,12 @@ in
             { name, ... }:
             let
               # from https://wiki.nixos.org/wiki/Yggdrasil#Virtual-hosts
-              digest = builtins.hashString "sha256" name;
-              hextets = builtins.genList (i: builtins.substring (4 * i) 4 digest) 4;
+              hash = builtins.hashString "sha256" name;
+              hextets = builtins.genList (i: builtins.substring (i * 4) 4 hash) 4;
+              inherit (builtins.fromTOML "rand = 0x${builtins.substring 0 8 hash}") rand;
               minPort = 18000;
               maxPort = 18999;
-              inherit (builtins.fromTOML "rand = 0x${builtins.substring 0 8 digest}") rand;
+              randomPort = minPort + lib.mod rand (maxPort - minPort);
             in
             {
               options = {
@@ -37,7 +38,7 @@ in
                 };
                 port = lib.mkOption {
                   type = lib.types.port;
-                  default = minPort + lib.mod rand (maxPort - minPort);
+                  default = randomPort;
                 };
               };
             }
