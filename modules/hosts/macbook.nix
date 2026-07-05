@@ -7,7 +7,7 @@
   flake.modules.darwin.default =
     { pkgs, ... }:
     {
-      local.user.name = "price";
+      local.username = "price";
       nix.enable = false;
       security.pki.installCACerts = false;
       system.keyboard.enableKeyMapping = true;

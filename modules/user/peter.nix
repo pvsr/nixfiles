@@ -1,6 +1,6 @@
 { lib, ... }:
 let
-  options.name = lib.mkOption {
+  options.local.username = lib.mkOption {
     type = lib.types.str;
     default = "peter";
   };
@@ -11,37 +11,45 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIObxXM22QQwNosuoH9UXhJWAm5PQOMtxEHGI3ElhsdCn peter@arseille"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJojCQs1VjUFaO/2dOq2N/zQgfRtBtFE7nLu3VpJZkwt price@jurai"
   ];
+  aliasModule =
+    { config, ... }:
+    {
+      imports = [
+        (lib.mkAliasOptionModule
+          [
+            "local"
+            "user"
+          ]
+          [
+            "users"
+            "users"
+            config.local.username
+          ]
+        )
+      ];
+    };
+
 in
 {
   config.flake.modules.nixos.user =
     { config, ... }:
-    let
-      cfg = config.local.user;
-    in
     {
-      options.local.user = {
-        inherit (options) name;
-        extraGroups = lib.mkOption {
-          type = with lib.types; listOf str;
-          default = [ ];
-          apply = groups: [ "wheel" ] ++ groups;
-        };
-      };
-
-      config.users.users.${cfg.name} = {
+      imports = [
+        { inherit options; }
+        aliasModule
+      ];
+      local.user = {
         isNormalUser = true;
-        inherit (cfg) extraGroups;
+        extraGroups = [ "wheel" ];
         inherit openssh;
       };
     };
 
-  config.flake.modules.darwin.default =
-    { config, ... }:
-    let
-      cfg = config.local.user;
-    in
-    {
-      options.local.user = { inherit (options) name; };
-      config.users.users.${cfg.name} = { inherit openssh; };
-    };
+  config.flake.modules.darwin.default = {
+    imports = [
+      { inherit options; }
+      aliasModule
+    ];
+    local.user = { inherit openssh; };
+  };
 }

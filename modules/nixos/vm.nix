@@ -2,7 +2,7 @@
   flake.modules.nixos.core =
     { config, lib, ... }:
     let
-      username = config.local.user.name;
+      username = config.local.username;
       userCfg = config.users.users.${username};
       vmVariant = {
         nixpkgs.hostPlatform = "x86_64-linux";

@@ -12,7 +12,7 @@
         podcastSubdir = "hosted-podcasts";
         fetch = {
           enable = true;
-          user = config.local.user.name;
+          user = config.local.username;
           group = "users";
           startAt = "0,8,16:0";
         };

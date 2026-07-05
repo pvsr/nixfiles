@@ -4,7 +4,7 @@
     { config, lib, ... }:
     let
       cfg = config.local.persistence;
-      username = config.local.user.name;
+      username = config.local.username;
       persistCfg = config.environment.persistence;
       persistDir = persistCfg.nixos.persistentStoragePath;
       sshPath = config.environment.persistence.nixos.persistentStoragePath + "/etc/ssh";

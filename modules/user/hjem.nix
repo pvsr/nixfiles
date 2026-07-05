@@ -3,7 +3,7 @@ let
   hjemModule =
     { config, ... }:
     {
-      hjem.users.${config.local.user.name}.enable = true;
+      hjem.users.${config.local.username}.enable = true;
       hjem.extraModules = [ inputs.self.modules.hjem.core ];
     };
 in
