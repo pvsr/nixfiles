@@ -1,10 +1,12 @@
+{ lib, ... }:
 {
   flake.modules.nixos.base = {
     time.timeZone = "America/New_York";
+    system.stateVersion = lib.mkDefault "26.05";
   };
 
   flake.modules.nixos.core =
-    { lib, pkgs, ... }:
+    { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [
         binutils
