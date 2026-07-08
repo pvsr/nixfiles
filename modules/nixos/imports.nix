@@ -7,6 +7,10 @@ in
     base.imports = [
       user
       "${modulesPath}/profiles/minimal.nix"
+      inputs.srvos.nixosModules.common
+    ];
+    base.disabledModules = [
+      "${inputs.srvos}/nixos/common/zfs.nix"
     ];
 
     core.imports = [

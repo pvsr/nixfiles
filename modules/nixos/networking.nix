@@ -12,12 +12,12 @@
         AuthenticationMethods = "publickey";
       };
     };
+
+    networking.nameservers = [ "94.140.14.14" ];
   };
 
   flake.modules.nixos.core = {
-    networking.nameservers = [ "94.140.14.14" ];
     services.openssh.enable = true;
-    services.openssh.startWhenNeeded = false;
   };
 
   flake.modules.nixos.desktop =
