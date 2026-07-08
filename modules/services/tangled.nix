@@ -40,8 +40,7 @@ in
       networking.firewall.allowedTCPPorts = [ 5555 ];
 
       services.tangled.knot = {
-        # TODO needs internet in VM
-        enable = false;
+        enable = true;
         server = {
           owner = "did:plc:l7ruokyumokt2tduqqvu33j6";
           hostname = external;
