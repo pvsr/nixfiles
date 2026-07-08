@@ -5,7 +5,7 @@
     networking.nftables.enable = true;
 
     services.openssh = {
-      openFirewall = false;
+      openFirewall = lib.mkDefault false;
       settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = false;

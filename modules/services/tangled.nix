@@ -9,7 +9,7 @@ in
     { pkgs, ... }:
     {
       local.caddy.reverseProxies.${external} = "${internal}:5555";
-      networking.firewall.allowedTCPPorts = [ 22 ];
+      services.openssh.openFirewall = true;
       systemd.services.knot-ssh = {
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {

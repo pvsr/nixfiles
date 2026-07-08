@@ -76,10 +76,8 @@ in
         ];
 
         boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 22;
-        networking.firewall.allowedTCPPorts = [
-          22
-          80
-        ];
+        services.openssh.openFirewall = true;
+        networking.firewall.allowedTCPPorts = [ 80 ];
         services.openssh.ports = [ 2222 ];
 
         services.forgejo = {
