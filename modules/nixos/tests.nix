@@ -26,6 +26,6 @@
           };
           inherit (self.nixosConfigurations.${name}.config.local) testScript;
         }
-      ) (config.local.hosts // config.local.resolvedContainers);
+      ) config.local.hosts;
     };
 }

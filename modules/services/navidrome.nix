@@ -1,9 +1,12 @@
-{ inputs, ... }:
+{ self, ... }:
+let
+  internalDomain =
+    self.nixosConfigurations.grancel.config.microvm.vms.navidrome.config.config.networking.fqdn;
+in
 {
-  local.servers.crossbell.local.caddy.reverseProxies."music.pvsr.dev" =
-    "music.${inputs.self.nixosConfigurations.ruan.config.networking.fqdn}";
+  local.servers.crossbell.local.caddy.reverseProxies."music.pvsr.dev" = internalDomain;
 
-  local.containers."music.ruan" =
+  local.desktops.grancel.vms.navidrome =
     { config, pkgs, ... }:
     {
       services.navidrome = {
@@ -12,11 +15,18 @@
         settings.Address = "[::]";
         settings.MusicFolder = "/var/lib/navidrome/annex/music";
       };
+
+      boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 80;
       networking.firewall.allowedTCPPorts = [ 80 ];
-      local.testScript = ''
-        machine.succeed("mkdir -p /var/lib/navidrome/annex/music")
-        machine.wait_for_unit("navidrome.service")
-        machine.wait_for_open_port(80)
-      '';
+
+      microvm.mem = 768;
+      microvm.shares = [
+        {
+          source = "/home/peter/annex";
+          mountPoint = "/var/lib/navidrome/annex";
+          tag = "music";
+          proto = "virtiofs";
+        }
+      ];
     };
 }
