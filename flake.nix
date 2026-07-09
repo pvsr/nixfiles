@@ -7,7 +7,6 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     hjem.url = "github:feel-co/hjem";
     hjem.inputs.nixpkgs.follows = "nixpkgs";
-    hjem.inputs.nix-darwin.follows = "nix-darwin";
     impermanence.url = "github:nix-community/impermanence";
     impermanence.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.inputs.home-manager.follows = "";
@@ -31,8 +30,9 @@
     niri.inputs.nixpkgs.follows = "nixpkgs";
     niri.inputs.nixpkgs-stable.follows = "nixpkgs";
 
-    tangled.url = "git+https://tangled.org/tangled.org/core";
+    tangled.url = "https://tangled.org/tangled.org/core/archive/master.tar.gz";
     tangled.inputs.nixpkgs.follows = "nixpkgs";
+    tangled.inputs.microvm.follows = "microvm";
 
     qbpm.url = "github:pvsr/qbpm";
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
