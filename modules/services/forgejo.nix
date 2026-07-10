@@ -71,7 +71,7 @@ in
             source = "/var/lib/forgejo";
             mountPoint = "/var/lib/forgejo";
             tag = "forgejo";
-            proto = "virtiofs";
+            inherit (config.microvm) proto;
           }
         ];
 

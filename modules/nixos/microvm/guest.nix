@@ -38,7 +38,7 @@
             source = "/nix/store";
             mountPoint = "/nix/.ro-store";
             tag = "ro-store";
-            proto = "virtiofs";
+            inherit (config.microvm) proto;
           }
         ];
       };

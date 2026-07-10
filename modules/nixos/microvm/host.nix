@@ -1,5 +1,13 @@
 { inputs, lib, ... }:
 {
+  flake.modules.nixos.base.options.microvm.proto = lib.mkOption {
+    type = lib.types.enum [
+      "9p"
+      "virtiofs"
+    ];
+    default = "virtiofs";
+  };
+
   flake.modules.nixos.core =
     { config, ... }:
     let
@@ -27,6 +35,7 @@
             {
               networking.hostName = name;
               networking.domain = config.networking.fqdn;
+              microvm.proto = config.microvm.proto;
             }
           ];
         }) vms;

@@ -25,7 +25,7 @@ in
           source = "/home/peter/annex";
           mountPoint = "/var/lib/navidrome/annex";
           tag = "music";
-          proto = "virtiofs";
+          inherit (config.microvm) proto;
         }
       ];
     };
