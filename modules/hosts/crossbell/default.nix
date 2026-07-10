@@ -64,10 +64,6 @@ in
 
       networking.firewall.allowedTCPPorts = [ 18325 ];
 
-      virtualisation.vmVariant = {
-        services.cloud-init.enable = false;
-      };
-
       system.stateVersion = "24.05";
     };
 
