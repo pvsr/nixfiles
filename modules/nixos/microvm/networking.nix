@@ -27,6 +27,7 @@
           bind-dynamic = true;
           domain-needed = true;
           no-resolv = true;
+          no-hosts = true;
           domain = config.networking.fqdn;
           local = "/${config.networking.fqdn}/";
           enable-ra = true;
