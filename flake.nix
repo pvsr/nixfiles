@@ -30,10 +30,6 @@
     niri.inputs.nixpkgs.follows = "nixpkgs";
     niri.inputs.nixpkgs-stable.follows = "nixpkgs";
 
-    tangled.url = "https://tangled.org/tangled.org/core/archive/master.tar.gz";
-    tangled.inputs.nixpkgs.follows = "nixpkgs";
-    tangled.inputs.microvm.follows = "microvm";
-
     qbpm.url = "github:pvsr/qbpm";
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
     podcasts.url = "github:pvsr/podcasts";
