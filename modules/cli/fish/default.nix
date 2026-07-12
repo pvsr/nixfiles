@@ -14,6 +14,16 @@ in
     {
       programs.fish.enable = true;
       programs.fish.useBabelfish = true;
+      programs.fish.interactiveShellInit = # fish
+        ''
+          abbr -a sc  'systemctl'
+          abbr -a ssc 'sudo systemctl'
+          abbr -a scu 'systemctl --user'
+          abbr -a jce 'journalctl -e'
+          abbr -a jcf 'journalctl -f'
+          abbr -a jcu 'journalctl -u'
+          abbr -a jcm 'sudo journalctl -M'
+        '';
       users.defaultUserShell = pkgs.fishMinimal;
       environment.systemPackages = [ (fishPrompt pkgs) ];
     };
@@ -106,14 +116,6 @@ in
             nn '--log-format internal-json -v 2&| nom --json'
           abbr -a --position anywhere --set-cursor -- \
             .c/ '$XDG_CONFIG_HOME/%'
-
-          abbr -a sc  'systemctl'
-          abbr -a ssc 'sudo systemctl'
-          abbr -a scu 'systemctl --user'
-          abbr -a jce 'journalctl -e'
-          abbr -a jcf 'journalctl -f'
-          abbr -a jcu 'journalctl -u'
-          abbr -a jcm 'sudo journalctl -M'
 
           ${cfg.interactiveShellInit}
         '';
