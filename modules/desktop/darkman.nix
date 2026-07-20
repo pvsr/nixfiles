@@ -28,7 +28,7 @@ in
       systemd.services.niri-screen-transition = modeToggleService {
         description = "Niri screen transition effect";
         script = ''
-          niri msg action do-screen-transition -d ''${UI_TRANSITION_MS:-250}
+          ${pkgs.niri}/bin/niri msg action do-screen-transition -d ''${UI_TRANSITION_MS:-250}
         '';
       };
 
