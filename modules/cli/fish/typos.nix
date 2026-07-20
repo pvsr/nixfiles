@@ -6,6 +6,7 @@
         suod = "sudo";
         shwo = "show";
         hsow = "show";
+        hlep = "help";
         conifg = "config";
         eanble = "enable";
         udpate = "update";
