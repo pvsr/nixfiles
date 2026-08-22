@@ -1,0 +1,27 @@
+name: "Flake.lock: update Nix dependencies"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 3,6'
+
+jobs:
+  nix-flake-update:
+    permissions:
+      contents: write
+      id-token: write
+      issues: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    env:
+      GIT_AUTHOR_NAME: Peter Rice (automated)
+      GIT_COMMITTER_NAME: Peter Rice (automated)
+      GIT_AUTHOR_EMAIL: noreply@pvsr.dev
+      GIT_COMMITTER_EMAIL: noreply@pvsr.dev
+    steps:
+      - uses: actions/checkout@v6
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - uses: DeterminateSystems/update-flake-lock@main
+        with:
+          pr-title: "Update Nix flake inputs"
+          pr-labels: automated
