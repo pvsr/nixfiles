@@ -18,6 +18,7 @@ let
       publicKey = "3039c43ca2825e2067f06121aa878fa25d5c0e3a1a7f74ed56afec67e4798e55";
     };
     arseille.publicKey = "9e01e6718db245dfe61d8afdff062a9fd4bd06dbee16cbeb0803610c1b53bba0";
+    router.publicKey = "ccf9bac10c0db4039eeebad3447b6357513a8b8040cdc35806abf7f3999f53f8";
   };
 in
 {
