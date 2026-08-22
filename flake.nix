@@ -26,10 +26,6 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
     agenix.inputs.home-manager.follows = "";
 
-    niri.url = "github:sodiboo/niri-flake";
-    niri.inputs.nixpkgs.follows = "nixpkgs";
-    niri.inputs.nixpkgs-stable.follows = "nixpkgs";
-
     qbpm.url = "github:pvsr/qbpm";
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
     podcasts.url = "github:pvsr/podcasts";

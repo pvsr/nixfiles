@@ -24,7 +24,7 @@
 
       security.sudo.wheelNeedsPassword = false;
 
-      programs.ssh.startAgent = true;
+      programs.ssh.startAgent = lib.mkDefault true;
 
       services.fstrim.enable = true;
 
