@@ -17,8 +17,11 @@ let
       address = "202:7e31:de1a:ebed:efc:c07c:f6f2:abc3";
       publicKey = "3039c43ca2825e2067f06121aa878fa25d5c0e3a1a7f74ed56afec67e4798e55";
     };
+    router = {
+      address = "200:660c:8a7d:e7e4:97f8:c222:8a59:7709";
+      publicKey = "ccf9bac10c0db4039eeebad3447b6357513a8b8040cdc35806abf7f3999f53f8";
+    };
     arseille.publicKey = "9e01e6718db245dfe61d8afdff062a9fd4bd06dbee16cbeb0803610c1b53bba0";
-    router.publicKey = "ccf9bac10c0db4039eeebad3447b6357513a8b8040cdc35806abf7f3999f53f8";
   };
 in
 {
@@ -37,6 +40,9 @@ in
 
   flake.modules.nixos.yggdrasilGateway.services.yggdrasil.settings.AllowedPublicKeys =
     map (builtins.getAttr "publicKey") (builtins.attrValues hosts);
+
+  router.hosts =
+    hosts |> lib.filterAttrs (_: host: host ? "address") |> builtins.mapAttrs (_: host: host.address);
 
   local.servers.crossbell.imports = [ self.modules.nixos.yggdrasilGateway ];
 }

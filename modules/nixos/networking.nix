@@ -13,7 +13,7 @@
       };
     };
 
-    networking.nameservers = [ "94.140.14.14" ];
+    networking.nameservers = [ "192.168.1.1" ];
   };
 
   flake.modules.nixos.core = {

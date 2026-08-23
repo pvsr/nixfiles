@@ -1,6 +1,6 @@
-{
+{ lib, self, ... }: {
   flake.modules.nixos.core =
-    { lib, config, ... }:
+    { config, ... }:
     let
       bridge = "microvm";
     in
@@ -54,4 +54,12 @@
         };
       };
     };
+
+  router.servers =
+    self.nixosConfigurations
+    |> lib.filterAttrs (_: host: !(host.config ? microvm && host.config.microvm ? guest))
+    |> lib.filterAttrs (_: host: host.config.microvm.host.enable)
+    |> lib.mapAttrsToList (
+      _: host: "/*.${host.config.networking.fqdn}/${host.config.local.prefix}::1/"
+    );
 }
