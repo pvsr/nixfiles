@@ -1,15 +1,18 @@
 { lib, config, ... }:
 let
-  domain = "ygg.pvsr.dev";
   cfg = config.router;
 in
 {
   config.flake.modules.nixos.core.networking = {
-    domain = lib.mkDefault domain;
-    search = [ domain ];
+    domain = lib.mkDefault cfg.domain;
+    search = [ cfg.domain ];
   };
 
   options.router = {
+    domain = lib.mkOption {
+      default = "ygg.pvsr.dev";
+      readOnly = true;
+    };
     hosts = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
     };
@@ -18,12 +21,17 @@ in
     };
   };
 
+  config.flake.modules.hjem.core.ssh.config = ''
+    Host router router.${cfg.domain}
+      User root
+  '';
+
   config.perSystem =
     { pkgs, ... }:
     let
       dnsmasqHosts =
         cfg.hosts
-        |> lib.mapAttrsToList (name: address: "${address} ${name}.${domain}\n")
+        |> lib.mapAttrsToList (name: address: "${address} ${name}.${cfg.domain}\n")
         |> lib.concatStrings
         |> pkgs.writeText "dnsmasq.hosts";
       dnsmasqServers =
@@ -45,7 +53,7 @@ in
           for var in hosts servers
             set dest /etc/dnsmasq.$var
             echo Deploying $dest
-            ${pkgs.openssh}/bin/ssh root@router "cat > $dest" < $$var
+            ${pkgs.openssh}/bin/ssh router "cat > $dest" < $$var
           end
         '';
       };
