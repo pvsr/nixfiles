@@ -33,7 +33,7 @@
     weather.url = "github:pvsr/weather";
     weather.inputs.nixpkgs.follows = "nixpkgs";
 
-    srcery-textmate.url = "github:srcery-colors/srcery-textmate";
+    srcery-textmate.url = "github:srcery-colors/srcery-textmate/738197f9d42c677d866c6d98fd348f6bb5b308fc";
     srcery-textmate.flake = false;
 
     fzf-fish.url = "github:pvsr/fzf.fish";

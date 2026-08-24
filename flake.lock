@@ -549,16 +549,17 @@
     "srcery-textmate": {
       "flake": false,
       "locked": {
-        "lastModified": 1786309750,
-        "narHash": "sha256-GfiR4DrLJMi0nf4mYVhzMNYPvzGXH/r4a7eq8vFwgC4=",
+        "lastModified": 1746286527,
+        "narHash": "sha256-WjaJAc3Ty5ZSGkbSf4j107f5b7pizr4W6hKWBL21luA=",
         "owner": "srcery-colors",
         "repo": "srcery-textmate",
-        "rev": "8795f1b1809a34e397dd296c05b34d922ab8508e",
+        "rev": "738197f9d42c677d866c6d98fd348f6bb5b308fc",
         "type": "github"
       },
       "original": {
         "owner": "srcery-colors",
         "repo": "srcery-textmate",
+        "rev": "738197f9d42c677d866c6d98fd348f6bb5b308fc",
         "type": "github"
       }
     },
