@@ -14,8 +14,7 @@
           pkgs.xwayland-satellite
         ];
 
-        # conflicts with gnome keyring
-        programs.ssh.startAgent = false;
+        services.gnome.gcr-ssh-agent.enable = false;
       };
     };
 
