@@ -49,6 +49,8 @@ in
         t.assertEqual("308->https://pvsr.dev/", result)
       '';
 
+      networking.nameservers = lib.mkForce [ router.ip ];
+
       services.openssh.listenAddresses = [
         {
           addr = "0.0.0.0";

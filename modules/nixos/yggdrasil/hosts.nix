@@ -41,6 +41,7 @@ in
   flake.modules.nixos.yggdrasilGateway.services.yggdrasil.settings.AllowedPublicKeys =
     map (builtins.getAttr "publicKey") (builtins.attrValues hosts);
 
+  router.ip = hosts.router.address;
   router.hosts =
     hosts |> lib.filterAttrs (_: host: host ? "address") |> builtins.mapAttrs (_: host: host.address);
 

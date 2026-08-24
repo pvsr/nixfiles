@@ -13,6 +13,9 @@ in
       default = "ygg.pvsr.dev";
       readOnly = true;
     };
+    ip = lib.mkOption {
+      type = lib.types.str;
+    };
     hosts = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
     };
