@@ -6,7 +6,11 @@
 
     config.files = {
       ".ssh/config" = {
-        text = "Include ssh_config.d/*.conf";
+        text = ''
+          AddKeysToAgent yes
+
+          Include ssh_config.d/*.conf
+        '';
         clobber = false;
       };
       ".ssh/ssh_config.d/hjem.conf".text = config.ssh.config;
