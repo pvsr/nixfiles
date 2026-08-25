@@ -1,4 +1,13 @@
-{ lib, self, ... }: {
+{
+  lib,
+  self,
+  config,
+  ...
+}:
+let
+  inherit (config) router;
+in
+{
   flake.modules.nixos.core =
     { config, ... }:
     let
@@ -32,7 +41,7 @@
           no-resolv = true;
           no-hosts = true;
           domain = config.networking.fqdn;
-          local = "/${config.networking.fqdn}/";
+          server = [ router.ip ];
           enable-ra = true;
           dhcp-range = [
             "10.0.0.2,10.0.0.255"
@@ -45,6 +54,8 @@
           67
           547
         ];
+
+        networking.firewall.interfaces.${bridge}.allowedTCPPorts = [ 22 ];
 
         networking.nat = {
           enable = true;
