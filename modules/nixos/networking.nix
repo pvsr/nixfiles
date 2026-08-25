@@ -12,8 +12,6 @@
         AuthenticationMethods = "publickey";
       };
     };
-
-    networking.nameservers = [ "192.168.1.1" ];
   };
 
   flake.modules.nixos.core = {
