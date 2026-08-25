@@ -14,7 +14,8 @@
         sptlrx
       ];
 
-      niri.extraConfig = ''output "HDMI-A-2" { variable-refresh-rate; }'';
+      # niri.extraConfig = ''output "HDMI-A-2" { variable-refresh-rate; }'';
+      niri.extraConfig = ''output "HDMI-A-2" { scale 2.0; }'';
 
       systemd.services.mpris-proxy = {
         unitConfig = {
