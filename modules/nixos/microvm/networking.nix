@@ -70,7 +70,5 @@ in
     self.nixosConfigurations
     |> lib.filterAttrs (_: host: !(host.config ? microvm && host.config.microvm ? guest))
     |> lib.filterAttrs (_: host: host.config.microvm.host.enable)
-    |> lib.mapAttrsToList (
-      _: host: "/*.${host.config.networking.fqdn}/${host.config.local.prefix}::1/"
-    );
+    |> lib.mapAttrsToList (_: host: "/*.${host.config.networking.fqdn}/${host.config.local.prefix}::1");
 }
