@@ -19,6 +19,14 @@ and begin
     set flake "$flake?rev=$commit&ref=$commit"
 end
 
+set highlight (set_color -o brmagenta)
+set reset (set_color normal)
+function _deploy_success -a seed -a dest
+    random (echo -n $seed | sum | cut -d' ' -f1)
+    set icon (random choice 🌸 🌼 🌻 🌺 🌷 🍄 🍀 🌳)
+    echo \nDeployed $icon$highlight$dest$reset$icon
+end
+
 function _deploy_one -a host
     set host (string replace .$domain '' $host)
     set host_url $host.$domain
@@ -40,18 +48,23 @@ function _deploy_one -a host
     set -q commit
     and jj --color=always bookmark set $host -B -r $commit &>/dev/null
 
-    set highlight (set_color -o brmagenta)
-    set reset (set_color normal)
-    random (echo -n $host | sum | cut -d' ' -f1)
-    set icon (random choice 🌸 🌼 🌻 🌺 🌷 🍄 🍀 🌳)
-    echo \nDeployed $icon$highlight$host_url$reset$icon
+    _deploy_success $host $host_url
+end
+
+function _deploy_router
+    nix run $flake#deploy-router
+    and _deploy_success router router.$domain
 end
 
 if not set -q argv[1]
     set argv (hostname -f)
 end
 for arg in $argv
-    _deploy_one $arg
+    if test $arg = router
+        _deploy_router
+    else
+        _deploy_one $arg
+    end
 end
 
-functions -e _deploy_one
+functions -e _deploy_one _deploy_router _deploy_success

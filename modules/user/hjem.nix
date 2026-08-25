@@ -5,6 +5,7 @@ let
     {
       hjem.users.${config.local.username}.enable = true;
       hjem.extraModules = [ inputs.self.modules.hjem.core ];
+      hjem.clobberByDefault = true;
     };
 in
 {

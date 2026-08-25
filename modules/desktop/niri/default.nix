@@ -1,29 +1,20 @@
-{ inputs, lib, ... }:
+{ lib, ... }:
 {
   flake.modules.nixos.desktop =
     { config, pkgs, ... }:
-    let
-      inherit (pkgs.stdenv.hostPlatform) system;
-    in
     {
-      imports = [
-        inputs.niri.nixosModules.niri
-      ];
-
       options.local.niri.enable = lib.mkOption { default = true; };
 
       config = lib.mkIf config.local.niri.enable {
 
         programs.niri.enable = true;
-        programs.niri.package = inputs.niri.packages.${system}.niri-unstable;
+        programs.niri.useNautilus = false;
 
         environment.systemPackages = [
-          inputs.niri.packages.${system}.xwayland-satellite-unstable
+          pkgs.xwayland-satellite
         ];
 
-        systemd.user.services.niri-flake-polkit.serviceConfig.ExecStart =
-          lib.mkForce "${pkgs.mate-polkit}/libexec/polkit-mate-authentication-agent-1";
-        services.gnome.gnome-keyring.enable = lib.mkForce false;
+        services.gnome.gcr-ssh-agent.enable = false;
       };
     };
 

@@ -1,4 +1,5 @@
-{ lib, ... }:
+{ config, lib, ... }:
+
 {
   # srcery
   options.local.colors = lib.mkOption {
@@ -40,6 +41,36 @@
 
       hardBlack = "#121212";
     };
+  };
+
+  config.flake.modules.nixOnDroid.base.terminal.colors = with config.local.colors; {
+    foreground = brightWhite;
+    background = black;
+    cursor = yellow;
+    # Black
+    color0 = black;
+    color8 = brightBlack;
+    # Red
+    color1 = red;
+    color9 = brightRed;
+    # Green
+    color2 = green;
+    color10 = brightGreen;
+    # Yellow
+    color3 = yellow;
+    color11 = brightYellow;
+    # Blue
+    color4 = blue;
+    color12 = brightBlue;
+    # Magenta
+    color5 = magenta;
+    color13 = brightMagenta;
+    # Cyan
+    color6 = cyan;
+    color14 = brightCyan;
+    # White
+    color7 = white;
+    color15 = brightWhite;
   };
 
 }

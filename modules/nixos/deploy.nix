@@ -1,22 +1,25 @@
-{ config, ... }:
+{ self, config, ... }:
 let
   hosts = config.flake.nixosConfigurations;
   hostnames = builtins.attrNames hosts;
   inherit (hosts.grancel.config.networking) domain fqdn;
-
 in
 {
+  perSystem = { pkgs, ... }: {
+    packages.deploy = pkgs.writers.writeFishBin "deploy" (
+      ''
+        set grancel ${fqdn}
+        set domain ${domain}
+      ''
+      + builtins.readFile ./deploy.fish
+    );
+  };
+
   flake.modules.nixos.core =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       environment.systemPackages = [
-        (pkgs.writers.writeFishBin "deploy" (
-          ''
-            set grancel ${fqdn}
-            set domain ${domain}
-          ''
-          + builtins.readFile ./deploy.fish
-        ))
+        self.packages.${pkgs.stdenv.hostPlatform.system}.deploy
       ];
       srvos.update-diff.command = "${pkgs.dix}/bin/dix --color always";
     };

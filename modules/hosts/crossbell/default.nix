@@ -1,5 +1,7 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 let
+  inherit (config) router;
+  port = 18325;
   ruan = inputs.self.nixosConfigurations.ruan.config.networking.fqdn;
 in
 {
@@ -47,14 +49,16 @@ in
         t.assertEqual("308->https://pvsr.dev/", result)
       '';
 
+      networking.nameservers = [ router.ip ];
+
       services.openssh.listenAddresses = [
         {
           addr = "0.0.0.0";
-          port = 18325;
+          inherit port;
         }
         {
           addr = "[::]";
-          port = 18325;
+          inherit port;
         }
         {
           addr = "[${config.local.ip}]";
@@ -62,10 +66,15 @@ in
         }
       ];
 
-      networking.firewall.allowedTCPPorts = [ 18325 ];
+      networking.firewall.allowedTCPPorts = [ port ];
 
       system.stateVersion = "24.05";
     };
 
   flake.modules.nixos.test.services.cloud-init.enable = false;
+
+  flake.modules.hjem.core.ssh.config = ''
+    Host crossbell crossbell.${router.domain}
+      Port ${toString port}
+  '';
 }

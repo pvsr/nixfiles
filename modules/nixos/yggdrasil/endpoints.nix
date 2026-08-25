@@ -72,7 +72,12 @@ in
             "${pkgs.jq}/bin/jq -r '.Interfaces[].Name' | " \
             "grep -E '^e(n|th)' | head -1"
           ).strip()
-          endpoints = ${cfg.endpoints |> builtins.attrValues |> builtins.length |> toString}
+          endpoints = ${
+            cfg.endpoints
+            |> builtins.attrValues
+            |> builtins.length
+            |> toString
+          }
           machine.wait_until_succeeds(
             f"networkctl status {interface} --json short | " \
             f"${pkgs.jq}/bin/jq '.Addresses | length' | grep {endpoints + 1}",
@@ -82,10 +87,9 @@ in
       };
     };
 
-  flake.modules.nixos.yggdrasilNameServer.networking.hosts = lib.concatMapAttrs (
+  router.hosts = lib.concatMapAttrs (
     hostname: host:
-    host.config.local.endpoints
-    |> lib.mapAttrs' (name: vhost: lib.nameValuePair vhost.address [ vhost.fqdn ])
+    host.config.local.endpoints |> lib.mapAttrs' (name: vhost: lib.nameValuePair name vhost.address)
   ) hosts;
 
   local.servers.crossbell.local.caddy.reverseProxies = lib.concatMapAttrs (
