@@ -23,6 +23,7 @@
       fileSystems."/run/media/host" = lib.mkIf onMacos {
         device = "share";
         fsType = "virtiofs";
+        options = [ "nofail" ];
       };
 
       services.spice-vdagentd.enable = true;
