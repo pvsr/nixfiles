@@ -1,6 +1,6 @@
 {
   local.desktops.grancel.fileSystems."/run/media/valleria" = {
-    device = "/dev/disk/by-label/valleria";
+    device = "/dev/disk/by-partlabel/disk-valleria";
     fsType = "bcachefs";
     options = [
       "nofail"
