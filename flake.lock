@@ -117,24 +117,6 @@
         "type": "github"
       }
     },
-    "flake-parts_3": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_3"
-      },
-      "locked": {
-        "lastModified": 1772408722,
-        "narHash": "sha256-rHuJtdcOjK7rAHpHphUb1iCvgkU3GpfvicLMwwnfMT0=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "f20dc5d9b8027381c474144ecabc9034d6a839a3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "fzf-fish": {
       "flake": false,
       "locked": {
@@ -377,21 +359,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-lib_3": {
-      "locked": {
-        "lastModified": 1772328832,
-        "narHash": "sha256-e+/T/pmEkLP6BHhYjx6GmwP5ivonQQn0bJdH9YrRB+Q=",
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "rev": "c185c7a5e5dd8f9add5b2f8ebeff00888b070742",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
     "nmd": {
       "inputs": {
         "nixpkgs": [
@@ -510,8 +477,7 @@
         "podcasts": "podcasts",
         "qbpm": "qbpm",
         "srcery-textmate": "srcery-textmate",
-        "srvos": "srvos",
-        "weather": "weather"
+        "srvos": "srvos"
       }
     },
     "scss-reset": {
@@ -595,27 +561,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "weather": {
-      "inputs": {
-        "flake-parts": "flake-parts_3",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1773592421,
-        "narHash": "sha256-vjRRIsWoYVHL1nyCIUJ9bWtp46ZEtJ6Bia70hHqG6Q0=",
-        "owner": "pvsr",
-        "repo": "weather",
-        "rev": "9ec0248414942e9480c063c5c8d7e473ef21eafa",
-        "type": "github"
-      },
-      "original": {
-        "owner": "pvsr",
-        "repo": "weather",
         "type": "github"
       }
     }

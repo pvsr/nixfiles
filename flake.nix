@@ -30,8 +30,6 @@
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
     podcasts.url = "github:pvsr/podcasts";
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
-    weather.url = "github:pvsr/weather";
-    weather.inputs.nixpkgs.follows = "nixpkgs";
 
     srcery-textmate.url = "github:srcery-colors/srcery-textmate/738197f9d42c677d866c6d98fd348f6bb5b308fc";
     srcery-textmate.flake = false;
