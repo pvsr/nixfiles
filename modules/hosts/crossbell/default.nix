@@ -28,6 +28,7 @@ in
 
       local.caddy = {
         virtualHosts = {
+          "peterrice.xyz".extraConfig = "redir https://pvsr.dev";
           "www.peterrice.xyz".extraConfig = "redir https://pvsr.dev";
           "www.pvsr.dev".extraConfig = "redir https://pvsr.dev";
           "podcasts.peterrice.xyz".extraConfig = ''
