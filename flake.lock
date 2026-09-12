@@ -65,6 +65,38 @@
         "type": "github"
       }
     },
+    "evergarden": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784301402,
+        "narHash": "sha256-TJCKzZguxOAAKxBS7LnD9P8x7XDPnTLGDeMNL460hEI=",
+        "rev": "8530473132da0570bab680e9e7bb359d5c02bc7c",
+        "type": "tarball",
+        "url": "https://codeberg.org/api/v1/repos/evergarden/nix/archive/8530473132da0570bab680e9e7bb359d5c02bc7c.tar.gz?rev=8530473132da0570bab680e9e7bb359d5c02bc7c"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://codeberg.org/evergarden/nix/archive/main.tar.gz"
+      }
+    },
+    "evergarden-qutebrowser": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773782995,
+        "narHash": "sha256-kirQsMBCVaRZ88iKObEmdz2pmpgivC+xHOwCqQ2Btqw=",
+        "rev": "c2927a1d7c6f0313ea51a3312ea6f8e7eb48bc23",
+        "type": "tarball",
+        "url": "https://codeberg.org/api/v1/repos/evergarden/qutebrowser/archive/c2927a1d7c6f0313ea51a3312ea6f8e7eb48bc23.tar.gz?rev=c2927a1d7c6f0313ea51a3312ea6f8e7eb48bc23"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://codeberg.org/evergarden/qutebrowser/archive/main.tar.gz"
+      }
+    },
     "fish-prompt-pvsr": {
       "flake": false,
       "locked": {
@@ -484,6 +516,8 @@
       "inputs": {
         "agenix": "agenix",
         "disko": "disko",
+        "evergarden": "evergarden",
+        "evergarden-qutebrowser": "evergarden-qutebrowser",
         "fish-prompt-pvsr": "fish-prompt-pvsr",
         "flake-parts": "flake-parts",
         "fzf-fish": "fzf-fish",
@@ -497,7 +531,6 @@
         "noctalia": "noctalia",
         "podcasts": "podcasts",
         "qbpm": "qbpm",
-        "srcery-textmate": "srcery-textmate",
         "srvos": "srvos"
       }
     },
@@ -531,23 +564,6 @@
       "original": {
         "type": "git",
         "url": "https://spectrum-os.org/git/spectrum"
-      }
-    },
-    "srcery-textmate": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1746286527,
-        "narHash": "sha256-WjaJAc3Ty5ZSGkbSf4j107f5b7pizr4W6hKWBL21luA=",
-        "owner": "srcery-colors",
-        "repo": "srcery-textmate",
-        "rev": "738197f9d42c677d866c6d98fd348f6bb5b308fc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "srcery-colors",
-        "repo": "srcery-textmate",
-        "rev": "738197f9d42c677d866c6d98fd348f6bb5b308fc",
-        "type": "github"
       }
     },
     "srvos": {

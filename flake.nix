@@ -34,8 +34,10 @@
     noctalia.url = "github:noctalia-dev/noctalia-shell";
     noctalia.inputs.nixpkgs.follows = "nixpkgs";
 
-    srcery-textmate.url = "github:srcery-colors/srcery-textmate/738197f9d42c677d866c6d98fd348f6bb5b308fc";
-    srcery-textmate.flake = false;
+    evergarden.url = "https://codeberg.org/evergarden/nix/archive/main.tar.gz";
+    evergarden.inputs.nixpkgs.follows = "nixpkgs";
+    evergarden-qutebrowser.url = "https://codeberg.org/evergarden/qutebrowser/archive/main.tar.gz";
+    evergarden-qutebrowser.flake = false;
 
     fzf-fish.url = "github:pvsr/fzf.fish";
     fzf-fish.flake = false;

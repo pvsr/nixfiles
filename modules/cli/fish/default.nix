@@ -100,7 +100,6 @@ in
           echo 'status is-interactive; or exit' > $out
           ${pkgs.zoxide}/bin/zoxide init fish >> $out
         '';
-        "fish/themes/magenta.theme".source = ./magenta.theme;
         "fish/config.fish".source = writeFish "config.fish" ''
           status is-interactive; or exit
           set -g fish_greeting

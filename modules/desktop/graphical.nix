@@ -14,26 +14,5 @@
     xdg.mime.enable = true;
     xdg.sounds.enable = true;
     xdg.autostart.enable = lib.mkForce false;
-
-    console.colors =
-      with config.local.colors;
-      map (builtins.substring 1 (-1)) [
-        black
-        red
-        green
-        yellow
-        blue
-        magenta
-        cyan
-        white
-        brightBlack
-        brightRed
-        brightGreen
-        brightYellow
-        brightBlue
-        brightMagenta
-        brightCyan
-        brightWhite
-      ];
   };
 }

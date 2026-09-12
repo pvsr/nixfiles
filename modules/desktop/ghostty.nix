@@ -1,13 +1,18 @@
-{ config, ... }:
+{ config, lib, ... }:
+let
+  inherit (config.local) appFont;
+in
 {
+  flake.modules.hjem.core.options.ghostty.theme = lib.mkOption { type = lib.types.str; };
+
   flake.modules.hjem.desktop =
-    { lib, pkgs, ... }:
+    { config, pkgs, ... }:
     {
       packages = [ pkgs.ghostty ];
       xdg.config.files."ghostty/config".text = ''
-        theme = light:Flexoki Light,dark:Srcery
+        theme = ${config.ghostty.theme}
         command = fish
-        font-family = ${config.local.appFont}
+        font-family = ${appFont}
         font-size = 14
         cursor-style-blink = false
         shell-integration-features = no-cursor
