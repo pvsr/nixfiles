@@ -4,19 +4,8 @@ let
     { pkgs, ... }:
     {
       packages = with pkgs; [
-        mako
         clipman
       ];
-
-      xdg.config.files."mako/config".text = with config.local.colors; ''
-        font=${config.local.appFont} 14
-        background-color=${brightBlue}
-        border-color=${blue}
-        text-color=${xgray1}
-      '';
-
-      xdg.data.files."dbus-1/services/fr.emersion.mako.service".source =
-        "${pkgs.mako}/share/dbus-1/services/fr.emersion.mako.service";
 
       # from home-manager
       systemd.services.clipman = {
