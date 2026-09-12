@@ -1,19 +1,15 @@
-{ config, lib, ... }:
-let
-  inherit (config.local) appFont;
-in
+{ lib, ... }:
 {
-  flake.modules.hjem.core.options.ghostty.theme = lib.mkOption { type = lib.types.str; };
+  flake.modules.hjem.core.options.ghostty.extraConfig = lib.mkOption {
+    type = lib.types.lines;
+    default = "";
+  };
 
   flake.modules.hjem.desktop =
     { config, pkgs, ... }:
     {
       packages = [ pkgs.ghostty ];
       xdg.config.files."ghostty/config".text = ''
-        theme = ${config.ghostty.theme}
-        command = fish
-        font-family = ${appFont}
-        font-size = 14
         cursor-style-blink = false
         shell-integration-features = no-cursor
         mouse-hide-while-typing = true
@@ -42,6 +38,7 @@ in
         keybind = alt+8=unbind
         keybind = alt+9=unbind
         keybind = alt+0=unbind
+        ${config.ghostty.extraConfig}
       '';
     };
 

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ lib, ... }:
 let
   services =
     { pkgs, ... }:
@@ -44,8 +44,13 @@ in
       services.playerctld.enable = true;
     };
 
+  flake.modules.hjem.core.options.fuzzel.extraConfig = lib.mkOption {
+    type = lib.types.lines;
+    default = "";
+  };
+
   flake.modules.hjem.desktop =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       imports = [ services ];
 
@@ -53,8 +58,8 @@ in
 
       xdg.config.files."fuzzel/fuzzel.ini".text = ''
         [main]
-        font="${config.local.appFont}:size=13"
         terminal="${pkgs.ghostty}/bin/ghostty -e"
+        ${config.fuzzel.extraConfig}
       '';
     };
 }

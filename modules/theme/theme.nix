@@ -18,7 +18,7 @@ in
       xdg.config.files."helix/themes/${darkTheme}.toml".source =
         "${themePkgs.helix}/evergarden_${darkVariant}_${accent}.toml";
 
-      ghostty.theme = "light:Flexoki Light,dark:${darkTheme}";
+      ghostty.extraConfig = "theme = light:Flexoki Light,dark:${darkTheme}";
       xdg.config.files."ghostty/themes/${darkTheme}".source =
         "${themePkgs.ghostty}/${darkTheme}-${accent}.yml";
 

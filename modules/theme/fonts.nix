@@ -1,4 +1,7 @@
-{ lib, ... }:
+{ config, lib, ... }:
+let
+  inherit (config.local) appFont;
+in
 {
   options.local = {
     appFont = lib.mkOption {
@@ -27,6 +30,14 @@
         sansSerif = [ "DejaVu Sans" ];
       };
     };
+
+  config.flake.modules.hjem.desktop = {
+    fuzzel.extraConfig = ''font="${appFont}:size=13"'';
+    ghostty.extraConfig = ''
+      font-family = ${appFont}
+      font-size = 14
+    '';
+  };
 
   config.flake.modules.hjem.macbook =
     { pkgs, ... }:
