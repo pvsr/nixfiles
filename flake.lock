@@ -397,6 +397,26 @@
         "type": "gitlab"
       }
     },
+    "noctalia": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789176111,
+        "narHash": "sha256-yMDcKnbjtinVb+1B/gnxGtQ1IUhUcHyIE4jHvUm/KT0=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "9f35ead435feaa3cc6bcfc6585433abc9ae4db17",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "type": "github"
+      }
+    },
     "podcasts": {
       "inputs": {
         "flake-parts": "flake-parts_2",
@@ -474,6 +494,7 @@
         "nix-darwin": "nix-darwin",
         "nix-on-droid": "nix-on-droid",
         "nixpkgs": "nixpkgs",
+        "noctalia": "noctalia",
         "podcasts": "podcasts",
         "qbpm": "qbpm",
         "srcery-textmate": "srcery-textmate",

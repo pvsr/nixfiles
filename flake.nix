@@ -31,6 +31,9 @@
     podcasts.url = "github:pvsr/podcasts";
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
 
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs";
+
     srcery-textmate.url = "github:srcery-colors/srcery-textmate/738197f9d42c677d866c6d98fd348f6bb5b308fc";
     srcery-textmate.flake = false;
 
