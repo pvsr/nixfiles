@@ -1,6 +1,7 @@
 { self, ... }:
 let
   domain = "code.pvsr.dev";
+  sshListenPort = 2222;
   settings = {
     server = {
       PROTOCOL = "http";
@@ -10,6 +11,7 @@ let
       ROOT_URL = "https://${domain}";
       START_SSH_SERVER = true;
       SSH_LISTEN_HOST = "::";
+      SSH_LISTEN_PORT = sshListenPort;
       BUILTIN_SSH_SERVER_USER = "git";
     };
     DEFAULT.APP_NAME = domain;
@@ -75,12 +77,11 @@ in
           }
         ];
 
-        boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 22;
+        boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 80;
         networking.firewall.allowedTCPPorts = [
-          22
           80
+          sshListenPort
         ];
-        services.openssh.ports = [ 2222 ];
 
         services.forgejo = {
           enable = true;
@@ -92,6 +93,21 @@ in
 
   local.desktops.grancel.imports = [ self.modules.nixos.forgejo ];
 
-  local.servers.crossbell.local.caddy.reverseProxies.${domain} =
-    self.nixosConfigurations.grancel.config.microvm.vms.forgejo.config.config.networking.fqdn;
+  local.servers.crossbell =
+    { pkgs, ... }:
+    let
+      internal =
+        self.nixosConfigurations.grancel.config.microvm.vms.forgejo.config.config.networking.fqdn;
+    in
+    {
+      local.caddy.reverseProxies.${domain} = internal;
+      networking.firewall.allowedTCPPorts = [ 22 ];
+      systemd.services.forward-forgejo-ssh = {
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          ExecStart = "${pkgs.socat}/bin/socat TCP-LISTEN:22,fork,reuseaddr TCP6:${internal}:${toString sshListenPort}";
+          Restart = "always";
+        };
+      };
+    };
 }
