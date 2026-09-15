@@ -22,6 +22,7 @@ in
       xdg.config.files."ghostty/themes/${darkTheme}".source =
         "${themePkgs.ghostty}/${darkTheme}-${accent}.yml";
 
+      fish.interactiveShellInit = "fish_config theme choose evergarden";
       xdg.config.files."fish/themes/evergarden.theme".text = builtins.concatStringsSep "\n" [
         (builtins.readFile "${themePkgs.fish}/${darkTheme}.theme")
         "[light]"
