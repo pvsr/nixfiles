@@ -30,6 +30,9 @@
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
     podcasts.url = "github:pvsr/podcasts";
     podcasts.inputs.nixpkgs.follows = "nixpkgs";
+    weather.url = "github:/pvsr/weather";
+    weather.inputs.nixpkgs.follows = "nixpkgs";
+    weather.inputs.flake-parts.follows = "flake-parts";
 
     noctalia.url = "github:noctalia-dev/noctalia-shell";
     noctalia.inputs.nixpkgs.follows = "nixpkgs";

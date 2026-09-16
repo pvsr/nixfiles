@@ -288,6 +288,27 @@
         "type": "github"
       }
     },
+    "nix-gleam": {
+      "inputs": {
+        "nixpkgs": [
+          "weather",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1788813684,
+        "narHash": "sha256-C3yUSP3F9CZUaBs0eqZYgFhG568rb3oY+uHBxjDFbAE=",
+        "owner": "arnarg",
+        "repo": "nix-gleam",
+        "rev": "01aa33464164f8ebe8765946574b4c3bdf60fcd7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "arnarg",
+        "repo": "nix-gleam",
+        "type": "github"
+      }
+    },
     "nix-on-droid": {
       "inputs": {
         "home-manager": [],
@@ -531,7 +552,8 @@
         "noctalia": "noctalia",
         "podcasts": "podcasts",
         "qbpm": "qbpm",
-        "srvos": "srvos"
+        "srvos": "srvos",
+        "weather": "weather"
       }
     },
     "scss-reset": {
@@ -598,6 +620,30 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "weather": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nix-gleam": "nix-gleam",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789534590,
+        "narHash": "sha256-3SWpBErFQrOXRAoDoe6kGLscVlgYTRWsYHzmqG/u/8w=",
+        "owner": "pvsr",
+        "repo": "weather",
+        "rev": "9eaa52ad99196d47e26842fde635a38285d66701",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pvsr",
+        "repo": "weather",
         "type": "github"
       }
     }
