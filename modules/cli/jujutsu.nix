@@ -55,6 +55,8 @@ in
           abbr -a jn  'jj new'
           abbr -a jd  'jj desc'
           abbr -a je  'jj edit'
+          abbr -a jp  'jj prev'
+          abbr -a jx  'jj next'
           abbr -a jsq 'jj squash'
           abbr -a jr  'jj rebase'
           abbr -a ja  'jj abandon'
