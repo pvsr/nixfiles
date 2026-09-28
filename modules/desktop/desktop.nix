@@ -14,7 +14,7 @@
     { pkgs, ... }:
     {
       packages = with pkgs; [
-        (git-annex.overrideAttrs { doCheck = false; })
+        git-annex
         moreutils
         ouch
         tig
