@@ -634,11 +634,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790212728,
-        "narHash": "sha256-UPSn/V54bQbro+dm/dcKwPLmHjpcL1uLLtTh+4EaEJE=",
+        "lastModified": 1790291121,
+        "narHash": "sha256-E9ysekAAU/TmdDx6+houlwPXDdXe9bB2KkA3HTC2WBM=",
         "owner": "pvsr",
         "repo": "weather",
-        "rev": "788b28dd9768e8df0b202a656544a7f05987afa8",
+        "rev": "4392a51d4167fdce53d4a5e5299a2f031c0c56e5",
         "type": "github"
       },
       "original": {
