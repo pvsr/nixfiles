@@ -24,7 +24,6 @@
     import-tree.url = "github:vic/import-tree";
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
-    agenix.inputs.home-manager.follows = "";
 
     qbpm.url = "github:pvsr/qbpm";
     qbpm.inputs.nixpkgs.follows = "nixpkgs";
