@@ -10,6 +10,7 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKJXTjmM8sqYI1WlQJZOpoUfuN3WCGWF5CND8SySuT9O peter@crossbell"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJEGqc+lTGfxD0iIXaI44Mjf2uc08QP/Dql2g/yZKuYV peter@arseille"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJojCQs1VjUFaO/2dOq2N/zQgfRtBtFE7nLu3VpJZkwt price@jurai"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOZ345a+1BFXhNy+Js6FrJiAiriNrHJrUgpvb04+duB/ peter@macbook"
   ];
   aliasModule =
     { config, ... }:
