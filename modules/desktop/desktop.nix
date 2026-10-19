@@ -7,6 +7,8 @@
       tmpfsSize = "75%";
     };
 
+    nixpkgs.config.allowUnfree = true;
+
     services.lorri.enable = true;
   };
 

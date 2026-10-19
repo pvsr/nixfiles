@@ -9,7 +9,12 @@
       };
     };
 
-  flake.modules.nixos.test.hardware.facter.report = { };
+  flake.modules.nixos.test =
+    { lib, ... }:
+    {
+      hardware.facter.report = { };
+      programs.steam.enable = lib.mkForce false;
+    };
 
   perSystem =
     { pkgs, ... }:
