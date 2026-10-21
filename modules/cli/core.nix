@@ -4,7 +4,6 @@
     {
       packages = with pkgs; [
         fd
-        moor
         nh
         dix
         nil
@@ -18,17 +17,5 @@
           sixelPreviewSupport = false;
         })
       ];
-
-      environment.sessionVariables = {
-        PAGER = "moor";
-        MOOR = builtins.concatStringsSep " " [
-          "-quit-if-one-screen"
-          "-statusbar=bold"
-          "-no-statusbar"
-          "-no-linenumbers"
-          "-no-clear-on-exit"
-          "-terminal-fg"
-        ];
-      };
     };
 }
