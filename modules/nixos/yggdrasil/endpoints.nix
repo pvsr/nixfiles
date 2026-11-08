@@ -6,7 +6,7 @@
 }:
 let
   hosts =
-    lib.intersectAttrs config.local.hosts self.nixosConfigurations
+    builtins.intersectAttrs config.local.hosts self.nixosConfigurations
     |> lib.filterAttrs (_: host: !host.config.boot.isContainer);
 in
 {

@@ -1,6 +1,11 @@
 { inputs, ... }: {
   flake.modules.nixos.microvm-guest =
-    { pkgs, config, ... }:
+    {
+      lib,
+      pkgs,
+      config,
+      ...
+    }:
     let
       inherit (builtins)
         substring
@@ -45,5 +50,8 @@
 
       nix.optimise.automatic = false;
       security.sudo.wheelNeedsPassword = false;
+
+      services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";
+      users.users.root.openssh.authorizedKeys.keys = config.local.user.openssh.authorizedKeys.keys;
     };
 }
