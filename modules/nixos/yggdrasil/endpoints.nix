@@ -1,6 +1,13 @@
-{ self, lib, ... }:
+{
+  self,
+  lib,
+  config,
+  ...
+}:
 let
-  hosts = lib.filterAttrs (_: host: !host.config.boot.isContainer) self.nixosConfigurations;
+  hosts =
+    lib.intersectAttrs config.local.hosts self.nixosConfigurations
+    |> lib.filterAttrs (_: host: !host.config.boot.isContainer);
 in
 {
   flake.modules.nixos.core =

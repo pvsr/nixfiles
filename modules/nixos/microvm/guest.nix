@@ -1,4 +1,4 @@
-{
+{ inputs, ... }: {
   flake.modules.nixos.microvm-guest =
     { pkgs, config, ... }:
     let
@@ -38,7 +38,7 @@
             source = "/nix/store";
             mountPoint = "/nix/.ro-store";
             tag = "ro-store";
-            inherit (config.microvm) proto;
+            proto = "virtiofs";
           }
         ];
       };

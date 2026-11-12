@@ -60,44 +60,39 @@ let
   };
 in
 {
-  flake.modules.nixos.forgejo =
+  local.vms.forgejo.host = "grancel";
+
+  local.vms.forgejo.module =
     { pkgs, config, ... }:
     {
-      environment.persistence.nixos.directories = [ "/var/lib/forgejo" ];
+      environment.systemPackages = [ pkgs.forgejo ];
+      environment.sessionVariables.FORGEJO_WORK_DIR = "/var/lib/forgejo";
+      microvm.shares = [
+        {
+          source = "/var/lib/forgejo";
+          mountPoint = "/var/lib/forgejo";
+          tag = "forgejo";
+          proto = "virtiofs";
+        }
+      ];
 
-      vms.forgejo = {
-        environment.systemPackages = [ pkgs.forgejo ];
-        environment.sessionVariables.FORGEJO_WORK_DIR = "/var/lib/forgejo";
-        microvm.shares = [
-          {
-            source = "/var/lib/forgejo";
-            mountPoint = "/var/lib/forgejo";
-            tag = "forgejo";
-            inherit (config.microvm) proto;
-          }
-        ];
+      boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 80;
+      networking.firewall.allowedTCPPorts = [
+        80
+        sshListenPort
+      ];
 
-        boot.kernel.sysctl."net.ipv4.ip_unprivileged_port_start" = 80;
-        networking.firewall.allowedTCPPorts = [
-          80
-          sshListenPort
-        ];
-
-        services.forgejo = {
-          enable = true;
-          package = pkgs.forgejo;
-          inherit settings;
-        };
+      services.forgejo = {
+        enable = true;
+        package = pkgs.forgejo;
+        inherit settings;
       };
     };
-
-  local.desktops.grancel.imports = [ self.modules.nixos.forgejo ];
 
   local.servers.crossbell =
     { pkgs, ... }:
     let
-      internal =
-        self.nixosConfigurations.grancel.config.microvm.vms.forgejo.config.config.networking.fqdn;
+      internal = self.nixosConfigurations.forgejo.config.networking.fqdn;
     in
     {
       local.caddy.reverseProxies.${domain} = internal;

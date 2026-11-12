@@ -15,7 +15,6 @@ in
           disabledModules = [ inputs.srvos.nixosModules.hardware-vultr-vm ];
 
           microvm.mem = 1536;
-          microvm.proto = "9p";
 
           disko.devices = lib.mkForce { };
           fileSystems."/run/media/persist".enable = false;

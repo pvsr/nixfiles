@@ -1,12 +1,13 @@
 { self, ... }:
 let
-  internalDomain =
-    self.nixosConfigurations.grancel.config.microvm.vms.navidrome.config.config.networking.fqdn;
+  internalDomain = self.nixosConfigurations.navidrome.config.networking.fqdn;
 in
 {
   local.servers.crossbell.local.caddy.reverseProxies."music.pvsr.dev" = internalDomain;
 
-  local.desktops.grancel.vms.navidrome =
+  local.vms.navidrome.host = "grancel";
+
+  local.vms.navidrome.module =
     { config, pkgs, ... }:
     {
       services.navidrome = {
@@ -25,7 +26,7 @@ in
           source = "/home/peter/annex";
           mountPoint = "/var/lib/navidrome/annex";
           tag = "music";
-          inherit (config.microvm) proto;
+          proto = "virtiofs";
         }
       ];
     };
